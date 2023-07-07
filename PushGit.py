@@ -15,6 +15,11 @@ os.system("git remote rm origin")
 # 輸入github網址
 github_url = input(">>> Please input github url : ")
 github_branch = input(">>> Please input github branch : ")
+github_commit_msg = input(">>> Please input commit msg : ")
+# 如果沒有輸入 commit msg 就用預設的
+if github_commit_msg != "":
+    commit_msg = github_commit_msg
+
 set_o  = "git remote add origin " + github_url
 
 
