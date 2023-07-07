@@ -1,7 +1,3 @@
-# ImitatedSky.github.io
+# Make a template 2023/7/7
 
-https://pochunyeh.com/
 
-blog : Hexo
-
-theme : butterfly
