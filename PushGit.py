@@ -14,18 +14,19 @@ os.system("git remote rm origin")
 
 # 輸入github網址
 github_url = input(">>> Please input github url : ")
-comd_O  = "git remote add origin " + github_url
+github_branch = input(">>> Please input github branch : ")
+set_o  = "git remote add origin " + github_url
 
 
 comd_0  = "git init"
 comd_1  = "git add ."
 comd_2  = "git commit -m \" " + commit_msg + " \""
-comd_3  = "git push origin master"
+comd_3  = "git push origin " + github_branch 
 comd_4  = "git status"
 
 
-print(">>> " + comd_O)
-os.system(comd_O)
+print(">>> " + set_o)
+os.system(set_o)
 print(">>> " + comd_0)
 os.system(comd_0)
 print(">>> " + comd_1)
