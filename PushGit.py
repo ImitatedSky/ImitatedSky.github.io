@@ -7,7 +7,7 @@ def GetTime():
     import time
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-commit_msg =f"update : {GetTime()}"
+commit_msg =f"update: {GetTime()}"
 
 # 清空origin
 os.system("git remote rm origin")
