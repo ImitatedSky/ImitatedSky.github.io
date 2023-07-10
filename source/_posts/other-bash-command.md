@@ -12,7 +12,7 @@ tags:
 $ npm inatall --force
 ```
 
-由於上傳為包含node_modules，因此下載後需要重新安裝
+由於上傳未包含node_modules，因此下載後需要重新安裝
 
 ### 上傳至github
 
