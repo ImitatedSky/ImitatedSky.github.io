@@ -1,0 +1,37 @@
+# 1. 確保你使用 Butterfly 主題
+# 2. 確保你的網站是 https
+# 3. 修改 source/_data/link.yml
+# 4. 按要求新增內容
+#     - name: 博客名
+#       link: 博客地址
+#       avatar: 博客頭像
+#       descr: 博客描述
+# 5. 發起 Pull requests ，合併到 butterfly.js.org 倉庫
+
+- class_name: '<i class="fas fa-check-double" style="color: #FF6666;padding-right: 0.4rem"></i>網站'
+  class_desc: '<span style="font-style: italic;">重要的事情説三遍</span>'
+  link_list:
+    - name: email
+      link: mailto:yehforlivelihood@gmail.com
+      avatar: /img/email.png
+      descr: 我的email
+    - name: Linkin
+      link: https://www.linkedin.com/in/pochunyeh1997/
+      avatar: /img/linkedin.png
+      descr: 我的Linkin
+    - name: Github
+      link: https://github.com/ImitatedSky
+      avatar: /img/github.png
+      descr: 我的Github    
+    - name: My Resume
+      link: https://imitatedsky.github.io/resume/
+      avatar: /img/MyAvatar.jpg
+      descr: 使用React.js製作
+    - name: 我的IG
+      link: https://www.instagram.com/xiebojun/
+      avatar: /img/IG.jpg
+      descr: 我的IG
+    - name: Butterfly
+      link: https://butterfly.js.org/
+      avatar: https://file.crazywong.com/gh/jerryc127/butterfly_cdn@2.1.0/top_img/index.jpg
+      descr: Butterfly 作者
