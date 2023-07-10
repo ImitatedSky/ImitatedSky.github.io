@@ -25,6 +25,9 @@ $ pythone PushGit.py
 github_url = input(">>> Please input github url : ")
 
 github_branch = input(">>> Please input github branch : ")
+目前我的分支要填寫 `master:main`
+因為我github預設分支已經改為main
+另一點我這邊指令有加入`-f`，因此會強制上傳
 
 github_commit_msg = input(">>> Please input commit msg : ")
 
