@@ -46,7 +46,7 @@ set_o  = "git remote add origin " + github_url
 comd_0  = "git init"
 comd_1  = "git add ."
 comd_2  = "git commit -m \" " + commit_msg + " \""
-comd_3  = "git push origin " + github_branch + " -f"
+comd_3  = "git push origin " + github_branch  # + " -f"
 comd_4  = "git status"
 
 
