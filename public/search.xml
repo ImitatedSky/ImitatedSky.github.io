@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Leetcode#148. Sort Listk</title>
+    <url>/2023/07/14/leetcode/Leetcode-148-Sort-Listk/</url>
+    <content><![CDATA[<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h2><p>Given the <code>head</code> of a linked list, return <em>the list after sorting it in <strong>ascending order</strong></em>.</p>
+<p><strong>Example 1:</strong></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg">https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: head = [4,2,1,3]</span><br><span class="line">Output: [1,2,3,4]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg">https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: head = [-1,5,3,4,0]</span><br><span class="line">Output: [-1,0,3,4,5]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: head = []</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a>Solve</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sortList</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 沒有 或只只有一個 代表已經排好了</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 用快慢指針找到中間點</span></span><br><span class="line">        slow = head</span><br><span class="line">        fast = head.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.<span class="built_in">next</span>:</span><br><span class="line">            slow = slow.<span class="built_in">next</span></span><br><span class="line">            fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        mid= slow.<span class="built_in">next</span></span><br><span class="line">        slow.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 遞迴調用 sortList 函式 排序左右兩邊</span></span><br><span class="line">        left = self.sortList(head)</span><br><span class="line">        right = self.sortList(mid)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 創建兩個指針，指向相同的 ListNode(0) </span></span><br><span class="line">        h = res = ListNode(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 將兩個已排序鏈表的合併</span></span><br><span class="line">        <span class="keyword">while</span> left <span class="keyword">and</span> right:</span><br><span class="line">            <span class="keyword">if</span> left.val &lt; right.val:</span><br><span class="line">                h.<span class="built_in">next</span>= left</span><br><span class="line">                left = left.<span class="built_in">next</span></span><br><span class="line">                <span class="comment"># 如果左半部分鏈表的節點值小於右半部分鏈表的節點值，</span></span><br><span class="line">                <span class="comment"># 將 h 的下一個節點指向 left，同時更新 left 指針到下一個節點。</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                h.<span class="built_in">next</span> = right</span><br><span class="line">                right = right.<span class="built_in">next</span></span><br><span class="line">                <span class="comment"># 如果右半部分鏈表的節點值小於等於左半部分鏈表的節點值，</span></span><br><span class="line">                <span class="comment"># 將 h 的下一個節點指向 right，同時更新 right 指針到下一個節點</span></span><br><span class="line">            h = h.<span class="built_in">next</span></span><br><span class="line">            <span class="comment"># 更新 h 指針到下一個節點</span></span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        <span class="comment"># 連接剩下的</span></span><br><span class="line">        h.<span class="built_in">next</span> = left <span class="keyword">if</span> left <span class="keyword">else</span> right</span><br><span class="line">        <span class="keyword">return</span> res.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="拆分為三個函式"><a href="#拆分為三個函式" class="headerlink" title="拆分為三個函式"></a>拆分為三個函式</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sortList</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="comment"># 如果鏈表為空或只有一個節點，則無需排序，直接返回鏈表</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 獲取鏈表的中間節點</span></span><br><span class="line">        mid = self.getMiddle(head)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 遞迴排序左半部分鏈表和右半部分鏈表</span></span><br><span class="line">        left = self.sortList(head)</span><br><span class="line">        right = self.sortList(mid)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 合併排序後的左半部分鏈表和右半部分鏈表</span></span><br><span class="line">        <span class="keyword">return</span> self.merge(left, right)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getMiddle</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="comment"># 使用快慢指針法找到鏈表的中間節點</span></span><br><span class="line">        slow, fast = head, head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.<span class="built_in">next</span>:</span><br><span class="line">            slow = slow.<span class="built_in">next</span></span><br><span class="line">            fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 將鏈表切分成兩半，並返回中間節點</span></span><br><span class="line">        mid = slow.<span class="built_in">next</span></span><br><span class="line">        slow.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> mid</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, left: <span class="type">Optional</span>[ListNode], right: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        合併兩個已排序的鏈表</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">            left: 第一個已排序的鏈表的頭節點</span></span><br><span class="line"><span class="string">            right: 第二個已排序的鏈表的頭節點</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Returns:</span></span><br><span class="line"><span class="string">            合併後的已排序鏈表的頭節點</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果其中一個鏈表為空，則直接返回另一個鏈表</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> left:</span><br><span class="line">            <span class="keyword">return</span> right</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> right:</span><br><span class="line">            <span class="keyword">return</span> left</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 比較兩個鏈表頭節點的值</span></span><br><span class="line">        <span class="keyword">if</span> left.val &lt; right.val:</span><br><span class="line">            <span class="comment"># 如果左鏈表的頭節點值較小，則將其連接到合併後的鏈表，</span></span><br><span class="line">            <span class="comment"># 同時遞迴地將左鏈表的下一個節點和右鏈表傳入 merge 函式進行合併</span></span><br><span class="line">            left.<span class="built_in">next</span> = self.merge(left.<span class="built_in">next</span>, right)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 返回合併後的鏈表的頭節點</span></span><br><span class="line">            <span class="keyword">return</span> left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果右鏈表的頭節點值較小或相等，則將其連接到合併後的鏈表，</span></span><br><span class="line">            <span class="comment"># 同時遞迴地將左鏈表和右鏈表的下一個節點傳入 merge 函式進行合併</span></span><br><span class="line">            right.<span class="built_in">next</span> = self.merge(left, right.<span class="built_in">next</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 返回合併後的鏈表的頭節點</span></span><br><span class="line">            <span class="keyword">return</span> right</span><br></pre></td></tr></table></figure>
+
+<p>程式碼將原先的 <strong><code>sortList</code></strong> 函式拆分為三個函式：**<code>sortList</code><strong>、</strong><code>getMiddle</code>** 和 <strong><code>merge</code><strong>。</strong><code>sortList</code></strong> 函式仍然是入口點，用於遞迴調用和合併兩部分鏈表，**<code>getMiddle</code>** 函式用於獲取鏈表的中間節點並切斷鏈表，**<code>merge</code>** 函式用於合併兩個已排序的鏈表。</p>
+<p>在 <strong><code>merge</code></strong> 函式中，通過比較兩個鏈表的頭節點的值，每次選擇較小的節點，並將其 <strong><code>next</code></strong> 指針指向遞迴調用的結果，最後返回合併後的鏈表。</p>
+<p>這樣的實現方式可以使用合併排序的思想對鏈表進行排序，達到相同的效果。</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>sortList</tag>
+        <tag>ListNode</tag>
+        <tag>merge Sort</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#14. Longest Common Prefix</title>
+    <url>/2023/07/13/leetcode/Leetcode-14-Longest-Common-Prefix/</url>
+    <content><![CDATA[<p>##<code>Problem</code><br>Write a function to find the longest common prefix string amongst an array of strings.</p>
+<p>If there is no common prefix, return an empty string <code>&quot;&quot;</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: strs = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">Output: &quot;fl&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: strs = [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]</span><br><span class="line">Output: &quot;&quot;</span><br><span class="line">Explanation: There is no common prefix among the input strings.</span><br></pre></td></tr></table></figure>
+
+<h2 id="slove"><a href="#slove" class="headerlink" title="slove"></a><code>slove</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestCommonPrefix</span>(<span class="params">self, strs: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        pref = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        </span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        minWord = <span class="built_in">min</span>(strs, key=<span class="built_in">len</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(minWord):</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> strs:</span><br><span class="line">                <span class="keyword">if</span> word[i] != minWord[i]:</span><br><span class="line">                    <span class="keyword">return</span> pref</span><br><span class="line">            pref += minWord[i]</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> pref</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#88. Merge Sorted Array</title>
+    <url>/2023/07/13/leetcode/Leetcode-88-Merge-Sorted-Array/</url>
+    <content><![CDATA[<p>##<code>Problem</code><br>You are given two integer arrays <code>nums1</code> and <code>nums2</code>, sorted in <strong>non-decreasing order</strong>, and two integers <code>m</code> and <code>n</code>, representing the number of elements in <code>nums1</code> and <code>nums2</code> respectively.</p>
+<p><strong>Merge</strong> <code>nums1</code> and <code>nums2</code> into a single array sorted in <strong>non-decreasing order</strong>.</p>
+<p>The final sorted array should not be returned by the function, but instead be <em>stored inside the array</em> <code>nums1</code>. To accommodate this, <code>nums1</code> has a length of <code>m + n</code>, where the first <code>m</code> elements denote the elements that should be merged, and the last <code>n</code> elements are set to <code>0</code> and should be ignored. <code>nums2</code> has a length of <code>n</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3</span><br><span class="line">Output: [1,2,2,3,5,6]</span><br><span class="line">Explanation: The arrays we are merging are [1,2,3] and [2,5,6].</span><br><span class="line">The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums1 = [1], m = 1, nums2 = [], n = 0</span><br><span class="line">Output: [1]</span><br><span class="line">Explanation: The arrays we are merging are [1] and [].</span><br><span class="line">The result of the merge is [1].</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums1 = [0], m = 0, nums2 = [1], n = 1</span><br><span class="line">Output: [1]</span><br><span class="line">Explanation: The arrays we are merging are [] and [1].</span><br><span class="line">The result of the merge is [1].</span><br><span class="line">Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.</span><br></pre></td></tr></table></figure>
+<h2 id="solve"><a href="#solve" class="headerlink" title="solve"></a><code>solve</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, nums1, m, nums2, n</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums1: List[int]</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :type nums2: List[int]</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify nums1 in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        nums1[m:m+n] = nums2</span><br><span class="line">        nums1.sort()</span><br></pre></td></tr></table></figure>
+
+<p>不用函式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, nums1: <span class="type">List</span>[<span class="built_in">int</span>], m: <span class="built_in">int</span>, nums2: <span class="type">List</span>[<span class="built_in">int</span>], n: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums1 in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        i = m - <span class="number">1</span></span><br><span class="line">        j = n - <span class="number">1</span></span><br><span class="line">        k = m + n - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>  j &gt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span>  i&gt;=<span class="number">0</span> <span class="keyword">and</span> nums1[i] &gt;= nums2[j]:</span><br><span class="line">                nums1[k] = nums1[i]</span><br><span class="line">                i -=<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                nums1[k] = nums2[j]</span><br><span class="line">                j -=<span class="number">1</span></span><br><span class="line">            k -=<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#27. Remove Element</title>
+    <url>/2023/07/13/leetcode/Leetcode-27-Remove-Element/</url>
+    <content><![CDATA[<p>##<code>Problem</code><br>Given an integer array <code>nums</code> and an integer <code>val</code>, remove all occurrences of <code>val</code> in <code>nums</code> <strong><a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a></strong>. The order of the elements may be changed. Then return <em>the number of elements in</em> <code>nums</code> <em>which are not equal to</em> <code>val</code>.</p>
+<p>Consider the number of elements in <code>nums</code> which are not equal to <code>val</code> be <code>k</code>, to get accepted, you need to do the following things:</p>
+<ul>
+<li>Change the array <code>nums</code> such that the first <code>k</code> elements of <code>nums</code> contain the elements which are not equal to <code>val</code>. The remaining elements of <code>nums</code> are not important as well as the size of <code>nums</code>.</li>
+<li>Return <code>k</code>.</li>
+</ul>
+<p><strong>Custom Judge:</strong></p>
+<p>The judge will test your solution with the following code:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int[] nums = [...]; // Input array</span><br><span class="line">int val = ...; // Value to remove</span><br><span class="line">int[] expectedNums = [...]; // The expected answer with correct length.</span><br><span class="line">                            // It is sorted with no values equaling val.</span><br><span class="line"></span><br><span class="line">int k = removeElement(nums, val); // Calls your implementation</span><br><span class="line"></span><br><span class="line">assert k == expectedNums.length;</span><br><span class="line">sort(nums, 0, k); // Sort the first k elements of nums</span><br><span class="line">for (int i = 0; i &lt; actualLength; i++) &#123;</span><br><span class="line">    assert nums[i] == expectedNums[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>If all assertions pass, then your solution will be <strong>accepted</strong>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [3,2,2,3], val = 3</span><br><span class="line">Output: 2, nums = [2,2,_,_]</span><br><span class="line">Explanation: Your function should return k = 2, with the first two elements of nums being 2.</span><br><span class="line">It does not matter what you leave beyond the returned k (hence they are underscores).</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [0,1,2,2,3,0,4,2], val = 2</span><br><span class="line">Output: 5, nums = [0,1,4,0,3,_,_,_]</span><br><span class="line">Explanation: Your function should return k = 5, with the first five elements of nums containing 0, 0, 1, 3, and 4.</span><br><span class="line">Note that the five elements can be returned in any order.</span><br><span class="line">It does not matter what you leave beyond the returned k (hence they are underscores).</span><br></pre></td></tr></table></figure>
+<h2 id="solve"><a href="#solve" class="headerlink" title="solve"></a><code>solve</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeElement</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> num != val:</span><br><span class="line">                nums[i] = num</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> i</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeElement</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">while</span> val <span class="keyword">in</span> nums:</span><br><span class="line">            nums.remove(val)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(nums)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Post Front-matter</title>
+    <url>/2023/07/06/mix/Post%20Front-matter/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>寫法,</th>
+<th>解釋</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>title</td>
+<td>【必需】文章標題</td>
+</tr>
+<tr>
+<td>date</td>
+<td>【必需】文章創建日期</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>【可選】文章更新日期</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>【可選】文章標籤</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>【可選】文章分類</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>【可選】文章關鍵字</td>
+</tr>
+<tr>
+<td>description</td>
+<td>【可選】文章描述</td>
+</tr>
+<tr>
+<td>top_img</td>
+<td>【可選】文章頂部圖片</td>
+</tr>
+<tr>
+<td>cover</td>
+<td>【可選】文章縮略圖(如果沒有設置top_img,文章頁頂部將顯示縮略圖，可設為false&#x2F;圖片地址&#x2F;留空)</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>【可選】顯示文章評論模塊(默認 true)</td>
+</tr>
+<tr>
+<td>toc</td>
+<td>【可選】顯示文章TOC(默認為設置中toc的enable配置)</td>
+</tr>
+<tr>
+<td>toc_number</td>
+<td>【可選】顯示toc_number(默認為設置中toc的number配置)</td>
+</tr>
+<tr>
+<td>toc_style_simple</td>
+<td>【可選】顯示 toc 簡潔模式</td>
+</tr>
+<tr>
+<td>copyright</td>
+<td>【可選】顯示文章版權模塊(默認為設置中post_copyright的enable配置)</td>
+</tr>
+<tr>
+<td>copyright_author</td>
+<td>【可選】文章版權模塊的文章作者</td>
+</tr>
+<tr>
+<td>copyright_author_href</td>
+<td>【可選】文章版權模塊的文章作者鏈接</td>
+</tr>
+<tr>
+<td>copyright_url</td>
+<td>【可選】文章版權模塊的文章連結鏈接</td>
+</tr>
+<tr>
+<td>copyright_info</td>
+<td>【可選】文章版權模塊的版權聲明文字</td>
+</tr>
+<tr>
+<td>mathjax</td>
+<td>【可選】顯示mathjax(當設置 mathjax 的 per_page: false 時，才需要配置，默認 false )</td>
+</tr>
+<tr>
+<td>katex</td>
+<td>【可選】顯示 katex (當設置 katex 的 per_page: false 時，才需要配置，默認 false )</td>
+</tr>
+<tr>
+<td>aplayer</td>
+<td>【可選】在需要的頁面加載 aplayer 的 js 和 css,請參考文章下面的音樂 配置</td>
+</tr>
+<tr>
+<td>highlight_shrink</td>
+<td>【可選】配置代碼框是否展開(true&#x2F;false)(默認為設置中 highlight_shrink 的配置)</td>
+</tr>
+<tr>
+<td>aside</td>
+<td>【可選】顯示側邊欄 (默認 true)</td>
+</tr>
+<tr>
+<td>abcjs</td>
+<td>【可選】加載 abcjs (當設置 abcjs 的 per_page: false 時，才需要配置，默認 false )</td>
+</tr>
+</tbody></table>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/07/13/mix/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>other bash command</title>
+    <url>/2023/07/10/mix/other-bash-command/</url>
+    <content><![CDATA[<p>紀錄一些指令</p>
+<h2 id="set-up"><a href="#set-up" class="headerlink" title="set up"></a>set up</h2><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm inatall --force</span><br></pre></td></tr></table></figure>
+
+<p>由於上傳未包含node_modules，因此下載後需要重新安裝</p>
+<h3 id="上傳至github"><a href="#上傳至github" class="headerlink" title="上傳至github"></a>上傳至github</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pythone PushGit.py</span><br></pre></td></tr></table></figure>
+
+<p>自己寫的上傳程式，包括:<code>hexo generate</code> 、 <code>hexo deploy</code> 、 整包上傳repro&#x2F;{填寫的分支}</p>
+<p>github_url &#x3D; input(“&gt;&gt;&gt; Please input github url : “)</p>
+<p>github_branch &#x3D; input(“&gt;&gt;&gt; Please input github branch : “)<br>    目前我的分支要填寫 <code>master:main</code><br>    因為github預設分支已經改為main<br>    另一點這邊指令有加入<code>-f</code>，因此會強制上傳</p>
+<p>github_commit_msg &#x3D; input(“&gt;&gt;&gt; Please input commit msg : “)</p>
+<h3 id="題外話-hexo-deploy"><a href="#題外話-hexo-deploy" class="headerlink" title="題外話-hexo deploy"></a>題外話-hexo deploy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>這邊我是上傳至 .io 的gh-pages分支，設定在 _config.yml</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>ReactWeb-deploy-command</title>
+    <url>/2023/07/10/mix/resume-page-command/</url>
+    <content><![CDATA[<p>我Resume 是使用React (在codesandbox)，紀錄上傳至github的步驟</p>
+<h2 id="set-up"><a href="#set-up" class="headerlink" title="set up"></a>set up</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><h4 id="安裝gh-pages"><a href="#安裝gh-pages" class="headerlink" title="安裝gh-pages"></a>安裝gh-pages</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install gh-pages --save-dev</span><br></pre></td></tr></table></figure>
+<p>可以看 dependencies 中有沒有，沒有的話再安裝一次，因為我有遇過安裝後沒有出現在 dependencies 中，若確定安裝成功，則可在<br>package.json 中看到</p>
+<figure class="highlight json"><figcaption><span>/ dependencies</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;gh-pages&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.0.0&quot;</span></span><br></pre></td></tr></table></figure>
+<p>不然就手動加入…</p>
+<h4 id="加入deploy指令"><a href="#加入deploy指令" class="headerlink" title="加入deploy指令"></a>加入deploy指令</h4><p>package.json</p>
+<figure class="highlight json"><figcaption><span>/ scripts</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;predeploy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npm run build&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;deploy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gh-pages -d build&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="設定deploy的分支"><a href="#設定deploy的分支" class="headerlink" title="設定deploy的分支"></a>設定deploy的分支</h4><p>package.json</p>
+<figure class="highlight json"><figcaption><span>/</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;homepage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://&#123;username&#125;.github.io/&#123;repro-name&#125;/&quot;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="執行deploy"><a href="#執行deploy" class="headerlink" title="執行deploy"></a>執行deploy</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm run deploy</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>完成的網站了，聊一下</title>
+    <url>/2023/07/06/mix/%E5%AE%8C%E6%88%90%E7%9A%84%E7%B6%B2%E7%AB%99%E4%BA%86%EF%BC%8C%E8%81%8A%E4%B8%80%E4%B8%8B/</url>
+    <content><![CDATA[<p>post 測試 123</p>
+<p>介紹一下這個網站使用的技術</p>
+<h2 id="網站製作"><a href="#網站製作" class="headerlink" title="網站製作"></a>網站製作</h2><h3 id="使用-Hexo"><a href="#使用-Hexo" class="headerlink" title="使用 Hexo"></a>使用 Hexo</h3><h3 id="使用-Butterfly-主題"><a href="#使用-Butterfly-主題" class="headerlink" title="使用 Butterfly 主題"></a>使用 Butterfly 主題</h3><h3 id="部屬至-Github-Pages"><a href="#部屬至-Github-Pages" class="headerlink" title="部屬至 Github Pages"></a>部屬至 Github Pages</h3><h3 id="網域-使用-Namecheap"><a href="#網域-使用-Namecheap" class="headerlink" title="網域 使用 Namecheap"></a>網域 使用 Namecheap</h3><p>由於使用 GitHub Page 上展示一些靜態內容，並且不涉及使用者的敏感信息或網站交互，那麼購買 SSL 證書”好像”不是必需的。<br>其實我也在Namecheap上也買，但是沒有使用到。 拜託不要攻擊我QQ</p>
+<hr>
+<p><font size=1><em>有沒有人要委託我做部落格呢？</em></font></p>
+]]></content>
+  </entry>
+</search>

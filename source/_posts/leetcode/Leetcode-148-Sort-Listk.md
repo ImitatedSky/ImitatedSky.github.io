@@ -5,11 +5,12 @@ tags:
 - [Leetcode]
 - [Python]
 - [medium]
+- [sortList]
+- [ListNode]
+- [merge Sort]
 categories: Leetcode
 cover: /img/cover/leetcode.jpg
 ---
-**keywords : sortList  ListNode  mergeSort**
-
 ## `Problem`
 
 Given the `head` of a linked list, return *the list after sorting it in **ascending order***.
