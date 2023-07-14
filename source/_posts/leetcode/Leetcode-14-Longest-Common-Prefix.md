@@ -1,12 +1,13 @@
 ---
 title: "Leetcode#14.\_Longest Common Prefix"
 date: 2023-07-13 16:53:58
+categories: Leetcode
+cover: /img/cover/leetcode.jpg
 tags: 
 - [Leetcode]
 - [Python]
 - [easy]
-categories: Leetcode
-cover: /img/cover/leetcode.jpg
+updated:
 ---
 ##`Problem`
 Write a function to find the longest common prefix string amongst an array of strings.

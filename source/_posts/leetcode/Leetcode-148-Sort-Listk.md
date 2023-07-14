@@ -1,18 +1,19 @@
 ---
 title: "Leetcode#148.\_Sort Listk"
 date: 2023-07-14 10:38:50
+categories: Leetcode
+cover: /img/cover/leetcode.jpg
 tags: 
 - [Leetcode]
 - [Python]
 - [medium]
-
 - [Linked List]
 - [Two Pointers]
 - [Divide and Conquer]
 - [Sorting]
 - [Merge Sort]
-categories: Leetcode
-cover: /img/cover/leetcode.jpg
+
+updated:
 ---
 ## `Problem`
 

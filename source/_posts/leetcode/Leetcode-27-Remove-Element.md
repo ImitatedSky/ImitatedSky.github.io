@@ -1,12 +1,13 @@
 ---
 title: "Leetcode#27.\_Remove Element"
 date: 2023-07-13 16:12:13
+categories: Leetcode
+cover: /img/cover/leetcode.jpg
 tags: 
 - [Leetcode]
 - [Python]
 - [easy]
-categories: Leetcode
-cover: /img/cover/leetcode.jpg
+updated:
 ---
 ##`Problem`
 Given an integer array `nums` and an integer `val`, remove all occurrences of `val` in `nums` **[in-place](https://en.wikipedia.org/wiki/In-place_algorithm)**. The order of the elements may be changed. Then return *the number of elements in* `nums` *which are not equal to* `val`.

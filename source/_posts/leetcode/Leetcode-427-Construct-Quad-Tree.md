@@ -1,6 +1,8 @@
 ---
 title: "Leetcode#427.\_Construct Quad Tree"
 date: 2023-07-14 15:13:59
+categories: Leetcode
+cover: /img/cover/leetcode.jpg
 tags:
 - [Leetcode]
 - [Python]
@@ -10,8 +12,7 @@ tags:
 - Tree
 - Matrix
 
-categories: Leetcode
-cover: /img/cover/leetcode.jpg
+updated:
 ---
 
 ## `Problem`
