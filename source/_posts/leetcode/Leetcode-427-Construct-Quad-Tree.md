@@ -14,7 +14,6 @@ categories: Leetcode
 cover: /img/cover/leetcode.jpg
 ---
 
-
 ## `Problem`
 
 Given a `n * n` matrix `grid` of `0's` and `1's` only. We want to represent `grid` with a Quad-Tree.
@@ -100,30 +99,6 @@ Input: grid =
 ## `Solve`
 
 ```python
-Input: grid = 
-[[1,1,1,1,0,0,0,0],
-[1,1,1,1,0,0,0,0],
-[1,1,1,1,1,1,1,1],
-[1,1,1,1,1,1,1,1],
-[1,1,1,1,0,0,0,0],
-[1,1,1,1,0,0,0,0],
-[1,1,1,1,0,0,0,0],
-[1,1,1,1,0,0,0,0]]
-
-len(grid)    # is the number of rows ， List[List[int]] 有多少個list
-# [1,1,1,1,0,0,0,0] 1
-# [1,1,1,1,0,0,0,0] 2
-# .
-# .
-# .
-# [1,1,1,1,0,0,0,0] 8
-
-len(grid[0]) # is the number of columns ， List[List[int]] 每个list有多少个元素
-
-# [1,1,1,1,0,0,0,0] 8
-```
-
-```python
 """
 # Definition for a QuadTree node.
 class Node:
@@ -151,6 +126,38 @@ class Solution:
             else:
                 return Node(True, False, topLeft, topRight, bottomLeft, bottomRight)
         return dfs(0, 0, len(grid))
+```
+
+### 分解
+
+```python
+Input: grid = 
+[[1,1,1,1,0,0,0,0],
+[1,1,1,1,0,0,0,0],
+[1,1,1,1,1,1,1,1],
+[1,1,1,1,1,1,1,1],
+[1,1,1,1,0,0,0,0],
+[1,1,1,1,0,0,0,0],
+[1,1,1,1,0,0,0,0],
+[1,1,1,1,0,0,0,0]]
+
+len(grid)    # is the number of rows ， List[List[int]] 有多少個list
+# [1,1,1,1,0,0,0,0] 1
+# [1,1,1,1,0,0,0,0] 2
+# .
+# .
+# .
+# [1,1,1,1,0,0,0,0] 8
+
+len(grid[0]) # is the number of columns ， List[List[int]] 每个list有多少个元素
+
+# [1,1,1,1,0,0,0,0] 8
+
+node.topLeft = constructTree([row[:n//2] for row in grid[:n//2]])
+# [row[:n//2] for row in grid[:n//2]]  # 0-3行，0-3列
+
+node.bottomLeft = constructTree([row[:n//2] for row in grid[n//2:]])
+# [row[:n//2] for row in grid[n//2:]]  # 4-7行，0-3列
 ```
 
 ```python
