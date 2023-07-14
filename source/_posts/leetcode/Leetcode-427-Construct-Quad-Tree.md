@@ -150,7 +150,7 @@ len(grid)    # is the number of rows ， List[List[int]] 有多少個list
 # .
 # [1,1,1,1,0,0,0,0] 8
 
-len(grid[0]) # is the number of columns ， List[List[int]] 每个list有多少个元素
+len(grid[0]) # is the number of columns ， List[List[int]] 每個list有多少個元素
 
 # [1,1,1,1,0,0,0,0] 8
 
