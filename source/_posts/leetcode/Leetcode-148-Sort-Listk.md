@@ -5,9 +5,12 @@ tags:
 - [Leetcode]
 - [Python]
 - [medium]
-- [sortList]
-- [ListNode]
-- [merge Sort]
+
+- [Linked List]
+- [Two Pointers]
+- [Divide and Conquer]
+- [Sorting]
+- [Merge Sort]
 categories: Leetcode
 cover: /img/cover/leetcode.jpg
 ---
