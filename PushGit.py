@@ -2,6 +2,19 @@
 
 import os
 import sys
+import platform
+
+
+# 保存文件
+if platform.system() == "Darwin":
+    os.system("echo 'Save current file' | code -")
+elif platform.system() == "Windows":
+    os.system("echo Save current file | code -")
+elif platform.system() == "Linux":
+    os.system("echo 'Save current file' | code -")
+else:
+    print("Unsupported platform. Saving file manually.")
+
 
 # hexo generate
 is_hexo_generate = True
