@@ -4,7 +4,7 @@ date: 2023-07-13 16:12:13
 tags: 
 - [Leetcode]
 - [Python]
-- easy
+- [easy]
 categories: Leetcode
 cover: /img/cover/leetcode.jpg
 ---
