@@ -10,7 +10,7 @@ tags:
 
 updated:
 ---
-##`Problem`
+#`Problem`
 Given an integer array `nums` and an integer `val`, remove all occurrences of `val` in `nums` **[in-place](https://en.wikipedia.org/wiki/In-place_algorithm)**. The order of the elements may be changed. Then return *the number of elements in* `nums` *which are not equal to* `val`.
 
 Consider the number of elements in `nums` which are not equal to `val` be `k`, to get accepted, you need to do the following things:
@@ -59,7 +59,7 @@ Explanation: Your function should return k = 5, with the first five elements of 
 Note that the five elements can be returned in any order.
 It does not matter what you leave beyond the returned k (hence they are underscores).
 ```
-## `Solve`
+# `Solve`
 ```python
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:

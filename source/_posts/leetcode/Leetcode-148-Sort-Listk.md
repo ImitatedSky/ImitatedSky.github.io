@@ -16,7 +16,7 @@ tags:
 
 updated:
 ---
-## `Problem`
+# `Problem`
 
 Given the `head` of a linked list, return *the list after sorting it in **ascending order***.
 
@@ -47,7 +47,7 @@ Input: head = []
 Output: []
 ```
 
-## `Solve`
+# `Solve`
 
 ```python
 class Solution:

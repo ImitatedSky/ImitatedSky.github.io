@@ -1,5 +1,5 @@
 ---
-title: 23. Merge k Sorted Lists
+title: "Leetcode#23. Merge k Sorted Lists"
 tags:
 - [Leetcode]
 - [Python]
@@ -16,7 +16,7 @@ cover: /img/cover/leetcode.jpg
 categories: Leetcode
 ---
 
-## `Problem`
+# `Problem`
 
 You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order.
 
@@ -63,7 +63,7 @@ Output: []
 - `lists[i]` is sorted in **ascending order**.
 - The sum of `lists[i].length` will not exceed `104`.
 
-## `Solve`
+# `Solve`
 
 Leetcode#**148**
 

@@ -16,7 +16,7 @@ tags:
 updated:
 ---
 
-## `Problem`
+# `Problem`
 
 Given a `n * n` matrix `grid` of `0's` and `1's` only. We want to represent `grid` with a Quad-Tree.
 
@@ -98,7 +98,7 @@ Input: grid =
 
 !https://assets.leetcode.com/uploads/2020/02/12/e2tree.png
 
-## `Solve`
+# `Solve`
 
 ```python
 """
