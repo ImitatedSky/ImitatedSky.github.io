@@ -7,6 +7,7 @@ tags:
 - [Leetcode]
 - [Python]
 - [medium]
+- [💡]
 - Array
 - Divide and Conquer
 - Tree
@@ -114,7 +115,7 @@ class Node:
 
 class Solution:
     def construct(self, grid: List[List[int]]) -> 'Node':
-				def dfs(x, y, l):
+		def dfs(x, y, l):
             if l == 1:
                 return Node(grid[x][y] == 1, True, None, None, None, None)
             l = l // 2
@@ -159,6 +160,16 @@ node.topLeft = constructTree([row[:n//2] for row in grid[:n//2]])
 
 node.bottomLeft = constructTree([row[:n//2] for row in grid[n//2:]])
 # [row[:n//2] for row in grid[n//2:]]  # 4-7行，0-3列
+
+node.topRight = constructTree([row[n//2:] for row in grid[:n//2]])
+# [row[n//2:] for row in grid[:n//2]]  # 0-3行，4-7列
+
+node.bottomRight = constructTree([row[n//2:] for row in grid[n//2:]])
+# [row[n//2:] for row in grid[n//2:]]  # 4-7行，4-7列
+
+
+grid[:n//2] 是一個切片操作，它取出 grid 列表的前半部分。
+row[n//2:]  是一個切片操作，它取出grid 每一 row 列表的後半部分。
 ```
 
 ```python
@@ -192,7 +203,7 @@ class Solution:
                 return node
             else:
                 n = len(grid)
-                node.topLeft = constructTree([row[:n//2] for row in grid[:n//2]])
+                node.topLeft = constructTree([row[:n//2] for row in grid[:n//2]]) #記得要加中括弧
                 node.topRight = constructTree([row[n//2:] for row in grid[:n//2]])
                 node.bottomLeft = constructTree([row[:n//2] for row in grid[n//2:]])
                 node.bottomRight = constructTree([row[n//2:] for row in grid[n//2:]])

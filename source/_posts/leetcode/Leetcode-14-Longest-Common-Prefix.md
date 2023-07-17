@@ -7,6 +7,7 @@ tags:
 - [Leetcode]
 - [Python]
 - [easy]
+
 updated:
 ---
 ##`Problem`
@@ -30,7 +31,7 @@ Output: ""
 Explanation: There is no common prefix among the input strings.
 ```
 
-## `slove`
+## `Solve`
 
 ```python
 class Solution:

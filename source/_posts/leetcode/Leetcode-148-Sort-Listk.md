@@ -7,6 +7,7 @@ tags:
 - [Leetcode]
 - [Python]
 - [medium]
+- [💡]
 - [Linked List]
 - [Two Pointers]
 - [Divide and Conquer]
@@ -46,7 +47,7 @@ Input: head = []
 Output: []
 ```
 
-## Solve
+## `Solve`
 
 ```python
 class Solution:
