@@ -2,7 +2,7 @@
 title: 改變git推送人與信箱
 tags:
   - [Git]
-cover: /img/cover/code.jpg
+cover: /img/cover/cover01.jpg
 date: 2023-07-18 09:15:59
 categories:
 ---

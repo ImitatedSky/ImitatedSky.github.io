@@ -4,7 +4,7 @@ date: {{ date }}
 tags:
 - []
 
-cover: /img/cover/code.jpg
+cover: /img/cover/cover03.jpg
 categories:
 
 ---
