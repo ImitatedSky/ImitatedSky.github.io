@@ -5,7 +5,6 @@ tags:
 - [Python]
 - [medium]
 
-- [💡]
 - [Bit Manipulation]
 
 
@@ -13,7 +12,6 @@ cover: /img/cover/leetcode.jpg
 categories: Leetcode
 date: 2023-07-18 11:09:31
 ---
-
 # `Problem`
 
 Given two integers `left` and `right` that represent the range `[left, right]`, return *the bitwise(位元運算) AND of all numbers in this range, inclusive*.
@@ -61,7 +59,35 @@ Output: 0
 10001000   (136)
 ```
 
-`題目要連續`
+`不過題目要連續`
+
+```python
+101   (5)
+& 
+110   (6)
+&
+.
+.
+.
+&
+1100   (12)
+----------
+0000   (0)
+```
+
+```python
+10101010   (170)
+& 
+10101010   (171)
+&
+.
+.
+.
+&
+11001100   (204)
+----------
+10000000   (128)
+```
 
 ## 先說`結論、實際看 就是看位元數有沒有一樣`
 

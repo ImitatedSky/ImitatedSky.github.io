@@ -533,7 +533,11 @@
 <h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>對區間的數字進行位元運算</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">根據位元的值（0或1）進行邏輯運算</span><br><span class="line"></span><br><span class="line">位元 AND（&amp;）：對兩個二進制數進行對應位元的 AND 運算。當兩個對應位元都為1時，結果的對應位元為1，否則為0。</span><br><span class="line">10101010   (170)</span><br><span class="line">&amp; </span><br><span class="line">11001100   (204)</span><br><span class="line">----------</span><br><span class="line">10001000   (136)</span><br></pre></td></tr></table></figure>
 
-<p><code>題目要連續</code></p>
+<p><code>不過題目要連續</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">101</span>   (<span class="number">5</span>)</span><br><span class="line">&amp; </span><br><span class="line"><span class="number">110</span>   (<span class="number">6</span>)</span><br><span class="line">&amp;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">&amp;</span><br><span class="line"><span class="number">1100</span>   (<span class="number">12</span>)</span><br><span class="line">----------</span><br><span class="line"><span class="number">0000</span>   (<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">10101010</span>   (<span class="number">170</span>)</span><br><span class="line">&amp; </span><br><span class="line"><span class="number">10101010</span>   (<span class="number">171</span>)</span><br><span class="line">&amp;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">&amp;</span><br><span class="line"><span class="number">11001100</span>   (<span class="number">204</span>)</span><br><span class="line">----------</span><br><span class="line"><span class="number">10000000</span>   (<span class="number">128</span>)</span><br></pre></td></tr></table></figure>
+
 <h2 id="先說結論、實際看-就是看位元數有沒有一樣"><a href="#先說結論、實際看-就是看位元數有沒有一樣" class="headerlink" title="先說結論、實際看 就是看位元數有沒有一樣"></a>先說<code>結論、實際看 就是看位元數有沒有一樣</code></h2><p>因為連續區間 位元 AND 的結果該位元會是 0。</p>
 <p>所以只有長度一樣時，才有</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rangeBitwiseAnd</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        shift = <span class="number">0</span>  <span class="comment">#紀錄往右的次數</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right: <span class="comment">#當長短不一時會持續進行，最終可能為0  0</span></span><br><span class="line">            left &gt;&gt;= <span class="number">1</span>   <span class="comment">#位元往右 1</span></span><br><span class="line">            right &gt;&gt;= <span class="number">1</span>  <span class="comment">#位元往右 1</span></span><br><span class="line">            shift += <span class="number">1</span>  <span class="comment">#往右次數+1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> left &lt;&lt; shift  <span class="comment">#位元往左 shift 次</span></span><br></pre></td></tr></table></figure>
@@ -596,7 +600,6 @@
         <tag>Leetcode</tag>
         <tag>Python</tag>
         <tag>medium</tag>
-        <tag>💡</tag>
         <tag>Bit Manipulation</tag>
       </tags>
   </entry>
