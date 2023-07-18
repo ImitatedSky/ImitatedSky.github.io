@@ -126,13 +126,16 @@ class Solution:
         return merged_list.next
 ```
 
+O(nk log k)
+
+- n 是所有list的長度總和
+- k 是lists的長度
+
 ## 可以過 但速度太慢
 
-原先寫得
-但時間複雜度太慘， 
+~~原先寫得，但時間複雜度太慘~~
 
-- 每回合的合併需要花：O(n)
-- 總共需要回合數：O(n log n)  ?這邊還要想一下是不是
+- 這邊的時間複雜度：O(n log k)
 
 想法是:
 
@@ -179,7 +182,12 @@ class Solution:
                 return l2
 ```
 
-## 偷吃步
+O(n log k)
+
+- n 是所有list的長度總和
+- k 是lists的長度
+
+## 偷吃步O(n log n)
 
 ```python
 # Definition for singly-linked list.

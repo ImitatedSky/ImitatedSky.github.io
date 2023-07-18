@@ -13,18 +13,15 @@ categories:
 
 1. 使用以下命令檢視當前的 Git 設定：
 
-```
-luaCopy code
+```bash
 git config --list
 
 ```
-
 這將顯示當前的 Git 設定列表。
 
-2. 使用以下命令設定新的使用者名稱：
 
-```
-arduinoCopy code
+2. 使用以下命令設定新的使用者名稱：
+```bash
 git config --global user.name "Name"
 
 ```
@@ -33,8 +30,8 @@ git config --global user.name "Name"
 
 3. 使用以下命令設定新的電子郵件地址：
 
-```
-arduinoCopy code
+```bash
+
 git config --global user.email "email@example.com"
 
 ```
