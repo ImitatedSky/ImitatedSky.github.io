@@ -25,7 +25,7 @@ if is_hexo_generate:
 
 # 是否 hexo deploy
 is_hexo_deploy = input(">>> Is hexo deploy? (y/n) : ")
-if is_hexo_deploy == "y" or is_hexo_deploy == "Y" or is_hexo_deploy == "yes" or is_hexo_deploy == "Yes" or is_hexo_deploy == "YES":
+if is_hexo_deploy == "y" or is_hexo_deploy == "Y" or is_hexo_deploy == "yes" or is_hexo_deploy == "Yes" or is_hexo_deploy == "YES" or is_hexo_deploy == "":
     # hexo deploy
     hexo_deploy = "hexo deploy"
     print(">>> " + hexo_deploy)
