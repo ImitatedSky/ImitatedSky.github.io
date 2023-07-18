@@ -14,7 +14,7 @@ python pushgit.py
 
 
 ``` bash
-# github_deploy
+# _config.yml
 github_deploy:
   type: git
   repo: https://github.com/ImitatedSky/ImitatedSky.github.io

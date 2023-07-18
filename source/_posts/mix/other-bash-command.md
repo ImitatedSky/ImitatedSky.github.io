@@ -25,7 +25,7 @@ $ pythone PushGit.py
 `2023/7/18` 新增 _config.yml 的github_deploy，節省輸入的時間
 
 ``` bash
-# github_deploy
+# _config.yml
 github_deploy:
   type: git
   repo: https://github.com/ImitatedSky/ImitatedSky.github.io
@@ -54,6 +54,16 @@ github_branch = config["github_deploy"]["branch"]
 
 ``` bash
 $ hexo deploy
+```
+``` bash
+# _config.yml
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  repo: https://github.com/ImitatedSky/ImitatedSky.github.io # https://github.com/[你的 GitHub 帳號]/[你的 GitHub 帳號].github.io.git
+  branch: gh-page # 在這邊我是使用 gp-page 當作主要分支
+  message: 'deploy'
 ```
 
 這邊我是上傳至 .io 的gh-pages分支，設定在 _config.yml
