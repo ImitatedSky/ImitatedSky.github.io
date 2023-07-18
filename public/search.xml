@@ -465,4 +465,28 @@
         <tag>施工中</tag>
       </tags>
   </entry>
+  <entry>
+    <title>改變git推送人與信箱</title>
+    <url>/2023/07/18/%E6%94%B9%E8%AE%8Agit%E6%8E%A8%E9%80%81%E4%BA%BA%E8%88%87%E4%BF%A1%E7%AE%B1/</url>
+    <content><![CDATA[<p>當你需要更改 Git 中的使用者名稱和電子郵件地址時，可以按照以下步驟執行：</p>
+<ol>
+<li>使用以下命令檢視當前的 Git 設定：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">luaCopy code</span><br><span class="line">git config --list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>這將顯示當前的 Git 設定列表。</p>
+<ol start="2">
+<li>使用以下命令設定新的使用者名稱：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arduinoCopy code</span><br><span class="line">git config --global user.name &quot;Name&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>將 “Name” 替換為你要設定的新使用者名稱。</p>
+<ol start="3">
+<li>使用以下命令設定新的電子郵件地址：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arduinoCopy code</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
 </search>
