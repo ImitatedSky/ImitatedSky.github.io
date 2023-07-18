@@ -11,7 +11,8 @@ push :
 python pushgit.py
 ```
 新增_config.yml 的github_deploy，節省輸入的時間
-~~可以一直按ENTER~~，還是要確認一下
+
+~~可以一直按ENTER~~，還是要確認一下拉
 
 ``` bash
 # _config.yml

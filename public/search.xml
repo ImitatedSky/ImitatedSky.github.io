@@ -118,181 +118,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Post Front-matter</title>
-    <url>/2023/07/06/mix/Post%20Front-matter/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th>寫法,</th>
-<th>解釋</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>title</td>
-<td>【必需】文章標題</td>
-</tr>
-<tr>
-<td>date</td>
-<td>【必需】文章創建日期</td>
-</tr>
-<tr>
-<td>updated</td>
-<td>【可選】文章更新日期</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>【可選】文章標籤</td>
-</tr>
-<tr>
-<td>categories</td>
-<td>【可選】文章分類</td>
-</tr>
-<tr>
-<td>keywords</td>
-<td>【可選】文章關鍵字</td>
-</tr>
-<tr>
-<td>description</td>
-<td>【可選】文章描述</td>
-</tr>
-<tr>
-<td>top_img</td>
-<td>【可選】文章頂部圖片</td>
-</tr>
-<tr>
-<td>cover</td>
-<td>【可選】文章縮略圖(如果沒有設置top_img,文章頁頂部將顯示縮略圖，可設為false&#x2F;圖片地址&#x2F;留空)</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>【可選】顯示文章評論模塊(默認 true)</td>
-</tr>
-<tr>
-<td>toc</td>
-<td>【可選】顯示文章TOC(默認為設置中toc的enable配置)</td>
-</tr>
-<tr>
-<td>toc_number</td>
-<td>【可選】顯示toc_number(默認為設置中toc的number配置)</td>
-</tr>
-<tr>
-<td>toc_style_simple</td>
-<td>【可選】顯示 toc 簡潔模式</td>
-</tr>
-<tr>
-<td>copyright</td>
-<td>【可選】顯示文章版權模塊(默認為設置中post_copyright的enable配置)</td>
-</tr>
-<tr>
-<td>copyright_author</td>
-<td>【可選】文章版權模塊的文章作者</td>
-</tr>
-<tr>
-<td>copyright_author_href</td>
-<td>【可選】文章版權模塊的文章作者鏈接</td>
-</tr>
-<tr>
-<td>copyright_url</td>
-<td>【可選】文章版權模塊的文章連結鏈接</td>
-</tr>
-<tr>
-<td>copyright_info</td>
-<td>【可選】文章版權模塊的版權聲明文字</td>
-</tr>
-<tr>
-<td>mathjax</td>
-<td>【可選】顯示mathjax(當設置 mathjax 的 per_page: false 時，才需要配置，默認 false )</td>
-</tr>
-<tr>
-<td>katex</td>
-<td>【可選】顯示 katex (當設置 katex 的 per_page: false 時，才需要配置，默認 false )</td>
-</tr>
-<tr>
-<td>aplayer</td>
-<td>【可選】在需要的頁面加載 aplayer 的 js 和 css,請參考文章下面的音樂 配置</td>
-</tr>
-<tr>
-<td>highlight_shrink</td>
-<td>【可選】配置代碼框是否展開(true&#x2F;false)(默認為設置中 highlight_shrink 的配置)</td>
-</tr>
-<tr>
-<td>aside</td>
-<td>【可選】顯示側邊欄 (默認 true)</td>
-</tr>
-<tr>
-<td>abcjs</td>
-<td>【可選】加載 abcjs (當設置 abcjs 的 per_page: false 時，才需要配置，默認 false )</td>
-</tr>
-</tbody></table>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/07/13/mix/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>other bash command</title>
-    <url>/2023/07/10/mix/other-bash-command/</url>
-    <content><![CDATA[<p>紀錄一些指令</p>
-<h2 id="set-up"><a href="#set-up" class="headerlink" title="set up"></a>set up</h2><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm inatall --force</span><br></pre></td></tr></table></figure>
-
-<p>由於上傳未包含node_modules，因此下載後需要重新安裝</p>
-<h3 id="上傳至github"><a href="#上傳至github" class="headerlink" title="上傳至github"></a>上傳至github</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pythone PushGit.py</span><br></pre></td></tr></table></figure>
-
-<p>自己寫的上傳程式，包括:<code>hexo generate</code> 、 <code>hexo deploy</code> 、 整包上傳repro&#x2F;{填寫的分支}</p>
-<p><code>2023/7/18</code> 新增 _config.yml 的github_deploy，節省輸入的時間</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">github_deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/ImitatedSky/ImitatedSky.github.io</span><br><span class="line">  branch: main</span><br><span class="line">  message: <span class="string">&#x27;deploy&#x27;</span></span><br><span class="line">  <span class="built_in">test</span>: <span class="string">&quot;test message&quot;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pip install pyyaml</span></span><br><span class="line"><span class="comment"># PushGit.py</span></span><br><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 讀取設定檔</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;_config.yml&quot;</span>, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.load(f, Loader=yaml.FullLoader)</span><br><span class="line"></span><br><span class="line">github_url = config[<span class="string">&quot;github_deploy&quot;</span>][<span class="string">&quot;repo&quot;</span>]</span><br><span class="line">github_branch = config[<span class="string">&quot;github_deploy&quot;</span>][<span class="string">&quot;branch&quot;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="題外話-hexo-deploy"><a href="#題外話-hexo-deploy" class="headerlink" title="題外話-hexo deploy"></a>題外話-hexo deploy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/ImitatedSky/ImitatedSky.github.io <span class="comment"># https://github.com/[你的 GitHub 帳號]/[你的 GitHub 帳號].github.io.git</span></span><br><span class="line">  branch: gh-page <span class="comment"># 在這邊我是使用 gp-page 當作主要分支</span></span><br><span class="line">  message: <span class="string">&#x27;deploy&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>這邊我是上傳至 .io 的gh-pages分支，設定在 _config.yml</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>ReactWeb-deploy-command</title>
-    <url>/2023/07/10/mix/resume-page-command/</url>
-    <content><![CDATA[<p>我Resume 是使用React (在codesandbox)，紀錄上傳至github的步驟</p>
-<h2 id="set-up"><a href="#set-up" class="headerlink" title="set up"></a>set up</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><h4 id="安裝gh-pages"><a href="#安裝gh-pages" class="headerlink" title="安裝gh-pages"></a>安裝gh-pages</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install gh-pages --save-dev</span><br></pre></td></tr></table></figure>
-<p>可以看 dependencies 中有沒有，沒有的話再安裝一次，因為我有遇過安裝後沒有出現在 dependencies 中，若確定安裝成功，則可在<br>package.json 中看到</p>
-<figure class="highlight json"><figcaption><span>/ dependencies</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;gh-pages&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.0.0&quot;</span></span><br></pre></td></tr></table></figure>
-<p>不然就手動加入…</p>
-<h4 id="加入deploy指令"><a href="#加入deploy指令" class="headerlink" title="加入deploy指令"></a>加入deploy指令</h4><p>package.json</p>
-<figure class="highlight json"><figcaption><span>/ scripts</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;predeploy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npm run build&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;deploy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gh-pages -d build&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="設定deploy的分支"><a href="#設定deploy的分支" class="headerlink" title="設定deploy的分支"></a>設定deploy的分支</h4><p>package.json</p>
-<figure class="highlight json"><figcaption><span>/</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;homepage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://&#123;username&#125;.github.io/&#123;repro-name&#125;/&quot;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="執行deploy"><a href="#執行deploy" class="headerlink" title="執行deploy"></a>執行deploy</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm run deploy</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>完成的網站了，聊一下</title>
-    <url>/2023/07/06/mix/%E5%AE%8C%E6%88%90%E7%9A%84%E7%B6%B2%E7%AB%99%E4%BA%86%EF%BC%8C%E8%81%8A%E4%B8%80%E4%B8%8B/</url>
-    <content><![CDATA[<p>post 測試 123</p>
-<p>介紹一下這個網站使用的技術</p>
-<h2 id="網站製作"><a href="#網站製作" class="headerlink" title="網站製作"></a>網站製作</h2><h3 id="使用-Hexo"><a href="#使用-Hexo" class="headerlink" title="使用 Hexo"></a>使用 Hexo</h3><h3 id="使用-Butterfly-主題"><a href="#使用-Butterfly-主題" class="headerlink" title="使用 Butterfly 主題"></a>使用 Butterfly 主題</h3><h3 id="部屬至-Github-Pages"><a href="#部屬至-Github-Pages" class="headerlink" title="部屬至 Github Pages"></a>部屬至 Github Pages</h3><h3 id="網域-使用-Namecheap"><a href="#網域-使用-Namecheap" class="headerlink" title="網域 使用 Namecheap"></a>網域 使用 Namecheap</h3><p>由於使用 GitHub Page 上展示一些靜態內容，並且不涉及使用者的敏感信息或網站交互，那麼購買 SSL 證書”好像”不是必需的。<br>其實我也在Namecheap上也買，但是沒有使用到。 拜託不要攻擊我QQ</p>
-<hr>
-<p><font size=1><em>有沒有人要委託我做部落格呢？</em></font></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Leetcode#427. Construct Quad Tree</title>
     <url>/2023/07/14/leetcode/Leetcode-427-Construct-Quad-Tree/</url>
     <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given a <code>n * n</code> matrix <code>grid</code> of <code>0&#39;s</code> and <code>1&#39;s</code> only. We want to represent <code>grid</code> with a Quad-Tree.</p>
@@ -400,8 +225,200 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2023/07/13/gossip/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>gossip</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Post Front-matter</title>
+    <url>/2023/07/06/gossip/Post%20Front-matter/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>寫法,</th>
+<th>解釋</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>title</td>
+<td>【必需】文章標題</td>
+</tr>
+<tr>
+<td>date</td>
+<td>【必需】文章創建日期</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>【可選】文章更新日期</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>【可選】文章標籤</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>【可選】文章分類</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>【可選】文章關鍵字</td>
+</tr>
+<tr>
+<td>description</td>
+<td>【可選】文章描述</td>
+</tr>
+<tr>
+<td>top_img</td>
+<td>【可選】文章頂部圖片</td>
+</tr>
+<tr>
+<td>cover</td>
+<td>【可選】文章縮略圖(如果沒有設置top_img,文章頁頂部將顯示縮略圖，可設為false&#x2F;圖片地址&#x2F;留空)</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>【可選】顯示文章評論模塊(默認 true)</td>
+</tr>
+<tr>
+<td>toc</td>
+<td>【可選】顯示文章TOC(默認為設置中toc的enable配置)</td>
+</tr>
+<tr>
+<td>toc_number</td>
+<td>【可選】顯示toc_number(默認為設置中toc的number配置)</td>
+</tr>
+<tr>
+<td>toc_style_simple</td>
+<td>【可選】顯示 toc 簡潔模式</td>
+</tr>
+<tr>
+<td>copyright</td>
+<td>【可選】顯示文章版權模塊(默認為設置中post_copyright的enable配置)</td>
+</tr>
+<tr>
+<td>copyright_author</td>
+<td>【可選】文章版權模塊的文章作者</td>
+</tr>
+<tr>
+<td>copyright_author_href</td>
+<td>【可選】文章版權模塊的文章作者鏈接</td>
+</tr>
+<tr>
+<td>copyright_url</td>
+<td>【可選】文章版權模塊的文章連結鏈接</td>
+</tr>
+<tr>
+<td>copyright_info</td>
+<td>【可選】文章版權模塊的版權聲明文字</td>
+</tr>
+<tr>
+<td>mathjax</td>
+<td>【可選】顯示mathjax(當設置 mathjax 的 per_page: false 時，才需要配置，默認 false )</td>
+</tr>
+<tr>
+<td>katex</td>
+<td>【可選】顯示 katex (當設置 katex 的 per_page: false 時，才需要配置，默認 false )</td>
+</tr>
+<tr>
+<td>aplayer</td>
+<td>【可選】在需要的頁面加載 aplayer 的 js 和 css,請參考文章下面的音樂 配置</td>
+</tr>
+<tr>
+<td>highlight_shrink</td>
+<td>【可選】配置代碼框是否展開(true&#x2F;false)(默認為設置中 highlight_shrink 的配置)</td>
+</tr>
+<tr>
+<td>aside</td>
+<td>【可選】顯示側邊欄 (默認 true)</td>
+</tr>
+<tr>
+<td>abcjs</td>
+<td>【可選】加載 abcjs (當設置 abcjs 的 per_page: false 時，才需要配置，默認 false )</td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>gossip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ReactWeb-deploy-command</title>
+    <url>/2023/07/10/gossip/resume-page-command/</url>
+    <content><![CDATA[<p>我Resume 是使用React (在codesandbox)，紀錄上傳至github的步驟</p>
+<h2 id="set-up"><a href="#set-up" class="headerlink" title="set up"></a>set up</h2><h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><h4 id="安裝gh-pages"><a href="#安裝gh-pages" class="headerlink" title="安裝gh-pages"></a>安裝gh-pages</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install gh-pages --save-dev</span><br></pre></td></tr></table></figure>
+<p>可以看 dependencies 中有沒有，沒有的話再安裝一次，因為我有遇過安裝後沒有出現在 dependencies 中，若確定安裝成功，則可在<br>package.json 中看到</p>
+<figure class="highlight json"><figcaption><span>/ dependencies</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;gh-pages&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.0.0&quot;</span></span><br></pre></td></tr></table></figure>
+<p>不然就手動加入…</p>
+<h4 id="加入deploy指令"><a href="#加入deploy指令" class="headerlink" title="加入deploy指令"></a>加入deploy指令</h4><p>package.json</p>
+<figure class="highlight json"><figcaption><span>/ scripts</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;predeploy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;npm run build&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;deploy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gh-pages -d build&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="設定deploy的分支"><a href="#設定deploy的分支" class="headerlink" title="設定deploy的分支"></a>設定deploy的分支</h4><p>package.json</p>
+<figure class="highlight json"><figcaption><span>/</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;homepage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://&#123;username&#125;.github.io/&#123;repro-name&#125;/&quot;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="執行deploy"><a href="#執行deploy" class="headerlink" title="執行deploy"></a>執行deploy</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm run deploy</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>gossip</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>改變git推送人與信箱</title>
+    <url>/2023/07/18/gossip/%E6%94%B9%E8%AE%8Agit%E6%8E%A8%E9%80%81%E4%BA%BA%E8%88%87%E4%BF%A1%E7%AE%B1/</url>
+    <content><![CDATA[<p>當你需要更改 Git 中的使用者名稱和電子郵件地址時，可以按照以下步驟執行：</p>
+<ol>
+<li>使用以下命令檢視當前的 Git 設定：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">luaCopy code</span><br><span class="line">git config --list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>這將顯示當前的 Git 設定列表。</p>
+<ol start="2">
+<li>使用以下命令設定新的使用者名稱：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arduinoCopy code</span><br><span class="line">git config --global user.name &quot;Name&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>將 “Name” 替換為你要設定的新使用者名稱。</p>
+<ol start="3">
+<li>使用以下命令設定新的電子郵件地址：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arduinoCopy code</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Git</tag>
+        <tag>gossip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>完成的網站了，聊一下</title>
+    <url>/2023/07/06/gossip/%E5%AE%8C%E6%88%90%E7%9A%84%E7%B6%B2%E7%AB%99%E4%BA%86%EF%BC%8C%E8%81%8A%E4%B8%80%E4%B8%8B/</url>
+    <content><![CDATA[<p>post 測試 123</p>
+<p>介紹一下這個網站使用的技術</p>
+<h2 id="網站製作"><a href="#網站製作" class="headerlink" title="網站製作"></a>網站製作</h2><h3 id="使用-Hexo"><a href="#使用-Hexo" class="headerlink" title="使用 Hexo"></a>使用 Hexo</h3><h3 id="使用-Butterfly-主題"><a href="#使用-Butterfly-主題" class="headerlink" title="使用 Butterfly 主題"></a>使用 Butterfly 主題</h3><h3 id="部屬至-Github-Pages"><a href="#部屬至-Github-Pages" class="headerlink" title="部屬至 Github Pages"></a>部屬至 Github Pages</h3><h3 id="網域-使用-Namecheap"><a href="#網域-使用-Namecheap" class="headerlink" title="網域 使用 Namecheap"></a>網域 使用 Namecheap</h3><p>由於使用 GitHub Page 上展示一些靜態內容，並且不涉及使用者的敏感信息或網站交互，那麼購買 SSL 證書”好像”不是必需的。<br>其實我也在Namecheap上也買，但是沒有使用到。 拜託不要攻擊我QQ</p>
+<hr>
+<p><font size=1><em>有沒有人要委託我做部落格呢？</em></font></p>
+]]></content>
+      <tags>
+        <tag>gossip</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>時間複雜度</title>
-    <url>/2023/07/17/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6/</url>
+    <url>/2023/07/17/gossip/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6/</url>
     <content><![CDATA[<h1 id="時間複雜度由小到大依次為"><a href="#時間複雜度由小到大依次為" class="headerlink" title="時間複雜度由小到大依次為:"></a>時間複雜度由小到大依次為:</h1><p>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</p>
 <table>
 <thead>
@@ -467,30 +484,33 @@
 ]]></content>
       <tags>
         <tag>施工中</tag>
+        <tag>gossip</tag>
       </tags>
   </entry>
   <entry>
-    <title>改變git推送人與信箱</title>
-    <url>/2023/07/18/%E6%94%B9%E8%AE%8Agit%E6%8E%A8%E9%80%81%E4%BA%BA%E8%88%87%E4%BF%A1%E7%AE%B1/</url>
-    <content><![CDATA[<p>當你需要更改 Git 中的使用者名稱和電子郵件地址時，可以按照以下步驟執行：</p>
-<ol>
-<li>使用以下命令檢視當前的 Git 設定：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">luaCopy code</span><br><span class="line">git config --list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>other bash command</title>
+    <url>/2023/07/10/gossip/other-bash-command/</url>
+    <content><![CDATA[<p>紀錄一些指令</p>
+<h2 id="set-up"><a href="#set-up" class="headerlink" title="set up"></a>set up</h2><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm inatall --force</span><br></pre></td></tr></table></figure>
 
-<p>這將顯示當前的 Git 設定列表。</p>
-<ol start="2">
-<li>使用以下命令設定新的使用者名稱：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arduinoCopy code</span><br><span class="line">git config --global user.name &quot;Name&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>由於上傳未包含node_modules，因此下載後需要重新安裝</p>
+<h3 id="上傳至github"><a href="#上傳至github" class="headerlink" title="上傳至github"></a>上傳至github</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pythone PushGit.py</span><br></pre></td></tr></table></figure>
 
-<p>將 “Name” 替換為你要設定的新使用者名稱。</p>
-<ol start="3">
-<li>使用以下命令設定新的電子郵件地址：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arduinoCopy code</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+<p>自己寫的上傳程式，包括:<code>hexo generate</code> 、 <code>hexo deploy</code> 、 整包上傳repro&#x2F;{填寫的分支}</p>
+<p><code>2023/7/18</code> 新增 _config.yml 的github_deploy，節省輸入的時間</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">github_deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/ImitatedSky/ImitatedSky.github.io</span><br><span class="line">  branch: main</span><br><span class="line">  message: <span class="string">&#x27;deploy&#x27;</span></span><br><span class="line">  <span class="built_in">test</span>: <span class="string">&quot;test message&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pip install pyyaml</span></span><br><span class="line"><span class="comment"># PushGit.py</span></span><br><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 讀取設定檔</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;_config.yml&quot;</span>, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.load(f, Loader=yaml.FullLoader)</span><br><span class="line"></span><br><span class="line">github_url = config[<span class="string">&quot;github_deploy&quot;</span>][<span class="string">&quot;repo&quot;</span>]</span><br><span class="line">github_branch = config[<span class="string">&quot;github_deploy&quot;</span>][<span class="string">&quot;branch&quot;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="題外話-hexo-deploy"><a href="#題外話-hexo-deploy" class="headerlink" title="題外話-hexo deploy"></a>題外話-hexo deploy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/ImitatedSky/ImitatedSky.github.io <span class="comment"># https://github.com/[你的 GitHub 帳號]/[你的 GitHub 帳號].github.io.git</span></span><br><span class="line">  branch: gh-page <span class="comment"># 在這邊我是使用 gp-page 當作主要分支</span></span><br><span class="line">  message: <span class="string">&#x27;deploy&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>這邊我是上傳至 .io 的gh-pages分支，設定在 _config.yml</p>
+]]></content>
       <tags>
-        <tag>Git</tag>
+        <tag>gossip</tag>
+        <tag>bash</tag>
       </tags>
   </entry>
 </search>

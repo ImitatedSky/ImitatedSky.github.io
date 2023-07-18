@@ -3,12 +3,13 @@ title: Post Front-matter
 date: 2023-07-06
 updated:
 tags:
+- [gossip]
 categories:
 keywords:
 description:
 top_img:
 comments:
-cover: /img/cover/code.jpg
+cover: /img/cover/cover02.jpg
 toc:
 toc_number:
 toc_style_simple:

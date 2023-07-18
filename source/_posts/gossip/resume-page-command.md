@@ -2,6 +2,9 @@
 title: ReactWeb-deploy-command
 date: 2023-07-10 09:54:28
 tags:
+- [React]
+- [gossip]
+
 ---
 我Resume 是使用React (在codesandbox)，紀錄上傳至github的步驟
 
