@@ -5,8 +5,8 @@ tags:
 - [Python]
 - [easy]
 
-Array
-Dynamic Programming
+- [Array]
+- [Dynamic Programming]
 
 
 cover: /img/cover/leetcode.jpg
