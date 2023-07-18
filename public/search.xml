@@ -4,11 +4,10 @@
     <title>Leetcode#148. Sort Listk</title>
     <url>/2023/07/14/leetcode/Leetcode-148-Sort-Listk/</url>
     <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given the <code>head</code> of a linked list, return <em>the list after sorting it in <strong>ascending order</strong></em>.</p>
-<p><strong>Example 1:</strong><br><a href="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg">https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg</a><br><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg"></p>
+<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: head = [4,2,1,3]</span><br><span class="line">Output: [1,2,3,4]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>Example 2:</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg"></p>
+<p><strong>Example 2:</strong><br><img src="/invert1-tree.jpg" alt="Alt text"><br><img src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: head = [-1,5,3,4,0]</span><br><span class="line">Output: [-1,0,3,4,5]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><strong>Example 3:</strong></p>

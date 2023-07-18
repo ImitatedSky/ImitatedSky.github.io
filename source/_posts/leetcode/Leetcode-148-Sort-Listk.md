@@ -21,7 +21,6 @@ updated:
 Given the `head` of a linked list, return *the list after sorting it in **ascending order***.
 
 **Example 1:**
-https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg
 ![](https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg)
 
 ```
@@ -31,7 +30,7 @@ Output: [1,2,3,4]
 ```
 
 **Example 2:**
-
+![Alt text](invert1-tree.jpg)
 ![](https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg)
 
 ```

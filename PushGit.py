@@ -18,8 +18,11 @@ url = config["github_deploy"]["repo"]
 branch = config["github_deploy"]["branch"]
 
 if is_hexo_generate:
-    # hexo generate
+    # hexo clean  # 清除public，清除cache
+    # hexo generate # 產生public靜態檔案
+    hexo_clean = "hexo clean"
     hexo_generate = "hexo generate"
+    print(">>> " + hexo_clean)
     print(">>> " + hexo_generate)
     os.system(hexo_generate)
 
