@@ -106,3 +106,11 @@ deploy:
   repo: https://github.com/ImitatedSky/ImitatedSky.github.io # https://github.com/[你的 GitHub 帳號]/[你的 GitHub 帳號].github.io.git
   branch: gh-page # 在這邊我是使用 gp-page 當作主要分支
   message: 'deploy'
+
+# github_deploy
+github_deploy:
+  type: git
+  repo: https://github.com/ImitatedSky/ImitatedSky.github.io
+  branch: main
+  message: 'deploy'
+  test: "test message"

@@ -3,11 +3,19 @@
 import os
 import sys
 import platform
+import yaml
+
+
+# 讀取設定檔
+with open("_config.yml", "r", encoding="utf-8") as f:
+    config = yaml.load(f, Loader=yaml.FullLoader)
+
 
 
 # hexo generate
 is_hexo_generate = True
-url = "https://github.com/ImitatedSky/ImitatedSky.github.io"
+url = config["github_deploy"]["repo"]
+branch = config["github_deploy"]["branch"]
 
 if is_hexo_generate:
     # hexo generate
@@ -34,17 +42,21 @@ commit_msg =f"update: {GetTime()}"
 os.system("git remote rm origin")
 
 # 輸入github網址
-# github_url = input(">>> Please input github url : ")
-# ask for github url if true else input
-
 is_github_url = input(f">>> Is github url? {url}(y/n) : ")
 if is_github_url == "y" or is_github_url == "Y" or is_github_url == "yes" or is_github_url == "Yes" or is_github_url == "YES":
     github_url = url
 else:
     github_url = input(">>> Please input github url : ")
-github_branch = input(">>> Please input github branch : ")
-github_commit_msg = input(">>> Please input commit msg : ")
 
+# 輸入github分支
+is_github_branch = input(f">>> Is github branch? {branch}(y/n) : ")
+if is_github_branch == "y" or is_github_branch == "Y" or is_github_branch == "yes" or is_github_branch == "Yes" or is_github_branch == "YES":
+    github_branch = branch
+else:
+    github_branch = input(">>> Please input github branch : ")
+
+
+github_commit_msg = input(">>> Please input commit msg : ")
 # 如果沒有輸入 github_url  branch 停止程式
 if github_url == "" or github_branch == "":
     print(">>> Error: github_url or github_branch is empty")
@@ -79,6 +91,9 @@ print(">>> " + comd_4)
 os.system(comd_4)
 
 print(">>> Done!")
+
+
+
 
 # 點擊後自動關閉
 os.system("pause")

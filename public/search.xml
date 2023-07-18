@@ -254,9 +254,12 @@
 <h3 id="上傳至github"><a href="#上傳至github" class="headerlink" title="上傳至github"></a>上傳至github</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pythone PushGit.py</span><br></pre></td></tr></table></figure>
 
 <p>自己寫的上傳程式，包括:<code>hexo generate</code> 、 <code>hexo deploy</code> 、 整包上傳repro&#x2F;{填寫的分支}</p>
-<p>github_url &#x3D; input(“&gt;&gt;&gt; Please input github url : “)</p>
-<p>github_branch &#x3D; input(“&gt;&gt;&gt; Please input github branch : “)<br>    目前我的分支要填寫 <code>master:main</code><br>    因為github預設分支已經改為main<br>    另一點這邊指令有加入<code>-f</code>，因此會強制上傳</p>
-<p>github_commit_msg &#x3D; input(“&gt;&gt;&gt; Please input commit msg : “)</p>
+<p><code>2023/7/18</code> 新增 _config.yml 的github_deploy，節省輸入的時間</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># github_deploy</span></span><br><span class="line">github_deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/ImitatedSky/ImitatedSky.github.io</span><br><span class="line">  branch: main</span><br><span class="line">  message: <span class="string">&#x27;deploy&#x27;</span></span><br><span class="line">  <span class="built_in">test</span>: <span class="string">&quot;test message&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pip install pyyaml</span></span><br><span class="line"><span class="comment"># PushGit.py</span></span><br><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 讀取設定檔</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;_config.yml&quot;</span>, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.load(f, Loader=yaml.FullLoader)</span><br><span class="line"></span><br><span class="line">github_url = config[<span class="string">&quot;github_deploy&quot;</span>][<span class="string">&quot;repo&quot;</span>]</span><br><span class="line">github_branch = config[<span class="string">&quot;github_deploy&quot;</span>][<span class="string">&quot;branch&quot;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 <h3 id="題外話-hexo-deploy"><a href="#題外話-hexo-deploy" class="headerlink" title="題外話-hexo deploy"></a>題外話-hexo deploy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>這邊我是上傳至 .io 的gh-pages分支，設定在 _config.yml</p>

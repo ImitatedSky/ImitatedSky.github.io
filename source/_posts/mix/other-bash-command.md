@@ -22,14 +22,33 @@ $ pythone PushGit.py
 
 自己寫的上傳程式，包括:`hexo generate` 、 `hexo deploy` 、 整包上傳repro/{填寫的分支}
 
-github_url = input(">>> Please input github url : ")
+`2023/7/18` 新增 _config.yml 的github_deploy，節省輸入的時間
 
-github_branch = input(">>> Please input github branch : ")
-    目前我的分支要填寫 `master:main`
-    因為github預設分支已經改為main
-    另一點這邊指令有加入`-f`，因此會強制上傳
+``` bash
+# github_deploy
+github_deploy:
+  type: git
+  repo: https://github.com/ImitatedSky/ImitatedSky.github.io
+  branch: main
+  message: 'deploy'
+  test: "test message"
+```
 
-github_commit_msg = input(">>> Please input commit msg : ")
+``` python
+# pip install pyyaml
+# PushGit.py
+import yaml
+import os
+
+# 讀取設定檔
+with open("_config.yml", "r", encoding="utf-8") as f:
+    config = yaml.load(f, Loader=yaml.FullLoader)
+
+github_url = config["github_deploy"]["repo"]
+github_branch = config["github_deploy"]["branch"]
+
+```
+
 
 ### 題外話-hexo deploy
 
