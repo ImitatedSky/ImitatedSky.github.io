@@ -44,7 +44,7 @@ We can construct a Quad-Tree from a two-dimensional area using the following ste
 2. If the current grid has different values, set `isLeaf` to False and set `val` to any value and divide the current grid into four sub-grids as shown in the photo.
 3. Recurse for each of the children with the proper sub-grid.
 
-!https://assets.leetcode.com/uploads/2020/02/11/new_top.png
+![](https://assets.leetcode.com/uploads/2020/02/11/new_top.png)
 
 If you want to know more about the Quad-Tree, you can refer to the [wiki](https://en.wikipedia.org/wiki/Quadtree).
 
@@ -58,7 +58,7 @@ If the value of `isLeaf` or `val` is True we represent it as **1** in the 
 
 **Example 1:**
 
-!https://assets.leetcode.com/uploads/2020/02/11/grid1.png
+![](https://assets.leetcode.com/uploads/2020/02/11/grid1.png)
 
 ```
 Input: grid = [[0,1],[1,0]]
@@ -68,11 +68,11 @@ Notice that 0 represnts False and 1 represents True in the photo representing th
 
 ```
 
-!https://assets.leetcode.com/uploads/2020/02/12/e1tree.png
+![](https://assets.leetcode.com/uploads/2020/02/12/e1tree.png)
 
 **Example 2:**
 
-!https://assets.leetcode.com/uploads/2020/02/12/e2mat.png
+![](https://assets.leetcode.com/uploads/2020/02/12/e2mat.png)
 
 ```
 Input: grid = [[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]]
@@ -96,7 +96,7 @@ Input: grid =
 [1,1,1,1,0,0,0,0]]
 ```
 
-!https://assets.leetcode.com/uploads/2020/02/12/e2tree.png
+![](https://assets.leetcode.com/uploads/2020/02/12/e2tree.png)
 
 # `Solve`
 
