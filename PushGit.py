@@ -7,6 +7,7 @@ import platform
 
 # hexo generate
 is_hexo_generate = True
+url = "https://github.com/ImitatedSky/ImitatedSky.github.io"
 
 if is_hexo_generate:
     # hexo generate
@@ -33,9 +34,23 @@ commit_msg =f"update: {GetTime()}"
 os.system("git remote rm origin")
 
 # 輸入github網址
-github_url = input(">>> Please input github url : ")
+# github_url = input(">>> Please input github url : ")
+# ask for github url if true else input
+
+is_github_url = input(f">>> Is github url? {url}(y/n) : ")
+if is_github_url == "y" or is_github_url == "Y" or is_github_url == "yes" or is_github_url == "Yes" or is_github_url == "YES":
+    github_url = url
+else:
+    github_url = input(">>> Please input github url : ")
 github_branch = input(">>> Please input github branch : ")
 github_commit_msg = input(">>> Please input commit msg : ")
+
+# 如果沒有輸入 github_url  branch 停止程式
+if github_url == "" or github_branch == "":
+    print(">>> Error: github_url or github_branch is empty")
+    os.system("pause")
+    sys.exit()
+
 # 如果沒有輸入 commit msg 就用預設的
 if github_commit_msg != "":
     commit_msg = github_commit_msg
