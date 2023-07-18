@@ -43,14 +43,14 @@ os.system("git remote rm origin")
 
 # 輸入github網址
 is_github_url = input(f">>> Is github url? {url}(y/n) : ")
-if is_github_url == "y" or is_github_url == "Y" or is_github_url == "yes" or is_github_url == "Yes" or is_github_url == "YES":
+if is_github_url == "y" or is_github_url == "Y" or is_github_url == "yes" or is_github_url == "Yes" or is_github_url == "YES" or is_github_url == "":
     github_url = url
 else:
     github_url = input(">>> Please input github url : ")
 
 # 輸入github分支
 is_github_branch = input(f">>> Is github branch? {branch}(y/n) : ")
-if is_github_branch == "y" or is_github_branch == "Y" or is_github_branch == "yes" or is_github_branch == "Yes" or is_github_branch == "YES":
+if is_github_branch == "y" or is_github_branch == "Y" or is_github_branch == "yes" or is_github_branch == "Yes" or is_github_branch == "YES" or is_github_branch == "":
     github_branch = branch
 else:
     github_branch = input(">>> Please input github branch : ")
