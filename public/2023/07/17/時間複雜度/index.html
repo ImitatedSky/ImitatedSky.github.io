@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>時間複雜度 | Imisky</title><meta name="author" content="ImitatedSky"><meta name="copyright" content="ImitatedSky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="時間複雜度由小到大依次為:O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)  O(1)：常數時間，不管輸入多大，執行時間都是一樣的 O(logn)：對數時間，隨著輸入的增加，執行時間會稍微增加 O(n)：線性時間，隨著輸入的增加，執行時間會線性增加">
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>時間複雜度 | Imisky</title><meta name="author" content="ImitatedSky"><meta name="copyright" content="ImitatedSky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="時間複雜度由小到大依次為:O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)    時間複雜度 描述    O(1) 常數時間   O(logn) 對數時間   O(n) 線性時間   O(nlogn) 線性對數時間   O(n^2) 平方時間">
 <meta property="og:type" content="article">
 <meta property="og:title" content="時間複雜度">
 <meta property="og:url" content="https://pochunyeh.com/2023/07/17/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6/index.html">
 <meta property="og:site_name" content="Imisky">
-<meta property="og:description" content="時間複雜度由小到大依次為:O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)  O(1)：常數時間，不管輸入多大，執行時間都是一樣的 O(logn)：對數時間，隨著輸入的增加，執行時間會稍微增加 O(n)：線性時間，隨著輸入的增加，執行時間會線性增加">
+<meta property="og:description" content="時間複雜度由小到大依次為:O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)    時間複雜度 描述    O(1) 常數時間   O(logn) 對數時間   O(n) 線性時間   O(nlogn) 線性對數時間   O(n^2) 平方時間">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://pochunyeh.com/img/cover/code.jpg">
 <meta property="article:published_time" content="2023-07-17T09:07:18.000Z">
-<meta property="article:modified_time" content="2023-07-17T09:32:13.821Z">
+<meta property="article:modified_time" content="2023-07-18T01:00:58.750Z">
 <meta property="article:author" content="ImitatedSky">
 <meta property="article:tag" content="施工中">
 <meta name="twitter:card" content="summary">
@@ -61,7 +61,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-07-17 17:32:13'
+  postUpdate: '2023-07-18 09:00:58'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -186,18 +186,51 @@
     document.addEventListener('pjax:send', () => { preloader.initLoading() })
     document.addEventListener('pjax:complete', () => { preloader.endLoading() })
   }
-})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/MyAvatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/code.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Imisky"><img class="site-icon" src="/img/MyAvatar.jpg"/><span class="site-name">Imisky</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">時間複雜度</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-07-17T09:07:18.000Z" title="發表於 2023-07-17 17:07:18">2023-07-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-07-17T09:32:13.821Z" title="更新於 2023-07-17 17:32:13">2023-07-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="時間複雜度"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%96%BD%E5%B7%A5%E4%B8%AD/">施工中</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/code.jpg" data-sites="facebook,twitter,linkedin"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><article class="post-content" id="article-container"><h1 id="時間複雜度由小到大依次為"><a href="#時間複雜度由小到大依次為" class="headerlink" title="時間複雜度由小到大依次為:"></a>時間複雜度由小到大依次為:</h1><p>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</p>
-<ul>
-<li>O(1)：常數時間，不管輸入多大，執行時間都是一樣的</li>
-<li>O(logn)：對數時間，隨著輸入的增加，執行時間會稍微增加</li>
-<li>O(n)：線性時間，隨著輸入的增加，執行時間會線性增加</li>
-<li>O(nlogn)：線性對數時間，隨著輸入的增加，執行時間會稍微增加</li>
-<li>O(n^2)：平方時間，隨著輸入的增加，執行時間會大幅增加</li>
-<li>O(n^3)：立方時間，隨著輸入的增加，執行時間會大幅增加</li>
-<li>O(2^n)：指數時間，隨著輸入的增加，執行時間會大幅增加</li>
-<li>O(n!)：階乘時間，隨著輸入的增加，執行時間會大幅增加</li>
-<li>O(n^n)：階乘時間，隨著輸入的增加，執行時間會大幅增加</li>
-</ul>
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/MyAvatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/code.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Imisky"><img class="site-icon" src="/img/MyAvatar.jpg"/><span class="site-name">Imisky</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">時間複雜度</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-07-17T09:07:18.000Z" title="發表於 2023-07-17 17:07:18">2023-07-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-07-18T01:00:58.750Z" title="更新於 2023-07-18 09:00:58">2023-07-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="時間複雜度"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%96%BD%E5%B7%A5%E4%B8%AD/">施工中</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/code.jpg" data-sites="facebook,twitter,linkedin"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><article class="post-content" id="article-container"><h1 id="時間複雜度由小到大依次為"><a href="#時間複雜度由小到大依次為" class="headerlink" title="時間複雜度由小到大依次為:"></a>時間複雜度由小到大依次為:</h1><p>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</p>
+<table>
+<thead>
+<tr>
+<th>時間複雜度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>O(1)</td>
+<td>常數時間</td>
+</tr>
+<tr>
+<td>O(logn)</td>
+<td>對數時間</td>
+</tr>
+<tr>
+<td>O(n)</td>
+<td>線性時間</td>
+</tr>
+<tr>
+<td>O(nlogn)</td>
+<td>線性對數時間</td>
+</tr>
+<tr>
+<td>O(n^2)</td>
+<td>平方時間</td>
+</tr>
+<tr>
+<td>O(n^3)</td>
+<td>立方時間</td>
+</tr>
+<tr>
+<td>O(2^n)</td>
+<td>指數時間</td>
+</tr>
+<tr>
+<td>O(n!)</td>
+<td>階乘時間</td>
+</tr>
+<tr>
+<td>O(n^n)</td>
+<td>階乘時間</td>
+</tr>
+</tbody></table>
 <h1 id="常見的時間複雜度"><a href="#常見的時間複雜度" class="headerlink" title="常見的時間複雜度"></a>常見的時間複雜度</h1><h2 id="O-1-：常數時間"><a href="#O-1-：常數時間" class="headerlink" title="O(1)：常數時間"></a>O(1)：常數時間</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">constant_algo</span>(<span class="params">items</span>):</span><br><span class="line">    result = items[<span class="number">0</span>] * items[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
 
 <h2 id="O-n-：線性時間"><a href="#O-n-：線性時間" class="headerlink" title="O(n)：線性時間"></a>O(n)：線性時間</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">linear_algo</span>(<span class="params">items</span>):</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        <span class="built_in">print</span>(item)</span><br></pre></td></tr></table></figure>
