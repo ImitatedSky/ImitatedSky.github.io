@@ -82,7 +82,7 @@ r   g  e   at
           a   t
 
     great
-		/  \
+    /  \
   gr    eat
  / \    /  \
 g  r   e    at
@@ -262,30 +262,4 @@ class Solution:
             m[(s1, s2)] = False
             return False
         return func(s1, s2)
-```
-
-bab
-/   \
-b     ab
-/  \
-a    b
-
-```
-abb
-    /   \
-  ab      b
- /  \
-a    b
-
-   bba
-  /   \
-b     ba
-      /  \
-     b    agreta
-    /     \
-   gr      eta
-  /  \    /   \
- g   r   e    ta
-            /    \
-           t      a
 ```
