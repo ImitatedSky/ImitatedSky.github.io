@@ -73,7 +73,7 @@ Output: true
 ~~當初看超久~~
 
 ```
-		rgeat
+    rgeat
    /    \
   rg    eat
  / \    /  \
@@ -81,9 +81,9 @@ r   g  e   at
            / \
           a   t
 
-		great
+    great
 		/  \
-	gr    eat
+  gr    eat
  / \    /  \
 g  r   e    at
            /  \
@@ -95,12 +95,12 @@ g  r   e    at
 所以也能延伸
 
 ```bash
-  		greta
- 	   /     \
+     greta
+    /     \
    gr      eta
   /  \    /   \
  g   r   e    ta
-						/    \
+            /    \
            t      a
 ```
 
@@ -115,7 +115,7 @@ at &  ta ⇒ `True` ( scrambled )   →  eat  &  ate  ⇒ `True`
  /  \
 a    b
 
-	 bba
+   bba
   /   \
 b     ba
       /  \
@@ -164,36 +164,6 @@ class Solution:
 做一個儲存庫
 
 這樣不用每次都從新跑
-
-```python
-class Solution:
-    def isScramble(self, s1: str, s2: str) -> bool:
-        memo = {}
-
-        def helper(s1, s2):
-            if (s1, s2) in memo:
-                return memo[(s1, s2)]
-
-            if len(s1) != len(s2) or sorted(s1) != sorted(s2):
-                memo[(s1, s2)] = False
-                return False
-
-            if s1 == s2:
-                memo[(s1, s2)] = True
-                return True
-
-            n = len(s1)
-            for i in range(1, n):
-                if (helper(s1[:i], s2[:i]) and helper(s1[i:], s2[i:])) or \
-                   (helper(s1[:i], s2[n-i:]) and helper(s1[i:], s2[:n-i])):
-                    memo[(s1, s2)] = True
-                    return True
-
-            memo[(s1, s2)] = False
-            return False
-
-        return helper(s1, s2)
-```
 
 ```python
 class Solution:
@@ -292,4 +262,30 @@ class Solution:
             m[(s1, s2)] = False
             return False
         return func(s1, s2)
+```
+
+bab
+/   \
+b     ab
+/  \
+a    b
+
+```
+abb
+    /   \
+  ab      b
+ /  \
+a    b
+
+   bba
+  /   \
+b     ba
+      /  \
+     b    agreta
+    /     \
+   gr      eta
+  /  \    /   \
+ g   r   e    ta
+            /    \
+           t      a
 ```
