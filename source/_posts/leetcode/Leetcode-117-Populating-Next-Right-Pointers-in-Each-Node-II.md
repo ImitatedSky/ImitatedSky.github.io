@@ -1,7 +1,6 @@
 ---
 title: "Leetcode#117.\_Populating Next Right Pointers in Each Node II"
 tags:
-  - []
 - [Leetcode]
 - [Python]
 - [medium]

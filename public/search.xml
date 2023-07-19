@@ -790,4 +790,47 @@
         <tag>String</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#117. Populating Next Right Pointers in Each Node II</title>
+    <url>/2023/07/19/leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given a binary tree</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Node &#123;</span><br><span class="line">  int val;</span><br><span class="line">  Node *left;</span><br><span class="line">  Node *right;</span><br><span class="line">  Node *next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to <code>NULL</code>.</p>
+<p>Initially, all next pointers are set to <code>NULL</code>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2019/02/15/117_sample.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: root = [1,2,3,4,5,null,7]</span><br><span class="line">Output: [1,#,2,3,#,4,5,7,#]</span><br><span class="line">Explanation:Given the above binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with &#x27;#&#x27; signifying the end of each level.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: root = []</span><br><span class="line">Output: []</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[0, 6000]</code>.</li>
+<li><code>100 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+<p><strong>Follow-up:</strong></p>
+<ul>
+<li>You may only use constant extra space.</li>
+<li>The recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>可以先去看看116</p>
+<p>這邊就是多一 <code>指針</code> <code>curr</code>，協助找子節點 next</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 左子節點和右子節點的 next 指針連接</span></span><br><span class="line">        <span class="keyword">if</span> root.left:</span><br><span class="line">            <span class="keyword">if</span> root.right:</span><br><span class="line">                root.left.<span class="built_in">next</span> = root.right  <span class="comment"># 左子節點 next 指向右子節點</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 找右側存在的節點</span></span><br><span class="line">                curr = root.<span class="built_in">next</span></span><br><span class="line">                </span><br><span class="line">                <span class="comment"># 重複尋找右側存在的子節點</span></span><br><span class="line">                <span class="keyword">while</span> curr:</span><br><span class="line">                    <span class="keyword">if</span> curr.left:</span><br><span class="line">                        root.left.<span class="built_in">next</span> = curr.left <span class="comment"># 左子節點 next</span></span><br><span class="line">                        <span class="keyword">break</span> <span class="comment"># 找到後就跳出</span></span><br><span class="line">                    <span class="keyword">elif</span> curr.right:</span><br><span class="line">                        root.left.<span class="built_in">next</span> = curr.right</span><br><span class="line">                        <span class="keyword">break</span> <span class="comment"># 找到後就跳出</span></span><br><span class="line">                    curr = curr.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 右子節點和右子節點的 next 指針連接</span></span><br><span class="line">        <span class="keyword">if</span> root.right:</span><br><span class="line">            <span class="comment"># 找右側存在的節點</span></span><br><span class="line">            curr = root.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 重複尋找右側存在的子節點</span></span><br><span class="line">            <span class="keyword">while</span> curr:</span><br><span class="line">                <span class="keyword">if</span> curr.left:</span><br><span class="line">                    root.right.<span class="built_in">next</span> = curr.left</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> curr.right:</span><br><span class="line">                    root.right.<span class="built_in">next</span> = curr.right</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                curr = curr.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 遞迴處理右子樹和左子樹</span></span><br><span class="line">        <span class="comment"># 先處理右子樹，因為左子樹的 next 指針可能會用到右子樹的 next 指針</span></span><br><span class="line">        self.connect(root.right)</span><br><span class="line">        self.connect(root.left)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>Tree</tag>
+        <tag>Linked List</tag>
+        <tag>💡</tag>
+        <tag>Depth-First Search</tag>
+        <tag>Breadth-First Search</tag>
+        <tag>Binary Tree</tag>
+      </tags>
+  </entry>
 </search>
