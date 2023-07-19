@@ -126,7 +126,7 @@ class Solution:
         return merged_list.next
 ```
 
-O(nk log k)
+O(n log k) 
 
 - n 是所有list的長度總和
 - k 是lists的長度
@@ -135,7 +135,7 @@ O(nk log k)
 
 ~~原先寫得，但時間複雜度太慘~~
 
-- 這邊的時間複雜度：O(n log k)
+- 這邊的時間複雜度：O(n log k) ???
 
 想法是:
 
