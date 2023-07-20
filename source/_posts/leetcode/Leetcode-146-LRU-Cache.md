@@ -129,7 +129,7 @@ lRUCache.get(4);    // return 4
 
 ```
 
-## `題目要求得 Hash Table Doubly-Linked List`
+## `題目要求的 Hash Table Doubly-Linked List`
 
 ```python
 class Node:

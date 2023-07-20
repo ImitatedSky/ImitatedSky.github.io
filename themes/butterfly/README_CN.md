@@ -14,20 +14,6 @@
       include includes/third-party/share/index.pug
 ```
 
-# post、page
-## `原先的`
-```pug
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
-```
-## `我的改動`
-```pug
-    if page.comments !== true && theme.comments && theme.comments.use
-      - var commentsJsLoad = false
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
-```
-
 
 
 
