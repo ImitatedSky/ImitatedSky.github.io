@@ -8,7 +8,7 @@ categories:
 keywords:
 description:
 top_img:
-comments:
+comments: false
 cover: /img/cover/cover02.jpg
 toc:
 toc_number:

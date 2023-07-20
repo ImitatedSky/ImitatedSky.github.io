@@ -10,12 +10,12 @@ import yaml
 with open("_config.yml", "r", encoding="utf-8") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
-
+url = config["github_deploy"]["repo"]
+branch = config["github_deploy"]["branch"]
 
 # hexo generate
 is_hexo_generate = True
-url = config["github_deploy"]["repo"]
-branch = config["github_deploy"]["branch"]
+
 
 if is_hexo_generate:
     # hexo clean  # 清除public，清除cache

@@ -12,12 +12,14 @@ menu:
   Home: / || fas fa-home
   Archives: /archives/ || fas fa-archive
   Tags: /tags/ || fas fa-tags
-  Categories: /categories/ || fas fa-folder-open
+  Categories || fas fa-folder-open:
+    📑All: /categories/ 
+    🧭Leetcode: /categories/Leetcode/
   # List||fas fa-list ||hide:
   #   Music: /music/ || fas fa-music
   #   Movie: /movies/ || fas fa-video
   Link: /link/ || fas fa-link
-  About: /about/ || fas fa-heart
+  messageboard: /messageboard/ || fas fa-comment-dots
 
 # Code Blocks (代碼相關)
 # --------------------------------------
@@ -233,7 +235,9 @@ aside:
       link: https://github.com/ImitatedSky
   card_announcement:
     enable: true
-    content: Have a good time!
+    content: 
+      如果你在使用中遇到問題，請到 <a href="https://github.com/ImitatedSky/ImitatedSky.github.io/issues" style="color:#49b1f5">Github Issues</a> 或者 <a href="/messageboard/" style="color:#49b1f5">留言板</a> 進行反饋
+      
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
@@ -279,10 +283,10 @@ runtimeshow:
 
 # Aside widget - Newest Comments
 newest_comments:
-  enable: false
+  enable: true
   sort_order: # Don't modify the setting unless you know how it works
   limit: 6
-  storage: 10 # unit: mins, save data to localStorage
+  storage: 5 # unit: mins, save data to localStorage
   avatar: true
 
 # Bottom right button (右下角按鈕)
@@ -405,18 +409,18 @@ addtoany:
 comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42/Artalk
-  use: # Valine,Disqus
+  use: Disqus # Valine,Disqus
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: false
+  lazyload: true
   count: false # Display comment count in post's top_img
   card_post_count: false # Display comment count in Home Page
 
 # disqus
 # https://disqus.com/
 disqus:
-  shortname:
+  shortname: imisky
   apikey: # For newest comments widget
 
 # Alternative Disqus - Render comments with Disqus API

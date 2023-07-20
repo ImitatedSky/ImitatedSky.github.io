@@ -4,6 +4,8 @@ date: 2023-07-10 09:00:41
 tags:
 - [bash]
 - [gossip]
+
+comments: false
 ---
 紀錄一些指令
 ## set up

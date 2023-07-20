@@ -2,6 +2,35 @@
   <a title="English" href="/README.md">English</a>
 </div>
 
+# 個人更動主題部分
+# 新增tags顯示
+```pug
+    //-我多增加一段tags
+    .tag_share
+      if (theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
+```
+
+# post、page
+## `原先的`
+```pug
+    if page.comments !== false && theme.comments && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
+```
+## `我的改動`
+```pug
+    if page.comments !== true && theme.comments && theme.comments.use
+      - var commentsJsLoad = false
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
+```
+
+
+
+
 # hexo-theme-butterfly
 
 ![master version](https://img.shields.io/github/package-json/v/jerryc127/hexo-theme-butterfly/master?color=%231ab1ad&label=master)

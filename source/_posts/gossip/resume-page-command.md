@@ -5,6 +5,7 @@ tags:
 - [React]
 - [gossip]
 
+comments: false
 ---
 我Resume 是使用React (在codesandbox)，紀錄上傳至github的步驟
 

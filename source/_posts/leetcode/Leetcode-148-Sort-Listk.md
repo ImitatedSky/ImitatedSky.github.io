@@ -15,6 +15,8 @@ tags:
 - [Merge Sort]
 
 updated:
+
+comments: false
 ---
 # `Problem`
 

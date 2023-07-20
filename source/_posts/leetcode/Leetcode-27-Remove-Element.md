@@ -9,6 +9,7 @@ tags:
 - [easy]
 
 updated:
+comments: false
 ---
 #`Problem`
 Given an integer array `nums` and an integer `val`, remove all occurrences of `val` in `nums` **[in-place](https://en.wikipedia.org/wiki/In-place_algorithm)**. The order of the elements may be changed. Then return *the number of elements in* `nums` *which are not equal to* `val`.
