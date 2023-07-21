@@ -38,3 +38,12 @@ github_url = config["github_deploy"]["repo"]
 github_branch = config["github_deploy"]["branch"]
 
 ```
+
+
+為了文章裡方便連結，所以把文章的路徑改成
+``` yaml
+原先
+  permalink: posts/:year/:month/:day/:title/
+改成
+  permalink: posts/:title/
+```

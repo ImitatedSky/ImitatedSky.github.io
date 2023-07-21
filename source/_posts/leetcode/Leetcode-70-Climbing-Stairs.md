@@ -167,3 +167,18 @@ class Solution:
 
         return dp[n]
 ```
+```python
+# 可以爬 1 2 3 4 四種時
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        dp = [0] * (n + 1)
+        dp[0] = 1 #這邊是把4當作一種
+        dp[1] = 1
+        dp[2] = 2
+        dp[3] = 4
+
+        for i in range(4, n + 1): # 4開始，所以階梯4時也會跑
+            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3] + dp[i-4]
+
+        return dp[n]
+```
