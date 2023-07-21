@@ -236,7 +236,7 @@ aside:
   card_announcement:
     enable: true
     content: 
-      如果你在使用中遇到問題，請到 <a href="https://github.com/ImitatedSky/ImitatedSky.github.io/issues" style="color:#49b1f5">Github Issues</a> 或者 <a href="/messageboard/" style="color:#49b1f5">留言板</a> 進行反饋
+      如果在使用中遇到問題，可以到 <a href="https://github.com/ImitatedSky/blog-utterances/issues" style="color:#49b1f5">Github Issues</a> 或者 <a href="/messageboard/" style="color:#49b1f5">留言板</a> 進行反饋，
       
   card_recent_post:
     enable: true
@@ -815,7 +815,7 @@ abcjs:
 # mermaid
 # see https://github.com/mermaid-js/mermaid
 mermaid:
-  enable: false
+  enable: true
   # built-in themes: default/forest/dark/neutral
   theme:
     light: default

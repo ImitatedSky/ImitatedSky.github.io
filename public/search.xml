@@ -898,4 +898,79 @@
         <tag>Doubly-Linked List</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#70. Climbing Stairs</title>
+    <url>/2023/07/21/leetcode/Leetcode-70-Climbing-Stairs/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>You are climbing a staircase. It takes <code>n</code> steps to reach the top.</p>
+<p>Each time you can either climb <code>1</code> or <code>2</code> steps. In how many distinct ways can you climb to the top?</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 2</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: There are two ways to climb to the top.</span><br><span class="line">1. 1 step + 1 step</span><br><span class="line">2. 2 steps</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 3</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: There are three ways to climb to the top.</span><br><span class="line">1. 1 step + 1 step + 1 step</span><br><span class="line">2. 1 step + 2 steps</span><br><span class="line">3. 2 steps + 1 step</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 45</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h2 id="用一般的-fibonacci-但時間上無法，所以加一個memory紀錄"><a href="#用一般的-fibonacci-但時間上無法，所以加一個memory紀錄" class="headerlink" title="用一般的**fibonacci 但時間上無法，所以加一個memory紀錄**"></a><code>用一般的**fibonacci 但時間上無法，所以加一個memory紀錄**</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Result time-exced limit</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">climb</span>(<span class="params">n</span>):</span><br><span class="line">            <span class="keyword">if</span>  n == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> climb(n-<span class="number">1</span>) + climb(n-<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> climb(n)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        memo = &#123;&#125;</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">climb</span>(<span class="params">n</span>):</span><br><span class="line">            <span class="keyword">if</span>  n == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> n <span class="keyword">in</span> memo:</span><br><span class="line">                <span class="keyword">return</span> memo[n]</span><br><span class="line">            memo[n] = climb(n-<span class="number">1</span>) + climb(n-<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> climb(n-<span class="number">1</span>) + climb(n-<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> climb(n)</span><br></pre></td></tr></table></figure>
+
+<h2 id="用DP-可減少遞迴帶來的記憶體開銷"><a href="#用DP-可減少遞迴帶來的記憶體開銷" class="headerlink" title="用DP(可減少遞迴帶來的記憶體開銷)"></a><code>用DP(可減少遞迴帶來的記憶體開銷)</code></h2><p>用迭代計算所有項目</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span>  n</span><br><span class="line"></span><br><span class="line">        dp = &#123;&#125;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        dp[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n+<span class="number">1</span>):</span><br><span class="line">            dp[i] = dp[i-<span class="number">1</span>] + dp[i-<span class="number">2</span>]</span><br><span class="line">        <span class="comment"># print(f)</span></span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+
+<p>通常情況下，使用動態規劃（DP）相對於純遞迴方法可以減少記憶體開銷。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>在嚴格的定義下，動態規劃是一種將複雜問題分解成簡單子問題的優化技術，並使用迭代的方式計算所有子問題的解，並且通常有一個明確的「狀態轉移方程」來描述子問題之間的關係。這樣的實現方式通常不依賴遞迴，而是使用循環來進行計算。</p>
+<p>雖然<code>(Solve1)</code>確實使用了 memoization 技術來優化遞迴計算，但在 DP 的嚴格定義下，它仍然被視為是遞迴解法（recursive solution），而不是 DP 解法。遞迴解法仍然有一定的遞迴調用開銷，而真正的 DP 解法則完全避免了遞迴，只使用迭代計算。</p>
+<p>總結來說，<code>(Solve1)</code>確實使用了 memoization 技術，它在時間和空間上優於純遞迴解法，但嚴格來說不屬於真正的動態規劃（DP）方法。</p>
+<hr>
+<h2 id="費式數列"><a href="#費式數列" class="headerlink" title="費式數列"></a>費式數列</h2><p>當爬梯子</p>
+<p>可以爬 1 2 3 三種時</p>
+<p>n &#x3D; 4時，有7組解</p>
+<ol>
+<li>1 + 1 + 1 + 1</li>
+<li>1 + 2 + 1</li>
+<li>2 + 1 + 1</li>
+<li>1 + 1 + 2</li>
+<li>2 + 2</li>
+<li>3 + 1</li>
+<li>1 + 3</li>
+</ol>
+<p>先回到原始的圖解</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  flowchart TD
+
+start[4]
+treenode1[1]
+treenode2[2]
+treenode3[3]
+	treenode3.1[1]
+	treenode3.2[1]
+	treenode3.3[2]
+
+start --&gt;|4-3|treenode1
+start --&gt;|4-2|treenode2
+start --&gt;|4-1|treenode3
+
+treenode3 --&gt;|3-3|treenode3.1
+treenode3 --&gt;|3-2|treenode3.2
+treenode3 --&gt;|3-1|treenode3.3
+
+  </pre></div>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        dp[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n + <span class="number">1</span>):</span><br><span class="line">            dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>] + dp[i - <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+        <tag>Dynamic Programming</tag>
+        <tag>💡</tag>
+        <tag>Math</tag>
+        <tag>Memoization</tag>
+      </tags>
+  </entry>
 </search>
