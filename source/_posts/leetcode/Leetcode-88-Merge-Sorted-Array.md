@@ -7,6 +7,9 @@ tags:
 - [Leetcode]
 - [Python]
 - [easy]
+- Array
+- Two Pointers
+- Sorting
 
 updated:
 

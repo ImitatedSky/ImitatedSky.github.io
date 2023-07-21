@@ -19,6 +19,7 @@ date: 2023-07-19 13:15:45
 
 
 ---
+[leetcode116](../Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node)
 
 # `Problem`
 
