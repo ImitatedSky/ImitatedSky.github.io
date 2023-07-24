@@ -1061,4 +1061,52 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>String</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#62. Unique Paths</title>
+    <url>/posts/leetcode/Leetcode-62-Unique-Paths/</url>
+    <content><![CDATA[<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> [Leetcode]</span><br><span class="line"><span class="bullet">-</span> [Python]</span><br><span class="line"><span class="bullet">-</span> [medium]</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> [💡]</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> Math</span><br><span class="line"><span class="bullet">-</span> Dynamic Programming</span><br><span class="line"><span class="bullet">-</span> Combinatorics</span><br><span class="line"></span><br><span class="line">cover: /img/cover/leetcode.jpg</span><br><span class="line">categories: Leetcode</span><br></pre></td></tr></table></figure>
+
+<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>There is a robot on an <code>m x n</code> grid. The robot is initially located at the <strong>top-left corner</strong> (i.e., <code>grid[0][0]</code>). The robot tries to move to the <strong>bottom-right corner</strong> (i.e., <code>grid[m - 1][n - 1]</code>). The robot can only move either down or right at any point in time.</p>
+<p>Given the two integers <code>m</code> and <code>n</code>, return <em>the number of possible unique paths that the robot can take to reach the bottom-right corner</em>.</p>
+<p>The test cases are generated so that the answer will be less than or equal to <code>2 * 109</code>.</p>
+<p><strong>Example 1:</strong></p>
+<p>![]<a href="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png">https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png</a></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png">https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: m = 3, n = 7</span><br><span class="line">Output: 28</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: m = 3, n = 2</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:</span><br><span class="line">1. Right -&gt; Down -&gt; Down</span><br><span class="line">2. Down -&gt; Down -&gt; Right</span><br><span class="line">3. Down -&gt; Right -&gt; Down</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= m, n &lt;= 100</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><table>
+<thead>
+<tr>
+<th>x-1 ,  y-1</th>
+<th>x ,  y-1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x-1   ,    y</td>
+<td>x   ,   y</td>
+</tr>
+</tbody></table>
+<p>應該是國中數學吧</p>
+<p>右下角的為，上方 + 左邊 的方法次數</p>
+<h2 id="使用dp，memo"><a href="#使用dp，memo" class="headerlink" title="使用dp，memo"></a><code>使用dp，memo</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">uniquePaths</span>(<span class="params">self, m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        dp[(<span class="number">0</span>,<span class="number">0</span>)] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            dp[(i,<span class="number">0</span>)] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            dp[(<span class="number">0</span>,j)] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">                dp[(i,j)] = dp[(i-<span class="number">1</span>,j)] + dp[(i,j-<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[(m-<span class="number">1</span>,n-<span class="number">1</span>)]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Dynamic Programming</tag>
+        <tag>Math</tag>
+        <tag>Combinatorics</tag>
+      </tags>
+  </entry>
 </search>
