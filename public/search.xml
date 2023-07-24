@@ -1070,7 +1070,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <p>Given the two integers <code>m</code> and <code>n</code>, return <em>the number of possible unique paths that the robot can take to reach the bottom-right corner</em>.</p>
 <p>The test cases are generated so that the answer will be less than or equal to <code>2 * 109</code>.</p>
 <p><strong>Example 1:</strong></p>
-<p>![]<a href="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png">https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png</a></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png"></p>
 <p>!<a href="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png">https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png</a></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: m = 3, n = 7</span><br><span class="line">Output: 28</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 

@@ -40,7 +40,7 @@ The test cases are generated so that the answer will be less than or equal to `
 
 **Example 1:**
 
-![]https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png
+![](https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png)
 
 !https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png
 
