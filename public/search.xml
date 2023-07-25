@@ -1109,4 +1109,43 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Combinatorics</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#100. Same Tree</title>
+    <url>/posts/leetcode/Leetcode-100-Same-Tree/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given the roots of two binary trees <code>p</code> and <code>q</code>, write a function to check if they are the same or not.</p>
+<p>Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg">https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: p = [1,2,3], q = [1,2,3]</span><br><span class="line">Output: true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg">https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: p = [1,2], q = [1,null,2]</span><br><span class="line">Output: false</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg">https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: p = [1,2,1], q = [1,1,2]</span><br><span class="line">Output: false</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in both trees is in the range <code>[0, 100]</code>.</li>
+<li><code>10^4 &lt;= Node.val &lt;= 10^4</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSameTree</span>(<span class="params">self, p: <span class="type">Optional</span>[TreeNode], q: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> p <span class="keyword">and</span> <span class="keyword">not</span> q:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> p <span class="keyword">or</span> <span class="keyword">not</span> q <span class="keyword">or</span> p.val != q.val:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> (self.isSameTree(p.left,q.left) <span class="keyword">and</span> self.isSameTree(p.right,q.right))</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>Tree</tag>
+        <tag>Depth-First Search</tag>
+        <tag>Breadth-First Search</tag>
+        <tag>Binary Tree</tag>
+      </tags>
+  </entry>
 </search>
