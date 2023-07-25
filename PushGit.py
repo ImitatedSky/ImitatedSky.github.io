@@ -5,6 +5,11 @@ import sys
 import platform
 import yaml
 
+# push github的步驟
+# 1. git init
+# 2. git add .
+# 3. git commit -m "123"
+# 4. git push origin master
 
 # 讀取設定檔
 with open("_config.yml", "r", encoding="utf-8") as f:

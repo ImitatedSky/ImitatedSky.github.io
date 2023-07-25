@@ -29,9 +29,16 @@
       descr: 使用React.js製作
     - name: 我的IG
       link: https://www.instagram.com/xiebojun/
-      avatar: /img/IG.jpg
+      avatar: /img/IG.png
       descr: 我的IG
     - name: Butterfly
       link: https://butterfly.js.org/
       avatar: https://file.crazywong.com/gh/jerryc127/butterfly_cdn@2.1.0/top_img/index.jpg
       descr: Butterfly 作者
+- class_name: '<i class="fa-solid fa-seedling"></i>other portfolio'
+  class_desc: '<span style="font-style: italic;">重要的事情説三遍</span>'
+  link_list:
+    - name: wordcards
+      link: https://imitatedsky.github.io/wordcards/
+      avatar: https://raw.githubusercontent.com/facebook/react/main/packages/react-devtools/icons/icon128.png
+      descr: make by react.js
