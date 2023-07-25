@@ -9,7 +9,7 @@
 # 5. 發起 Pull requests ，合併到 butterfly.js.org 倉庫
 
 - class_name: '<i class="fas fa-check-double" style="color: #FF6666;padding-right: 0.4rem"></i>網站'
-  class_desc: '<span style="font-style: italic;">重要的事情説三遍</span>'
+  class_desc: '<span style="font-style: italic;">與怪物戰鬥的人，應當小心自己不要成為怪物</span>'
   link_list:
     - name: email
       link: mailto:yehforlivelihood@gmail.com
@@ -36,7 +36,7 @@
       avatar: https://file.crazywong.com/gh/jerryc127/butterfly_cdn@2.1.0/top_img/index.jpg
       descr: Butterfly 作者
 - class_name: '<i class="fa-solid fa-seedling"></i>other portfolio'
-  class_desc: '<span style="font-style: italic;">重要的事情説三遍</span>'
+  class_desc: '<span style="font-style: italic;">一些其他實作</span>'
   link_list:
     - name: wordcards
       link: https://imitatedsky.github.io/wordcards/
