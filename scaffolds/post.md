@@ -4,6 +4,6 @@ date: {{ date }}
 tags:
 - []
 
-cover: /img/cover/cover03.jpg
+cover: /img/cover/cover02.jpg
 
 ---

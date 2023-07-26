@@ -1187,4 +1187,34 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Binary Search</tag>
       </tags>
   </entry>
+  <entry>
+    <title>一些部落格配置adsense 域名</title>
+    <url>/posts/gossip/%E4%B8%80%E4%BA%9B%E9%83%A8%E8%90%BD%E6%A0%BC%E9%85%8D%E7%BD%AEadsense-%E5%9F%9F%E5%90%8D/</url>
+    <content><![CDATA[<h1 id="hexo部落格配置adsense"><a href="#hexo部落格配置adsense" class="headerlink" title="hexo部落格配置adsense"></a>hexo部落格配置adsense</h1><h2 id="1-申請adsense"><a href="#1-申請adsense" class="headerlink" title="1. 申請adsense"></a>1. 申請adsense</h2><p><a href="https://www.google.com/adsense/start/">https://www.google.com/adsense/start/</a></p>
+<p>就照著申請帳號吧</p>
+<h2 id="2-ads-txt"><a href="#2-ads-txt" class="headerlink" title="2. ads.txt"></a>2. ads.txt</h2><p>回到hexo在source底下新增ads.txt</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">google.com, pub-xxxxxxxxxxxxxxxx, DIRECT, f08c47fec0942fa0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="架設在github-io上的網站設置自己的域名"><a href="#架設在github-io上的網站設置自己的域名" class="headerlink" title="架設在github.io上的網站設置自己的域名"></a>架設在github.io上的網站設置自己的域名</h1><h2 id="1-設定custome-domain"><a href="#1-設定custome-domain" class="headerlink" title="1. 設定custome domain"></a>1. 設定custome domain</h2><p>(假設已經有github.io的repo)</p>
+<p>到github的setting&#x2F;Pages</p>
+<p>找到custom domain，並輸入自己的網域</p>
+<h2 id="2-hexo設定CNAME"><a href="#2-hexo設定CNAME" class="headerlink" title="2. hexo設定CNAME"></a>2. hexo設定CNAME</h2><p>在source底下新增CNAME</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yourdomain.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-設定DNS"><a href="#3-設定DNS" class="headerlink" title="3. 設定DNS"></a>3. 設定DNS</h2><p>到自己的買網域的地方，設定DNS</p>
+<!-- https://www.namecheap.com/support/knowledgebase/article.aspx/9645/2208/how-do-i-link-my-domain-to-github-pages/ -->
+
+<p>可以參考官方文檔</p>
+<p><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site</a></p>
+]]></content>
+      <tags>
+        <tag>gossip</tag>
+        <tag>adsense</tag>
+        <tag>domain</tag>
+      </tags>
+  </entry>
 </search>
