@@ -16,7 +16,7 @@ categories: Leetcode
 date: 2023-07-21 15:52:50
 ---
 
-[leetcode62]
+[leetcode62](..\Leetcode-62-Unique-Paths.md)
 
 # `Problem`
 

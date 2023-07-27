@@ -263,7 +263,7 @@
   <entry>
     <title>Leetcode#120. Triangle</title>
     <url>/posts/leetcode/Leetcode-120-Triangle/</url>
-    <content><![CDATA[<p>[leetcode62]</p>
+    <content><![CDATA[<p><a href="..%5CLeetcode-62-Unique-Paths.md">leetcode62</a></p>
 <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given a <code>triangle</code> array, return <em>the minimum path sum from top to bottom</em>.</p>
 <p>For each step, you may move to an adjacent number of the row below. More formally, if you are on index <code>i</code> on the current row, you may move to either index <code>i</code> or index <code>i + 1</code> on the next row.</p>
 <p><strong>Example 1:</strong></p>
@@ -1215,6 +1215,64 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>gossip</tag>
         <tag>adsense</tag>
         <tag>domain</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#212. Word Search II</title>
+    <url>/posts/Leetcode-212-Word-Search-II/</url>
+    <content><![CDATA[<p>簡易<br><a href="../Leetcode-79-Word-Search.md">leetcode79</a></p>
+]]></content>
+      <tags>
+        <tag></tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#79. Word Search</title>
+    <url>/posts/Leetcode-79-Word-Search/</url>
+    <content><![CDATA[<p>進階<br><a href="../Leetcode-212-Word-Search-II.md">leetcode212</a></p>
+<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an <code>m x n</code> grid of characters <code>board</code> and a string <code>word</code>, return <code>true</code> <em>if</em> <code>word</code> <em>exists in the grid</em>.</p>
+<p>The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/04/word2.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/11/04/word2.jpg">https://assets.leetcode.com/uploads/2020/11/04/word2.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: board = [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word = &quot;ABCCED&quot;</span><br><span class="line">Output: true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg">https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: board = [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word = &quot;SEE&quot;</span><br><span class="line">Output: true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/15/word3.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2020/10/15/word3.jpg">https://assets.leetcode.com/uploads/2020/10/15/word3.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: board = [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word = &quot;ABCB&quot;</span><br><span class="line">Output: false</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>m == board.length</code></li>
+<li><code>n = board[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 6</code></li>
+<li><code>1 &lt;= word.length &lt;= 15</code></li>
+<li><code>board</code> and <code>word</code> consists of only lowercase and uppercase English letters.</li>
+</ul>
+<p><strong>Follow up:</strong> Could you use search pruning to make your solution faster with a larger <code>board</code>?</p>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>先全部搜索，當找到第一個字母時，再開始跑 DFS</p>
+<p>DFS的概念，</p>
+<p>1.判斷是否找到了，如果找到了，就回傳True</p>
+<p>2.判斷是否超出邊界，或是word的第一個字母不等於board[i][j]時，代表找不到，回傳False</p>
+<p>3.把board[i][j]標記為 #，代表已經走過了</p>
+<p>4.往上下左右四個方向走，並且word往後一個字母</p>
+<p>5.把board[i][j]還原</p>
+<p>6.回傳結果</p>
+<p>backtracking 的觀念，當發現走不下去時，就把標記還原，然後往另一個方向走</p>
+<p>老鼠走迷宮的概念</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">exist</span>(<span class="params">self, board: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]], word: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># DFS approach</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">board, i, j, word</span>):</span><br><span class="line">            <span class="comment"># 當word長度為0時，代表已經找到了</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(word) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 當i,j超出邊界，或是word的第一個字母不等於board[i][j]時，代表找不到</span></span><br><span class="line">            <span class="keyword">if</span>( i &lt; <span class="number">0</span> <span class="keyword">or</span> i &gt;= <span class="built_in">len</span>(board) <span class="keyword">or</span> <span class="comment"># row</span></span><br><span class="line">                 j &lt; <span class="number">0</span> <span class="keyword">or</span> j &gt;= <span class="built_in">len</span>(board[<span class="number">0</span>]) <span class="keyword">or</span> <span class="comment"># column</span></span><br><span class="line">                 word[<span class="number">0</span>] != board[i][j]): <span class="comment"># word</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># temp用來記錄board[i][j]的值，因為之後會被改變 </span></span><br><span class="line">            temp = board[i][j]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># board[i][j] = #，代表已經走過了</span></span><br><span class="line">            board[i][j] = <span class="string">&#x27;#&#x27;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 往上下左右四個方向走，並且word往後一個字母</span></span><br><span class="line">            <span class="comment"># 這邊的board 會有 # 的情況，所以不用擔心會走回頭路</span></span><br><span class="line">            res = (dfs(board, i + <span class="number">1</span>, j, word[<span class="number">1</span>:]) <span class="keyword">or</span> </span><br><span class="line">                    dfs(board, i - <span class="number">1</span>, j, word[<span class="number">1</span>:]) <span class="keyword">or</span> </span><br><span class="line">                    dfs(board, i, j + <span class="number">1</span>, word[<span class="number">1</span>:]) <span class="keyword">or</span> </span><br><span class="line">                    dfs(board, i, j - <span class="number">1</span>, word[<span class="number">1</span>:]) )</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 把board[i][j]還原</span></span><br><span class="line">            board[i][j] = temp</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 全部都走過一遍</span></span><br><span class="line">        <span class="comment"># 這邊的i,j是用來找起點的</span></span><br><span class="line">        <span class="comment"># 通常board[i][j] != word[0]，所以不會進入dfs</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(board)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(board[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> dfs(board, i, j, word):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>Time complexity: O(m*<em>n * 4^L) m</em>n is the size of the board and L is the length of the word</p>
+<p>Space complexity: O(L) where L is the length of the word</p>
+]]></content>
+      <tags>
+        <tag></tag>
       </tags>
   </entry>
 </search>
