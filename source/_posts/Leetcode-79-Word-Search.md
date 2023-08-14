@@ -1,8 +1,18 @@
 ---
 title: "Leetcode#79.\_Word Search"
 tags:
-  - []
-cover: /img/cover/cover02.jpg
+- [Leetcode]
+- [Python]
+- [medium]
+
+- [💡]
+- Array
+- Backtracking
+- Matrix
+
+
+cover: /img/cover/leetcode.jpg
+categories: Leetcode
 date: 2023-07-26 11:31:52
 ---
 
