@@ -1342,4 +1342,39 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Backtracking</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#67. Add Binary</title>
+    <url>/posts/leetcode/Leetcode-67-Add-Binary/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given two binary strings <code>a</code> and <code>b</code>, return <em>their sum as a binary string</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: a = &quot;11&quot;, b = &quot;1&quot;</span><br><span class="line">Output: &quot;100&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: a = &quot;1010&quot;, b = &quot;1011&quot;</span><br><span class="line">Output: &quot;10101&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= a.length, b.length &lt;= 10^4</code></li>
+<li><code>a</code> and <code>b</code> consist only of <code>&#39;0&#39;</code> or <code>&#39;1&#39;</code> characters.</li>
+<li>Each string does not contain leading zeros except for the zero itself.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addBinary</span>(<span class="params">self, a: <span class="built_in">str</span>, b: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">      s = []</span><br><span class="line">      carry = <span class="number">0</span></span><br><span class="line">      i = <span class="built_in">len</span>(a) - <span class="number">1</span></span><br><span class="line">      j = <span class="built_in">len</span>(b) - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">or</span> j &gt;= <span class="number">0</span> <span class="keyword">or</span> carry:</span><br><span class="line">        total = carry</span><br><span class="line">        <span class="keyword">if</span> i &gt;= <span class="number">0</span>:</span><br><span class="line">          total += <span class="built_in">int</span>(a[i])</span><br><span class="line">          i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j &gt;= <span class="number">0</span>:</span><br><span class="line">          total += <span class="built_in">int</span>(b[j])</span><br><span class="line">          j -= <span class="number">1</span></span><br><span class="line">        s.append(<span class="built_in">str</span>(total % <span class="number">2</span>))</span><br><span class="line">        carry = total // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">      <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">reversed</span>(s))</span><br></pre></td></tr></table></figure>
+
+<h2 id="偷吃步"><a href="#偷吃步" class="headerlink" title="偷吃步"></a><code>偷吃步</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addBinary</span>(<span class="params">self, a: <span class="built_in">str</span>, b: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        x=<span class="built_in">int</span>(a,<span class="number">2</span>)</span><br><span class="line">        y=<span class="built_in">int</span>(b,<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">bin</span>(x+y)[<span class="number">2</span>:]</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>💡</tag>
+        <tag>easy</tag>
+        <tag>Bit Manipulation</tag>
+        <tag>Math</tag>
+        <tag>String</tag>
+        <tag>Simulation</tag>
+      </tags>
+  </entry>
 </search>
