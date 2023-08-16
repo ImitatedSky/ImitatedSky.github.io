@@ -47,11 +47,16 @@ Output: "10101"
 ```python
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
+      # s 用來存放結果 ，因為是用append(從後面加) 最後要用reversed
       s = []
+      # carry 存放進位
       carry = 0
       i = len(a) - 1
       j = len(b) - 1
 
+      # 運算式
+      # 不會動到原先的a,b
+      # i  j 為處理的位置
       while i >= 0 or j >= 0 or carry:
         total = carry
         if i >= 0:
@@ -65,6 +70,30 @@ class Solution:
         
       return ''.join(reversed(s))
 ```
+```python
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+      s = ""
+      carry = 0
+      i = len(a) - 1
+      j = len(b) - 1
+
+      while i >= 0 or j >= 0 or carry:
+        total = carry
+        if i >= 0:
+          total += int(a[i])
+          i -= 1 
+        if j >= 0:
+          total += int(b[j])
+          j -= 1
+
+        s += (str(total % 2))
+        carry = total // 2
+
+        
+      return s[::-1]
+```
+
 
 ## `偷吃步`
 
