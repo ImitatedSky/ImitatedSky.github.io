@@ -70,6 +70,9 @@ class Solution:
         
       return ''.join(reversed(s))
 ```
+
+稍做修改
+
 ```python
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
