@@ -48,6 +48,8 @@ Explanation:The input binary string11111111111111111111111111111101 represents t
 
 ## `位元的方法`
 
+### `利用位元移位`
+
 ```python
 class Solution:
     def reverseBits(self, n: int) -> int:
@@ -80,6 +82,8 @@ class Solution:
 ```
 
 ## `字串方法`
+
+### `.`
 
 1.轉成字串+補字元
 
