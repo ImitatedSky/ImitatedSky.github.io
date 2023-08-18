@@ -591,17 +591,17 @@ google_adsense:
   enable_page_level_ads: true
 
 # Insert ads manually (手動插入廣告)
-# ad:
-#   index:
-#   aside:
-#   post:
+ad:
+  index: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1586127049432699" crossorigin="anonymous"></script>
+  aside: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1586127049432699" crossorigin="anonymous"></script>
+  post: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1586127049432699" crossorigin="anonymous"></script>
 
 # Verification (站長驗證)
 # --------------------------------------
 
 site_verification:
-  - name: google-site-verification
-    content: vc4yXV0k1WLSBvY3rMMNCqWczbFIdPMUx6
+  # - name: google-site-verification
+  #   content: vc4yXV0k1WLSBvY3rMMNCqWczbFIdPMUx6
   # - name: baidu-site-verification
   #   content: xxxxxxx
 
