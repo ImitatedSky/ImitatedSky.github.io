@@ -1463,4 +1463,48 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Matrix</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#149. Max Points on a Line</title>
+    <url>/posts/leetcode/Leetcode-149-Max-Points-on-a-Line/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an array of <code>points</code> where <code>points[i] = [xi, yi]</code> represents a point on the <strong>X-Y</strong> plane, return <em>the maximum number of points that lie on the same straight line</em>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/25/plane1.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2021/02/25/plane1.jpg">https://assets.leetcode.com/uploads/2021/02/25/plane1.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: points = [[1,1],[2,2],[3,3]]</span><br><span class="line">Output: 3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/25/plane2.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2021/02/25/plane2.jpg">https://assets.leetcode.com/uploads/2021/02/25/plane2.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]</span><br><span class="line">Output: 4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= points.length &lt;= 300</code></li>
+<li><code>points[i].length == 2</code></li>
+<li><code>10^4 &lt;= xi, yi &lt;= 10^4</code></li>
+<li>All the <code>points</code> are <strong>unique</strong>.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h3 id="法一"><a href="#法一" class="headerlink" title="法一"></a><code>法一</code></h3><p>找到最多</p>
+<p>兩點斜率公式 y &#x3D; tan * x + res             ( y &#x3D; a x  + b)</p>
+<p>“#” 為垂直線</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxPoints</span>(<span class="params">self, points: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">				<span class="comment"># At least the last point, if the list is not empty</span></span><br><span class="line">        max_value = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(points)):</span><br><span class="line">            memo = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>( i + <span class="number">1</span> ,<span class="built_in">len</span>(points)):</span><br><span class="line"></span><br><span class="line">                dx = points[i][<span class="number">0</span>]-points[j][<span class="number">0</span>]</span><br><span class="line">                dy = points[i][<span class="number">1</span>]-points[j][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> dx == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> (<span class="string">&quot;#&quot;</span>,-points[i][<span class="number">0</span>]) <span class="keyword">in</span> memo:</span><br><span class="line">                        memo[(<span class="string">&quot;#&quot;</span>,-points[i][<span class="number">0</span>])] += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        memo[(<span class="string">&quot;#&quot;</span>,-points[i][<span class="number">0</span>])] = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    tan = dy / dx</span><br><span class="line">                    res = points[i][<span class="number">1</span>] - tan*points[i][<span class="number">0</span>]</span><br><span class="line">                    <span class="keyword">if</span> (tan , res) <span class="keyword">in</span> memo:</span><br><span class="line">                        memo[(tan,res)] += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        memo[(tan,res)] = <span class="number">2</span></span><br><span class="line">                </span><br><span class="line">            <span class="keyword">if</span> memo:</span><br><span class="line">                max_value = <span class="built_in">max</span>(max_value , <span class="built_in">max</span>(memo.values()))</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> max_value</span><br></pre></td></tr></table></figure>
+
+<h3 id="優化"><a href="#優化" class="headerlink" title="優化"></a><code>優化</code></h3><p>發現 res 根本不重要</p>
+<p>畢竟在 第 i 點上</p>
+<p>所以res 一定一樣</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxPoints</span>(<span class="params">self, points: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        max_value = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(points)):</span><br><span class="line">            memo = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>( i + <span class="number">1</span> ,<span class="built_in">len</span>(points)):</span><br><span class="line"></span><br><span class="line">                dx = points[i][<span class="number">0</span>]-points[j][<span class="number">0</span>]</span><br><span class="line">                dy = points[i][<span class="number">1</span>]-points[j][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> dx == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="string">&quot;#&quot;</span> <span class="keyword">in</span> memo:</span><br><span class="line">                        memo[<span class="string">&quot;#&quot;</span>] += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        memo[<span class="string">&quot;#&quot;</span>] = <span class="number">2</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    tan = dy / dx</span><br><span class="line">                    <span class="keyword">if</span> (tan) <span class="keyword">in</span> memo:</span><br><span class="line">                        memo[tan] += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        memo[tan] = <span class="number">2</span></span><br><span class="line">                        </span><br><span class="line">            <span class="keyword">if</span> memo:</span><br><span class="line">                max_value = <span class="built_in">max</span>(max_value , <span class="built_in">max</span>(memo.values()))</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> max_value</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Hash Table</tag>
+        <tag>hard</tag>
+        <tag>Math</tag>
+        <tag>Geometry</tag>
+      </tags>
+  </entry>
 </search>
