@@ -600,8 +600,8 @@ google_adsense:
 # --------------------------------------
 
 site_verification:
-  # - name: google-site-verification
-  #   content: xxxxxx
+  - name: google-site-verification
+    content: vc4yXV0k1WLSBvY3rMMNCqWczbFIdPMUx6
   # - name: baidu-site-verification
   #   content: xxxxxxx
 
