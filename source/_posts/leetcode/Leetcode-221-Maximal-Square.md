@@ -97,6 +97,9 @@ class Solution:
                 res = max(res,memo[(i,j)])
         return res*res
 ```
+Time complixity:
+
+O(m * n)
 
 ### `優化`
 
@@ -129,3 +132,6 @@ class Solution:
 
         return res * res
 ```
+Time complixity:
+
+O(m * n)

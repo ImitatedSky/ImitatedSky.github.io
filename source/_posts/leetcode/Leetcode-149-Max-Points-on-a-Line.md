@@ -95,6 +95,10 @@ class Solution:
         return max_value
 ```
 
+Time complexity :
+
+O( n^2)
+
 ### `優化`
 
 發現 res 根本不重要
