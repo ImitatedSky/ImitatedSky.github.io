@@ -103,11 +103,11 @@ BST 若為有序
 root.left.left → root.left → root.left.right → root → root.right.left → root.right → root.right.right
 
 ```
-      1
+      4
      / \
-    2   3
+    2   6
    / \ / \
-  4  5 6  7
+  1  3 5  7
 ```
 
 down-top 的走法
