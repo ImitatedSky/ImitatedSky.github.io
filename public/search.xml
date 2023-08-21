@@ -1602,7 +1602,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <p>遍歷的順序為 </p>
 <p>1              2               3               4               5               6               7</p>
 <p>root.left.left → root.left → root.left.right → root → root.right.left → root.right → root.right.right</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    4</span><br><span class="line">   / \</span><br><span class="line">  2   6</span><br><span class="line"> / \ / \</span><br><span class="line">1  3 5  7</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="number">4</span></span><br><span class="line">   / \</span><br><span class="line">  <span class="number">2</span>   <span class="number">6</span></span><br><span class="line"> / \ / \</span><br><span class="line"><span class="number">1</span>  <span class="number">3</span> <span class="number">5</span>  <span class="number">7</span></span><br></pre></td></tr></table></figure>
 
 <p>down-top 的走法</p>
 ]]></content>

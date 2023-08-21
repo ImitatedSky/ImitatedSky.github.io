@@ -102,7 +102,7 @@ BST 若為有序
 
 root.left.left → root.left → root.left.right → root → root.right.left → root.right → root.right.right
 
-```
+```javascript
       4
      / \
     2   6
