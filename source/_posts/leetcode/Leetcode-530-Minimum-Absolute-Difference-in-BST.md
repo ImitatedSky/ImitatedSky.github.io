@@ -111,3 +111,13 @@ root.left.left → root.left → root.left.right → root → root.right.left �
 ```
 
 down-top 的走法
+
+```python
+def down_top(root):
+    if not root:
+        return
+
+    down_top(root.left)
+    down_top(root.right)
+    print(root.val)
+```
