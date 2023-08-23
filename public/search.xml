@@ -1646,7 +1646,7 @@ treenode3 --&gt;|3-1|treenode3.3
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">現在才知道</span><br><span class="line">      <span class="keyword">if</span> col + (row - r) &lt; n <span class="keyword">and</span> chessboard[r][col + (row - r)] == <span class="string">&#x27;Q&#x27;</span>  :</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">      <span class="keyword">if</span>  chessboard[r][col + (row - r)] == <span class="string">&#x27;Q&#x27;</span> <span class="keyword">and</span> col + (row - r) &lt; n   :</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">有差</span><br><span class="line">上方的的因為前辦已經false，所以不會跑超出範圍的</span><br><span class="line">下方的可以因為超出範圍 先error，而不會達到想要的結果</span><br></pre></td></tr></table></figure>
 
-<h3 id="法二、網路上快速解"><a href="#法二、網路上快速解" class="headerlink" title="法二、網路上快速解"></a><code>法二、網路上快速解</code></h3><p>利用 <code>主對角線</code>、<code>副對角線</code>性質，用來判斷是否有斜線</p>
+<h3 id="法2、網路上快速解"><a href="#法2、網路上快速解" class="headerlink" title="法2、網路上快速解"></a><code>法2、網路上快速解</code></h3><p>利用 <code>主對角線</code>、<code>副對角線</code>性質，用來判斷是否有斜線</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="number">0</span>, <span class="number">0</span>)   (<span class="number">0</span>, <span class="number">1</span>)   (<span class="number">0</span>, <span class="number">2</span>)   (<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">(<span class="number">1</span>, <span class="number">0</span>)   (<span class="number">1</span>, <span class="number">1</span>)   (<span class="number">1</span>, <span class="number">2</span>)   (<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">(<span class="number">2</span>, <span class="number">0</span>)   (<span class="number">2</span>, <span class="number">1</span>)   (<span class="number">2</span>, <span class="number">2</span>)   (<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="number">0</span>)   (<span class="number">3</span>, <span class="number">1</span>)   (<span class="number">3</span>, <span class="number">2</span>)   (<span class="number">3</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 
 <p>主對角線上 <code>row + col</code> 都為同一個值</p>
@@ -1661,6 +1661,49 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>💡</tag>
         <tag>hard</tag>
         <tag>Backtracking</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#224. Basic Calculator</title>
+    <url>/posts/leetcode/Leetcode-224-Basic-Calculator/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given a string <code>s</code> representing a valid expression, implement a basic calculator to evaluate it, and return <em>the result of the evaluation</em>.</p>
+<p><strong>Note:</strong> You are <strong>not</strong> allowed to use any built-in function which evaluates strings as mathematical expressions, such as <code>eval()</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot;1 + 1&quot;</span><br><span class="line">Output: 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot; 2-1 + 2 &quot;</span><br><span class="line">Output: 3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot;(1+(4+5+2)-3)+(6+8)&quot;</span><br><span class="line">Output: 23</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 3 * 10^5</code></li>
+<li><code>s</code> consists of digits, <code>&#39;+&#39;</code>, <code>&#39;-&#39;</code>, <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, and <code>&#39; &#39;</code>.</li>
+<li><code>s</code> represents a valid expression.</li>
+<li><code>&#39;+&#39;</code> is <strong>not</strong> used as a unary operation (i.e., <code>&quot;+1&quot;</code> and <code>&quot;+(2 + 3)&quot;</code> is invalid).</li>
+<li><code>&#39;-&#39;</code> could be used as a unary operation (i.e., <code>&quot;-1&quot;</code> and <code>&quot;-(2 + 3)&quot;</code> is valid).</li>
+<li>There will be no two consecutive operators in the input.</li>
+<li>Every number and running calculation will fit in a signed 32-bit integer.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>這題不能用既有的公式，所以就土法煉鋼，將整段刻出來</p>
+<p>其中可能有括弧中又有括弧的問題，所以用stack將記錄</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">calculate</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        stack = [] <span class="comment"># 用來放置 括弧的計算</span></span><br><span class="line">        num = <span class="number">0</span></span><br><span class="line">        sign = <span class="number">1</span>  <span class="comment"># 初始化正號</span></span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">				<span class="comment"># 是否為數字</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">is_digit</span>(<span class="params">char</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span> &lt;= char &lt;= <span class="string">&#x27;9&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> is_digit(char):</span><br><span class="line">                num = num * <span class="number">10</span> + <span class="built_in">int</span>(char)  <span class="comment"># 最開始是0，當連續讀到數字 num*10 + char</span></span><br><span class="line">            <span class="keyword">elif</span> char == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                result += sign * num  <span class="comment"># 將當前數字加入結果，根據當前符號加減</span></span><br><span class="line">                num = <span class="number">0</span>  <span class="comment"># 重置數字</span></span><br><span class="line">                sign = <span class="number">1</span>  <span class="comment"># 設置為正號</span></span><br><span class="line">            <span class="keyword">elif</span> char == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                result += sign * num  <span class="comment"># res</span></span><br><span class="line">                num = <span class="number">0</span>  </span><br><span class="line">                sign = -<span class="number">1</span>  </span><br><span class="line"></span><br><span class="line">						<span class="comment"># 括弧的運算，利用 stack儲存括弧前的result</span></span><br><span class="line">						<span class="comment"># 括弧中有括弧也不會有問題</span></span><br><span class="line">            <span class="keyword">elif</span> char == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                stack.append((result, sign))  <span class="comment"># 將括弧前的結果 和 前面的符號  放進stack</span></span><br><span class="line">                result = <span class="number">0</span>  </span><br><span class="line">                sign = <span class="number">1</span>  </span><br><span class="line">            <span class="keyword">elif</span> char == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">                result += sign * num  <span class="comment"># 這是括弧內 # res</span></span><br><span class="line">                num = <span class="number">0</span>  </span><br><span class="line">                prev_result, prev_sign = stack.pop()  <span class="comment"># 取出最後一個放入stack的</span></span><br><span class="line">                result = prev_result + prev_sign * result  <span class="comment"># 使用前一個結果和符號更新當前結果</span></span><br><span class="line"></span><br><span class="line">        result += sign * num  <span class="comment"># 加上最後一個數字</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity : O(n) <del>雖然好像是廢話 XD</del></p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>hard</tag>
+        <tag>Math</tag>
+        <tag>String</tag>
+        <tag>Stack</tag>
+        <tag>Recursion</tag>
       </tags>
   </entry>
 </search>
