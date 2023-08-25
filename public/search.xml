@@ -1743,4 +1743,47 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>施工中</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#105. Construct Binary Tree from Preorder and Inorder Traversal</title>
+    <url>/posts/leetcode/Leetcode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given two integer arrays <code>preorder</code> and <code>inorder</code> where <code>preorder</code> is the preorder traversal of a binary tree and <code>inorder</code> is the inorder traversal of the same tree, construct and return <em>the binary tree</em>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/19/tree.jpg"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2021/02/19/tree.jpg">https://assets.leetcode.com/uploads/2021/02/19/tree.jpg</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]</span><br><span class="line">Output: [3,9,20,null,null,15,7]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: preorder = [-1], inorder = [-1]</span><br><span class="line">Output: [-1]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= preorder.length &lt;= 3000</code></li>
+<li><code>inorder.length == preorder.length</code></li>
+<li><code>3000 &lt;= preorder[i], inorder[i] &lt;= 3000</code></li>
+<li><code>preorder</code> and <code>inorder</code> consist of <strong>unique</strong> values.</li>
+<li>Each value of <code>inorder</code> also appears in <code>preorder</code>.</li>
+<li><code>preorder</code> is <strong>guaranteed</strong> to be the preorder traversal of the tree.</li>
+<li><code>inorder</code> is <strong>guaranteed</strong> to be the inorder traversal of the tree.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h2 id="法1"><a href="#法1" class="headerlink" title="法1"></a><code>法1</code></h2><h3 id="解"><a href="#解" class="headerlink" title="解"></a>解</h3><p>前序的第一點就是TreeNode的root</p>
+<p>找到中序的root.val 對應值，左邊就是左子樹，右邊就是右子樹</p>
+<p>遞迴下去即可</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">buildTree</span>(<span class="params">self, preorder: <span class="type">List</span>[<span class="built_in">int</span>], inorder: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">preo,ino</span>):</span><br><span class="line">			<span class="comment"># 當preo 或 ino 為空時，返回None</span></span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">not</span> preo <span class="keyword">or</span> <span class="keyword">not</span> ino :</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">      root = TreeNode(preo[<span class="number">0</span>])</span><br><span class="line">      root_index = <span class="number">0</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ino)):</span><br><span class="line">        <span class="keyword">if</span> ino[i] == root.val:</span><br><span class="line">          root_index = i</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">      </span><br><span class="line">      root.left = build( preo[<span class="number">1</span>:root_index+<span class="number">1</span>] , ino[<span class="number">0</span>:root_index])</span><br><span class="line">      root.right = build( preo[root_index+<span class="number">1</span>:<span class="built_in">len</span>(preo)] , ino[root_index+<span class="number">1</span>:<span class="built_in">len</span>(ino)])</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span>(root)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> build(preorder,inorder)</span><br></pre></td></tr></table></figure>
+
+<h3 id="整理過後"><a href="#整理過後" class="headerlink" title="整理過後"></a>整理過後</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">buildTree</span>(<span class="params">self, preorder: <span class="type">List</span>[<span class="built_in">int</span>], inorder: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> preorder <span class="keyword">or</span> <span class="keyword">not</span> inorder:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    root = TreeNode(preorder[<span class="number">0</span>])</span><br><span class="line">    root_index = inorder.index(preorder[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    root.left = self.buildTree(preorder[<span class="number">1</span>:root_index +<span class="number">1</span>], inorder[:root_index ])</span><br><span class="line">    root.right = self.buildTree(preorder[root_index +<span class="number">1</span>:], inorder[root_index +<span class="number">1</span>:])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>Tree</tag>
+        <tag>Binary Tree</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Hash Table</tag>
+        <tag>Divide and Conquer</tag>
+      </tags>
+  </entry>
 </search>
