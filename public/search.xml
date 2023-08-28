@@ -1786,4 +1786,42 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Divide and Conquer</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#34. Find First and Last Position of Element in Sorted Array</title>
+    <url>/posts/leetcode/Leetcode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an array of integers <code>nums</code> sorted in non-decreasing order, find the starting and ending position of a given <code>target</code> value.</p>
+<p>If <code>target</code> is not found in the array, return <code>[-1, -1]</code>.</p>
+<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [5,7,7,8,8,10], target = 8</span><br><span class="line">Output: [3,4]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [5,7,7,8,8,10], target = 6</span><br><span class="line">Output: [-1,-1]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [], target = 0</span><br><span class="line">Output: [-1,-1]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= nums.length &lt;= 10^5</code></li>
+<li><code>10^9 &lt;= nums[i] &lt;= 10^9</code></li>
+<li><code>nums</code> is a non-decreasing array.</li>
+<li><code>10^9 &lt;= target &lt;= 10^9</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>使用標準的Binary Search 來做這題</p>
+<p>先用二分法找到target</p>
+<p>因為target可能有重複，找到後，再前後延伸搜索</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">searchRange</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> [-<span class="number">1</span>, -<span class="number">1</span>]</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            mid = (left + right) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">                left = mid</span><br><span class="line">                right = mid</span><br><span class="line">                <span class="keyword">while</span> left &gt; <span class="number">0</span> <span class="keyword">and</span> nums[left - <span class="number">1</span>] == target:</span><br><span class="line">                    left -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> right &lt; <span class="built_in">len</span>(nums) - <span class="number">1</span> <span class="keyword">and</span> nums[right + <span class="number">1</span>] == target:</span><br><span class="line">                    right += <span class="number">1</span></span><br><span class="line">                <span class="keyword">return</span> [left, right]</span><br><span class="line">            <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">                right = mid - <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> [-<span class="number">1</span>, -<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Binary Search</tag>
+      </tags>
+  </entry>
 </search>
