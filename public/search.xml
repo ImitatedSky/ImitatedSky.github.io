@@ -1849,11 +1849,56 @@ treenode3 --&gt;|3-1|treenode3.3
 <h3 id="優化1"><a href="#優化1" class="headerlink" title="優化1"></a><code>優化1</code></h3><p>改變 <strong>往前走的步數</strong> → 最遠可達到的位置</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canJump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> nums[<span class="number">0</span>]&lt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        dp = &#123;&#125;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>] , i + nums[i])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> dp[i] &gt;= <span class="built_in">len</span>(nums) - <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">elif</span> dp[i] &lt;= i:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
-<p><code>然後發現根本不需要DP記錄所有</code></p>
+<h3 id="優化2"><a href="#優化2" class="headerlink" title="優化2"></a><code>優化2</code></h3><p><code>然後發現根本不需要DP記錄所有</code></p>
 <p>所以 判斷變成</p>
-<p>沒往前就<code>return False</code></p>
-<p>超過就<code>return True</code></p>
+<p>無法到達節點就 <code>return False</code></p>
+<p>超過終點就 <code>return True</code></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canJump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        dp = nums[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> dp &lt; i:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">            dp = <span class="built_in">max</span>(dp, i + nums[i])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> dp &gt;= <span class="built_in">len</span>(nums) - <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Dynamic Programming</tag>
+        <tag>Greedy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#45. Jump Game II</title>
+    <url>/posts/leetcode/Leetcode-45-Jump-Game-II/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>You are given a <strong>0-indexed</strong> array of integers <code>nums</code> of length <code>n</code>. You are initially positioned at <code>nums[0]</code>.</p>
+<p>Each element <code>nums[i]</code> represents the maximum length of a forward jump from index <code>i</code>. In other words, if you are at <code>nums[i]</code>, you can jump to any <code>nums[i + j]</code> where:</p>
+<ul>
+<li><code>0 &lt;= j &lt;= nums[i]</code> and</li>
+<li><code>i + j &lt; n</code></li>
+</ul>
+<p>Return <em>the minimum number of jumps to reach</em> <code>nums[n - 1]</code>. The test cases are generated such that you can reach <code>nums[n - 1]</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [2,3,1,1,4]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [2,3,0,1,4]</span><br><span class="line">Output: 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10^4</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 1000</code></li>
+<li>It’s guaranteed that you can reach <code>nums[n - 1]</code>.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>和<strong>Jump Game I 不同，沒有到不了的問題</strong></p>
+<h3 id="法1"><a href="#法1" class="headerlink" title="法1"></a><code>法1</code></h3><p>想法蠻簡單的做一個DP，紀錄到達這個節點，最少步數</p>
+<p>不需要回頭做</p>
+<p>但題目要求要為Greedy algo</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">jump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        dp = &#123;&#125;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums) ):</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span> , nums[i]+<span class="number">1</span> ):</span><br><span class="line">                <span class="keyword">if</span> i+j <span class="keyword">in</span> dp:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                dp[i+j] = dp[i]+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[<span class="built_in">len</span>(nums)-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="法3-Greedy-algo"><a href="#法3-Greedy-algo" class="headerlink" title="法3 Greedy algo"></a><code>法3 Greedy algo</code></h3><p>其實跟法1想法一樣，但更快且Space complexity 更少</p>
+<p>不斷更新reach 最遠可以到達的，當到達紀錄的last點時，</p>
+<p>再跳躍一次，更新最遠距離，並將count +&#x3D; 1</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 網路的解</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">jump</span>(<span class="params">self, nums</span>):</span><br><span class="line">        <span class="comment"># Initialize reach (maximum reachable index), count (number of jumps), and last (rightmost index reached)</span></span><br><span class="line">        reach, count, last = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Loop through the array excluding the last element</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)-<span class="number">1</span>):    </span><br><span class="line">            <span class="comment"># Update reach to the maximum between reach and i + nums[i]</span></span><br><span class="line">            reach = <span class="built_in">max</span>(reach, i + nums[i])</span><br><span class="line">        </span><br><span class="line">            <span class="comment"># If i has reached the last index that can be reached with the current number of jumps</span></span><br><span class="line">            <span class="keyword">if</span> i == last:</span><br><span class="line">                <span class="comment"># Update last to the new maximum reachable index</span></span><br><span class="line">                last = reach</span><br><span class="line">                <span class="comment"># Increment the number of jumps made so far</span></span><br><span class="line">                count += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Return the minimum number of jumps required</span></span><br><span class="line">        <span class="keyword">return</span> count</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Leetcode</category>
       </categories>

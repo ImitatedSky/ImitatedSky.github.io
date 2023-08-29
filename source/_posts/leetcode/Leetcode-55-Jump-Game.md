@@ -106,13 +106,15 @@ class Solution:
         return False
 ```
 
+### `優化2`
+
 `然後發現根本不需要DP記錄所有`
 
 所以 判斷變成
 
-沒往前就`return False`
+無法到達節點就 `return False`
 
-超過就`return True`
+超過終點就 `return True`
 
 ```python
 class Solution:

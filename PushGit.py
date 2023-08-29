@@ -37,7 +37,7 @@ if is_hexo_deploy == "y" or is_hexo_deploy == "Y" or is_hexo_deploy == "yes" or 
     # hexo deploy
     hexo_deploy = "hexo deploy"
     print(">>> " + hexo_deploy)
-    os.system(hexo_deploy)
+    os.system(hexo_deploy) 
 
 
 def GetTime():
@@ -45,6 +45,12 @@ def GetTime():
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
 commit_msg =f"update: {GetTime()}"
+
+
+
+'''
+###這邊開始為push git的部分
+'''
 
 # 清空origin
 os.system("git remote rm origin")
