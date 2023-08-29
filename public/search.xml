@@ -1824,4 +1824,47 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Binary Search</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#55. Jump Game</title>
+    <url>/posts/leetcode/Leetcode-55-Jump-Game/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>You are given an integer array <code>nums</code>. You are initially positioned at the array’s <strong>first index</strong>, and each element in the array represents your maximum jump length at that position.</p>
+<p>Return <code>true</code> <em>if you can reach the last index, or</em> <code>false</code> <em>otherwise</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [2,3,1,1,4]</span><br><span class="line">Output: true</span><br><span class="line">Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [3,2,1,0,4]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10^4</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 10^5</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h2 id="法一"><a href="#法一" class="headerlink" title="法一"></a><code>法一</code></h2><p>想法做一個DP，紀錄節點可以往前走的步數</p>
+<p>DP[i] &#x3D; max( DP[i-1] -1  , nums[i] ) 和前面一點比較誰可以走更遠，取大值</p>
+<p>最後當 DP[i]可以往前的步數+ 當前位置，超出最後一點，<code>return True</code></p>
+<p>當有一節點會往回走，或是沒有前進<code>return False</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 直接將想法刻出來，蠻醜的</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canJump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> nums[<span class="number">0</span>]&lt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        dp = &#123;&#125;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span> , <span class="built_in">len</span>(nums)):</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>] -<span class="number">1</span>  , nums[i] )</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> dp[i] + i &gt;= <span class="built_in">len</span>(nums)-<span class="number">1</span> :</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">elif</span> dp[i] &lt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="優化1"><a href="#優化1" class="headerlink" title="優化1"></a><code>優化1</code></h3><p>改變 <strong>往前走的步數</strong> → 最遠可達到的位置</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canJump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> nums[<span class="number">0</span>]&lt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        dp = &#123;&#125;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>] , i + nums[i])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> dp[i] &gt;= <span class="built_in">len</span>(nums) - <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">elif</span> dp[i] &lt;= i:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p><code>然後發現根本不需要DP記錄所有</code></p>
+<p>所以 判斷變成</p>
+<p>沒往前就<code>return False</code></p>
+<p>超過就<code>return True</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canJump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        dp = nums[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> dp &lt; i:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">            dp = <span class="built_in">max</span>(dp, i + nums[i])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> dp &gt;= <span class="built_in">len</span>(nums) - <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Dynamic Programming</tag>
+        <tag>Greedy</tag>
+      </tags>
+  </entry>
 </search>
