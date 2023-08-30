@@ -22,6 +22,8 @@ Trie 像一顆特別的樹，每個節點都是一個字母，從根節點到葉
 
 `缺點`空間消耗大，因為每個節點都需要存儲子節點的指針，當單詞數量很多時，需要的空間就很大。
 
+
+
 ## 建立 Trie
 ```python
 class TrieNode:
@@ -160,4 +162,6 @@ root.children['b'].children['a'].children['n'].children['a'].children['n'].child
 '''
 
 ```
+
+
 
