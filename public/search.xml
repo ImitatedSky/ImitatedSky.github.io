@@ -2027,4 +2027,48 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Binary Search</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#135. Candy</title>
+    <url>/posts/leetcode/Leetcode-135-Candy/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>There are <code>n</code> children standing in a line. Each child is assigned a rating value given in the integer array <code>ratings</code>.</p>
+<p>You are giving candies to these children subjected to the following requirements:</p>
+<ul>
+<li>Each child must have at least one candy.</li>
+<li>Children with a higher rating get more candies than their neighbors.</li>
+</ul>
+<p>Return <em>the minimum number of candies you need to have to distribute the candies to the children</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: ratings = [1,0,2]</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: You can allocate to the first, second and third child with 2, 1, 2 candies respectively.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: ratings = [1,2,2]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.</span><br><span class="line">The third child gets 1 candy because it satisfies the above two conditions.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == ratings.length</code></li>
+<li><code>1 &lt;= n &lt;= 2 * 10^4</code></li>
+<li><code>0 &lt;= ratings[i] &lt;= 2 * 10^4</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>這題看似簡單，但意外讓我卡很久</p>
+<h3 id="法1"><a href="#法1" class="headerlink" title="法1"></a><code>法1</code></h3><p>直接遍歷方式解法，(這解法不確定算不算用到greedy了)</p>
+<p>1.每個同學都先發放一顆</p>
+<p>2.接下來兩兩比較當下一個較大就多發一顆</p>
+<p>3.從後面看回來，同樣的方式，比下一個大的就多發一顆，但多一個加條件，當下一個已經多發就不用改變</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">candy</span>(<span class="params">self, ratings: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        L = <span class="built_in">len</span>(ratings)</span><br><span class="line">        ans = [<span class="number">1</span>]*L</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,L):</span><br><span class="line">            <span class="keyword">if</span> ratings[i-<span class="number">1</span>] &lt; ratings[i]:</span><br><span class="line">                ans[i] = ans[i-<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L-<span class="number">1</span>, <span class="number">0</span>  ,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ratings[i-<span class="number">1</span>] &gt; ratings[i] <span class="keyword">and</span> ans[i-<span class="number">1</span>] &lt;= ans[i]:</span><br><span class="line">                ans[i-<span class="number">1</span>] = ans[i]+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(ans)</span><br></pre></td></tr></table></figure>
+
+<p>Time Complexity : O(n)</p>
+<p>Space Complexity : O(n)</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>hard</tag>
+        <tag>Greedy</tag>
+      </tags>
+  </entry>
 </search>
