@@ -2071,4 +2071,48 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Greedy</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#172. Factorial Trailing Zeroes</title>
+    <url>/posts/leetcode/Leetcode-172-Factorial-Trailing-Zeroes/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an integer <code>n</code>, return <em>the number of trailing zeroes in</em> <code>n!</code>.</p>
+<p>Note that <code>n! = n * (n - 1) * (n - 2) * ... * 3 * 2 * 1</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 3</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: 3! = 6, no trailing zero.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 5</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: 5! = 120, one trailing zero.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 0</span><br><span class="line">Output: 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= n &lt;= 10^4</code></li>
+</ul>
+<p><strong>Follow up:</strong> Could you write a solution that works in logarithmic time complexity?</p>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>這題先搞懂 <em>trailing zeroes，</em>是指尾巴的0</p>
+<p>要計算尾巴有幾個0很簡單就是算其中乘了幾次(5*2)</p>
+<p>由於每次乘到5前，一定有2，所以找5有幾個就好</p>
+<h3 id="法1"><a href="#法1" class="headerlink" title="法1"></a><code>法1</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trailingZeroes</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        output = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">while</span> i % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">                output += <span class="number">1</span></span><br><span class="line">                i //= <span class="number">5</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+
+<p>Time Complexity : O(n)</p>
+<p><strong>當然這題不需要這麼麻煩</strong></p>
+<h3 id="法2-簡單"><a href="#法2-簡單" class="headerlink" title="法2 簡單"></a><code>法2</code> 簡單</h3><p>其實這題數學更簡單的思考方法，直接計算幾個5就好</p>
+<p>只需要注意當超過5的指數項，會增多</p>
+<p>所以也不用O(n)</p>
+<p>ex: </p>
+<p>n &#x3D; 10 2個5</p>
+<p>n &#x3D; 25 6個5</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trailingZeroes</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        output = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> n&gt;=<span class="number">5</span>:</span><br><span class="line">            output += n//<span class="number">5</span></span><br><span class="line">            n = n//<span class="number">5</span></span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Math</tag>
+      </tags>
+  </entry>
 </search>
