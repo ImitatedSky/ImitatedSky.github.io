@@ -89,3 +89,33 @@ memo 可以改成 set()，不用用dict
 用除於10的餘數來做也是可以
 
 但這邊就不寫了
+
+### `法2` Two pointer!!
+
+一開始想不到可以用這樣的方法
+
+two pointer 這邊建立兩個pointer 一個快 一個慢
+
+當兩個pointer 同樣時停止
+
+```python
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        p1,p2 = n,n
+        def f_sqr(n):
+            total = 0
+            while n > 0:
+                total += (n%10) * (n%10)
+                n //= 10
+            
+            return total
+
+        while True:
+            p1 = f_sqr(p1)
+            p2 = f_sqr(f_sqr(p2))
+
+            if p1 == p2:
+                break
+        
+        return p1 == 1
+```

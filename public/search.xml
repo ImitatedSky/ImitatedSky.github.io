@@ -2144,7 +2144,10 @@ treenode3 --&gt;|3-1|treenode3.3
 <p>運算其實可以不用轉變字串</p>
 <p>用除於10的餘數來做也是可以</p>
 <p>但這邊就不寫了</p>
-]]></content>
+<h3 id="法2-Two-pointer"><a href="#法2-Two-pointer" class="headerlink" title="法2 Two pointer!!"></a><code>法2</code> Two pointer!!</h3><p>一開始想不到可以用這樣的方法</p>
+<p>two pointer 這邊建立兩個pointer 一個快 一個慢</p>
+<p>當兩個pointer 同樣時停止</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isHappy</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        p1,p2 = n,n</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">f_sqr</span>(<span class="params">n</span>):</span><br><span class="line">            total = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">                total += (n%<span class="number">10</span>) * (n%<span class="number">10</span>)</span><br><span class="line">                n //= <span class="number">10</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> total</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            p1 = f_sqr(p1)</span><br><span class="line">            p2 = f_sqr(f_sqr(p2))</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> p1 == p2:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> p1 == <span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Leetcode</category>
       </categories>
