@@ -2097,7 +2097,7 @@ treenode3 --&gt;|3-1|treenode3.3
 
 <p>Time Complexity : O(n)</p>
 <p><strong>當然這題不需要這麼麻煩</strong></p>
-<h3 id="法2-簡單"><a href="#法2-簡單" class="headerlink" title="法2 簡單"></a><code>法2</code> 簡單</h3><p>其實這題數學更簡單的思考方法，直接計算幾個5就好</p>
+<h3 id="法2-用數學的方式"><a href="#法2-用數學的方式" class="headerlink" title="法2 用數學的方式"></a><code>法2</code> 用數學的方式</h3><p>其實這題數學的思考方法沒這麼麻煩，直接計算幾個5就好</p>
 <p>只需要注意當超過5的指數項，會增多</p>
 <p>所以也不用O(n)</p>
 <p>ex: </p>
@@ -2112,6 +2112,48 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Python</tag>
         <tag>medium</tag>
         <tag>💡</tag>
+        <tag>Math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#202. Happy Number</title>
+    <url>/posts/leetcode/Leetcode-202-Happy-Number/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Write an algorithm to determine if a number <code>n</code> is happy.</p>
+<p>A <strong>happy number</strong> is a number defined by the following process:</p>
+<ul>
+<li>Starting with any positive integer, replace the number by the sum of the squares of its digits.</li>
+<li>Repeat the process until the number equals 1 (where it will stay), or it <strong>loops endlessly in a cycle</strong> which does not include 1.</li>
+<li>Those numbers for which this process <strong>ends in 1</strong> are happy.</li>
+</ul>
+<p>Return <code>true</code> <em>if</em> <code>n</code> <em>is a happy number, and</em> <code>false</code> <em>if not</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 19</span><br><span class="line">Output: true</span><br><span class="line">Explanation:</span><br><span class="line">12 + 92 = 82</span><br><span class="line">82 + 22 = 68</span><br><span class="line">62 + 82 = 100</span><br><span class="line">12 + 02 + 02 = 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 2</span><br><span class="line">Output: false</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 2^31 - 1</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>沒甚麼難度的一題</p>
+<p>要想辦法將非happy number的挑出來，所以做了一個memo，當經過迴圈運算後，數字又變成memo裏頭數字時，代表不可能是happy number</p>
+<h3 id="法1"><a href="#法1" class="headerlink" title="法1"></a><code>法1</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isHappy</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        memo = &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> n &gt; <span class="number">0</span> <span class="keyword">and</span> n <span class="keyword">not</span> <span class="keyword">in</span> memo:</span><br><span class="line">            n2 = <span class="number">0</span></span><br><span class="line">            n_s = <span class="built_in">str</span>(n)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(n_s)):</span><br><span class="line">                n2 += <span class="built_in">int</span>(n_s[i])*<span class="built_in">int</span>(n_s[i])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> n2 == <span class="number">1</span> :</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            memo[n] = <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">            n = n2</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>memo 可以改成 set()，不用用dict</p>
+<p>運算其實可以不用轉變字串</p>
+<p>用除於10的餘數來做也是可以</p>
+<p>但這邊就不寫了</p>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+        <tag>Hash Table</tag>
+        <tag>Two Pointers</tag>
         <tag>Math</tag>
       </tags>
   </entry>
