@@ -972,7 +972,8 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="number">4</span></span><br><span class="line">   / \</span><br><span class="line">  <span class="number">2</span>   <span class="number">6</span></span><br><span class="line"> / \ / \</span><br><span class="line"><span class="number">1</span>  <span class="number">3</span> <span class="number">5</span>  <span class="number">7</span></span><br></pre></td></tr></table></figure>
 
 <p>down-top 的走法</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">down_top</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    down_top(root.left)</span><br><span class="line">    down_top(root.right)</span><br><span class="line">    <span class="built_in">print</span>(root.val)</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">down_top</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    down_top(root.left)</span><br><span class="line">    down_top(root.right)</span><br><span class="line">    <span class="built_in">print</span>(root.val)</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>Leetcode</category>
       </categories>
@@ -2158,6 +2159,52 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Hash Table</tag>
         <tag>Two Pointers</tag>
         <tag>Math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>shioaji 永豐API</title>
+    <url>/posts/shioaji-%E6%B0%B8%E8%B1%90API/</url>
+    <content><![CDATA[<h1 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">!pip install shioaji</span><br><span class="line">!pip install -U shioaji</span><br><span class="line"><span class="comment"># docker run -it sinotrade/shioaji:latest</span></span><br><span class="line"><span class="comment"># docker run -p 8888:8888 sinotrade/shioaji:jupyter</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> shioaji <span class="keyword">as</span> sj</span><br><span class="line"><span class="built_in">print</span>(sj.__version__)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>*<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模擬模式</span></span><br><span class="line">api = sj.Shioaji(simulation = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需到官方網站申請API</span></span><br><span class="line">accounts =  api.login(<span class="string">&quot;YOUR_API_KEY&quot;</span>, </span><br><span class="line">											<span class="string">&quot;YOUR_SECRET_KEY&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(accounts)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 憑證需要先下載永豐windows App ，OS X 就沒有研究了</span></span><br><span class="line">api.activate_ca(</span><br><span class="line">    ca_path=<span class="string">&quot;/c/your/ca/path/Sinopac.pfx&quot;</span>,</span><br><span class="line">    ca_passwd=<span class="string">&quot;YOUR_CA_PASSWORD&quot;</span>,</span><br><span class="line">    person_id=<span class="string">&quot;Person of this Ca&quot;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Logout"><a href="#Logout" class="headerlink" title="Logout"></a>Logout</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">api.logout()</span><br><span class="line"><span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="下單"><a href="#下單" class="headerlink" title="下單"></a>下單</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># contract - 合同</span></span><br><span class="line">contract = api.Contracts.Stocks.TSE[<span class="string">&quot;2890&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># order - 單</span></span><br><span class="line">order = api.Order(</span><br><span class="line">    price = <span class="number">18</span>, </span><br><span class="line">    quantity = <span class="number">1</span>, </span><br><span class="line">    action = sj.constant.Action.Buy, </span><br><span class="line">    price_type = sj.constant.StockPriceType.LMT, </span><br><span class="line">    order_type = sj.constant.OrderType.ROD, </span><br><span class="line">    account = api.stock_account</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># place order</span></span><br><span class="line">trade = api.place_order(contract, order)</span><br><span class="line">trade</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;trade</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Trade(</span></span><br><span class="line"><span class="string">    contract=Stock(</span></span><br><span class="line"><span class="string">        exchange=&lt;Exchange.TSE: &#x27;TSE&#x27;&gt;,</span></span><br><span class="line"><span class="string">        code=&#x27;2890&#x27;,</span></span><br><span class="line"><span class="string">        symbol=&#x27;TSE2890&#x27;,</span></span><br><span class="line"><span class="string">        name=&#x27;永豐金&#x27;,</span></span><br><span class="line"><span class="string">        category=&#x27;17&#x27;,</span></span><br><span class="line"><span class="string">        unit=1000,</span></span><br><span class="line"><span class="string">        limit_up=19.05,</span></span><br><span class="line"><span class="string">        limit_down=15.65,</span></span><br><span class="line"><span class="string">        reference=17.35,</span></span><br><span class="line"><span class="string">        update_date=&#x27;2023/09/11&#x27;,</span></span><br><span class="line"><span class="string">        day_trade=&lt;DayTrade.Yes: &#x27;Yes&#x27;&gt;</span></span><br><span class="line"><span class="string">    ),</span></span><br><span class="line"><span class="string">    order=Order(</span></span><br><span class="line"><span class="string">        action=&lt;Action.Buy: &#x27;Buy&#x27;&gt;,</span></span><br><span class="line"><span class="string">        price=18,</span></span><br><span class="line"><span class="string">        quantity=1,</span></span><br><span class="line"><span class="string">        id=&#x27;fa0bc4c8&#x27;,</span></span><br><span class="line"><span class="string">        seqno=&#x27;000108&#x27;,</span></span><br><span class="line"><span class="string">        ordno=&#x27;000003&#x27;,</span></span><br><span class="line"><span class="string">        account=Account(</span></span><br><span class="line"><span class="string">            account_type=&lt;AccountType.Stock: &#x27;S&#x27;&gt;,</span></span><br><span class="line"><span class="string">            person_id=&#x27;F129760296&#x27;,</span></span><br><span class="line"><span class="string">            broker_id=&#x27;9A9K&#x27;,</span></span><br><span class="line"><span class="string">            account_id=&#x27;0264271&#x27;</span></span><br><span class="line"><span class="string">        ),</span></span><br><span class="line"><span class="string">        price_type=&lt;StockPriceType.LMT: &#x27;LMT&#x27;&gt;,</span></span><br><span class="line"><span class="string">        order_type=&lt;OrderType.ROD: &#x27;ROD&#x27;&gt;</span></span><br><span class="line"><span class="string">    ),</span></span><br><span class="line"><span class="string">    status=OrderStatus(</span></span><br><span class="line"><span class="string">        id=&#x27;fa0bc4c8&#x27;,</span></span><br><span class="line"><span class="string">        status=&lt;Status.PendingSubmit: &#x27;PendingSubmit&#x27;&gt;,</span></span><br><span class="line"><span class="string">        status_code=&#x27;00&#x27;,</span></span><br><span class="line"><span class="string">        order_datetime=datetime.datetime(2023, 9, 11, 8, 1, 23, 168095),</span></span><br><span class="line"><span class="string">        deals=[]</span></span><br><span class="line"><span class="string">    )</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="contract"><a href="#contract" class="headerlink" title="contract"></a>contract</h3><h3 id="Order-Attributes"><a href="#Order-Attributes" class="headerlink" title="Order Attributes"></a><strong>Order Attributes</strong></h3><ul>
+<li><code>price</code> (<code>float</code> or <code>int</code>): the price of order</li>
+<li><code>quantity</code> (<code>int</code>): the quantity of order</li>
+<li><code>action</code> (<code>str</code>): order action to buy or sell<ul>
+<li>{Buy, Sell}</li>
+</ul>
+</li>
+<li><code>price_type</code> (<code>str</code>): pricing type of order<ul>
+<li>{LMT, MKT, MKP} (限價、市價、範圍市價)</li>
+</ul>
+</li>
+<li><code>order_type</code> (<code>str</code>): the type of order<ul>
+<li>{ROD, IOC, FOK} (掛單到收盤，允許部分成交，全部成交否則取消)</li>
+</ul>
+</li>
+<li><code>order_cond</code> (<code>str</code>): order condition stock only<ul>
+<li>{Cash, MarginTrading, ShortSelling} (現股、融資、融券)</li>
+</ul>
+</li>
+<li><code>order_lot</code> (<code>str</code>): the type of order<ul>
+<li>{Common, Fixing, Odd, IntradayOdd} (整股、定盤、盤後零股、盤中零股)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>daytrade_short</code> {<code>bool</code>}: the type of first sell<br>{True, False}</p>
+<p><code>custom_field</code> {<code>str</code>}: memo field, only letters and numbers are allowed, and the maximum length is 6.<br><code>account</code> (:<code>obj</code>:Account): which account to place this order<br><code>ca</code> (<code>binary</code>): the ca of this order</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>api</tag>
+        <tag>python</tag>
+        <tag>shioaji</tag>
       </tags>
   </entry>
 </search>
