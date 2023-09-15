@@ -144,7 +144,7 @@ Space Complexity:O(1)
 ```python
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        # 找到跨越中點的最大子list
+        # 中間往左右計算，找最大
         def maxCrossingSum(nums, low, mid, high):
             left_sum = float('-inf')
             right_sum = float('-inf')
@@ -167,7 +167,7 @@ class Solution:
             # 返回跨越中點的最大子list和
             return left_sum + right_sum
 
-        # 遞迴函数，用于找到最大list
+        # 遞迴函数
         def findMaxSubArray(nums, low, high):
             # 最下層：只有一個元素
             if low == high:
