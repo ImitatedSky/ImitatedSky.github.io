@@ -153,12 +153,14 @@ class Solution:
 
             # 往左邊慢慢加
             # 計算左半部分的最大子list和
+            # 包含mid
             for i in range(mid, low - 1, -1):
                 max_left += nums[i]
                 if max_left > left_sum:
                     left_sum = max_left
             # 往右邊慢慢加
             # 計算右半部分的最大子list和
+            # 不包含mid
             for i in range(mid + 1, high + 1):
                 max_right += nums[i]
                 if max_right > right_sum:
