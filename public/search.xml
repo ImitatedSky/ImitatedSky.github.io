@@ -2275,4 +2275,18 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Divide and Conquer</tag>
       </tags>
   </entry>
+  <entry>
+    <title>visual studio ctrl+z delete whole cell(Solve)</title>
+    <url>/posts/gossip/visual-studio-ctrl-z-delete-whole-cell(Solve)/</url>
+    <content><![CDATA[<h2 id="目前找到兩個方法"><a href="#目前找到兩個方法" class="headerlink" title="目前找到兩個方法"></a>目前找到兩個方法</h2><p><code>Ctrl + Z</code> 會把Cell刪除，真的是惡夢</p>
+<p>可以先試試<code>Ctrl + Y</code> or <code>ESC + Z</code></p>
+<p>左邊 Timeline 也可以找到過去的時間線</p>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/aa7d30ee-c6ed-4ce4-91c8-c79bede1cbaf/9ae092de-942f-4088-86fc-ac3a7f03c092/Untitled.png" alt="Untitled"></p>
+]]></content>
+      <tags>
+        <tag>gossip</tag>
+        <tag>python</tag>
+        <tag>visual studio</tag>
+      </tags>
+  </entry>
 </search>
