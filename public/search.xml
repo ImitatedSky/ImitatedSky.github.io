@@ -2289,4 +2289,26 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>visual studio</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Conda 指令</title>
+    <url>/posts/gossip/Conda-%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="配置Conda環境"><a href="#配置Conda環境" class="headerlink" title="配置Conda環境"></a>配置Conda環境</h1><p><code>以下都是在Anaconda prompt下執行</code></p>
+<h2 id="conda版本"><a href="#conda版本" class="headerlink" title="conda版本"></a>conda版本</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure>
+
+<h2 id="列出和刪除環境、package"><a href="#列出和刪除環境、package" class="headerlink" title="列出和刪除環境、package"></a><strong>列出和刪除環境、package</strong></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看已建置環境</span></span><br><span class="line">conda env <span class="built_in">list</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 刪除整個envName的環境</span></span><br><span class="line">conda env remove --name envName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刪除envName中pandas 的package</span></span><br><span class="line">conda remove --name envName pandas </span><br></pre></td></tr></table></figure>
+
+<h2 id="創建新環境"><a href="#創建新環境" class="headerlink" title="創建新環境"></a><strong>創建新環境</strong></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 建置名為envName的環境</span></span><br><span class="line">conda create --name envName python=<span class="number">3.10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="激活和退出環境"><a href="#激活和退出環境" class="headerlink" title="激活和退出環境"></a><strong>激活和退出環境</strong></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 激活環境</span></span><br><span class="line">conda activate  envName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出環境</span></span><br><span class="line">conda deactivate  envName</span><br></pre></td></tr></table></figure>
+
+<h2 id="安裝、升級package"><a href="#安裝、升級package" class="headerlink" title="安裝、升級package"></a>安裝、升級package</h2><p>假定已經在(envName)想要設定的環境底下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安裝 matplotlib numpy tensorflow pandas</span></span><br><span class="line">conda install matplotlib numpy tensorflow pandas</span><br><span class="line"></span><br><span class="line"><span class="comment"># update</span></span><br><span class="line">conda update numpy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出已安裝的軟體包</span></span><br><span class="line">conda <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一些雜七雜八"><a href="#一些雜七雜八" class="headerlink" title="一些雜七雜八"></a>一些雜七雜八</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看軟體包之間的依賴關係樹</span></span><br><span class="line">conda <span class="built_in">list</span> --tree   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找可用軟體包</span></span><br><span class="line">conda search</span><br><span class="line"></span><br><span class="line"><span class="comment"># 當前環境配置導出到YAML文件</span></span><br><span class="line">conda env export &gt; environment.yml</span><br><span class="line"></span><br><span class="line"><span class="comment"># clone</span></span><br><span class="line">conda create --name newEnv --clone envName</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>gossip</tag>
+        <tag>python</tag>
+        <tag>conda</tag>
+      </tags>
+  </entry>
 </search>
