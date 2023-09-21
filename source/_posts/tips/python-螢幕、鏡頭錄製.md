@@ -149,11 +149,12 @@ while (time.time() - start_time) < duration:
 
     # 轉換BGR到RGB
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-    gif = cv2.cvtColor(frame, cv2.COLOR_BGRA2RGBA)  # 轉換顏色
-    gif = Image.fromarray(frame)                    # 轉換成 PIL 格式
-    gif = gif.convert('RGB')                      # 轉換顏色
-    output.append(gif)                            # 添加到 output
+    
+    # 由於np.array無法儲存，這邊轉換成PIL格式
+    f = cv2.cvtColor(frame, cv2.COLOR_BGRA2RGBA)  # 轉換顏色
+    f = Image.fromarray(frame)                    # 轉換成 PIL 格式
+    f = gif.convert('RGB')                      # 轉換顏色
+    output.append(f)                            # 添加到 output
 
     # 顯示錄製的畫面
     # cv2.imshow('Recording', frame)
