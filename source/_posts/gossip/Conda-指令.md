@@ -53,8 +53,8 @@ conda deactivate  envName
 假定已經在(envName)想要設定的環境底下
 
 ```python
-# 安裝 matplotlib numpy tensorflow pandas
-conda install matplotlib numpy tensorflow pandas
+# 安裝 matplotlib numpy tensorflow pandas opencv-python 
+conda install matplotlib numpy tensorflow pandas opencv-python 
 
 # update
 conda update numpy
