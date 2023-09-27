@@ -153,7 +153,7 @@ while (time.time() - start_time) < duration:
     # 由於np.array無法儲存，這邊轉換成PIL格式
     f = cv2.cvtColor(frame, cv2.COLOR_BGRA2RGBA)  # 轉換顏色
     f = Image.fromarray(frame)                    # 轉換成 PIL 格式
-    f = gif.convert('RGB')                      # 轉換顏色
+    f = f.convert('RGB')                      # 轉換顏色
     output.append(f)                            # 添加到 output
 
     # 顯示錄製的畫面
@@ -163,7 +163,7 @@ while (time.time() - start_time) < duration:
         break
 
 # 儲存 GIF
-output[0].save("test.gif", save_all=True, append_images=output[1:], duration=150, loop=1, disposal=2)
+output[0].save("test.gif", save_all=True, append_images=output[1:], duration=150, loop=0, disposal=2)
 cv2.destroyAllWindows()
 ```
 

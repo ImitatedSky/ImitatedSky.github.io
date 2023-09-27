@@ -1,5 +1,5 @@
 ---
-title: Hello World
+title: Hello World，Hexo
 cover: /img/cover/code.jpg
 tags:
     - [gossip]
