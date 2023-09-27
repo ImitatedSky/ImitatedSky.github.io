@@ -7,7 +7,7 @@ cover: /img/cover/code.jpg
 date: 2023-09-27 11:47:04
 ---
 
-System.IO.IOException: '由於另一個處理序正在使用檔案 'C:\..\..'，所以無法存取該檔案。’
+System.IO.IOException: '由於另一個處理序正在使用檔案 'C:\..\..'，所以無法存取該檔案。
 
 ```csharp
 //原先我用一個
@@ -20,7 +20,7 @@ image.Source = path
 File.Delete(path)
 
 #region 錯誤訊息
-System.IO.IOException: '由於另一個處理序正在使用檔案 'C:\..\..'，所以無法存取該檔案。’
+System.IO.IOException: '由於另一個處理序正在使用檔案 'C:\..\..'，所以無法存取該檔案。
 #endregion
 ```
 
@@ -40,4 +40,4 @@ image.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
 img.Dispose();
 ```
 
-這樣就不會綁定這圖片
+這樣程序就不會綁定這圖片
