@@ -38,6 +38,17 @@ image.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                                           BitmapSizeOptions.FromEmptyOptions());
 
 img.Dispose();
+
+// 順帶用try catch
+try
+{
+    File.Delete(fullPath);
+}
+catch
+{
+    
+    MessageBox.Show("檔案正在使用中，無法刪除。", "刪除失敗", MessageBoxButton.OK, MessageBoxImage.Error);
+}
 ```
 
 這樣程序就不會綁定這圖片
