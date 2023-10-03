@@ -2349,4 +2349,46 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Bug</tag>
       </tags>
   </entry>
+  <entry>
+    <title>.Net 上的圖像類型(Bitmap、Image、Mat、UMat)</title>
+    <url>/posts/tips/Net-%E4%B8%8A%E7%9A%84%E5%9C%96%E5%83%8F%E9%A1%9E%E5%9E%8B-Bitmap%E3%80%81Image%E3%80%81Mat%E3%80%81UMat/</url>
+    <content><![CDATA[<ol>
+<li><p><code>Bitmap:</code></p>
+<ul>
+<li>Bitmap 是一個在 C# 中常用的圖像類型，它屬於 System.Drawing 命名空間。它用於表示和處理點陣圖圖像。</li>
+<li>Bitmap 是一個基於像素的圖像，每個像素都包含顏色信息。您可以輕鬆地創建、讀取、繪製和處理 Bitmap 圖像。</li>
+<li>這是一個簡單且易於使用的圖像類型，適用於大多數基本圖像處理需求，但在某些情況下可能會有性能問題。</li>
+</ul>
+</li>
+<li><p><code>Image&lt;TColor, TColor&gt;:</code></p>
+<ul>
+<li>Image&lt;TColor, TColor&gt; 通常是指一種泛型圖像類型，通常用於 .NET Core 和 .NET 5+ 中的圖像處理庫，如 SixLabors.ImageSharp。</li>
+<li>這是一種較新的圖像類型，支援更多的圖像處理功能，例如縮放、旋轉、濾鏡等。</li>
+<li>Image&lt;TColor, TColor&gt; 使用泛型，因此您可以指定圖像的顏色類型（例如 RGB、灰度等），這使得它更具彈性和可擴展性。</li>
+</ul>
+</li>
+<li><p><code>Mat:</code></p>
+<ul>
+<li>Mat 是一個常見於 OpenCV（Open Source Computer Vision Library）中的圖像類型，用於 C# 中的 OpenCVSharp 或 Emgu.CV 等圖像處理庫。</li>
+<li>Mat 是一種多維數組（通常是2D或3D）表示方式，可以表示圖像、視頻幀或其他數據。</li>
+<li>它具有豐富的圖像處理和計算能力，包括運算子重載，可以輕鬆進行像素級操作和高級圖像處理。</li>
+</ul>
+</li>
+<li><p><code>UMat:</code></p>
+<ul>
+<li>UMat（Unified Memory）是一種 Mat 的變種，用於支援 OpenCV 中的 GPU 加速處理。</li>
+<li>它允許在 CPU 和 GPU 之間共享圖像數據，以實現更快的圖像處理。</li>
+<li>UMat 可以使用與 Mat 類似的方式進行操作，但能夠充分利用現代圖形硬件加速計算。</li>
+</ul>
+<h1 id="轉換"><a href="#轉換" class="headerlink" title="轉換"></a>轉換</h1> <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Drawing;</span><br><span class="line"><span class="keyword">using</span> SixLabors.ImageSharp;</span><br><span class="line"><span class="keyword">using</span> SixLabors.ImageSharp.PixelFormats;</span><br><span class="line"><span class="keyword">using</span> Emgu.CV;</span><br><span class="line"><span class="keyword">using</span> Emgu.CV.CvEnum;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ImageConverter</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Bitmap 轉換為 Image&lt;TColor, TColor&gt;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Image&lt;Rgba32&gt; <span class="title">BitmapToImage</span>(<span class="params">Bitmap bitmap</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> (MemoryStream stream = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 將 Bitmap 轉換為 byte 數組</span></span><br><span class="line">            bitmap.Save(stream, ImageFormat.Png);</span><br><span class="line">            <span class="built_in">byte</span>[] imageBytes = stream.ToArray();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 使用 ImageSharp 加載圖像</span></span><br><span class="line">            Image&lt;Rgba32&gt; image = Image.Load&lt;Rgba32&gt;(imageBytes);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> image;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Image&lt;TColor, TColor&gt; 轉換為 Bitmap</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">ImageToBitmap</span>(<span class="params">Image&lt;Rgba32&gt; image</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> (MemoryStream stream = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 將 ImageSharp 圖像保存為 Bitmap 格式</span></span><br><span class="line">            image.Save(stream, ImageFormat.Png);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 創建並返回 Bitmap</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Bitmap(stream);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Mat 轉換為 Bitmap</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">MatToBitmap</span>(<span class="params">Mat mat</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 使用 Emgu.CV 將 Mat 轉換為 Bitmap</span></span><br><span class="line">        <span class="keyword">return</span> mat.ToImage&lt;Bgr, <span class="built_in">byte</span>&gt;().Bitmap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Bitmap 轉換為 Mat</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Mat <span class="title">BitmapToMat</span>(<span class="params">Bitmap bitmap</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 使用 Emgu.CV 將 Bitmap 轉換為 Mat</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Mat(bitmap, DepthType.Cv8U, <span class="number">3</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Mat 轉換為 UMat</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UMat <span class="title">MatToUMat</span>(<span class="params">Mat mat</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 使用 Emgu.CV 將 Mat 轉換為 UMat</span></span><br><span class="line">        UMat umat = <span class="keyword">new</span> UMat();</span><br><span class="line">        mat.CopyTo(umat);</span><br><span class="line">        <span class="keyword">return</span> umat;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// UMat 轉換為 Mat</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Mat <span class="title">UMatToMat</span>(<span class="params">UMat umat</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 使用 Emgu.CV 將 UMat 轉換為 Mat</span></span><br><span class="line">        Mat mat = <span class="keyword">new</span> Mat();</span><br><span class="line">        umat.CopyTo(mat);</span><br><span class="line">        <span class="keyword">return</span> mat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>tips</tag>
+        <tag>C#</tag>
+        <tag>OpenCV</tag>
+        <tag>Bitmap</tag>
+        <tag>Image</tag>
+      </tags>
+  </entry>
 </search>
