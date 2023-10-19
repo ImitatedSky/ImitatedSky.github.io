@@ -2416,4 +2416,285 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>life</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#283. Move Zeroes</title>
+    <url>/posts/z/Leetcode-283-Move-Zeroes/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an integer array <code>nums</code>, move all <code>0</code>‘s to the end of it while maintaining the relative order of the non-zero elements.</p>
+<p><strong>Note</strong> that you must do this in-place without making a copy of the array.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [0,1,0,3,12]</span><br><span class="line">Output: [1,3,12,0,0]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [0]</span><br><span class="line">Output: [0]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10^4</code></li>
+<li><code>2^31 &lt;= nums[i] &lt;= 2^31 - 1</code></li>
+</ul>
+<p><strong>Follow up:</strong></p>
+<p>Could you minimize the total number of operations done?</p>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">moveZeroes</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(nums) ):</span><br><span class="line">            <span class="keyword">if</span> nums[i] != <span class="number">0</span>:</span><br><span class="line">                nums[s] = nums[i]</span><br><span class="line">                s += <span class="number">1</span> </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(s+<span class="number">1</span> , <span class="built_in">len</span>(nums)):</span><br><span class="line">            nums[j] = <span class="number">0</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>Array</tag>
+        <tag>easy</tag>
+        <tag>Two Pointers</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#1456. Maximum Number of Vowels in a Substring of Given Length</title>
+    <url>/posts/z/Leetcode-1456-Maximum-Number-of-Vowels-in-a-Substring-of-Given-Length/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given a string <code>s</code> and an integer <code>k</code>, return <em>the maximum number of vowel letters in any substring of</em> <code>s</code> <em>with length</em> <code>k</code>.</p>
+<p><strong>Vowel letters</strong> in English are <code>&#39;a&#39;</code>, <code>&#39;e&#39;</code>, <code>&#39;i&#39;</code>, <code>&#39;o&#39;</code>, and <code>&#39;u&#39;</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot;abciiidef&quot;, k = 3</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The substring &quot;iii&quot; contains 3 vowel letters.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot;aeiou&quot;, k = 2</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: Any substring of length 2 contains 2 vowels.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot;leetcode&quot;, k = 3</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: &quot;lee&quot;, &quot;eet&quot; and &quot;ode&quot; contain 2 vowels.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 10^5</code></li>
+<li><code>s</code> consists of lowercase English letters.</li>
+<li><code>1 &lt;= k &lt;= s.length</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>醜醜</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxVowels</span>(<span class="params">self, s: <span class="built_in">str</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        l , r = <span class="number">0</span> , <span class="number">0</span></span><br><span class="line">        vowel = <span class="string">&quot;aeiou&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            <span class="keyword">if</span> s[i] <span class="keyword">in</span> vowel:</span><br><span class="line">                res +=<span class="number">1</span></span><br><span class="line">        max_res=res</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( k, <span class="built_in">len</span>(s) ):</span><br><span class="line">            <span class="keyword">if</span> s[i] <span class="keyword">in</span> vowel:</span><br><span class="line">                res +=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> s[ i-k ]  <span class="keyword">in</span> vowel:</span><br><span class="line">                res -= <span class="number">1</span></span><br><span class="line">            max_res = <span class="built_in">max</span>(max_res,res)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> max_res</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>String</tag>
+        <tag>Sliding Window</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#1. Two Sum</title>
+    <url>/posts/z/Leetcode-1-Two-Sum/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+<p>You may assume that each input would have <strong><em>exactly</em> one solution</strong>, and you may not use the <em>same</em> element twice.</p>
+<p>You can return the answer in any order.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [2,7,11,15], target = 9</span><br><span class="line">Output: [0,1]</span><br><span class="line">Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [3,2,4], target = 6</span><br><span class="line">Output: [1,2]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [3,3], target = 6</span><br><span class="line">Output: [0,1]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 10^4</code></li>
+<li><code>10^9 &lt;= nums[i] &lt;= 10^9</code></li>
+<li><code>10^9 &lt;= target &lt;= 10^9</code></li>
+<li><strong>Only one valid answer exists.</strong></li>
+</ul>
+<p><strong>Follow-up:</strong></p>
+<p>Can you come up with an algorithm that is less than</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">O(n^2)</span><br></pre></td></tr></table></figure>
+
+<p>time complexity?</p>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Solution</span>:</span><br><span class="line">    <span class="title">def</span> <span class="title">twoSum</span>(<span class="title">self</span>, <span class="title">nums</span>: <span class="title">List</span>[<span class="title">int</span>], <span class="title">target</span>: <span class="title">int</span>) -&gt; <span class="title">List</span>[<span class="title">int</span>]:</span><br><span class="line">        _<span class="title">target</span> = []</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="title">range</span>(<span class="params">len(nums</span>)):</span></span><br><span class="line"><span class="function">            _target.<span class="title">append</span>(<span class="params"> target - nums[i] </span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">            <span class="title">if</span> (<span class="params">_target[<span class="number">-1</span>] <span class="keyword">in</span> nums <span class="keyword">and</span> i != nums.index(_target[<span class="number">-1</span>]</span>) ):</span></span><br><span class="line"><span class="function">                <span class="keyword">return</span> [i , nums.<span class="title">index</span>(<span class="params">_target[<span class="number">-1</span>]</span>) ]</span></span><br><span class="line"><span class="function">        <span class="keyword">return</span> False</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>easy</tag>
+        <tag>Hash Table</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#1768. Merge Strings Alternately</title>
+    <url>/posts/z/Leetcode-1768-Merge-Strings-Alternately/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>You are given two strings <code>word1</code> and <code>word2</code>. Merge the strings by adding letters in alternating order, starting with <code>word1</code>. If a string is longer than the other, append the additional letters onto the end of the merged string.</p>
+<p>Return <em>the merged string.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: word1 = &quot;abc&quot;, word2 = &quot;pqr&quot;</span><br><span class="line">Output: &quot;apbqcr&quot;</span><br><span class="line">Explanation: The merged string will be merged as so:</span><br><span class="line">word1:  a   b   c</span><br><span class="line">word2:    p   q   r</span><br><span class="line">merged: a p b q c r</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: word1 = &quot;ab&quot;, word2 = &quot;pqrs&quot;</span><br><span class="line">Output: &quot;apbqrs&quot;</span><br><span class="line">Explanation: Notice that as word2 is longer, &quot;rs&quot; is appended to the end.</span><br><span class="line">word1:  a   b</span><br><span class="line">word2:    p   q   r   s</span><br><span class="line">merged: a p b q   r   s</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: word1 = &quot;abcd&quot;, word2 = &quot;pq&quot;</span><br><span class="line">Output: &quot;apbqcd&quot;</span><br><span class="line">Explanation: Notice that as word1 is longer, &quot;cd&quot; is appended to the end.</span><br><span class="line">word1:  a   b   c   d</span><br><span class="line">word2:    p   q</span><br><span class="line">merged: a p b q c   d</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= word1.length, word2.length &lt;= 100</code></li>
+<li><code>word1</code> and <code>word2</code> consist of lowercase English letters.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mergeAlternately</span>(<span class="params">self, word1: <span class="built_in">str</span>, word2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        i , j = <span class="number">0</span> , <span class="number">0</span></span><br><span class="line">        last = <span class="number">2</span></span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(word1) <span class="keyword">or</span> j &lt; <span class="built_in">len</span>(word2):</span><br><span class="line">            <span class="keyword">if</span> last == <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">if</span>  i &lt; <span class="built_in">len</span>(word1):</span><br><span class="line">                    res += word1[i]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    res += <span class="string">&quot;&quot;</span></span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">                last = <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> last == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">if</span> j &lt; <span class="built_in">len</span>(word2):</span><br><span class="line">                    res += word2[j]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    res += <span class="string">&quot;&quot;</span></span><br><span class="line">                j+=<span class="number">1</span></span><br><span class="line">                last = <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+        <tag>Two Pointers</tag>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#33. Search in Rotated Sorted Array</title>
+    <url>/posts/z/Leetcode-33-Search-in-Rotated-Sorted-Array/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>There is an integer array <code>nums</code> sorted in ascending order (with <strong>distinct</strong> values).</p>
+<p>Prior to being passed to your function, <code>nums</code> is <strong>possibly rotated</strong> at an unknown pivot index <code>k</code> (<code>1 &lt;= k &lt; nums.length</code>) such that the resulting array is <code>[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]</code> (<strong>0-indexed</strong>). For example, <code>[0,1,2,4,5,6,7]</code> might be rotated at pivot index <code>3</code> and become <code>[4,5,6,7,0,1,2]</code>.</p>
+<p>Given the array <code>nums</code> <strong>after</strong> the possible rotation and an integer <code>target</code>, return <em>the index of</em> <code>target</code> <em>if it is in</em> <code>nums</code><em>, or</em> <code>-1</code> <em>if it is not in</em> <code>nums</code>.</p>
+<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [4,5,6,7,0,1,2], target = 0</span><br><span class="line">Output: 4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [4,5,6,7,0,1,2], target = 3</span><br><span class="line">Output: -1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [1], target = 0</span><br><span class="line">Output: -1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5000</code></li>
+<li><code>10^4 &lt;= nums[i] &lt;= 10^4</code></li>
+<li>All values of <code>nums</code> are <strong>unique</strong>.</li>
+<li><code>nums</code> is an ascending array that is possibly rotated.</li>
+<li><code>10^4 &lt;= target &lt;= 10^4</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>寫一個 最複雜的，而且還沒用到O(log(n))</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> target <span class="keyword">not</span> <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        idx = nums.index(target)</span><br><span class="line"></span><br><span class="line">        left = nums[idx:]</span><br><span class="line">        right = nums[:idx]</span><br><span class="line"></span><br><span class="line">        b1 = <span class="literal">False</span></span><br><span class="line">        b2 = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="number">1</span> , <span class="built_in">len</span>(left) ):</span><br><span class="line">            <span class="keyword">if</span> left[i-<span class="number">1</span>] &gt; left[i]:</span><br><span class="line">                b1 = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="number">1</span> , <span class="built_in">len</span>(right) ):</span><br><span class="line">            <span class="keyword">if</span> right[i-<span class="number">1</span>] &gt; right[i]:</span><br><span class="line">                b2 = -<span class="number">1</span></span><br><span class="line">                </span><br><span class="line">        <span class="keyword">if</span> b1 ==-<span class="number">1</span> <span class="keyword">and</span> b2 == -<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> nums.index(target)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Solution2-Binary-Search"><a href="#Solution2-Binary-Search" class="headerlink" title="Solution2 - Binary Search"></a><code>Solution2 - Binary Search</code></h1><p>改正為 <strong>Binary Search</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> target <span class="keyword">not</span> <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            mid = (left+right)//<span class="number">2</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &gt;= nums[left]:</span><br><span class="line">                <span class="keyword">if</span> nums[left] &lt;= target &lt;= nums[mid]:</span><br><span class="line">                    right = mid - <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    left = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> nums[mid] &lt;= target &lt;= nums[right]:</span><br><span class="line">                    left = mid + <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    right = mid - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Binary Search</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#337. House Robber III</title>
+    <url>/posts/z/Leetcode-337-House-Robber-III/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>The thief has found himself a new place for his thievery again. There is only one entrance to this area, called <code>root</code>.</p>
+<p>Besides the <code>root</code>, each house has one and only one parent house. After a tour, the smart thief realized that all houses in this place form a binary tree. It will automatically contact the police if <strong>two directly-linked houses were broken into on the same night</strong>.</p>
+<p>Given the <code>root</code> of the binary tree, return <em>the maximum amount of money the thief can rob <strong>without alerting the police</strong></em>.</p>
+<p><strong>Example 1:</strong></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2021/03/10/rob1-tree.jpg">https://assets.leetcode.com/uploads/2021/03/10/rob1-tree.jpg</a></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/10/rob1-tree.jpg"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: root = [3,2,3,null,3,null,1]</span><br><span class="line">Output: 7</span><br><span class="line">Explanation: Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2021/03/10/rob2-tree.jpg">https://assets.leetcode.com/uploads/2021/03/10/rob2-tree.jpg</a></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/10/rob2-tree.jpg"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: root = [3,4,5,1,3,null,1]</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[1, 104]</code>.</li>
+<li><code>0 &lt;= Node.val &lt;= 104</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p><strong>Time Limit Exceeded</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rob</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dd</span>(<span class="params">node</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">                <span class="keyword">return</span> (<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">            </span><br><span class="line">            left = node.left</span><br><span class="line">            right = node.right</span><br><span class="line"></span><br><span class="line">            submax = <span class="built_in">max</span>( dd(left) ) + <span class="built_in">max</span>( dd(right) )</span><br><span class="line">            addcurmax = node.val +  dd(left)[<span class="number">1</span>] + dd(right)[<span class="number">1</span>]  </span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (addcurmax , submax)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>( dd(root) )</span><br></pre></td></tr></table></figure>
+
+<p>改成這樣就沒問題，原先單純沒有把postorder格式寫好，導致會一直重複運算</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rob</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dd</span>(<span class="params">node</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">                <span class="keyword">return</span> (<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">            </span><br><span class="line">            left = dd(node.left)</span><br><span class="line">            right = dd(node.right)</span><br><span class="line"></span><br><span class="line">            submax = <span class="built_in">max</span>( left ) + <span class="built_in">max</span>( right )</span><br><span class="line">            addcurmax = node.val +  left[<span class="number">1</span>] + right[<span class="number">1</span>]  </span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (addcurmax , submax)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>( dd(root) )</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>Tree</tag>
+        <tag>Depth-First Search</tag>
+        <tag>Binary Tree</tag>
+        <tag>💡</tag>
+        <tag>Dynamic Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#643. Maximum Average Subarray I</title>
+    <url>/posts/z/Leetcode-643-Maximum-Average-Subarray-I/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>You are given an integer array <code>nums</code> consisting of <code>n</code> elements, and an integer <code>k</code>.</p>
+<p>Find a contiguous subarray whose <strong>length is equal to</strong> <code>k</code> that has the maximum average value and return <em>this value</em>. Any answer with a calculation error less than <code>10-5</code> will be accepted.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [1,12,-5,-6,50,3], k = 4</span><br><span class="line">Output: 12.75000</span><br><span class="line">Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [5], k = 1</span><br><span class="line">Output: 5.00000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == nums.length</code></li>
+<li><code>1 &lt;= k &lt;= n &lt;= 10^5</code></li>
+<li><code>10^4 &lt;= nums[i] &lt;= 10^4</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>醜醜的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMaxAverage</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">float</span>:</span><br><span class="line">        li = []</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            li.append( nums[i] / k )</span><br><span class="line">        </span><br><span class="line">        sums = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            sums += li[i]</span><br><span class="line">        </span><br><span class="line">        res.append(sums)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( k, <span class="built_in">len</span>(li) ):</span><br><span class="line">            sums += li[i]</span><br><span class="line">            sums -= li[i-k]</span><br><span class="line">            res.append(sums)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(res)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>easy</tag>
+        <tag>Sliding Window</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#435. Non-overlapping Intervals</title>
+    <url>/posts/z/Leetcode-435-Non-overlapping-Intervals/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an array of intervals <code>intervals</code> where <code>intervals[i] = [starti, endi]</code>, return <em>the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: intervals = [[1,2],[2,3],[3,4],[1,3]]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: [1,3] can be removed and the rest of the intervals are non-overlapping.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: intervals = [[1,2],[1,2],[1,2]]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: You need to remove two [1,2] to make the rest of the intervals non-overlapping.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: intervals = [[1,2],[2,3]]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: You don&#x27;t need to remove any of the intervals since they&#x27;re already non-overlapping.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= intervals.length &lt;= 10^5</code></li>
+<li><code>intervals[i].length == 2</code></li>
+<li><code>5 * 10^4 &lt;= starti &lt; endi &lt;= 5 * 10^4</code></li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eraseOverlapIntervals</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> intervals:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        intervals.sort()</span><br><span class="line"></span><br><span class="line">        last_end = intervals[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span> , <span class="built_in">len</span>(intervals )):</span><br><span class="line">            <span class="keyword">if</span> intervals[i][<span class="number">0</span>] &gt;= last_end:</span><br><span class="line">                last_end = intervals[i][<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                last_end = <span class="built_in">min</span>(last_end , intervals[i][<span class="number">1</span>])</span><br><span class="line">                res +=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Dynamic Programming</tag>
+        <tag>Sorting</tag>
+        <tag>Greedy</tag>
+      </tags>
+  </entry>
 </search>
