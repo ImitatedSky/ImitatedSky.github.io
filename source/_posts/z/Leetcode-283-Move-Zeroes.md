@@ -61,6 +61,6 @@ class Solution:
             if nums[i] != 0:
                 nums[s] = nums[i]
                 s += 1 
-        for j in range(s+1 , len(nums)):
+        for j in range(s , len(nums)):
             nums[j] = 0
 ```

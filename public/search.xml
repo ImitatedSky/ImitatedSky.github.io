@@ -548,12 +548,12 @@
     <url>/posts/leetcode/Leetcode-221-Maximal-Square/</url>
     <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an <code>m x n</code> binary <code>matrix</code> filled with <code>0</code>‘s and <code>1</code>‘s, <em>find the largest square containing only</em> <code>1</code>‘s <em>and return its area</em>.</p>
 <p><strong>Example 1:</strong></p>
-<p>![]<a href="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg">https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg</a></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg"></p>
 <p>!<a href="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg">https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg</a></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: matrix = [[&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;],[&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],[&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;]]</span><br><span class="line">Output: 4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><strong>Example 2:</strong></p>
-<p>![]<a href="https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg">https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg</a></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg"></p>
 <p>!<a href="https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg">https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg</a></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: matrix = [[&quot;0&quot;,&quot;1&quot;],[&quot;1&quot;,&quot;0&quot;]]</span><br><span class="line">Output: 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -2434,7 +2434,7 @@ treenode3 --&gt;|3-1|treenode3.3
 </ul>
 <p><strong>Follow up:</strong></p>
 <p>Could you minimize the total number of operations done?</p>
-<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">moveZeroes</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(nums) ):</span><br><span class="line">            <span class="keyword">if</span> nums[i] != <span class="number">0</span>:</span><br><span class="line">                nums[s] = nums[i]</span><br><span class="line">                s += <span class="number">1</span> </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(s+<span class="number">1</span> , <span class="built_in">len</span>(nums)):</span><br><span class="line">            nums[j] = <span class="number">0</span></span><br></pre></td></tr></table></figure>]]></content>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">moveZeroes</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(nums) ):</span><br><span class="line">            <span class="keyword">if</span> nums[i] != <span class="number">0</span>:</span><br><span class="line">                nums[s] = nums[i]</span><br><span class="line">                s += <span class="number">1</span> </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(s , <span class="built_in">len</span>(nums)):</span><br><span class="line">            nums[j] = <span class="number">0</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Leetcode</category>
       </categories>
@@ -2703,6 +2703,124 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Sorting</tag>
         <tag>施工中</tag>
         <tag>Greedy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#841. Keys and Rooms</title>
+    <url>/posts/leetcode/Leetcode-841-Keys-and-Rooms/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>There are <code>n</code> rooms labeled from <code>0</code> to <code>n - 1</code> and all the rooms are locked except for room <code>0</code>. Your goal is to visit all the rooms. However, you cannot enter a locked room without having its key.</p>
+<p>When you visit a room, you may find a set of <strong>distinct keys</strong> in it. Each key has a number on it, denoting which room it unlocks, and you can take all of them with you to unlock the other rooms.</p>
+<p>Given an array <code>rooms</code> where <code>rooms[i]</code> is the set of keys that you can obtain if you visited room <code>i</code>, return <code>true</code> <em>if you can visit <strong>all</strong> the rooms, or</em> <code>false</code> <em>otherwise</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: rooms = [[1],[2],[3],[]]</span><br><span class="line">Output: true</span><br><span class="line">Explanation:</span><br><span class="line">We visit room 0 and pick up key 1.</span><br><span class="line">We then visit room 1 and pick up key 2.</span><br><span class="line">We then visit room 2 and pick up key 3.</span><br><span class="line">We then visit room 3.</span><br><span class="line">Since we were able to visit every room, we return true.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: rooms = [[1,3],[3,0,1],[2],[0]]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: We can not enter room number 2 since the only key that unlocks it is in that room.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == rooms.length</code></li>
+<li><code>2 &lt;= n &lt;= 1000</code></li>
+<li><code>0 &lt;= rooms[i].length &lt;= 1000</code></li>
+<li><code>1 &lt;= sum(rooms[i].length) &lt;= 3000</code></li>
+<li><code>0 &lt;= rooms[i][j] &lt; n</code></li>
+<li>All the values of <code>rooms[i]</code> are <strong>unique</strong>.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canVisitAllRooms</span>(<span class="params">self, rooms: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        memo = [<span class="literal">False</span>]*<span class="built_in">len</span>(rooms)</span><br><span class="line">        memo[<span class="number">0</span>] = [<span class="literal">True</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dd</span>(<span class="params"> key </span>):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(rooms[key]) ) :</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> memo[ rooms[key][i] ]  :</span><br><span class="line"></span><br><span class="line">                    memo[ rooms[key][i] ] = <span class="literal">True</span></span><br><span class="line">                    dd( rooms[key][i] )</span><br><span class="line"></span><br><span class="line">        dd( <span class="number">0</span> )</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> memo:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="literal">False</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>Depth-First Search</tag>
+        <tag>Breadth-First Search</tag>
+        <tag>💡</tag>
+        <tag>Graph</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#1493. Longest Subarray of 1&#39;s After Deleting One Element</title>
+    <url>/posts/z/Leetcode-1493-Longest-Subarray-of-1-s-After-Deleting-One-Element/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given a binary array <code>nums</code>, you should delete one element from it.</p>
+<p>Return <em>the size of the longest non-empty subarray containing only</em> <code>1</code><em>‘s in the resulting array</em>. Return <code>0</code> if there is no such subarray.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [1,1,0,1]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: After deleting the number in position 2, [1,1,1] contains 3 numbers with value of 1&#x27;s.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [0,1,1,1,0,1,1,0,1]</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: After deleting the number in position 4, [0,1,1,1,1,1,0,1] longest subarray with value of 1&#x27;s is [1,1,1,1,1].</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums = [1,1,1]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: You must delete one element.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 10^5</code></li>
+<li><code>nums[i]</code> is either <code>0</code> or <code>1</code>.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>直接用**<a href="https://leetcode.com/problems/max-consecutive-ones-iii/">1004. Max Consecutive Ones III</a> 作法去改**</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestSubarray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        l , r = <span class="number">0</span> , <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        k = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> nums[r] == <span class="number">0</span> :</span><br><span class="line">                k-=<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> k &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> nums[l] == <span class="number">0</span>:</span><br><span class="line">                    k +=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">                l+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> r - l</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Dynamic Programming</tag>
+        <tag>施工中</tag>
+        <tag>Sliding Window</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#392. Is Subsequence</title>
+    <url>/posts/leetcode/Leetcode-392-Is-Subsequence/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given two strings <code>s</code> and <code>t</code>, return <code>true</code> <em>if</em> <code>s</code> <em>is a <strong>subsequence</strong> of</em> <code>t</code><em>, or</em> <code>false</code> <em>otherwise</em>.</p>
+<p>A <strong>subsequence</strong> of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., <code>&quot;ace&quot;</code> is a subsequence of <code>&quot;abcde&quot;</code> while <code>&quot;aec&quot;</code> is not).</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot;abc&quot;, t = &quot;ahbgdc&quot;</span><br><span class="line">Output: true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: s = &quot;axc&quot;, t = &quot;ahbgdc&quot;</span><br><span class="line">Output: false</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= s.length &lt;= 100</code></li>
+<li><code>0 &lt;= t.length &lt;= 104</code></li>
+<li><code>s</code> and <code>t</code> consist only of lowercase English letters.</li>
+</ul>
+<p><strong>Follow up:</strong></p>
+<p>Suppose there are lots of incoming</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>, say</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s1, s2, ..., sk</span><br></pre></td></tr></table></figure>
+
+<p>where</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">k &gt;= 10^9</span><br></pre></td></tr></table></figure>
+
+<p>, and you want to check one by one to see if</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">t</span><br></pre></td></tr></table></figure>
+
+<p>has its subsequence. In this scenario, how would you change your code?</p>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSubsequence</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="keyword">if</span> s[i] <span class="keyword">not</span> <span class="keyword">in</span> t[j:]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                j = j + t[j:].index(s[i]) +<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>簡化一些</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSubsequence</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(s) ):</span><br><span class="line">            <span class="keyword">if</span> s[i] <span class="keyword">not</span> <span class="keyword">in</span> t:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ii = t.index(s[i])</span><br><span class="line">                t = t[ii + <span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>💡</tag>
+        <tag>Dynamic Programming</tag>
+        <tag>easy</tag>
+        <tag>Two Pointers</tag>
+        <tag>String</tag>
       </tags>
   </entry>
 </search>

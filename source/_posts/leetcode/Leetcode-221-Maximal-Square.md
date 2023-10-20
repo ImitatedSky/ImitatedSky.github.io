@@ -22,7 +22,7 @@ Given an `m x n` binary `matrix` filled with `0`'s and `1`'s, *find the l
 
 **Example 1:**
 
-![]https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg
+![](https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg)
 
 !https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg
 
@@ -34,7 +34,7 @@ Output: 4
 
 **Example 2:**
 
-![]https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg
+![](https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg)
 
 !https://assets.leetcode.com/uploads/2020/11/26/max2grid.jpg
 
