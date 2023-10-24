@@ -584,8 +584,8 @@ microsoft_clarity:
 
 # Google Adsense (谷歌廣告)
 google_adsense:
-  enable: true
-  auto_ads: true
+  enable: false
+  auto_ads: false
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
   client: ca-pub-1586127049432699
   enable_page_level_ads: true
