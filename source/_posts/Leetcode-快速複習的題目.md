@@ -9,15 +9,19 @@ sticky: 100
 
 
 
+# `Binary Search`
+
+[Leetcode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array](../leetcode/Leetcode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
+
 # `Depth-First Search    Breadth-First Search`
 
-[Leetcode-530-Minimum-Absolute-Difference-in-BST](leetcode/Leetcode-530-Minimum-Absolute-Difference-in-BST)
+[Leetcode-530-Minimum-Absolute-Difference-in-BST](../leetcode/Leetcode-530-Minimum-Absolute-Difference-in-BST)
 
 # `Backtracking`
 
 [Leetcode-79-Word-Search](../leetcode/Leetcode-79-Word-Search)
 
-[Leetcode-79-Word-Search)](../leetcode/Leetcode-79-Word-Search)
+[Leetcode-212-Word-Search-II](../leetcode/Leetcode-212-Word-Search-II)
 
 # `Divide and Conquer`
 
