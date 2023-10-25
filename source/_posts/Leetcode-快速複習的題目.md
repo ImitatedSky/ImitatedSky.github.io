@@ -14,9 +14,13 @@ sticky: 100
 
 [Leetcode-35-Search-Insert-Position](../leetcode/Leetcode-35-Search-Insert-Position)
 
+[Leetcode-74-Search-a-2D-Matrix](../leetcode/Leetcode-74-Search-a-2D-Matrix)
+
 # `Depth-First Search    Breadth-First Search`
 
 [Leetcode-530-Minimum-Absolute-Difference-in-BST](../leetcode/Leetcode-530-Minimum-Absolute-Difference-in-BST)
+
+[Leetcode-100-Same-Tree  (DP)](../leetcode/Leetcode-100-Same-Tree)
 
 # `Backtracking`
 
@@ -32,7 +36,17 @@ sticky: 100
 
 [Leetcode-53-Maximum-Subarray  (Greedy)](../leetcode/Leetcode-53-Maximum-Subarray)
 
-# `Sliding Window`
+[Leetcode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal](../leetcode/Leetcode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal)
+
+# `Dynamic Programming`
+
+[Leetcode-55-Jump-Game](../leetcode/Leetcode-55-Jump-Game)
+
+[Leetcode-62-Unique-Paths](../leetcode/Leetcode-62-Unique-Paths)
+
+[Leetcode-70-Climbing-Stairs](../leetcode/Leetcode-70-Climbing-Stairs)
+
+[Leetcode-87-Scramble-String](../leetcode/Leetcode-87-Scramble-String)
 
 # `Greedy`
 
@@ -43,3 +57,11 @@ sticky: 100
 [Leetcode-26-Remove-Duplicates-from-Sorted-Array](../leetcode/Leetcode-26-Remove-Duplicates-from-Sorted-Array)
 
 [Leetcode-27-Remove-Element](../leetcode/Leetcode-27-Remove-Element)
+
+# `Sliding Window`
+
+[Leetcode-76-Minimum-Window-Substring](../leetcode/Leetcode-76-Minimum-Window-Substring)
+
+# `Linked List`
+
+[Leetcode-92-Reverse-Linked-List-II](../leetcode/Leetcode-92-Reverse-Linked-List-II)
