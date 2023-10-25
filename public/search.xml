@@ -3008,12 +3008,14 @@ treenode3 --&gt;|3-1|treenode3.3
     <content><![CDATA[<h1 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a><code>Binary Search</code></h1><p><a href="../leetcode/Leetcode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array">Leetcode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array</a></p>
 <p><a href="../leetcode/Leetcode-35-Search-Insert-Position">Leetcode-35-Search-Insert-Position</a></p>
 <p><a href="../leetcode/Leetcode-74-Search-a-2D-Matrix">Leetcode-74-Search-a-2D-Matrix</a></p>
-<h1 id="Depth-First-Search-Breadth-First-Search"><a href="#Depth-First-Search-Breadth-First-Search" class="headerlink" title="Depth-First Search    Breadth-First Search"></a><code>Depth-First Search    Breadth-First Search</code></h1><p><a href="../leetcode/Leetcode-530-Minimum-Absolute-Difference-in-BST">Leetcode-530-Minimum-Absolute-Difference-in-BST</a></p>
+<h1 id="Depth-First-Search-Breadth-First-Search"><a href="#Depth-First-Search-Breadth-First-Search" class="headerlink" title="Depth-First Search  Breadth-First Search"></a><code>Depth-First Search  Breadth-First Search</code></h1><p>[Depth-First Search]<strong>(</strong>..&#x2F;..&#x2F;tags&#x2F;<strong>)</strong>    [Breadth-First Search]<strong>(</strong>..&#x2F;..&#x2F;tags&#x2F;<strong>)</strong></p>
+<p><a href="../leetcode/Leetcode-530-Minimum-Absolute-Difference-in-BST">Leetcode-530-Minimum-Absolute-Difference-in-BST</a></p>
 <p><a href="../leetcode/Leetcode-100-Same-Tree">Leetcode-100-Same-Tree  (DP)</a></p>
 <h1 id="Backtracking"><a href="#Backtracking" class="headerlink" title="Backtracking"></a><code>Backtracking</code></h1><p><a href="../leetcode/Leetcode-79-Word-Search">Leetcode-79-Word-Search</a></p>
 <p><a href="../leetcode/Leetcode-52-N-Queens-II">Leetcode-52-N-Queens-II</a></p>
 <p><a href="../leetcode/Leetcode-212-Word-Search-II">Leetcode-212-Word-Search-II</a></p>
-<h1 id="Divide-and-Conquer"><a href="#Divide-and-Conquer" class="headerlink" title="Divide and Conquer"></a><code>Divide and Conquer</code></h1><p><a href="../leetcode/Leetcode-23-Merge-k-Sorted-Lists">Leetcode-23-Merge-k-Sorted-Lists</a></p>
+<h1 id="Divide-and-Conquer"><a href="#Divide-and-Conquer" class="headerlink" title="Divide and Conquer"></a><code>Divide and Conquer</code></h1><p>[tags  Divide and Conquer](..&#x2F;..&#x2F;tags&#x2F;Divide and Conquer**)**</p>
+<p><a href="../leetcode/Leetcode-23-Merge-k-Sorted-Lists">Leetcode-23-Merge-k-Sorted-Lists</a></p>
 <p><a href="../leetcode/Leetcode-53-Maximum-Subarray">Leetcode-53-Maximum-Subarray  (Greedy)</a></p>
 <p><a href="../leetcode/Leetcode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal">Leetcode-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal</a></p>
 <h1 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a><code>Dynamic Programming</code></h1><p><a href="../leetcode/Leetcode-55-Jump-Game">Leetcode-55-Jump-Game</a></p>
@@ -3023,7 +3025,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <h1 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a><code>Greedy</code></h1><p><a href="../leetcode/Leetcode-45-Jump-Game-II">Leetcode-45-Jump-Game-II</a></p>
 <h1 id="Two-Pointer"><a href="#Two-Pointer" class="headerlink" title="Two Pointer"></a><code>Two Pointer</code></h1><p><a href="../leetcode/Leetcode-26-Remove-Duplicates-from-Sorted-Array">Leetcode-26-Remove-Duplicates-from-Sorted-Array</a></p>
 <p><a href="../leetcode/Leetcode-27-Remove-Element">Leetcode-27-Remove-Element</a></p>
-<h1 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a><code>Sliding Window</code></h1><p><a href="../leetcode/Leetcode-76-Minimum-Window-Substring">Leetcode-76-Minimum-Window-Substring</a></p>
+<h1 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a>Sliding Window</h1><p><a href="../leetcode/Leetcode-76-Minimum-Window-Substring">Leetcode-76-Minimum-Window-Substring</a></p>
 <h1 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a><code>Linked List</code></h1><p><a href="../leetcode/Leetcode-92-Reverse-Linked-List-II">Leetcode-92-Reverse-Linked-List-II</a></p>
 ]]></content>
       <tags>

@@ -16,7 +16,9 @@ sticky: 100
 
 [Leetcode-74-Search-a-2D-Matrix](../leetcode/Leetcode-74-Search-a-2D-Matrix)
 
-# `Depth-First Search    Breadth-First Search`
+# `Depth-First Search  Breadth-First Search`
+
+[Depth-First Search]**(**../../tags/**)**    [Breadth-First Search]**(**../../tags/**)**
 
 [Leetcode-530-Minimum-Absolute-Difference-in-BST](../leetcode/Leetcode-530-Minimum-Absolute-Difference-in-BST)
 
@@ -31,6 +33,8 @@ sticky: 100
 [Leetcode-212-Word-Search-II](../leetcode/Leetcode-212-Word-Search-II)
 
 # `Divide and Conquer`
+
+[tags  Divide and Conquer](../../tags/Divide and Conquer**)**
 
 [Leetcode-23-Merge-k-Sorted-Lists](../leetcode/Leetcode-23-Merge-k-Sorted-Lists)
 
@@ -58,7 +62,7 @@ sticky: 100
 
 [Leetcode-27-Remove-Element](../leetcode/Leetcode-27-Remove-Element)
 
-# `Sliding Window`
+# Sliding Window
 
 [Leetcode-76-Minimum-Window-Substring](../leetcode/Leetcode-76-Minimum-Window-Substring)
 
