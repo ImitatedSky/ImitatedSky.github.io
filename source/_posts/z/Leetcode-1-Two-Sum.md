@@ -67,7 +67,7 @@ time complexity?
 
 # `Solve`
 
-```csharp
+```python
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         _target = []

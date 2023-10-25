@@ -17,7 +17,7 @@ date: 2023-07-26 11:31:52
 ---
 
 進階
-[leetcode212](../Leetcode-212-Word-Search-II.md)
+[leetcode212](../Leetcode-212-Word-Search-II)
 
 # `Problem`
 
