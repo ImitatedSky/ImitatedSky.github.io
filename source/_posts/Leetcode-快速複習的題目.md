@@ -62,7 +62,7 @@ sticky: 100
 
 [Leetcode-27-Remove-Element](../leetcode/Leetcode-27-Remove-Element)
 
-# Sliding Window
+# `Sliding Window`
 
 [Leetcode-76-Minimum-Window-Substring](../leetcode/Leetcode-76-Minimum-Window-Substring)
 
