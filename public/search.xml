@@ -214,7 +214,7 @@
 </tr>
 <tr>
 <td>sticky</td>
-<td>【可選】文章置頂(默認為設置中post_sticky的enable配置)</td>
+<td>【可選】文章置頂(ex sticky:1)</td>
 </tr>
 </tbody></table>
 ]]></content>
@@ -2955,6 +2955,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node">Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II">Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-684-Redundant-Connection">Leetcode-684-Redundant-Connection</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-909-Snakes-and-Ladders">Leetcode-909-Snakes-and-Ladders</a></li>
 </ul>
 <hr>
 <h2 id="Backtracking"><a href="#Backtracking" class="headerlink" title="Backtracking"></a><code>Backtracking</code></h2><p><strong>入門</strong></p>
@@ -2964,6 +2965,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-79-Word-Search">Leetcode-79-Word-Search</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-212-Word-Search-II">Leetcode-212-Word-Search-II</a></li>
 </ul>
+<hr>
 <h2 id="Divide-and-Conquer"><a href="#Divide-and-Conquer" class="headerlink" title="Divide and Conquer"></a><code>Divide and Conquer</code></h2><p><strong>入門</strong></p>
 <p><strong>進階</strong></p>
 <ul>
@@ -3050,6 +3052,12 @@ treenode3 --&gt;|3-1|treenode3.3
 <p><strong>進階</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-224-Basic-Calculator">Leetcode-224-Basic-Calculator</a></li>
+</ul>
+<hr>
+<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a><code>Queue</code></h2><p><strong>入門</strong></p>
+<p><strong>進階</strong></p>
+<ul>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-909-Snakes-and-Ladders">Leetcode-909-Snakes-and-Ladders</a></li>
 </ul>
 <hr>
 <h2 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a><code>Graph</code></h2><p><strong>入門</strong></p>
@@ -3245,6 +3253,55 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Breadth-First Search</tag>
         <tag>Graph</tag>
         <tag>Union Find</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#909. Snakes and Ladders</title>
+    <url>/posts/leetcode/Leetcode-909-Snakes-and-Ladders/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>You are given an <code>n x n</code> integer matrix <code>board</code> where the cells are labeled from <code>1</code> to <code>n^2</code> in a <strong><a href="https://en.wikipedia.org/wiki/Boustrophedon">Boustrophedon style</a></strong> starting from the bottom left of the board (i.e. <code>board[n - 1][0]</code>) and alternating direction each row.</p>
+<p>You start on square <code>1</code> of the board. In each move, starting from square <code>curr</code>, do the following:</p>
+<ul>
+<li>Choose a destination square <code>next</code> with a label in the range <code>[curr + 1, min(curr + 6, n^2)]</code>.<ul>
+<li>This choice simulates the result of a standard <strong>6-sided die roll</strong>: i.e., there are always at most 6 destinations, regardless of the size of the board.</li>
+</ul>
+</li>
+<li>If <code>next</code> has a snake or ladder, you <strong>must</strong> move to the destination of that snake or ladder. Otherwise, you move to <code>next</code>.</li>
+<li>The game ends when you reach the square <code>n^2</code>.</li>
+</ul>
+<p>A board square on row <code>r</code> and column <code>c</code> has a snake or ladder if <code>board[r][c] != -1</code>. The destination of that snake or ladder is <code>board[r][c]</code>. Squares <code>1</code> and <code>n2</code> do not have a snake or ladder.</p>
+<p>Note that you only take a snake or ladder at most once per move. If the destination to a snake or ladder is the start of another snake or ladder, you do <strong>not</strong> follow the subsequent snake or ladder.</p>
+<ul>
+<li>For example, suppose the board is <code>[[-1,4],[-1,3]]</code>, and on the first move, your destination square is <code>2</code>. You follow the ladder to square <code>3</code>, but do <strong>not</strong> follow the subsequent ladder to <code>4</code>.</li>
+</ul>
+<p>Return <em>the least number of moves required to reach the square</em> <code>n^2</code><em>. If it is not possible to reach the square, return</em> <code>-1</code>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/09/23/snakes.png"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2018/09/23/snakes.png">https://assets.leetcode.com/uploads/2018/09/23/snakes.png</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, you start at square 1 (at row 5, column 0).</span><br><span class="line">You decide to move to square 2 and must take the ladder to square 15.</span><br><span class="line">You then decide to move to square 17 and must take the snake to square 13.</span><br><span class="line">You then decide to move to square 14 and must take the ladder to square 35.</span><br><span class="line">You then decide to move to square 36, ending the game.</span><br><span class="line">This is the lowest possible number of moves to reach the last square, so return 4.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: board = [[-1,-1],[-1,3]]</span><br><span class="line">Output: 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == board.length == board[i].length</code></li>
+<li><code>2 &lt;= n &lt;= 20</code></li>
+<li><code>board[i][j]</code> is either <code>1</code> or in the range <code>[1, n^2]</code>.</li>
+<li>The squares labeled <code>1</code> and <code>n^2</code> do not have any ladders or snakes.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>用queue實作 bfs</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">snakesAndLadders</span>(<span class="params">self, board: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(board)</span><br><span class="line"></span><br><span class="line">        p = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)]*(n**<span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line">        p[<span class="number">1</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">n2rc</span>(<span class="params">pos,n</span>):</span><br><span class="line">            r = n -<span class="number">1</span> - (pos-<span class="number">1</span>)//n</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (r-n-<span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 往右</span></span><br><span class="line">                c  = (pos -<span class="number">1</span>) % n</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                c = n - <span class="number">1</span> - (pos -<span class="number">1</span>) % n</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> r , c</span><br><span class="line"></span><br><span class="line">        queue = [<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> queue:</span><br><span class="line">            curr = queue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">range</span>(curr +<span class="number">1</span> , <span class="built_in">min</span>(curr+<span class="number">6</span> , n**<span class="number">2</span>) +<span class="number">1</span> ):</span><br><span class="line">                <span class="keyword">if</span> pos &lt; <span class="number">1</span> :</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">                r , c = n2rc(pos,n)</span><br><span class="line">                <span class="keyword">if</span> board[r][c]  != -<span class="number">1</span>:</span><br><span class="line">                    pos = board[r][c]</span><br><span class="line">                <span class="keyword">if</span> p[ pos ] == <span class="built_in">float</span>(<span class="string">&quot;inf&quot;</span>):</span><br><span class="line">                    p[ pos ] = p[ curr ] + <span class="number">1</span></span><br><span class="line">                    queue.append(pos)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> p[ n**<span class="number">2</span> ] == <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>):</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> p[ n**<span class="number">2</span> ]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Array</tag>
+        <tag>Breadth-First Search</tag>
+        <tag>Matrix</tag>
       </tags>
   </entry>
 </search>

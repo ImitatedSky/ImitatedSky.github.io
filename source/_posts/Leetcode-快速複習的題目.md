@@ -41,6 +41,7 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node](../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node)
 - <input type="checkbox" >  [Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II](../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II)
 - <input type="checkbox" >  [Leetcode-684-Redundant-Connection](../leetcode/Leetcode-684-Redundant-Connection)
+- <input type="checkbox" >  [Leetcode-909-Snakes-and-Ladders](../leetcode/Leetcode-909-Snakes-and-Ladders)
 
 ---
 
@@ -53,6 +54,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-52-N-Queens-II](../leetcode/Leetcode-52-N-Queens-II)
 - <input type="checkbox" >  [Leetcode-79-Word-Search](../leetcode/Leetcode-79-Word-Search)
 - <input type="checkbox" >  [Leetcode-212-Word-Search-II](../leetcode/Leetcode-212-Word-Search-II)
+
+---
 
 ## `Divide and Conquer`
 
@@ -173,6 +176,16 @@ sticky: 100
 **進階**
 
 - <input type="checkbox" >  [Leetcode-224-Basic-Calculator](../leetcode/Leetcode-224-Basic-Calculator)
+
+---
+
+## `Queue`
+
+**入門**
+
+**進階**
+
+- <input type="checkbox" >  [Leetcode-909-Snakes-and-Ladders](../leetcode/Leetcode-909-Snakes-and-Ladders)
 
 ---
 
