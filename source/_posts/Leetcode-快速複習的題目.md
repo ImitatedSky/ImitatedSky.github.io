@@ -25,6 +25,8 @@ sticky: 100
 
 **進階**
 
+---
+
 ## `Depth-First Search  Breadth-First Search`
 
 **入門**
@@ -39,6 +41,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node](../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node)
 - <input type="checkbox" >  [Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II](../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II)
 - <input type="checkbox" >  [Leetcode-684-Redundant-Connection](../leetcode/Leetcode-684-Redundant-Connection)
+
+---
 
 ## `Backtracking`
 
@@ -62,6 +66,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-148-Sort-Listk](../leetcode/Leetcode-148-Sort-Listk)
 - <input type="checkbox" >  [Leetcode-427-Construct-Quad-Tree](../leetcode/Leetcode-427-Construct-Quad-Tree)
 
+---
+
 ## `Dynamic Programming`
 
 **入門**
@@ -81,6 +87,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-139-Word-Break](../leetcode/Leetcode-139-Word-Break)
 - <input type="checkbox" >  [Leetcode-221-Maximal-Square](../leetcode/Leetcode-221-Maximal-Square)
 
+---
+
 ## `Greedy`
 
 **入門**
@@ -94,6 +102,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-55-Jump-Game](../leetcode/Leetcode-55-Jump-Game)
 - <input type="checkbox" >  [Leetcode-135-Candy](../leetcode/Leetcode-135-Candy)
 
+---
+
 ## `Union Find`
 
 **入門**
@@ -101,6 +111,8 @@ sticky: 100
 **進階**
 
 - <input type="checkbox" >  [Leetcode-684-Redundant-Connection](../leetcode/Leetcode-684-Redundant-Connection)
+
+---
 
 ## `Two Pointer`
 
@@ -114,6 +126,8 @@ sticky: 100
 
 **進階**
 
+---
+
 ## `Sliding Window`
 
 **入門**
@@ -121,6 +135,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-76-Minimum-Window-Substring](../leetcode/Leetcode-76-Minimum-Window-Substring)
 
 **進階**
+
+---
 
 # 資料結構
 
@@ -135,6 +151,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-92-Reverse-Linked-List-II](../leetcode/Leetcode-92-Reverse-Linked-List-II)
 - <input type="checkbox" >  [Leetcode-148-Sort-Listk](../leetcode/Leetcode-148-Sort-Listk)
 
+---
+
 ## `hash map`
 
 **入門**
@@ -146,6 +164,8 @@ sticky: 100
 
 - <input type="checkbox" >  [Leetcode-146-LRU-Cache](../leetcode/Leetcode-146-LRU-Cache)
 
+---
+
 ## `Stack`
 
 **入門**
@@ -153,6 +173,8 @@ sticky: 100
 **進階**
 
 - <input type="checkbox" >  [Leetcode-224-Basic-Calculator](../leetcode/Leetcode-224-Basic-Calculator)
+
+---
 
 ## `Graph`
 
@@ -164,6 +186,8 @@ sticky: 100
 
 - <input type="checkbox" >  [Leetcode-684-Redundant-Connection](../leetcode/Leetcode-684-Redundant-Connection)
 
+---
+
 ## **`Array / String`**
 
 **入門**
@@ -171,6 +195,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-14-Longest-Common-Prefix](../leetcode/Leetcode-14-Longest-Common-Prefix)
 
 **進階**
+
+---
 
 ## `Bit Manipulation`
 
@@ -183,6 +209,8 @@ sticky: 100
 
 - <input type="checkbox" >  [Leetcode-201-Bitwise-AND-of-Numbers-Range](../leetcode/Leetcode-201-Bitwise-AND-of-Numbers-Range)
 
+---
+
 ## `Tree`
 
 **入門**
@@ -192,6 +220,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node](../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node)
 - <input type="checkbox" >  [Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II](../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II)
 
+---
+
 ## `Trie`
 
 **入門**
@@ -199,6 +229,8 @@ sticky: 100
 **進階**
 
 - <input type="checkbox" >  [Leetcode-212-Word-Search-II](../leetcode/Leetcode-212-Word-Search-II)
+
+---
 
 ## `Math`
 
@@ -208,6 +240,8 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-172-Factorial-Trailing-Zeroes](../leetcode/Leetcode-172-Factorial-Trailing-Zeroes)
 
 **進階**
+
+---
 
 <script>
     // 獲取所有 <a> 標籤元素

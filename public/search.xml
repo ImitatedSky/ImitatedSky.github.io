@@ -2938,6 +2938,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-74-Search-a-2D-Matrix">Leetcode-74-Search-a-2D-Matrix</a></li>
 </ul>
 <p><strong>進階</strong></p>
+<hr>
 <h2 id="Depth-First-Search-Breadth-First-Search"><a href="#Depth-First-Search-Breadth-First-Search" class="headerlink" title="Depth-First Search  Breadth-First Search"></a><code>Depth-First Search  Breadth-First Search</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-100-Same-Tree">Leetcode-100-Same-Tree</a></li>
@@ -2951,6 +2952,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II">Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-684-Redundant-Connection">Leetcode-684-Redundant-Connection</a></li>
 </ul>
+<hr>
 <h2 id="Backtracking"><a href="#Backtracking" class="headerlink" title="Backtracking"></a><code>Backtracking</code></h2><p><strong>入門</strong></p>
 <p><strong>進階</strong></p>
 <ul>
@@ -2967,6 +2969,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-148-Sort-Listk">Leetcode-148-Sort-Listk</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-427-Construct-Quad-Tree">Leetcode-427-Construct-Quad-Tree</a></li>
 </ul>
+<hr>
 <h2 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a><code>Dynamic Programming</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-45-Jump-Game-II">Leetcode-45-Jump-Game-II</a></li>
@@ -2984,6 +2987,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-139-Word-Break">Leetcode-139-Word-Break</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-221-Maximal-Square">Leetcode-221-Maximal-Square</a></li>
 </ul>
+<hr>
 <h2 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a><code>Greedy</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-45-Jump-Game-II">Leetcode-45-Jump-Game-II</a></li>
@@ -2995,11 +2999,13 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-55-Jump-Game">Leetcode-55-Jump-Game</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-135-Candy">Leetcode-135-Candy</a></li>
 </ul>
+<hr>
 <h2 id="Union-Find"><a href="#Union-Find" class="headerlink" title="Union Find"></a><code>Union Find</code></h2><p><strong>入門</strong></p>
 <p><strong>進階</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-684-Redundant-Connection">Leetcode-684-Redundant-Connection</a></li>
 </ul>
+<hr>
 <h2 id="Two-Pointer"><a href="#Two-Pointer" class="headerlink" title="Two Pointer"></a><code>Two Pointer</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-26-Remove-Duplicates-from-Sorted-Array">Leetcode-26-Remove-Duplicates-from-Sorted-Array</a></li>
@@ -3009,11 +3015,13 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-202-Happy-Number">Leetcode-202-Happy-Number</a></li>
 </ul>
 <p><strong>進階</strong></p>
+<hr>
 <h2 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a><code>Sliding Window</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-76-Minimum-Window-Substring">Leetcode-76-Minimum-Window-Substring</a></li>
 </ul>
 <p><strong>進階</strong></p>
+<hr>
 <h1 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h1><h2 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a><code>Linked List</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-23-Merge-k-Sorted-Lists">Leetcode-23-Merge-k-Sorted-Lists</a></li>
@@ -3023,6 +3031,7 @@ treenode3 --&gt;|3-1|treenode3.3
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-92-Reverse-Linked-List-II">Leetcode-92-Reverse-Linked-List-II</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-148-Sort-Listk">Leetcode-148-Sort-Listk</a></li>
 </ul>
+<hr>
 <h2 id="hash-map"><a href="#hash-map" class="headerlink" title="hash map"></a><code>hash map</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-76-Minimum-Window-Substring">Leetcode-76-Minimum-Window-Substring</a></li>
@@ -3032,11 +3041,13 @@ treenode3 --&gt;|3-1|treenode3.3
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-146-LRU-Cache">Leetcode-146-LRU-Cache</a></li>
 </ul>
+<hr>
 <h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a><code>Stack</code></h2><p><strong>入門</strong></p>
 <p><strong>進階</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-224-Basic-Calculator">Leetcode-224-Basic-Calculator</a></li>
 </ul>
+<hr>
 <h2 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a><code>Graph</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-841-Keys-and-Rooms">Leetcode-841-Keys-and-Rooms</a></li>
@@ -3045,11 +3056,13 @@ treenode3 --&gt;|3-1|treenode3.3
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-684-Redundant-Connection">Leetcode-684-Redundant-Connection</a></li>
 </ul>
+<hr>
 <h2 id="Array-String"><a href="#Array-String" class="headerlink" title="Array / String"></a><strong><code>Array / String</code></strong></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-14-Longest-Common-Prefix">Leetcode-14-Longest-Common-Prefix</a></li>
 </ul>
 <p><strong>進階</strong></p>
+<hr>
 <h2 id="Bit-Manipulation"><a href="#Bit-Manipulation" class="headerlink" title="Bit Manipulation"></a><code>Bit Manipulation</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-67-Add-Binary">Leetcode-67-Add-Binary</a></li>
@@ -3059,23 +3072,27 @@ treenode3 --&gt;|3-1|treenode3.3
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-201-Bitwise-AND-of-Numbers-Range">Leetcode-201-Bitwise-AND-of-Numbers-Range</a></li>
 </ul>
+<hr>
 <h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a><code>Tree</code></h2><p><strong>入門</strong></p>
 <p><strong>進階</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node">Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II">Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II</a></li>
 </ul>
+<hr>
 <h2 id="Trie"><a href="#Trie" class="headerlink" title="Trie"></a><code>Trie</code></h2><p><strong>入門</strong></p>
 <p><strong>進階</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-212-Word-Search-II">Leetcode-212-Word-Search-II</a></li>
 </ul>
+<hr>
 <h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a><code>Math</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-149-Max-Points-on-a-Line">Leetcode-149-Max-Points-on-a-Line</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-172-Factorial-Trailing-Zeroes">Leetcode-172-Factorial-Trailing-Zeroes</a></li>
 </ul>
 <p><strong>進階</strong></p>
+<hr>
 <script>
     // 獲取所有 <a> 標籤元素
     var links = document.querySelectorAll('a');
