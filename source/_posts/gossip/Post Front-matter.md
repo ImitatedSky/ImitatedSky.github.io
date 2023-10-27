@@ -24,6 +24,7 @@ aplayer:
 highlight_shrink:
 aside:
 abcjs:
+sticky:
 ---
 
 
@@ -54,5 +55,6 @@ abcjs:
 |highlight_shrink    |【可選】配置代碼框是否展開(true/false)(默認為設置中 highlight_shrink 的配置)        |
 |aside               |【可選】顯示側邊欄 (默認 true)                                           |
 |abcjs               |【可選】加載 abcjs (當設置 abcjs 的 per_page: false 時，才需要配置，默認 false )  |
+|sticky              |【可選】文章置頂(默認為設置中post_sticky的enable配置)                          |
 
 
