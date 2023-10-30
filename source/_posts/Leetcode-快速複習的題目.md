@@ -183,9 +183,13 @@ sticky: 100
 
 **入門**
 
+- <input type="checkbox" >  [Leetcode-909-Snakes-and-Ladders](../leetcode/Leetcode-909-Snakes-and-Ladders)
+- <input type="checkbox" >  [Leetcode-933-Number-of-Recent-Calls](../leetcode/Leetcode-933-Number-of-Recent-Calls)
+
 **進階**
 
 - <input type="checkbox" >  [Leetcode-909-Snakes-and-Ladders](../leetcode/Leetcode-909-Snakes-and-Ladders)
+- <input type="checkbox" >  [Leetcode-862-Shortest-Subarray-with-Sum-at-Least-K](../leetcode/Leetcode-862-Shortest-Subarray-with-Sum-at-Least-K)
 
 ---
 
@@ -198,6 +202,16 @@ sticky: 100
 **進階**
 
 - <input type="checkbox" >  [Leetcode-684-Redundant-Connection](../leetcode/Leetcode-684-Redundant-Connection)
+
+---
+
+## `Heap`
+
+**入門**
+
+**進階**
+
+- <input type="checkbox" >  [Leetcode-855-Exam-Room](../leetcode/Leetcode-855-Exam-Room)
 
 ---
 
