@@ -2933,7 +2933,7 @@ treenode3 --&gt;|3-1|treenode3.3
     <title>Leetcode 快速複習的題目</title>
     <url>/posts/Leetcode-%E5%BF%AB%E9%80%9F%E8%A4%87%E7%BF%92%E7%9A%84%E9%A1%8C%E7%9B%AE/</url>
     <content><![CDATA[<p>個人刷leetcode地方，不一定每題都為最佳最速解</p>
-<p><code>多為 &#39;Top Interview **150&#39;** &amp; &#39;blink 75&#39; ****的選題，其中同一題目會出現在不同類型，所以會重複</code></p>
+<p><code>多為 &#39;Top Interview 150&#39; &amp; &#39;blink 75&#39; 的選題，其中同一題目會出現在不同類型，所以會重複</code></p>
 <p><code>下方勾勾完全沒作用，單純複習時方便，但重新整理或離開就刷新</code></p>
 <h1 id="演算法"><a href="#演算法" class="headerlink" title="演算法"></a><strong>演算法</strong></h1><h2 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a><code>Binary Search</code></h2><p><strong>入門</strong></p>
 <ul>
