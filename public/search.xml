@@ -3499,4 +3499,97 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Queue</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode#2924. Find Champion II</title>
+    <url>/posts/leetcodePlus/Leetcode-2924-Find-Champion-II/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>There are <code>n</code> teams numbered from <code>0</code> to <code>n - 1</code> in a tournament; each team is also a node in a <strong>DAG</strong>.</p>
+<p>You are given the integer <code>n</code> and a <strong>0-indexed</strong> 2D integer array <code>edges</code> of length <code>m</code> representing the <strong>DAG</strong>, where <code>edges[i] = [ui, vi]</code> indicates that there is a directed edge from team <code>ui</code> to team <code>vi</code> in the graph.</p>
+<p>A directed edge from <code>a</code> to <code>b</code> in the graph means that team <code>a</code> is <strong>stronger</strong> than team <code>b</code> and team <code>b</code> is <strong>weaker</strong> than team <code>a</code>.</p>
+<p>Team <code>a</code> will be the <strong>champion</strong> of the tournament if there is no team <code>b</code> that is <strong>stronger</strong> than team <code>a</code>.</p>
+<p>Return <em>the team that will be the <strong>champion</strong> of the tournament if there is a <strong>unique</strong> champion, otherwise, return</em> <code>-1</code><em>.</em></p>
+<p><strong>Notes</strong></p>
+<ul>
+<li>A <strong>cycle</strong> is a series of nodes <code>a1, a2, ..., an, an+1</code> such that node <code>a1</code> is the same node as node <code>an+1</code>, the nodes <code>a1, a2, ..., an</code> are distinct, and there is a directed edge from the node <code>ai</code> to node <code>ai+1</code> for every <code>i</code> in the range <code>[1, n]</code>.</li>
+<li>A <strong>DAG</strong> is a directed graph that does not have any <strong>cycle</strong>.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2023/10/19/graph-3.png"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2023/10/19/graph-3.png">https://assets.leetcode.com/uploads/2023/10/19/graph-3.png</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 3, edges = [[0,1],[1,2]]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation:Team 1 is weaker than team 0. Team 2 is weaker than team 1. So the champion is team 0.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2023/10/19/graph-4.png"></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2023/10/19/graph-4.png">https://assets.leetcode.com/uploads/2023/10/19/graph-4.png</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: n = 4, edges = [[0,2],[1,3],[1,2]]</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: Team 2 is weaker than team 0 and team 1. Team 3 is weaker than team 1. But team 1 and team 0 are not weaker than any other teams. So the answer is -1.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 100</code></li>
+<li><code>m == edges.length</code></li>
+<li><code>0 &lt;= m &lt;= n * (n - 1) / 2</code></li>
+<li><code>edges[i].length == 2</code></li>
+<li><code>0 &lt;= edge[i][j] &lt;= n - 1</code></li>
+<li><code>edges[i][0] != edges[i][1]</code></li>
+<li>The input is generated such that if team <code>a</code> is stronger than team <code>b</code>, team <code>b</code> is not stronger than team <code>a</code>.</li>
+<li>The input is generated such that if team <code>a</code> is stronger than team <code>b</code> and team <code>b</code> is stronger than team <code>c</code>, then team <code>a</code> is stronger than team <code>c</code>.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h2 id="法1"><a href="#法1" class="headerlink" title="法1"></a><code>法1</code></h2><p>用union find 的方法，但不一樣的是 並不是每一段都會連接</p>
+<p>這題是為了找有最前面的頭 </p>
+<p>所以當已經輸過的人輸多少次都無關，需要的是前面贏過的人更新到新的冠軍</p>
+<p>當有人多個都沒有輸過的人，find( u ) ≠ find( v )  就 return -1</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findChampion</span>(<span class="params">self, n: <span class="built_in">int</span>, edges: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">				<span class="comment"># 每個一開始都視為自己是冠軍</span></span><br><span class="line">        parent = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">u</span>):</span><br><span class="line">            <span class="keyword">if</span> parent[u] == u :</span><br><span class="line">                <span class="keyword">return</span> u</span><br><span class="line">            </span><br><span class="line">            parent[u] = find(parent[u])</span><br><span class="line">            <span class="keyword">return</span> parent[u]</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">union</span>(<span class="params">u,v</span>):</span><br><span class="line">            pu = find(u)</span><br><span class="line">            pv = find(v)</span><br><span class="line">            <span class="keyword">if</span> pu != pv:</span><br><span class="line">                parent[pv] = pu</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> u,v <span class="keyword">in</span> edges:</span><br><span class="line">            pu = find(u)</span><br><span class="line">            pv = find(v)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 重點!!! 加上這個判斷式，讓子節點不更新</span></span><br><span class="line">            <span class="keyword">if</span> pv != v:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            union(pu,pv)</span><br><span class="line"></span><br><span class="line">        p = find(<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">print</span>(parent)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            <span class="keyword">if</span> find(i) != p:</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> p</span><br></pre></td></tr></table></figure>
+
+<p>由於find 會變成一個找下一個，所以這方法會很慢</p>
+<h2 id="法2"><a href="#法2" class="headerlink" title="法2"></a><code>法2</code></h2><p>這題重點為觀察是否有人沒輸過</p>
+<p>沒輸過的就是冠軍 → 但是可能有多個沒輸過的人，導致還找不到</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># not optimization ，its the idea</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findChampion</span>(<span class="params">self, n: <span class="built_in">int</span>, edges: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        loser = [<span class="number">0</span>]*n</span><br><span class="line">        <span class="keyword">for</span> edge <span class="keyword">in</span> edges:</span><br><span class="line">            loser[ edge[<span class="number">1</span>] ] += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> loser[ i ] == <span class="number">0</span>:</span><br><span class="line">                count += <span class="number">1</span></span><br><span class="line">                res = i</span><br><span class="line">            <span class="keyword">if</span> count &gt;= <span class="number">2</span> :</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>Time complexity: O(n)</p>
+<p>Space complexity: O(n)</p>
+<p>優化</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findChampion</span>(<span class="params">self, n: <span class="built_in">int</span>, edges: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        losers = <span class="built_in">set</span>(<span class="built_in">range</span>(n))  </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> edge <span class="keyword">in</span> edges:</span><br><span class="line">            loser = edge[<span class="number">1</span>]</span><br><span class="line">            losers.discard(loser)  </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(losers) == <span class="number">1</span>:</span><br><span class="line">            champion = losers.pop()</span><br><span class="line">            <span class="keyword">return</span> champion</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Union Find</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#2923. Find Champion I</title>
+    <url>/posts/leetcodePlus/Leetcode-2923-Find-Champion-I/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>There are <code>n</code> teams numbered from <code>0</code> to <code>n - 1</code> in a tournament.</p>
+<p>Given a <strong>0-indexed</strong> 2D boolean matrix <code>grid</code> of size <code>n * n</code>. For all <code>i, j</code> that <code>0 &lt;= i, j &lt;= n - 1</code> and <code>i != j</code> team <code>i</code> is <strong>stronger</strong> than team <code>j</code> if <code>grid[i][j] == 1</code>, otherwise, team <code>j</code> is <strong>stronger</strong> than team <code>i</code>.</p>
+<p>Team <code>a</code> will be the <strong>champion</strong> of the tournament if there is no team <code>b</code> that is stronger than team <code>a</code>.</p>
+<p>Return <em>the team that will be the champion of the tournament.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: grid = [[0,1],[0,0]]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: There are two teams in this tournament.</span><br><span class="line">grid[0][1] == 1 means that team 0 is stronger than team 1. So team 0 will be the champion.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: grid = [[0,0,1],[1,0,1],[0,0,0]]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: There are three teams in this tournament.</span><br><span class="line">grid[1][0] == 1 means that team 1 is stronger than team 0.</span><br><span class="line">grid[1][2] == 1 means that team 1 is stronger than team 2.</span><br><span class="line">So team 1 will be the champion.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == grid.length</code></li>
+<li><code>n == grid[i].length</code></li>
+<li><code>2 &lt;= n &lt;= 100</code></li>
+<li><code>grid[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
+<li>For all <code>i, j</code> that <code>i != j</code>, <code>grid[i][j] != grid[j][i]</code>.</li>
+<li>The input is generated such that if team <code>a</code> is stronger than team <code>b</code> and team <code>b</code> is stronger than team <code>c</code>, then team <code>a</code> is stronger than team <code>c</code>.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>單純看哪一隊強過所有其他隊伍</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findChampion</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(grid)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>( grid[i] ) == n-<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> i</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+      </tags>
+  </entry>
 </search>
