@@ -22,9 +22,9 @@ Error: ENOENT: no such file or directory, scandir
 
 *結論 版本太高
 
-![Untitled](/img/202401/20240321_1.png)
+![Untitled](../img/202403/20240321_1.png)
 
-![Untitled](/img/202401/20240321_2.png)
+![Untitled](../img/202403/20240321_2.png)
 
 後面用的nodejs 版本是 20.11.1
 
