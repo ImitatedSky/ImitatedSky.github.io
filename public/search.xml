@@ -3624,4 +3624,22 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>pyautogui</tag>
       </tags>
   </entry>
+  <entry>
+    <title>github 不能推的其中一種狀況 甚至雲端是空的</title>
+    <url>/posts/github-%E4%B8%8D%E8%83%BD%E6%8E%A8%E7%9A%84%E5%85%B6%E4%B8%AD%E4%B8%80%E7%A8%AE%E7%8B%80%E6%B3%81-%E7%94%9A%E8%87%B3%E9%9B%B2%E7%AB%AF%E6%98%AF%E7%A9%BA%E7%9A%84/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">To https://github.com/name/resp.git</span><br><span class="line"> ! [rejected]        main -&gt; main (non-fast-forward)</span><br><span class="line">error: failed to push some refs to <span class="string">&#x27;https://github.com/name/resp.git&#x27;</span></span><br><span class="line">hint: Updates were rejected because the tip of your current branch is behind</span><br><span class="line">hint: its remote counterpart. Integrate the remote changes (e.g.</span><br><span class="line">hint: <span class="string">&#x27;git pull ...&#x27;</span>) before pushing again.</span><br><span class="line">hint: See the <span class="string">&#x27;Note about fast-forwards&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;git push --help&#x27;</span> <span class="keyword">for</span> details.</span><br></pre></td></tr></table></figure>
+
+<p>若是有東西 可以先pull下來，因為可能本機是舊檔</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+
+<p>再</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<h2 id="再不行-甚至雲端是空的"><a href="#再不行-甚至雲端是空的" class="headerlink" title="再不行 甚至雲端是空的"></a><code>再不行 甚至雲端是空的</code></h2><p>直接強推吧(不推薦)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -f origin main</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>git</tag>
+        <tag>code</tag>
+      </tags>
+  </entry>
 </search>
