@@ -1,8 +1,9 @@
 ---
 title: github 不能推的其中一種狀況 甚至雲端是空的
 tags:
-  - [git]
-  - code
+  - [Git]
+  - Code
+  - Bug
 cover: /img/cover/cover02.jpg
 date: 2024-03-27 16:15:02
 ---
