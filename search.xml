@@ -208,6 +208,7 @@
 <p>結果很單純是 文件前面的config沒有寫好</p>
 <p><img src="/../img/202403/20240324_3.jpeg"></p>
 <p>這邊是tags -[] 這個的問題</p>
+<p>又或者忘記存檔</p>
 ]]></content>
       <tags>
         <tag>Bug</tag>
@@ -3665,9 +3666,19 @@ treenode3 --&gt;|3-1|treenode3.3
   <entry>
     <title>coding 前python快速複習公式</title>
     <url>/posts/coding-%E5%89%8Dpython%E5%BF%AB%E9%80%9F%E8%A4%87%E7%BF%92%E5%85%AC%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="一些公式"><a href="#一些公式" class="headerlink" title="一些公式"></a>一些公式</h2><h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><p>所有使用公式進行排列的<strong>時間複雜度 都是 O(nlogn)</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sorted_numbers = <span class="built_in">sorted</span>(numbers)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 逆序排序</span></span><br><span class="line">sorted_numbers_desc = <span class="built_in">sorted</span>(numbers, reverse=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#對原列表進行</span></span><br><span class="line">numbers = [<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">numbers.sort()</span><br><span class="line"><span class="built_in">print</span>(numbers)  <span class="comment"># 輸出: [1, 2, 5, 5, 6, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate"></a>enumerate</h3><p>使用 <code>enumerate()</code> 獲取索引和值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fruits = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;cherry&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index, fruit <span class="keyword">in</span> <span class="built_in">enumerate</span>(fruits):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Index <span class="subst">&#123;index&#125;</span> is <span class="subst">&#123;fruit&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="comment"># 輸出:</span></span><br><span class="line">    <span class="comment"># Index 0 is apple</span></span><br><span class="line">    <span class="comment"># Index 1 is banana</span></span><br><span class="line">    <span class="comment"># Index 2 is cherry</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><p>使用 <code>zip()</code> 合併列表</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">names = [<span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Charlie&quot;</span>]</span><br><span class="line">ages = [<span class="number">25</span>, <span class="number">30</span>, <span class="number">35</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name, age <span class="keyword">in</span> <span class="built_in">zip</span>(names, ages):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;name&#125;</span> is <span class="subst">&#123;age&#125;</span> years old&quot;</span>)</span><br><span class="line">    <span class="comment"># 輸出:</span></span><br><span class="line">    <span class="comment"># Alice is 25 years old</span></span><br><span class="line">    <span class="comment"># Bob is 30 years old</span></span><br><span class="line">    <span class="comment"># Charlie is 35 years old</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="hashmap"><a href="#hashmap" class="headerlink" title="hashmap"></a>hashmap</h2><p>其實python 要建立一個 hashmap 利用字典就可以</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 建立一個空的字典</span></span><br><span class="line">hashmap = &#123;&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
-        <tag></tag>
+        <tag>python</tag>
       </tags>
   </entry>
 </search>
