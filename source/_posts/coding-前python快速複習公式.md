@@ -13,7 +13,7 @@ linknode
 
 full binary tree  v.s. complete binary tree
 
-## 一些公式
+## 一些公式/函數
 
 ### sort
 
@@ -76,6 +76,76 @@ numbers = [10, 20, 30, 40, 50, 30]
 # 移除第一次出現的30
 numbers.remove(30)
 print(numbers)  # 輸出: [10, 20, 40, 50, 30]
+
+```
+
+### len
+
+`len()` 函數用來獲取序列（如列表、字典、字符串等）的長度。
+
+```python
+# 列表
+numbers = [10, 20, 30, 40, 50]
+print(len(numbers))  # 輸出: 5
+
+# 字符串
+text = "hello"
+print(len(text))  # 輸出: 5
+
+# 字典
+person = {"name": "Alice", "age": 25, "city": "New York"}
+print(len(person))  # 輸出: 3
+
+```
+
+### set
+
+列表轉換為集合
+
+```python
+# 原始列表
+numbers = [1, 2, 2, 3, 4, 4, 5]
+
+# 將列表轉換為集合
+set_numbers= set(numbers)
+
+print(set_numbers)  # 輸出: {1, 2, 3, 4, 5}
+
+```
+
+```python
+# 兩個列表
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+
+# 將列表轉換為集合
+set1 = set(list1)
+set2 = set(list2)
+
+# 聯集
+union_set = set1.union(set2)
+print(union_set)  # 輸出: {1, 2, 3, 4, 5, 6, 7, 8}
+
+# 交集
+intersection_set = set1.intersection(set2)
+print(intersection_set)  # 輸出: {4, 5}
+
+# 差集
+difference_set = set1.difference(set2)
+print(difference_set)  # 輸出: {1, 2, 3}
+
+```
+
+集合轉換回列表
+
+```python
+# 集合
+set_numbers = {1, 2, 3, 4, 5}
+
+# 將集合轉換回列表
+numbers_list = list(set_numbers)
+
+print(numbers_list)  # 輸出: [1, 2, 3, 4, 5]
 
 ```
 
