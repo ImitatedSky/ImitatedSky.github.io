@@ -5,6 +5,13 @@ tags:
 cover: /img/cover/cover02.jpg
 date: 2024-06-05 19:42:44
 ---
+linknode
+
+好處 插入只要O(1)
+
+壞處 訪問要O(n)
+
+full binary tree  v.s. complete binary tree
 
 ## 一些公式
 
@@ -22,6 +29,54 @@ sorted_numbers_desc = sorted(numbers, reverse=True)
 numbers = [5, 2, 9, 1, 5, 6]
 numbers.sort()
 print(numbers)  # 輸出: [1, 2, 5, 5, 6, 9]
+```
+
+### pop
+
+`pop()` 方法從列表中移除並返回指定位置的元素，如果不指定索引，則默認移除並返回列表的最後一個元素。
+
+```python
+person = {"name": "Alice", "age": 25, "city": "New York"}
+
+# 移除並返回鍵 "age" 對應的值
+age = person.pop("age")
+print(age)    # 輸出: 25
+print(person) # 輸出: {'name': 'Alice', 'city': 'New York'}
+
+# 如果鍵不存在，使用默認值
+city = person.pop("city", "Unknown")
+print(city)   # 輸出: New York
+
+# 嘗試移除不存在的鍵，使用默認值
+country = person.pop("country", "Unknown")
+print(country) # 輸出: Unknown
+
+```
+
+### insert
+
+`insert()` 方法在指定位置插入元素
+
+```python
+numbers = [10, 20, 30, 40, 50]
+
+# 在索引2處插入25
+numbers.insert(2, 25)
+print(numbers)  # 輸出: [10, 20, 25, 30, 40, 50]
+
+```
+
+### remove
+
+`remove()` 方法移除列表中第一次出現的指定元素。
+
+```python
+numbers = [10, 20, 30, 40, 50, 30]
+
+# 移除第一次出現的30
+numbers.remove(30)
+print(numbers)  # 輸出: [10, 20, 40, 50, 30]
+
 ```
 
 ### enumerate
