@@ -76,7 +76,7 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 # `Solve`
 
-[Leetcode-26-Remove-Duplicates-from-Sorted-Array](../leetcode/Leetcode-26-Remove-Duplicates-from-Sorted-Array)
+[Leetcode-26-Remove-Duplicates-from-Sorted-Array](../Leetcode-26-Remove-Duplicates-from-Sorted-Array)
 
 two point 重點
 
