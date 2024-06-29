@@ -4,7 +4,7 @@ tags:
   - [python]
 cover: /img/cover/cover02.jpg
 date: 2024-06-05 19:42:44
-sticky: 100
+sticky: 99
 ---
 linknode
 

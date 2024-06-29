@@ -11,6 +11,8 @@ sticky: 100
 
 `多為 'Top Interview 150' & 'blink 75' 的選題，其中同一題目會出現在不同類型，所以會重複`
 
+`多為 'Top Interview **150'** & 'blink 75' ****的選題，其中同一題目會出現在不同類型，所以會重複`
+
 `下方勾勾完全沒作用，單純複習時方便，但重新整理或離開就刷新`
 
 # **演算法**
@@ -40,6 +42,7 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-79-Word-Search](../leetcode/Leetcode-79-Word-Search)
 - <input type="checkbox" >  [Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node](../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node)
 - <input type="checkbox" >  [Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II](../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II)
+- <input type="checkbox" >  [Leetcode-124-Binary-Tree-Maximum-Path-Sum](../leetcode/Leetcode-124-Binary-Tree-Maximum-Path-Sum)
 - <input type="checkbox" >  [Leetcode-684-Redundant-Connection](../leetcode/Leetcode-684-Redundant-Connection)
 - <input type="checkbox" >  [Leetcode-909-Snakes-and-Ladders](../leetcode/Leetcode-909-Snakes-and-Ladders)
 
@@ -61,6 +64,8 @@ sticky: 100
 
 **入門**
 
+- <input type="checkbox" >  [Leetcode-104-Maximum-Depth-of-Binary-Tree](../leetcode/Leetcode-104-Maximum-Depth-of-Binary-Tree)
+
 **進階**
 
 - <input type="checkbox" >  [Leetcode-23-Merge-k-Sorted-Lists](../leetcode/Leetcode-23-Merge-k-Sorted-Lists)
@@ -77,7 +82,6 @@ sticky: 100
 
 - <input type="checkbox" >  [Leetcode-45-Jump-Game-II](../leetcode/Leetcode-45-Jump-Game-II)
 - <input type="checkbox" >  [Leetcode-70-Climbing-Stairs](../leetcode/Leetcode-70-Climbing-Stairs)
-- <input type="checkbox" >  [Leetcode-121-Best-Time-to-Buy-and-Sell-Stock](../leetcode/Leetcode-121-Best-Time-to-Buy-and-Sell-Stock)
 - <input type="checkbox" >  [Leetcode-198-House-Robber](../leetcode/Leetcode-198-House-Robber)
 - <input type="checkbox" >  [Leetcode-392-Is-Subsequence](../leetcode/Leetcode-392-Is-Subsequence)
 
@@ -89,6 +93,7 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-120-Triangle](../leetcode/Leetcode-120-Triangle)
 - <input type="checkbox" >  [Leetcode-139-Word-Break](../leetcode/Leetcode-139-Word-Break)
 - <input type="checkbox" >  [Leetcode-221-Maximal-Square](../leetcode/Leetcode-221-Maximal-Square)
+- <input type="checkbox" >  [Leetcode-322-Coin-Change](../leetcode/Leetcode-322-Coin-Change)
 
 ---
 
@@ -98,11 +103,13 @@ sticky: 100
 
 - <input type="checkbox" >  [Leetcode-45-Jump-Game-II](../leetcode/Leetcode-45-Jump-Game-II)
 - <input type="checkbox" >  [Leetcode-53-Maximum-Subarray](../leetcode/Leetcode-53-Maximum-Subarray)
+- <input type="checkbox" >  [Leetcode-121-Best-Time-to-Buy-and-Sell-Stock](../leetcode/Leetcode-121-Best-Time-to-Buy-and-Sell-Stock)
 - <input type="checkbox" >  [Leetcode-435-Non-overlapping-Intervals](../leetcode/Leetcode-435-Non-overlapping-Intervals)
 
 **進階**
 
 - <input type="checkbox" >  [Leetcode-55-Jump-Game](../leetcode/Leetcode-55-Jump-Game)
+- <input type="checkbox" >  [Leetcode-122-Best-Time-to-Buy-and-Sell-Stock-II](../leetcode/Leetcode-122-Best-Time-to-Buy-and-Sell-Stock-II)
 - <input type="checkbox" >  [Leetcode-135-Candy](../leetcode/Leetcode-135-Candy)
 
 ---
@@ -119,6 +126,22 @@ sticky: 100
 
 ## `Two Pointer`
 
+two point 重點(同向)
+
+0~i : 已經處理過`要保留的`
+
+i~j : 已經處理過 `不需要保留`
+
+j~ : `未見過得` 
+
+two point 重點(反向)
+
+0~i : 已經處理過`要保留的`
+
+i~j : 未處理
+
+j~ : 已經處理過`要保留的`
+
 **入門**
 
 - <input type="checkbox" >  [Leetcode-26-Remove-Duplicates-from-Sorted-Array](../leetcode/Leetcode-26-Remove-Duplicates-from-Sorted-Array)
@@ -128,6 +151,9 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-202-Happy-Number](../leetcode/Leetcode-202-Happy-Number)
 
 **進階**
+
+- <input type="checkbox" >  [Leetcode-80-Remove-Duplicates-from-Sorted-Array-II](../leetcode/Leetcode-80-Remove-Duplicates-from-Sorted-Array-II)
+- <input type="checkbox" >  [Leetcode-189-Rotate-Arra](../leetcode/Leetcode-189-Rotate-Arra)
 
 ---
 
@@ -162,10 +188,12 @@ sticky: 100
 
 - <input type="checkbox" >  [Leetcode-76-Minimum-Window-Substring](../leetcode/Leetcode-76-Minimum-Window-Substring)
 - <input type="checkbox" >  [Leetcode-149-Max-Points-on-a-Line](../leetcode/Leetcode-149-Max-Points-on-a-Line)
+- <input type="checkbox" >  [Leetcode-169-Majority-Element](../leetcode/Leetcode-169-Majority-Element)
 
 **進階**
 
 - <input type="checkbox" >  [Leetcode-146-LRU-Cache](../leetcode/Leetcode-146-LRU-Cache)
+- <input type="checkbox" >  [Leetcode-380-Insert-Delete-GetRandom-O-1](../leetcode/Leetcode-380-Insert-Delete-GetRandom-O-1)
 
 ---
 
@@ -223,6 +251,8 @@ sticky: 100
 
 **進階**
 
+- <input type="checkbox" >  [Leetcode-274-H-Index](../leetcode/LLeetcode-274-H-Index)
+
 ---
 
 ## `Bit Manipulation`
@@ -241,6 +271,8 @@ sticky: 100
 ## `Tree`
 
 **入門**
+
+- <input type="checkbox" >  [Leetcode-104-Maximum-Depth-of-Binary-Tree](../leetcode/Leetcode-104-Maximum-Depth-of-Binary-Tree)
 
 **進階**
 

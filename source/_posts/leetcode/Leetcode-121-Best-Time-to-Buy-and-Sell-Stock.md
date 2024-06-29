@@ -68,14 +68,14 @@ O (n) time and O(1) space
 ```python
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-      min_p = prices[0]
-      profit = 0
+        _min = prices[0]
+        maxProfit = 0
 
-      for i in range(len(prices)):
-          min_p = min(min_p , prices[i])
-          profit = max(profit , prices[i] - min_p)
-      
-      return profit
+        for i in range(len(prices)):
+            _min = min(_min , prices[i])
+            if prices[i]- _min   > maxProfit:
+                maxProfit = prices[i]- _min
+        return maxProfit
 ```
 
 O (n) time and O(1) space

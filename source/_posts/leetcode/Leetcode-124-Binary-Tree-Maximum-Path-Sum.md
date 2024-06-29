@@ -5,7 +5,7 @@ tags:
 - [Python]
 
 - [hard]
-- 施工中
+
 
 - [💡]
 
@@ -69,24 +69,32 @@ Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 
 #         self.right = right
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        if not root :
+            return 0
+        res = root.val
 
-        res = -float("inf")
-
-        def dps(node):
+        def dfs(node):
             nonlocal res
-
             if not node:
                 return 0
+            
+            max_left = dfs(node.left) 
+            max_right = dfs(node.right)
+            if max_left + max_right + node.val > res:
+                res = max_left + max_right + node.val
 
-            left = dps(node.left)
-            right = dps(node.right)
+            
+            return max( 0 , max_left + node.val , max_right + node.val )
 
-            left_max = max(0,left)
-            right_max = max(0,right)
-            res = max( res , left_max + right_max + node.val   )
+        dfs(root)
 
-            return max( node.val + left , node.val + right , node.val )
-
-        dps(root)
         return res
 ```
