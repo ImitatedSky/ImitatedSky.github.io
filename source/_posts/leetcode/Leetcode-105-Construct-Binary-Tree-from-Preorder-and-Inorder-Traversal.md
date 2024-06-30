@@ -73,26 +73,28 @@ Output: [-1]
 #         self.left = left
 #         self.right = right
 class Solution:
-  def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-    def build(preo,ino):
-			# 當preo 或 ino 為空時，返回None
-      if not preo or not ino :
-        return None
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if not preorder or not inorder:
+            return None
+        root = TreeNode(preorder[0])
+        
+        n = 0
 
-      root = TreeNode(preo[0])
-      root_index = 0
-      
-      for i in range(len(ino)):
-        if ino[i] == root.val:
-          root_index = i
-          break
-      
-      root.left = build( preo[1:root_index+1] , ino[0:root_index])
-      root.right = build( preo[root_index+1:len(preo)] , ino[root_index+1:len(ino)])
+        for i in range(len(inorder)):
+            if inorder[i] == preorder[0]:
+                n = i
+                break
+        root_l_pre = preorder[1:n+1]
+        root_r_pre = preorder[n+1:]
+        root_l_in = inorder[:n]
+        root_r_in = inorder[ n+1 : ]
+        
+        
+        root.left = self.buildTree(root_l_pre,root_l_in)
+        root.right = self.buildTree(root_r_pre,root_r_in)
 
-      return(root)
+        return root
 
-    return build(preorder,inorder)
 ```
 
 ### 整理過後

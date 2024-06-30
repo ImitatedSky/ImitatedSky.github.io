@@ -54,6 +54,24 @@ print(country) # 輸出: Unknown
 
 ```
 
+### append
+
+`append()` 方法在列表的末尾添加一個元素。
+
+```python
+numbers = [10, 20, 30]
+
+# 在列表末尾添加元素40
+numbers.append(40)
+print(numbers)  # 輸出: [10, 20, 30, 40]
+
+# 添加字符串
+fruits = ["apple", "banana"]
+fruits.append("cherry")
+print(fruits)  # 輸出: ["apple", "banana", "cherry"]
+
+```
+
 ### insert
 
 `insert()` 方法在指定位置插入元素
@@ -165,6 +183,19 @@ for index, fruit in enumerate(fruits):
     # Index 2 is cherry
 ```
 
+### index
+
+使用`index()` 獲取第一個的索引
+
+```python
+
+numbers = [10, 20, 30, 20, 40]
+
+index_of_20 = numbers.index(20)
+
+print(index_of_20)  # 輸出: 1
+```
+
 ### zip
 
 使用 `zip()` 合併列表
@@ -188,4 +219,78 @@ for name, age in zip(names, ages):
 ```python
 # 建立一個空的字典
 hashmap = {}
+```
+
+### defaultdict
+
+`defaultdict` 是 `collections` 模組中的一個子類，用於當鍵不存在時提供默認值。
+
+```python
+from collections import defaultdict
+
+# 創建一個默認值為 list 的 defaultdict
+dd = defaultdict(list)
+dd['a'].append(1)
+dd['b'].append(2)
+print(dd)  # 輸出: defaultdict(<class 'list'>, {'a': [1], 'b': [2]})
+
+# 創建一個默認值為 int 的 defaultdict
+dd = defaultdict(int)
+dd['a'] += 1
+dd['b'] += 2
+print(dd)  # 輸出: defaultdict(<class 'int'>, {'a': 1, 'b': 2})
+
+```
+
+### heapq
+
+`heapq` 模組提供了堆隊列算法，也稱為優先隊列算法。
+
+```python
+import heapq
+
+# 創建一個空堆
+heap = []
+
+# 向堆中添加元素
+heapq.heappush(heap, 3)
+heapq.heappush(heap, 1)
+heapq.heappush(heap, 2)
+print(heap)  # 輸出: [1, 3, 2]
+
+# 從堆中取出最小元素
+smallest = heapq.heappop(heap)
+print(smallest)  # 輸出: 1
+print(heap)  # 輸出: [2, 3]
+
+```
+
+```python
+a = 10
+b = 5
+c = 3
+
+# 加法
+add_result = a + b
+print(f"{a} + {b} = {add_result}")  # 輸出: 10 + 5 = 15
+
+# 減法
+sub_result = a - b
+print(f"{a} - {b} = {sub_result}")  # 輸出: 10 - 5 = 5
+
+# 乘法
+mul_result = a * b
+print(f"{a} * {b} = {mul_result}")  # 輸出: 10 * 5 = 50
+
+# 除法
+div_result = a / b
+print(f"{a} / {b} = {div_result}")  # 輸出: 10 / 5 = 2.0
+
+# 整數除法
+int_div_result = a // c
+print(f"{a} // {c} = {int_div_result}")  # 輸出: 10 // 3 = 3
+
+# 取餘數
+mod_result = a % c
+print(f"{a} % {c} = {mod_result}")  # 輸出: 10 % 3 = 1
 ```
