@@ -80,3 +80,17 @@ class Solution:
         
         return invert(root)
 ```
+
+```python
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+
+        if not root:
+            return root
+        
+        left = root.left
+        right = root.right
+        root.left , root.right = self.invertTree(root.right) ,self.invertTree(root.left)
+        
+        return root
+```
