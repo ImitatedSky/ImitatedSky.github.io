@@ -1937,7 +1937,9 @@
 <li>The number of nodes in the tree is in the range <code>[0, 100]</code>.</li>
 <li><code>100 &lt;= Node.val &lt;= 100</code></li>
 </ul>
-<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">invertTree</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">invert</span>(<span class="params">node</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            node.left , node.right = node.right , node.left  <span class="comment">#交換</span></span><br><span class="line">						<span class="comment">#如果還有就繼續做</span></span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                invert(node.left)</span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                invert(node.right)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> invert(root)</span><br></pre></td></tr></table></figure>]]></content>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">invertTree</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">invert</span>(<span class="params">node</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            node.left , node.right = node.right , node.left  <span class="comment">#交換</span></span><br><span class="line">						<span class="comment">#如果還有就繼續做</span></span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                invert(node.left)</span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                invert(node.right)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> invert(root)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">invertTree</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> root</span><br><span class="line">        </span><br><span class="line">        left = root.left</span><br><span class="line">        right = root.right</span><br><span class="line">        root.left , root.right = self.invertTree(root.right) ,self.invertTree(root.left)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Leetcode</category>
       </categories>
@@ -4145,6 +4147,54 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Tree</tag>
         <tag>Binary Tree</tag>
         <tag>Binary Search Tree</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#114. Flatten Binary Tree to Linked List</title>
+    <url>/posts/leetcode/Leetcode-114-Flatten-Binary-Tree-to-Linked-List/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given the <code>root</code> of a binary tree, flatten the tree into a “linked list”:</p>
+<ul>
+<li>The “linked list” should use the same <code>TreeNode</code> class where the <code>right</code> child pointer points to the next node in the list and the <code>left</code> child pointer is always <code>null</code>.</li>
+<li>The “linked list” should be in the same order as a <a href="https://en.wikipedia.org/wiki/Tree_traversal#Pre-order,_NLR"><strong>pre-order traversal</strong></a> of the binary tree.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<p>!<a href="https://assets.leetcode.com/uploads/2021/01/14/flaten.jpg">https://assets.leetcode.com/uploads/2021/01/14/flaten.jpg</a></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/14/flaten.jpg"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: root = [1,2,5,3,4,null,6]</span><br><span class="line">Output: [1,null,2,null,3,null,4,null,5,null,6]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: root = []</span><br><span class="line">Output: []</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: root = [0]</span><br><span class="line">Output: [0]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the tree is in the range <code>[0, 2000]</code>.</li>
+<li><code>100 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+<p><strong>Follow up:</strong></p>
+<p>Can you flatten the tree in-place (with</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">O(1)</span><br></pre></td></tr></table></figure>
+
+<p>extra space)?</p>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><p>前幾次試錯直接對<a href="https://symbols.wisdom-life.in/zh-TW/emoticon/shy"><strong>(,,・ω・,,)</strong></a></p>
+<p>想法沒錯後，直接DFS</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">flatten</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root :</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        left = root.left</span><br><span class="line">        right = root.right</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">findlast</span>(<span class="params">node</span>):</span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                node = findlast(node.right)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        root.left = <span class="literal">None</span> <span class="comment">#記得把左清空</span></span><br><span class="line">        root.right = self.flatten(left)</span><br><span class="line">        findlast(root).right = self.flatten(right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>medium</tag>
+        <tag>💡</tag>
+        <tag>Tree</tag>
+        <tag>Depth-First Search</tag>
+        <tag>Binary Tree</tag>
+        <tag>Linked List</tag>
+        <tag>Stack</tag>
       </tags>
   </entry>
 </search>
