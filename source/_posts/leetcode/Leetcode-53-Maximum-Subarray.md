@@ -15,7 +15,6 @@ cover: /img/cover/leetcode.jpg
 categories: Leetcode
 date: 2023-09-15 16:08:17
 ---
-
 # `Problem`
 
 Given an integer array `nums`, find the
@@ -120,7 +119,7 @@ Time Complexity: O(N)
 
 Space Complexity:O(1)
 
-## `法2`
+## `法2` 看到奇怪的方法，但是可以順便練習 D&C
 
 題目說除了O(n) 還有利用**divide and conquer 的解，關鍵就是`拆分→計算→合併`**
 
@@ -153,14 +152,12 @@ class Solution:
 
             # 往左邊慢慢加
             # 計算左半部分的最大子list和
-            # 包含mid
             for i in range(mid, low - 1, -1):
                 max_left += nums[i]
                 if max_left > left_sum:
                     left_sum = max_left
             # 往右邊慢慢加
             # 計算右半部分的最大子list和
-            # 不包含mid
             for i in range(mid + 1, high + 1):
                 max_right += nums[i]
                 if max_right > right_sum:
