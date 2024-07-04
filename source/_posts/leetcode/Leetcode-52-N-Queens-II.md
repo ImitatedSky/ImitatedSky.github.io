@@ -101,6 +101,42 @@ class Solution:
 ```
 
 ```python
+class Solution:
+    def totalNQueens(self, n: int) -> int:
+        chessboard = [[0]*n for i in range(n)]
+        self.res = 0
+
+        def is_valid(r,c):
+            for i in range(n):
+                # 垂直
+                if chessboard[i][c] == "Q"  :
+                    return False
+                # 左上
+                if r - i >=0 and c-i >=0 and chessboard[ r - i ][ c - i  ] == "Q":
+                    return False
+                # 右上
+                if r - i >=0 and c + i< n  and chessboard[ r - i ][ c + i  ] == "Q":
+                    return False
+            return True
+
+        def dfs(r):
+            if r == n:
+                self.res += 1
+                return
+            
+            for c in range(n):
+                if is_valid(r,c) :
+                    chessboard[r][c] = "Q"
+                    dfs(r+1)
+                    chessboard[r][c] = "0"
+        
+        dfs(0)
+
+        return self.res
+```
+
+
+```python
 現在才知道
       if col + (row - r) < n and chessboard[r][col + (row - r)] == 'Q'  :
           return False
