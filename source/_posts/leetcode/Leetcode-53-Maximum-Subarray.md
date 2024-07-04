@@ -15,6 +15,7 @@ cover: /img/cover/leetcode.jpg
 categories: Leetcode
 date: 2023-09-15 16:08:17
 ---
+
 # `Problem`
 
 Given an integer array `nums`, find the
@@ -190,6 +191,14 @@ class Solution:
 
         return findMaxSubArray(nums, 0, len(nums) - 1)
 ```
+
+拆分到最後，每個都會當中心點→
+
+計算往左往右擴，當下為中心最大值→
+
+往上返回， 區間最大 = 子區間最大 →
+
+答案
 
 Time Complexity: O(nlogn)
 

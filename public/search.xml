@@ -18,15 +18,18 @@
 <h2 id="Depth-First-Search-Breadth-First-Search"><a href="#Depth-First-Search-Breadth-First-Search" class="headerlink" title="Depth-First Search  Breadth-First Search"></a><code>Depth-First Search  Breadth-First Search</code></h2><p><strong>入門</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-100-Same-Tree">Leetcode-100-Same-Tree</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-101-Symmetric-Tree">Leetcode-101-Symmetric-Tree</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-226-Invert-Binary-Tree">Leetcode-226-Invert-Binary-Tree</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-530-Minimum-Absolute-Difference-in-BST">Leetcode-530-Minimum-Absolute-Difference-in-BST</a></li>
 </ul>
 <p><strong>進階</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-79-Word-Search">Leetcode-79-Word-Search</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-114-Flatten-Binary-Tree-to-Linked-List">Leetcode-114-Flatten-Binary-Tree-to-Linked-List</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node">Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II">Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-124-Binary-Tree-Maximum-Path-Sum">Leetcode-124-Binary-Tree-Maximum-Path-Sum</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-450-Delete-Node-in-a-BST">Leetcode-450-Delete-Node-in-a-BST</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-684-Redundant-Connection">Leetcode-684-Redundant-Connection</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-909-Snakes-and-Ladders">Leetcode-909-Snakes-and-Ladders</a></li>
 </ul>
@@ -61,6 +64,7 @@
 </ul>
 <p><strong>進階</strong></p>
 <ul>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-53-Maximum-Subarray">Leetcode-53-Maximum-Subarray</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-55-Jump-Game">Leetcode-55-Jump-Game</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-62-Unique-Paths">Leetcode-62-Unique-Paths</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-87-Scramble-String">Leetcode-87-Scramble-String</a></li>
@@ -164,6 +168,7 @@
 <p><strong>進階</strong></p>
 <ul>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-684-Redundant-Connection">Leetcode-684-Redundant-Connection</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-1319-Number-of-Operations-to-Make-Network-Connected">Leetcode-1319-Number-of-Operations-to-Make-Network-Connected</a></li>
 </ul>
 <hr>
 <h2 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a><code>Heap</code></h2><p><strong>入門</strong></p>
@@ -197,8 +202,10 @@
 </ul>
 <p><strong>進階</strong></p>
 <ul>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-114-Flatten-Binary-Tree-to-Linked-List">Leetcode-114-Flatten-Binary-Tree-to-Linked-List</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node">Leetcode-116-Populating-Next-Right-Pointers-in-Each-Node</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II">Leetcode-117-Populating-Next-Right-Pointers-in-Each-Node-II</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-450-Delete-Node-in-a-BST">Leetcode-450-Delete-Node-in-a-BST</a></li>
 </ul>
 <hr>
 <h2 id="Trie"><a href="#Trie" class="headerlink" title="Trie"></a><code>Trie</code></h2><p><strong>入門</strong></p>
@@ -2443,6 +2450,10 @@
 <p><code>合併</code> Max(左 ,中 ,右)</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 中間往左右計算，找最大</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">maxCrossingSum</span>(<span class="params">nums, low, mid, high</span>):</span><br><span class="line">            left_sum = <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">            right_sum = <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">            max_left = <span class="number">0</span></span><br><span class="line">            max_right = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 往左邊慢慢加</span></span><br><span class="line">            <span class="comment"># 計算左半部分的最大子list和</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(mid, low - <span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                max_left += nums[i]</span><br><span class="line">                <span class="keyword">if</span> max_left &gt; left_sum:</span><br><span class="line">                    left_sum = max_left</span><br><span class="line">            <span class="comment"># 往右邊慢慢加</span></span><br><span class="line">            <span class="comment"># 計算右半部分的最大子list和</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(mid + <span class="number">1</span>, high + <span class="number">1</span>):</span><br><span class="line">                max_right += nums[i]</span><br><span class="line">                <span class="keyword">if</span> max_right &gt; right_sum:</span><br><span class="line">                    right_sum = max_right</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 返回跨越中點的最大子list和</span></span><br><span class="line">            <span class="keyword">return</span> left_sum + right_sum</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 遞迴函数</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">findMaxSubArray</span>(<span class="params">nums, low, high</span>):</span><br><span class="line">            <span class="comment"># 最下層：只有一個元素</span></span><br><span class="line">            <span class="keyword">if</span> low == high:</span><br><span class="line">                <span class="keyword">return</span> nums[low]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 找到中點</span></span><br><span class="line">            mid = (low + high) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 遞迴地找到左半部分和右半部分的最大子list和</span></span><br><span class="line">            left_max = findMaxSubArray(nums, low, mid)</span><br><span class="line">            right_max = findMaxSubArray(nums, mid + <span class="number">1</span>, high)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 找到跨越中點的最大子list和</span></span><br><span class="line">            cross_max = maxCrossingSum(nums, low, mid, high)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 返回三者中的最大值</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(left_max, right_max, cross_max)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> findMaxSubArray(nums, <span class="number">0</span>, <span class="built_in">len</span>(nums) - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
+<p>拆分到最後，每個都會當中心點→</p>
+<p>計算往左往右擴，當下為中心最大值→</p>
+<p>往上返回， 區間最大 &#x3D; 子區間最大 →</p>
+<p>答案</p>
 <p>Time Complexity: O(nlogn)</p>
 <p>Space Complexity:O(logn) #主要來自 遞迴的</p>
 ]]></content>
