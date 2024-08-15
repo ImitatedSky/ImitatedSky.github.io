@@ -9,7 +9,8 @@ import yaml
 # 1. git init
 # 2. git add .
 # 3. git commit -m "123"
-# 4. git push origin master
+# 3.# git remote add origin <倉庫URL>
+# 4. git push origin master # 通常git庫的分支是master
 
 # 讀取設定檔
 with open("_config.yml", "r", encoding="utf-8") as f:
