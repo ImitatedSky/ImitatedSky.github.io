@@ -137,6 +137,8 @@
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-76-Minimum-Window-Substring">Leetcode-76-Minimum-Window-Substring</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-149-Max-Points-on-a-Line">Leetcode-149-Max-Points-on-a-Line</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-169-Majority-Element">Leetcode-169-Majority-Element</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-205-Isomorphic-Strings">Leetcode-205-Isomorphic-Strings</a></li>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-383-Ransom-Note">Leetcode-383-Ransom-Note</a></li>
 </ul>
 <p><strong>進階</strong></p>
 <ul>
@@ -4288,6 +4290,90 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>💡</tag>
         <tag>String</tag>
         <tag>Stack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#205. Isomorphic Strings</title>
+    <url>/posts/leetcode/Leetcode-205-Isomorphic-Strings/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given two strings <code>s</code> and <code>t</code>, <em>determine if they are isomorphic</em>.</p>
+<p>Two strings <code>s</code> and <code>t</code> are isomorphic if the characters in <code>s</code> can be replaced to get <code>t</code>.</p>
+<p>All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.</p>
+<p><strong>Example 1:</strong></p>
+<p><strong>Input:</strong> s &#x3D; “egg”, t &#x3D; “add”</p>
+<p><strong>Output:</strong> true</p>
+<p><strong>Explanation:</strong></p>
+<p>The strings <code>s</code> and <code>t</code> can be made identical by:</p>
+<ul>
+<li>Mapping <code>&#39;e&#39;</code> to <code>&#39;a&#39;</code>.</li>
+<li>Mapping <code>&#39;g&#39;</code> to <code>&#39;d&#39;</code>.</li>
+</ul>
+<p><strong>Example 2:</strong></p>
+<p><strong>Input:</strong> s &#x3D; “foo”, t &#x3D; “bar”</p>
+<p><strong>Output:</strong> false</p>
+<p><strong>Explanation:</strong></p>
+<p>The strings <code>s</code> and <code>t</code> can not be made identical as <code>&#39;o&#39;</code> needs to be mapped to both <code>&#39;a&#39;</code> and <code>&#39;r&#39;</code>.</p>
+<p><strong>Example 3:</strong></p>
+<p><strong>Input:</strong> s &#x3D; “paper”, t &#x3D; “title”</p>
+<p><strong>Output:</strong> true</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 5 * 104</code></li>
+<li><code>t.length == s.length</code></li>
+<li><code>s</code> and <code>t</code> consist of any valid ascii character.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isIsomorphic</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s) != <span class="built_in">len</span>(t):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        st_map = &#123;&#125;</span><br><span class="line">        ts_map = &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="keyword">if</span> s[i] <span class="keyword">not</span> <span class="keyword">in</span> st_map:</span><br><span class="line">                st_map[s[i]] = t[i]</span><br><span class="line">            <span class="keyword">if</span> t[i] <span class="keyword">not</span> <span class="keyword">in</span> ts_map:</span><br><span class="line">                ts_map[t[i]] = s[i]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> st_map[s[i]] != t[i] <span class="keyword">or</span> ts_map[t[i]] != s[i]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="還不錯的"><a href="#還不錯的" class="headerlink" title="還不錯的"></a>還不錯的</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isIsomorphic</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        s_map = []</span><br><span class="line">        t_map = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            s_map.append(s.index(c))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> t:</span><br><span class="line">            t_map.append(t.index(c))</span><br><span class="line">        <span class="keyword">if</span> s_map == t_map:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+        <tag>💡</tag>
+        <tag>Hash Table</tag>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#383. Ransom Note</title>
+    <url>/posts/leetcode/Leetcode-383-Ransom-Note/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given two strings <code>ransomNote</code> and <code>magazine</code>, return <code>true</code> <em>if</em> <code>ransomNote</code> <em>can be constructed by using the letters from</em> <code>magazine</code> <em>and</em> <code>false</code> <em>otherwise</em>.</p>
+<p>Each letter in <code>magazine</code> can only be used once in <code>ransomNote</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: ransomNote = &quot;a&quot;, magazine = &quot;b&quot;</span><br><span class="line">Output: false</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: ransomNote = &quot;aa&quot;, magazine = &quot;ab&quot;</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: ransomNote = &quot;aa&quot;, magazine = &quot;aab&quot;</span><br><span class="line">Output: true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= ransomNote.length, magazine.length &lt;= 105</code></li>
+<li><code>ransomNote</code> and <code>magazine</code> consist of lowercase English letters.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h2 id="解1"><a href="#解1" class="headerlink" title="解1"></a>解1</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote: <span class="built_in">str</span>, magazine: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        r_hashmap = &#123;&#125;</span><br><span class="line">        m_hashmap = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ransomNote)):</span><br><span class="line">            <span class="keyword">if</span> ransomNote[i] <span class="keyword">in</span> r_hashmap:</span><br><span class="line">                r_hashmap[ ransomNote[i]  ] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                r_hashmap[ ransomNote[i]  ] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(magazine)):</span><br><span class="line">            <span class="keyword">if</span> magazine[i] <span class="keyword">in</span> m_hashmap:</span><br><span class="line">                m_hashmap[ magazine[i]  ] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                m_hashmap[ magazine[i]  ] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> r_hashmap:</span><br><span class="line">            <span class="keyword">if</span> a <span class="keyword">not</span> <span class="keyword">in</span> magazine <span class="keyword">or</span> r_hashmap[a] &gt; m_hashmap[a] :</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>把可讀性寫好一點</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote: <span class="built_in">str</span>, magazine: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        r_hashmap = &#123;&#125;</span><br><span class="line">        m_hashmap = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> ransomNote:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> r_hashmap:</span><br><span class="line">                r_hashmap[ c  ] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                r_hashmap[ c  ] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> magazine:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> m_hashmap:</span><br><span class="line">                m_hashmap[ c  ] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                m_hashmap[ c  ] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> r_hashmap:</span><br><span class="line">            <span class="keyword">if</span> a <span class="keyword">not</span> <span class="keyword">in</span> magazine <span class="keyword">or</span> r_hashmap[a] &gt; m_hashmap[a] :</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="優化1"><a href="#優化1" class="headerlink" title="優化1"></a>優化1</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote: <span class="built_in">str</span>, magazine: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        m_hashmap = &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> magazine:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> m_hashmap:</span><br><span class="line">                m_hashmap[ c  ] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                m_hashmap[ c  ] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> ransomNote:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> m_hashmap <span class="keyword">or</span> m_hashmap[c] - <span class="number">1</span> &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">            m_hashmap[c] -= <span class="number">1</span> </span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="看到好的解法"><a href="#看到好的解法" class="headerlink" title="看到好的解法"></a>看到好的解法</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote: <span class="built_in">str</span>, magazine: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(ransomNote):</span><br><span class="line">            <span class="keyword">if</span> magazine.count(c)&lt;ransomNote.count(c):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>easy</tag>
+        <tag>💡</tag>
+        <tag>Hash Table</tag>
+        <tag>String</tag>
+        <tag>Counting</tag>
       </tags>
   </entry>
 </search>

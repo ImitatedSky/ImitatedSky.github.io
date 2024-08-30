@@ -193,6 +193,8 @@ j~ : 已經處理過`要保留的`
 - <input type="checkbox" >  [Leetcode-76-Minimum-Window-Substring](../leetcode/Leetcode-76-Minimum-Window-Substring)
 - <input type="checkbox" >  [Leetcode-149-Max-Points-on-a-Line](../leetcode/Leetcode-149-Max-Points-on-a-Line)
 - <input type="checkbox" >  [Leetcode-169-Majority-Element](../leetcode/Leetcode-169-Majority-Element)
+- <input type="checkbox" >  [Leetcode-205-Isomorphic-Strings](../leetcode/Leetcode-205-Isomorphic-Strings)
+- <input type="checkbox" >  [Leetcode-383-Ransom-Note](../leetcode/Leetcode-383-Ransom-Note)
 
 **進階**
 
