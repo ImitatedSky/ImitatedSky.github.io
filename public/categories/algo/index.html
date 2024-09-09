@@ -1,14 +1,333 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>分類: ~algo | Imisky</title><meta name="author" content="ImitatedSky"><meta name="copyright" content="ImitatedSky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Imisky">
+<meta property="og:url" content="https://pochunyeh.com/categories/algo/index.html">
+<meta property="og:site_name" content="Imisky">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pochunyeh.com/img/MyAvatar.jpg">
+<meta property="article:author" content="ImitatedSky">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pochunyeh.com/img/MyAvatar.jpg"><link rel="shortcut icon" href="/img/MyAvatar.jpg"><link rel="canonical" href="https://pochunyeh.com/categories/algo/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查詢的內容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: ImitatedSky","link":"連結: ","source":"來源: Imisky","info":"著作權歸作者所有。商業轉載請聯絡作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切換為繁體","cht_to_chs":"你已切換為簡體","day_to_night":"你已切換為深色模式","night_to_day":"你已切換為淺色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '分類: ~algo',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-09-09 16:48:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  if theme.category_ui == 'index'
-    include ./includes/mixins/post-ui.pug
-    #recent-posts.recent-posts.category_ui
-      +postUI
-      include includes/pagination.pug
-  else
-    include ./includes/mixins/article-sort.pug
-    #category
-      .article-sort-title= _p('page.category') + ' - ' + page.category
-      +articleSort(page.posts)
-      include includes/pagination.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Imisky" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">載入中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/MyAvatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">103</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 📑All</span></a></li><li><a class="site-page child" href="/categories/Leetcode/"><span> 🧭Leetcode</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> messageboard</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/img/index_img.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Imisky"><img class="site-icon" src="/img/MyAvatar.jpg"/><span class="site-name">Imisky</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 📑All</span></a></li><li><a class="site-page child" href="/categories/Leetcode/"><span> 🧭Leetcode</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> messageboard</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">~algo</h1></div></header><main class="layout" id="content-inner"><div id="category"><div class="article-sort-title">分類 - ~algo</div><div class="article-sort"><div class="article-sort-item year">2023</div><div class="article-sort-item"><a class="article-sort-item-img" href="/posts/tips/How-to-create-a-trie-in-Python/" title="How to create a trie in Python"><img src="/img/cover/code.jpg" alt="How to create a trie in Python" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2023-08-15T03:54:40.000Z" title="發表於 2023-08-15 11:54:40">2023-08-15</time></div><a class="article-sort-item-title" href="/posts/tips/How-to-create-a-trie-in-Python/" title="How to create a trie in Python">How to create a trie in Python</a></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/MyAvatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ImitatedSky</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">103</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ImitatedSky"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ImitatedSky" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:yehforlivelihood@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://www.linkedin.com/in/pochunyeh1997/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in" style="color: #0077b5;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">如果在使用中遇到問題，可以到 <a target="_blank" rel="noopener" href="https://github.com/ImitatedSky/blog-utterances/issues" style="color:#49b1f5">Github Issues</a> 或者 <a href="/messageboard/" style="color:#49b1f5">留言板</a> 進行反饋，</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/leetcode/Leetcode-133-Clone-Graph/" title="Leetcode#133. Clone Graph"><img src="/img/cover/leetcode.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode#133. Clone Graph"/></a><div class="content"><a class="title" href="/posts/leetcode/Leetcode-133-Clone-Graph/" title="Leetcode#133. Clone Graph">Leetcode#133. Clone Graph</a><time datetime="2024-09-09T08:18:28.000Z" title="發表於 2024-09-09 16:18:28">2024-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/leetcode/Leetcode-205-Isomorphic-Strings/" title="Leetcode#205. Isomorphic Strings"><img src="/img/cover/leetcode.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode#205. Isomorphic Strings"/></a><div class="content"><a class="title" href="/posts/leetcode/Leetcode-205-Isomorphic-Strings/" title="Leetcode#205. Isomorphic Strings">Leetcode#205. Isomorphic Strings</a><time datetime="2024-08-30T09:24:55.000Z" title="發表於 2024-08-30 17:24:55">2024-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/leetcode/Leetcode-383-Ransom-Note/" title="Leetcode#383. Ransom Note"><img src="/img/cover/leetcode.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode#383. Ransom Note"/></a><div class="content"><a class="title" href="/posts/leetcode/Leetcode-383-Ransom-Note/" title="Leetcode#383. Ransom Note">Leetcode#383. Ransom Note</a><time datetime="2024-08-30T09:01:03.000Z" title="發表於 2024-08-30 17:01:03">2024-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/leetcode/Leetcode-20-Valid-Parentheses/" title="Leetcode#20. Valid Parentheses"><img src="/img/cover/leetcode.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode#20. Valid Parentheses"/></a><div class="content"><a class="title" href="/posts/leetcode/Leetcode-20-Valid-Parentheses/" title="Leetcode#20. Valid Parentheses">Leetcode#20. Valid Parentheses</a><time datetime="2024-07-04T02:20:41.000Z" title="發表於 2024-07-04 10:20:41">2024-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/leetcode/Leetcode-1319-Number-of-Operations-to-Make-Network-Connected/" title="Leetcode#1319. Number of Operations to Make Network Connected"><img src="/img/cover/leetcode.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode#1319. Number of Operations to Make Network Connected"/></a><div class="content"><a class="title" href="/posts/leetcode/Leetcode-1319-Number-of-Operations-to-Make-Network-Connected/" title="Leetcode#1319. Number of Operations to Make Network Connected">Leetcode#1319. Number of Operations to Make Network Connected</a><time datetime="2024-07-02T05:35:58.000Z" title="發表於 2024-07-02 13:35:58">2024-07-02</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新評論</span></div><div class="aside-list"><span>正在載入中...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分類</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Leetcode/"><span class="card-category-list-name">Leetcode</span><span class="card-category-list-count">80</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/algo/"><span class="card-category-list-name">~algo</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/Leetcode/" style="font-size: 1.45em; color: rgb(123, 80, 59)">Leetcode</a><a href="/tags/python/" style="font-size: 1.2em; color: rgb(138, 60, 126)">python</a><a href="/tags/api/" style="font-size: 1.15em; color: rgb(115, 190, 33)">api</a><a href="/tags/shioaji/" style="font-size: 1.15em; color: rgb(11, 20, 68)">shioaji</a><a href="/tags/bash/" style="font-size: 1.15em; color: rgb(48, 176, 21)">bash</a><a href="/tags/gossip/" style="font-size: 1.24em; color: rgb(146, 178, 100)">gossip</a><a href="/tags/Hexo/" style="font-size: 1.15em; color: rgb(192, 110, 195)">Hexo</a><a href="/tags/visual-studio/" style="font-size: 1.15em; color: rgb(94, 179, 194)">visual studio</a><a href="/tags/React/" style="font-size: 1.15em; color: rgb(23, 43, 196)">React</a><a href="/tags/adsense/" style="font-size: 1.15em; color: rgb(110, 64, 35)">adsense</a><a href="/tags/domain/" style="font-size: 1.15em; color: rgb(169, 155, 13)">domain</a><a href="/tags/conda/" style="font-size: 1.15em; color: rgb(128, 22, 53)">conda</a><a href="/tags/gossing/" style="font-size: 1.15em; color: rgb(146, 16, 100)">gossing</a><a href="/tags/life/" style="font-size: 1.15em; color: rgb(20, 119, 106)">life</a><a href="/tags/%E6%96%BD%E5%B7%A5%E4%B8%AD/" style="font-size: 1.33em; color: rgb(18, 105, 123)">施工中</a><a href="/tags/Bug/" style="font-size: 1.2em; color: rgb(32, 139, 66)">Bug</a><a href="/tags/C/" style="font-size: 1.17em; color: rgb(16, 87, 104)">C#</a><a href="/tags/Git/" style="font-size: 1.17em; color: rgb(116, 108, 137)">Git</a><a href="/tags/Code/" style="font-size: 1.15em; color: rgb(148, 16, 127)">Code</a><a href="/tags/Python/" style="font-size: 1.45em; color: rgb(106, 158, 146)">Python</a><a href="/tags/easy/" style="font-size: 1.36em; color: rgb(14, 58, 23)">easy</a><a href="/tags/%F0%9F%92%A1/" style="font-size: 1.43em; color: rgb(155, 4, 171)">💡</a><a href="/tags/Tree/" style="font-size: 1.29em; color: rgb(103, 161, 97)">Tree</a><a href="/tags/Depth-First-Search/" style="font-size: 1.33em; color: rgb(67, 121, 50)">Depth-First Search</a><a href="/tags/Breadth-First-Search/" style="font-size: 1.31em; color: rgb(70, 158, 87)">Breadth-First Search</a><a href="/tags/Binary-Tree/" style="font-size: 1.27em; color: rgb(5, 161, 74)">Binary Tree</a><a href="/tags/medium/" style="font-size: 1.4em; color: rgb(60, 170, 109)">medium</a><a href="/tags/Array/" style="font-size: 1.38em; color: rgb(132, 41, 102)">Array</a><a href="/tags/Hash-Table/" style="font-size: 1.27em; color: rgb(129, 119, 113)">Hash Table</a><a href="/tags/Divide-and-Conquer/" style="font-size: 1.22em; color: rgb(128, 71, 33)">Divide and Conquer</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>歸檔</span><a class="card-more-btn" href="/archives/" title="檢視更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">25</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">10</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數目 :</div><div class="item-count">103</div></div><div class="webinfo-item"><div class="item-name">本站訪客數 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站總訪問量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-09-09T08:48:44.745Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By ImitatedSky</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://butterfly.js.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addModeChange('mermaid', runMermaid)
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[圖片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[連結]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[程式碼]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const findTrueUrl = (array) => {
+    Promise.all(array.map(item =>
+      fetch(item.url).then(resp => resp.json()).then(data => {
+        const urlArray = data.body.match(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/ig)
+        if (data.user.login === 'utterances-bot') {
+          return urlArray.pop()
+        } else {
+          return urlArray.shift()
+        }
+      })
+    )).then(res => {
+        array = array.map((i,index)=> {
+          return {
+            ...i,
+            url: res[index]
+          }
+        })
+
+        saveToLocal.set('github-newest-comments', JSON.stringify(array), 5/(60*24))
+        generateHtml(array)
+    });
+  }
+
+  const getComment = () => {
+    fetch('https://api.github.com/repos/ImitatedSky/blog-utterances/issues/comments?sort=updated&direction=desc&per_page=6&page=1',{
+      "headers": {
+        Accept: 'application/vnd.github.v3.html+json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        const githubArray = data.map(item => {
+          return {
+            'avatar': item.user.avatar_url,
+            'content': changeContent(item.body_html),
+            'nick': item.user.login,
+            'url': item.issue_url,
+            'date': item.updated_at,
+            'githubUrl': item.html_url
+          }
+        })
+        findTrueUrl(githubArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "無法獲取評論，請確認相關配置是否正確"
+      })
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '沒有評論'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('github-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜尋</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  資料庫載入中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜尋文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
