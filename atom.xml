@@ -6,7 +6,7 @@
   <link href="https://pochunyeh.com/atom.xml" rel="self"/>
   
   <link href="https://pochunyeh.com/"/>
-  <updated>2024-09-09T08:48:06.557Z</updated>
+  <updated>2024-09-10T07:17:00.141Z</updated>
   <id>https://pochunyeh.com/</id>
   
   <author>
@@ -15,6 +15,114 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode#300. Longest Increasing Subsequence</title>
+    <link href="https://pochunyeh.com/posts/leetcode/Leetcode-300-Longest-Increasing-Subsequence/"/>
+    <id>https://pochunyeh.com/posts/leetcode/Leetcode-300-Longest-Increasing-Subsequence/</id>
+    <published>2024-09-10T07:16:35.000Z</published>
+    <updated>2024-09-10T07:17:00.141Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an integer array <code>nums</code>, return <em>the length of the longest <strong>strictly increasing</strong></em></p><p><em><strong>subsequence</strong></em></p><p>.</p><p><strong>Example 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [10,9,2,5,3,7,101,18]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>Example 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [0,1,0,3,2,3]</span><br><span class="line">Output: 4</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>Example 3:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [7,7,7,7,7,7,7]</span><br><span class="line">Output: 1</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>Constraints:</strong></p><ul><li><code>1 &lt;= nums.length &lt;= 2500</code></li><li><code>104 &lt;= nums[i] &lt;= 104</code></li></ul><p><strong>Follow up:</strong> Can you come up with an algorithm that runs in <code>O(n log(n))</code> time complexity?</p><h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lengthOfLIS</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = [<span class="number">1</span>]*(<span class="built_in">len</span>(nums)+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(nums) ):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">                <span class="keyword">if</span> nums[j] &lt; nums[i]:</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>( dp[i] , dp[j] + <span class="number">1</span> )</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(dp)</span><br><span class="line">        </span><br></pre></td></tr></table></figure><p>寫的時候1次過，嘿嘿<a href="https://symbols.wisdom-life.in/zh-TW/emoticon/shy"><strong>(,,・ω・,,)</strong></a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;&lt;code&gt;Problem&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;Given an integer array &lt;code&gt;nums&lt;/co</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://pochunyeh.com/categories/Leetcode/"/>
+    
+    
+    <category term="Leetcode" scheme="https://pochunyeh.com/tags/Leetcode/"/>
+    
+    <category term="Python" scheme="https://pochunyeh.com/tags/Python/"/>
+    
+    <category term="💡" scheme="https://pochunyeh.com/tags/%F0%9F%92%A1/"/>
+    
+    <category term="medium" scheme="https://pochunyeh.com/tags/medium/"/>
+    
+    <category term="Array" scheme="https://pochunyeh.com/tags/Array/"/>
+    
+    <category term="Dynamic Programming" scheme="https://pochunyeh.com/tags/Dynamic-Programming/"/>
+    
+    <category term="hard" scheme="https://pochunyeh.com/tags/hard/"/>
+    
+    <category term="Binary Search" scheme="https://pochunyeh.com/tags/Binary-Search/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode#949. Largest Time for Given Digits</title>
+    <link href="https://pochunyeh.com/posts/leetcode/Leetcode-949-Largest-Time-for-Given-Digits/"/>
+    <id>https://pochunyeh.com/posts/leetcode/Leetcode-949-Largest-Time-for-Given-Digits/</id>
+    <published>2024-09-10T07:12:49.000Z</published>
+    <updated>2024-09-10T07:13:19.853Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Given an array <code>arr</code> of 4 digits, find the latest 24-hour time that can be made using each digit <strong>exactly once</strong>.</p><p>24-hour times are formatted as <code>&quot;HH:MM&quot;</code>, where <code>HH</code> is between <code>00</code> and <code>23</code>, and <code>MM</code> is between <code>00</code> and <code>59</code>. The earliest 24-hour time is <code>00:00</code>, and the latest is <code>23:59</code>.</p><p>Return <em>the latest 24-hour time in <code>&quot;HH:MM&quot;</code> format</em>. If no valid time can be made, return an empty string.</p><p><strong>Example 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: arr = [1,2,3,4]</span><br><span class="line">Output: &quot;23:41&quot;</span><br><span class="line">Explanation: The valid 24-hour times are &quot;12:34&quot;, &quot;12:43&quot;, &quot;13:24&quot;, &quot;13:42&quot;, &quot;14:23&quot;, &quot;14:32&quot;, &quot;21:34&quot;, &quot;21:43&quot;, &quot;23:14&quot;, and &quot;23:41&quot;. Of these times, &quot;23:41&quot; is the latest.</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>Example 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: arr = [5,5,5,5]</span><br><span class="line">Output: &quot;&quot;</span><br><span class="line">Explanation: There are no valid 24-hour times as &quot;55:55&quot; is not valid.</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>Constraints:</strong></p><ul><li><code>arr.length == 4</code></li><li><code>0 &lt;= arr[i] &lt;= 9</code></li></ul><h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h3 id="暴力解"><a href="#暴力解" class="headerlink" title="暴力解"></a>暴力解</h3><p>很醜O(n^4)<br>但是因為 n最大也是4</p><p>所以沒超出時間</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestTimeFromDigits</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">isValid</span>(<span class="params">hh , mm</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">int</span>(hh) &lt; <span class="number">24</span> <span class="keyword">and</span> <span class="built_in">int</span>(mm) &lt;<span class="number">60</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        memo = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">                    <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">                        <span class="keyword">if</span> i!=j <span class="keyword">and</span> i!=k <span class="keyword">and</span> i!=l <span class="keyword">and</span> j!=k <span class="keyword">and</span> j!=l <span class="keyword">and</span> k!=l:</span><br><span class="line">                            <span class="keyword">if</span> isValid( <span class="built_in">str</span>(arr[i]) + <span class="built_in">str</span>(arr[j]) , <span class="built_in">str</span>(arr[k]) + <span class="built_in">str</span>(arr[l]) ):</span><br><span class="line">                                memo.append( <span class="built_in">str</span>(arr[i]) + <span class="built_in">str</span>(arr[j]) + <span class="built_in">str</span>(arr[k]) + <span class="built_in">str</span>(arr[l]) )</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> memo:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">        res = <span class="built_in">max</span>(memo)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(res)[:<span class="number">2</span>] + <span class="string">&quot;:&quot;</span> + <span class="built_in">str</span>(res)[<span class="number">2</span>:]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;&lt;code&gt;Problem&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;Given an array &lt;code&gt;arr&lt;/code&gt; of 4 </summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://pochunyeh.com/categories/Leetcode/"/>
+    
+    
+    <category term="Leetcode" scheme="https://pochunyeh.com/tags/Leetcode/"/>
+    
+    <category term="Python" scheme="https://pochunyeh.com/tags/Python/"/>
+    
+    <category term="💡" scheme="https://pochunyeh.com/tags/%F0%9F%92%A1/"/>
+    
+    <category term="medium" scheme="https://pochunyeh.com/tags/medium/"/>
+    
+    <category term="Array" scheme="https://pochunyeh.com/tags/Array/"/>
+    
+    <category term="String" scheme="https://pochunyeh.com/tags/String/"/>
+    
+    <category term="Enumeration" scheme="https://pochunyeh.com/tags/Enumeration/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode#134. Gas Station</title>
+    <link href="https://pochunyeh.com/posts/leetcode/Leetcode-134-Gas-Station/"/>
+    <id>https://pochunyeh.com/posts/leetcode/Leetcode-134-Gas-Station/</id>
+    <published>2024-09-10T07:05:41.000Z</published>
+    <updated>2024-09-10T07:06:08.783Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>There are <code>n</code> gas stations along a circular route, where the amount of gas at the <code>ith</code> station is <code>gas[i]</code>.</p><p>You have a car with an unlimited gas tank and it costs <code>cost[i]</code> of gas to travel from the <code>ith</code> station to its next <code>(i + 1)th</code> station. You begin the journey with an empty tank at one of the gas stations.</p><p>Given two integer arrays <code>gas</code> and <code>cost</code>, return <em>the starting gas station’s index if you can travel around the circuit once in the clockwise direction, otherwise return</em> <code>-1</code>. If there exists a solution, it is <strong>guaranteed</strong> to be <strong>unique</strong></p><p><strong>Example 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: gas = [1,2,3,4,5], cost = [3,4,5,1,2]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation:</span><br><span class="line">Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4</span><br><span class="line">Travel to station 4. Your tank = 4 - 1 + 5 = 8</span><br><span class="line">Travel to station 0. Your tank = 8 - 2 + 1 = 7</span><br><span class="line">Travel to station 1. Your tank = 7 - 3 + 2 = 6</span><br><span class="line">Travel to station 2. Your tank = 6 - 4 + 3 = 5</span><br><span class="line">Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.</span><br><span class="line">Therefore, return 3 as the starting index.</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>Example 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: gas = [2,3,4], cost = [3,4,3]</span><br><span class="line">Output: -1</span><br><span class="line">Explanation:</span><br><span class="line">You can&#x27;t start at station 0 or 1, as there is not enough gas to travel to the next station.</span><br><span class="line">Let&#x27;s start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4</span><br><span class="line">Travel to station 0. Your tank = 4 - 3 + 2 = 3</span><br><span class="line">Travel to station 1. Your tank = 3 - 3 + 3 = 3</span><br><span class="line">You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.</span><br><span class="line">Therefore, you can&#x27;t travel around the circuit once no matter where you start.</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>Constraints:</strong></p><ul><li><code>n == gas.length == cost.length</code></li><li><code>1 &lt;= n &lt;= 105</code></li><li><code>0 &lt;= gas[i], cost[i] &lt;= 104</code></li></ul><h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h2 id="解"><a href="#解" class="headerlink" title="解"></a>解</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(gas) &lt; <span class="built_in">sum</span>(cost):</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="comment"># 否則應能順利跑完 重點!</span></span><br><span class="line">        tank = <span class="number">0</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(gas) ) :</span><br><span class="line">            tank += gas[i]-cost[i]</span><br><span class="line">            <span class="keyword">if</span> tank &lt; <span class="number">0</span>:</span><br><span class="line">                tank = <span class="number">0</span></span><br><span class="line">                start = i + <span class="number">1</span> <span class="comment">#</span></span><br><span class="line">        <span class="keyword">return</span> start</span><br></pre></td></tr></table></figure><h3 id="錯誤紀錄"><a href="#錯誤紀錄" class="headerlink" title="錯誤紀錄"></a>錯誤紀錄</h3><p>超過時間外，當相減&#x3D;&#x3D;0沒判決成功</p><p>ex: [0,0] [0,0]</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        fill = [ a-b <span class="keyword">for</span> a,b <span class="keyword">in</span> <span class="built_in">zip</span>(gas,cost) ]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(fill) &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(fill) ):</span><br><span class="line">            tank = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>( <span class="built_in">len</span>(fill) ):</span><br><span class="line">                cur = (i+j)%(<span class="built_in">len</span>(fill))</span><br><span class="line"></span><br><span class="line">                tank += fill[cur]</span><br><span class="line">                <span class="keyword">if</span> tank &lt; <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> j == <span class="built_in">len</span>(fill) - <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">return</span> i</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;&lt;code&gt;Problem&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;There are &lt;code&gt;n&lt;/code&gt; gas stations</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://pochunyeh.com/categories/Leetcode/"/>
+    
+    
+    <category term="Leetcode" scheme="https://pochunyeh.com/tags/Leetcode/"/>
+    
+    <category term="Python" scheme="https://pochunyeh.com/tags/Python/"/>
+    
+    <category term="💡" scheme="https://pochunyeh.com/tags/%F0%9F%92%A1/"/>
+    
+    <category term="medium" scheme="https://pochunyeh.com/tags/medium/"/>
+    
+    <category term="Array" scheme="https://pochunyeh.com/tags/Array/"/>
+    
+    <category term="Greedy" scheme="https://pochunyeh.com/tags/Greedy/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode#133. Clone Graph</title>
@@ -629,80 +737,6 @@
     
     
     <category term="python" scheme="https://pochunyeh.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>(Bug)git 推送問題 git add .</title>
-    <link href="https://pochunyeh.com/posts/BugRecord/Bug-git-%E6%8E%A8%E9%80%81%E5%95%8F%E9%A1%8C-git-add/"/>
-    <id>https://pochunyeh.com/posts/BugRecord/Bug-git-%E6%8E%A8%E9%80%81%E5%95%8F%E9%A1%8C-git-add/</id>
-    <published>2024-03-27T09:14:46.000Z</published>
-    <updated>2024-03-27T09:19:48.645Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用 git add .</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . fatal: will not add file <span class="built_in">alias</span> <span class="string">&#x27;public/tags/OpenCV/index.html&#x27;</span> (<span class="string">&#x27;public/tags/opencv/index.html&#x27;</span> already exists <span class="keyword">in</span> index)</span><br></pre></td></tr></table></figure><p>git commit -m “ ”</p><p>後面也出現一堆 modified…… 紅字</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git restore &lt;file&gt;...&quot;</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line">        modified:   .gitignore</span><br><span class="line">        modified:</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        .</span><br></pre></td></tr></table></figure><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a><code>原因</code></h2><p>這個錯誤是因為 Git 在 <code>Windows 上默認是不區分大小寫的</code>，所以 ‘public&#x2F;tags&#x2F;OpenCV&#x2F;index.html’ 和 ‘public&#x2F;tags&#x2F;opencv&#x2F;index.html’ 被視為同一個文件。這在 Unix-like 系統（如 Linux 或 MacOS）上不會發生，因為它們是區分大小寫的。</p><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a><code>解決方法</code></h2><p>命令更改 Git 的配置</p><p>使其在window上也分大小寫</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config core.ignorecase <span class="literal">false</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;使用 git add .&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;c</summary>
-      
-    
-    
-    
-    
-    <category term="Bug" scheme="https://pochunyeh.com/tags/Bug/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>github 不能推的其中一種狀況 甚至雲端是空的</title>
-    <link href="https://pochunyeh.com/posts/BugRecord/github-%E4%B8%8D%E8%83%BD%E6%8E%A8%E7%9A%84%E5%85%B6%E4%B8%AD%E4%B8%80%E7%A8%AE%E7%8B%80%E6%B3%81-%E7%94%9A%E8%87%B3%E9%9B%B2%E7%AB%AF%E6%98%AF%E7%A9%BA%E7%9A%84/"/>
-    <id>https://pochunyeh.com/posts/BugRecord/github-%E4%B8%8D%E8%83%BD%E6%8E%A8%E7%9A%84%E5%85%B6%E4%B8%AD%E4%B8%80%E7%A8%AE%E7%8B%80%E6%B3%81-%E7%94%9A%E8%87%B3%E9%9B%B2%E7%AB%AF%E6%98%AF%E7%A9%BA%E7%9A%84/</id>
-    <published>2024-03-27T08:15:02.000Z</published>
-    <updated>2024-03-27T09:18:41.023Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">To https://github.com/name/resp.git</span><br><span class="line"> ! [rejected]        main -&gt; main (non-fast-forward)</span><br><span class="line">error: failed to push some refs to <span class="string">&#x27;https://github.com/name/resp.git&#x27;</span></span><br><span class="line">hint: Updates were rejected because the tip of your current branch is behind</span><br><span class="line">hint: its remote counterpart. Integrate the remote changes (e.g.</span><br><span class="line">hint: <span class="string">&#x27;git pull ...&#x27;</span>) before pushing again.</span><br><span class="line">hint: See the <span class="string">&#x27;Note about fast-forwards&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;git push --help&#x27;</span> <span class="keyword">for</span> details.</span><br></pre></td></tr></table></figure><p>若是有東西 可以先pull下來，因為可能本機是舊檔</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin main</span><br></pre></td></tr></table></figure><p>再</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin main</span><br></pre></td></tr></table></figure><h2 id="再不行-甚至雲端是空的"><a href="#再不行-甚至雲端是空的" class="headerlink" title="再不行 甚至雲端是空的"></a><code>再不行 甚至雲端是空的</code></h2><p>直接強推吧(不推薦)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -f origin main</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=</summary>
-      
-    
-    
-    
-    
-    <category term="Bug" scheme="https://pochunyeh.com/tags/Bug/"/>
-    
-    <category term="Git" scheme="https://pochunyeh.com/tags/Git/"/>
-    
-    <category term="Code" scheme="https://pochunyeh.com/tags/Code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>(Bug)hexo生成模板時有問題</title>
-    <link href="https://pochunyeh.com/posts/BugRecord/Bug-hexo%E7%94%9F%E6%88%90%E6%A8%A1%E6%9D%BF%E6%99%82%E6%9C%89%E5%95%8F%E9%A1%8C/"/>
-    <id>https://pochunyeh.com/posts/BugRecord/Bug-hexo%E7%94%9F%E6%88%90%E6%A8%A1%E6%9D%BF%E6%99%82%E6%9C%89%E5%95%8F%E9%A1%8C/</id>
-    <published>2024-03-24T09:21:42.000Z</published>
-    <updated>2024-06-05T11:49:45.240Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/../img/202403/20240324_1.jpeg"></p><p><img src="/../img/202403/20240324_2.jpeg"></p><p>結果很單純是 文件前面的config沒有寫好</p><p><img src="/../img/202403/20240324_3.jpeg"></p><p>這邊是tags -[] 這個的問題</p><p>又或者忘記存檔</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/../img/202403/20240324_1.jpeg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/../img/202403/20240324_2.jpeg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;結果很單純是 文件前面的config沒有寫好&lt;/p&gt;
-&lt;p&gt;&lt;img sr</summary>
-      
-    
-    
-    
-    
-    <category term="Bug" scheme="https://pochunyeh.com/tags/Bug/"/>
     
   </entry>
   
