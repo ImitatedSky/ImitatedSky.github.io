@@ -98,6 +98,7 @@ sticky: 100
 - <input type="checkbox" >  [Leetcode-120-Triangle](../leetcode/Leetcode-120-Triangle)
 - <input type="checkbox" >  [Leetcode-139-Word-Break](../leetcode/Leetcode-139-Word-Break)
 - <input type="checkbox" >  [Leetcode-221-Maximal-Square](../leetcode/Leetcode-221-Maximal-Square)
+- <input type="checkbox" >  [Leetcode-300-Longest-Increasing-Subsequence](../leetcode/Leetcode-300-Longest-Increasing-Subsequence)
 - <input type="checkbox" >  [Leetcode-322-Coin-Change](../leetcode/Leetcode-322-Coin-Change)
 
 ---
@@ -115,6 +116,7 @@ sticky: 100
 
 - <input type="checkbox" >  [Leetcode-55-Jump-Game](../leetcode/Leetcode-55-Jump-Game)
 - <input type="checkbox" >  [Leetcode-122-Best-Time-to-Buy-and-Sell-Stock-II](../leetcode/Leetcode-122-Best-Time-to-Buy-and-Sell-Stock-II)
+- <input type="checkbox" >  [LLeetcode-134-Gas-Station](../leetcode/Leetcode-134-Gas-Station)
 - <input type="checkbox" >  [Leetcode-135-Candy](../leetcode/Leetcode-135-Candy)
 
 ---
@@ -260,7 +262,8 @@ j~ : 已經處理過`要保留的`
 
 **進階**
 
-- <input type="checkbox" >  [Leetcode-274-H-Index](../leetcode/LLeetcode-274-H-Index)
+- <input type="checkbox" >  [Leetcode-274-H-Index](../leetcode/Leetcode-274-H-Index)
+- <input type="checkbox" >  [Leetcode-949-Largest-Time-for-Given-Digits](../leetcode/Leetcode-949-Largest-Time-for-Given-Digits)
 
 ---
 
