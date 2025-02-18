@@ -1,3 +1,5 @@
+- 
+
 ---
 title: Leetcode 快速複習的題目
 tags:
@@ -201,6 +203,7 @@ j~ : 已經處理過`要保留的`
 
 **進階**
 
+- <input type="checkbox" >  [Leetcode-36-Valid-Sudoku](../leetcode/Leetcode-36-Valid-Sudoku)
 - <input type="checkbox" >  [Leetcode-146-LRU-Cache](../leetcode/Leetcode-146-LRU-Cache)
 - <input type="checkbox" >  [Leetcode-380-Insert-Delete-GetRandom-O-1](../leetcode/Leetcode-380-Insert-Delete-GetRandom-O-1)
 
