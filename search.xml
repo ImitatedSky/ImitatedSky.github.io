@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Leetcode 快速複習的題目</title>
+    <title></title>
     <url>/posts/Leetcode-%E5%BF%AB%E9%80%9F%E8%A4%87%E7%BF%92%E7%9A%84%E9%A1%8C%E7%9B%AE/</url>
-    <content><![CDATA[<p>個人刷leetcode地方，不一定每題都為最佳最速解</p>
+    <content><![CDATA[<h2 id="title-Leetcode-快速複習的題目tags-Leetcode-cover-x2F-img-x2F-cover-x2F-cover02-jpgdate-2023-10-25-16-31-36sticky-100"><a href="#title-Leetcode-快速複習的題目tags-Leetcode-cover-x2F-img-x2F-cover-x2F-cover02-jpgdate-2023-10-25-16-31-36sticky-100" class="headerlink" title="title: Leetcode 快速複習的題目tags:  - [Leetcode]cover: &#x2F;img&#x2F;cover&#x2F;cover02.jpgdate: 2023-10-25 16:31:36sticky: 100"></a>title: Leetcode 快速複習的題目<br>tags:<br>  - [Leetcode]<br>cover: &#x2F;img&#x2F;cover&#x2F;cover02.jpg<br>date: 2023-10-25 16:31:36<br>sticky: 100</h2><p>個人刷leetcode地方，不一定每題都為最佳最速解</p>
 <p><code>多為 &#39;Top Interview 150&#39; &amp; &#39;blink 75&#39; 的選題，其中同一題目會出現在不同類型，所以會重複</code></p>
 <p><code>多為 &#39;Top Interview **150&#39;** &amp; &#39;blink 75&#39; ****的選題，其中同一題目會出現在不同類型，所以會重複</code></p>
 <p><code>下方勾勾完全沒作用，單純複習時方便，但重新整理或離開就刷新</code></p>
@@ -145,6 +145,7 @@
 </ul>
 <p><strong>進階</strong></p>
 <ul>
+<li><input type="checkbox" >  <a href="../leetcode/Leetcode-36-Valid-Sudoku">Leetcode-36-Valid-Sudoku</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-146-LRU-Cache">Leetcode-146-LRU-Cache</a></li>
 <li><input type="checkbox" >  <a href="../leetcode/Leetcode-380-Insert-Delete-GetRandom-O-1">Leetcode-380-Insert-Delete-GetRandom-O-1</a></li>
 </ul>
@@ -237,9 +238,6 @@
         link.setAttribute('target', '_blank');
     });
 </script>]]></content>
-      <tags>
-        <tag>Leetcode</tag>
-      </tags>
   </entry>
   <entry>
     <title>coding 前python快速複習公式</title>
@@ -4535,6 +4533,54 @@ treenode3 --&gt;|3-1|treenode3.3
         <tag>Array</tag>
         <tag>String</tag>
         <tag>Enumeration</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode#36. Valid Sudoku</title>
+    <url>/posts/leetcode/Leetcode-36-Valid-Sudoku/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a><code>Problem</code></h1><p>Determine if a <code>9 x 9</code> Sudoku board is valid. Only the filled cells need to be validated <strong>according to the following rules</strong>:</p>
+<ol>
+<li>Each row must contain the digits <code>1-9</code> without repetition.</li>
+<li>Each column must contain the digits <code>1-9</code> without repetition.</li>
+<li>Each of the nine <code>3 x 3</code> sub-boxes of the grid must contain the digits <code>1-9</code> without repetition.</li>
+</ol>
+<p><strong>Note:</strong></p>
+<ul>
+<li>A Sudoku board (partially filled) could be valid but is not necessarily solvable.</li>
+<li>Only the filled cells need to be validated according to the mentioned rules.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png"></p>
+<p>!<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png">https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: board =</span><br><span class="line">[[&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;]</span><br><span class="line">,[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;]</span><br><span class="line">,[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]]</span><br><span class="line">Output: true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: board =</span><br><span class="line">[[&quot;8&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;]</span><br><span class="line">,[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;]</span><br><span class="line">,[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;]</span><br><span class="line">,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: Same as Example 1, except with the5 in the top left corner being modified to8. Since there are two 8&#x27;s in the top left 3x3 sub-box, it is invalid.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>board.length == 9</code></li>
+<li><code>board[i].length == 9</code></li>
+<li><code>board[i][j]</code> is a digit <code>1-9</code> or <code>&#39;.&#39;</code>.</li>
+</ul>
+<h1 id="Solve"><a href="#Solve" class="headerlink" title="Solve"></a><code>Solve</code></h1><h3 id="sol1暴力解"><a href="#sol1暴力解" class="headerlink" title="sol1暴力解"></a>sol1暴力解</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidSudoku</span>(<span class="params">self, board: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">                <span class="keyword">if</span> board[i][j] == <span class="string">&quot;.&quot;</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="number">9</span>):</span><br><span class="line">                    <span class="keyword">if</span> i != k <span class="keyword">and</span> board[i][j] == board[k][j]:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">range</span>(j,<span class="number">9</span>):</span><br><span class="line">                    <span class="keyword">if</span> l != j <span class="keyword">and</span> board[i][j] == board[i][l]:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        box = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">                <span class="keyword">if</span> board[i][j] == <span class="string">&quot;.&quot;</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                pos = (i//<span class="number">3</span>,j//<span class="number">3</span>)</span><br><span class="line">                <span class="keyword">if</span> pos <span class="keyword">not</span> <span class="keyword">in</span> box:</span><br><span class="line">                    box[pos] = []</span><br><span class="line">                <span class="keyword">if</span> board[i][j] <span class="keyword">in</span> box[pos]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    box[pos].append(board[i][j])</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sol2"><a href="#sol2" class="headerlink" title="sol2"></a>sol2</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidSudoku</span>(<span class="params">self, board: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        rows = [<span class="built_in">set</span>() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>)]</span><br><span class="line">        cols = [<span class="built_in">set</span>() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>)]</span><br><span class="line">        boxes = [<span class="built_in">set</span>() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">                num = board[i][j]</span><br><span class="line">                <span class="keyword">if</span> num == <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> num <span class="keyword">in</span> rows[i]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                rows[i].add(num)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> num <span class="keyword">in</span> cols[j]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                cols[j].add(num)</span><br><span class="line"></span><br><span class="line">                box_index = (i // <span class="number">3</span>) * <span class="number">3</span> + (j // <span class="number">3</span>)</span><br><span class="line">                <span class="keyword">if</span> num <span class="keyword">in</span> boxes[box_index]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                boxes[box_index].add(num)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>特殊解</p>
+<p>直接計算個數方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidSudoku</span>(<span class="params">self, board</span>):</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">                element = board[i][j]</span><br><span class="line">                <span class="keyword">if</span> element != <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">                    res += [(i, element), (element, j), (i // <span class="number">3</span>, j // <span class="number">3</span>, element)]</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(res) == <span class="built_in">len</span>(<span class="built_in">set</span>(res))</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Python</tag>
+        <tag>💡</tag>
+        <tag>medium</tag>
+        <tag>Array</tag>
+        <tag>Hash Table</tag>
+        <tag>Matrix</tag>
       </tags>
   </entry>
 </search>
