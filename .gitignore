@@ -1,11 +1,7 @@
 .DS_Store
 Thumbs.db
-db.json
 *.log
 node_modules/
-# Hexo generated output (root only — react-app/public holds tracked static assets)
-/public/
-.deploy*/
 .vs/
 
 # Claude Code
