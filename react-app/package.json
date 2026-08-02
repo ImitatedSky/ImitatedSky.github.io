@@ -28,7 +28,7 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
     "remark-rehype": "^11.1.2",
-    "shiki": "^4.0.2",
+    "shiki": "^4.3.1",
     "typed.js": "^3.0.0"
   },
   "devDependencies": {
