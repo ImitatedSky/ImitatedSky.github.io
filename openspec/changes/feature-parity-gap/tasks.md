@@ -68,3 +68,15 @@
 ## 12. 附帶修正（本次一併處理）
 
 - [x] 12.1 修 root `.gitignore`：`public/` → `/public/`（原規則誤將 `react-app/public/` 靜態資源整個排除在 git 之外）；補 `react-app/dist/`、`react-app/public/content/`、`sitemap.xml`、`rss.xml`、`.playwright-mcp/` 規則
+
+## 13. Bug: 上一篇/下一篇有時不跳轉（2026-08-02 使用者回報）
+
+- [x] 13.1 修 `usePost.ts`：slug 變更且目標已在快取時 effect 提前 return、從不 setPost，導致 URL 變了但內容停留在舊文章（只在導向「看過的文章」時發生 → 「有時候」）；改為快取命中也要 setPost，並加 cancelled 防止快速切換的 race
+- [x] 13.2 SPA 路由切換後回到頁面頂部（App.tsx 監聽 pathname → scrollTo(0,0)；原站整頁重載天然回頂，SPA 停在底部會讓上/下一篇看起來沒反應）
+- [x] 13.3 Playwright 驗證：A→B→回 A（快取命中）內容正確更新、scrollY 歸零、document.title 同步、瀏覽器返回鍵正常、console 無錯誤
+- [x] 13.4 驗證通過後 push main 由 Actions 部署
+
+## 14. 背景粒子滑鼠吸附（2026-08-02 使用者回報：原站有、新版沒有）
+
+- [x] 14.1 `CanvasNest.tsx` 加滑鼠互動：游標視為節點，MOUSE_DIST=200 內粒子連線到游標、外圈帶（0.6–1.0×）粒子被吸向游標（同原 canvas-nest 行為）；mouseleave 時解除
+- [x] 14.2 Playwright 驗證：游標懸停 3 秒後周圍 200×200 px 的 canvas alpha 總和 2513 → 32702（13 倍），吸附與連線生效

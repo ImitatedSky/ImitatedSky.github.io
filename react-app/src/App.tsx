@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
@@ -19,6 +19,13 @@ import { SITE } from "./config/site";
 
 export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  // SPA route changes keep the scroll position; jump to top like a full page
+  // load would (otherwise prev/next at the bottom of a post looks like a no-op)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   // Global search keyboard shortcut: / or Ctrl+K
   useEffect(() => {

@@ -9,6 +9,9 @@ interface Dot {
 
 const COUNT = 88;
 const MAX_DIST = 120;
+// Mouse acts as an extra node (original canvas-nest behavior): particles in
+// the outer band get pulled toward the cursor, and nearby ones link to it.
+const MOUSE_DIST = 200;
 
 /**
  * canvas-nest parity: animated particle web behind all content, matching the
@@ -56,6 +59,16 @@ export default function CanvasNest() {
     }));
     window.addEventListener("resize", resize);
 
+    let mouse: { x: number; y: number } | null = null;
+    function onMouseMove(e: MouseEvent) {
+      mouse = { x: e.clientX, y: e.clientY };
+    }
+    function onMouseOut() {
+      mouse = null;
+    }
+    window.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseleave", onMouseOut);
+
     let rafId: number | null = null;
     function frame() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -67,6 +80,26 @@ export default function CanvasNest() {
         d.y += d.vy;
         if (d.x <= 0 || d.x >= canvas.width) d.vx *= -1;
         if (d.y <= 0 || d.y >= canvas.height) d.vy *= -1;
+
+        if (mouse) {
+          const mdx = d.x - mouse.x;
+          const mdy = d.y - mouse.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mdist < MOUSE_DIST) {
+            // pull particles in the outer band toward the cursor
+            if (mdist >= MOUSE_DIST * 0.6) {
+              d.x -= 0.03 * mdx;
+              d.y -= 0.03 * mdy;
+            }
+            ctx.strokeStyle = `rgba(${r},${g},${b},${(1 - mdist / MOUSE_DIST) * base})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+
         ctx.fillStyle = `rgba(${r},${g},${b},${base})`;
         ctx.fillRect(d.x - 1, d.y - 1, 2, 2);
       }
@@ -102,6 +135,8 @@ export default function CanvasNest() {
     return () => {
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseleave", onMouseOut);
       if (rafId !== null) cancelAnimationFrame(rafId);
       canvas.remove();
     };
