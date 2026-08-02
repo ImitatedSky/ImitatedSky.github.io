@@ -2,8 +2,6 @@
 
 import os
 import sys
-import platform
-import yaml
 
 # push github的步驟
 # 1. git init
@@ -12,33 +10,16 @@ import yaml
 # 3.# git remote add origin <倉庫URL>
 # 4. git push origin master # 通常git庫的分支是master
 
-# 讀取設定檔
-with open("_config.yml", "r", encoding="utf-8") as f:
-    config = yaml.load(f, Loader=yaml.FullLoader)
+# Hexo 的 _config.yml 已移除，改為固定值
+url = "https://github.com/ImitatedSky/ImitatedSky.github.io.git"
+branch = "main"
 
-url = config["github_deploy"]["repo"]
-branch = config["github_deploy"]["branch"]
-
-# hexo generate
-is_hexo_generate = True
-
-
-if is_hexo_generate:
-    # hexo clean  # 清除public，清除cache
-    # hexo generate # 產生public靜態檔案
-    hexo_clean = "hexo clean"
-    hexo_generate = "hexo generate"
-    print(">>> " + hexo_clean)
-    print(">>> " + hexo_generate)
-    os.system(hexo_generate)
-
-# 是否 hexo deploy
-is_hexo_deploy = input(">>> Is hexo deploy? (y/n) : ")
-if is_hexo_deploy == "y" or is_hexo_deploy == "Y" or is_hexo_deploy == "yes" or is_hexo_deploy == "Yes" or is_hexo_deploy == "YES" or is_hexo_deploy == "":
-    # hexo deploy
-    hexo_deploy = "hexo deploy"
-    print(">>> " + hexo_deploy)
-    os.system(hexo_deploy) 
+# React app deploy (replaces Hexo)
+is_react_deploy = input(">>> Deploy React app to gh-page? (y/n) : ")
+if is_react_deploy.lower() in ("y", "yes", ""):
+    react_deploy = "cd react-app && npm run deploy"
+    print(">>> " + react_deploy)
+    os.system(react_deploy)
 
 
 def GetTime():
