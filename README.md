@@ -2,48 +2,42 @@
 
 https://pochunyeh.com/
 
-blog : Hexo
+個人部落格。原為 Hexo（Butterfly 主題），2026-08 起改為 **React SPA（Vite + React Router）**，文章仍是 `source/_posts/` 下的 Markdown。
 
-theme : butterfly
+## 架構
 
-push : 
+- `react-app/` — Vite + React 19 + React Router 7 + Tailwind CSS v4
+- `react-app/scripts/build-content.ts` — build 時把 `source/_posts/` 轉成 JSON（含搜尋索引、sitemap、RSS）
+- `source/_posts/` — Markdown 文章（front matter 格式沿用 Hexo 時代）
+- `source/_data/link.yml` — 友情連結
+- `openspec/` — 變更規格與任務記錄
+
+## 開發
+
 ```bash
-python pushgit.py
-```
-新增_config.yml 的github_deploy，節省輸入的時間
-
-~~可以一直按ENTER~~，還是要確認一下拉
-
-``` bash
-# _config.yml
-github_deploy:
-  type: git
-  repo: https://github.com/ImitatedSky/ImitatedSky.github.io
-  branch: main
-  message: 'deploy'
-  test: "test message"
+cd react-app
+npm install
+npm run dev     # http://localhost:5173
+npm run build   # 產出 react-app/dist/
 ```
 
-``` python
+## 部署
 
-# PushGit.py
-import yaml
-import os
+**自動（主要方式）**：push 到 `main`（動到 `react-app/**` 或 `source/**`）會觸發
+[GitHub Actions](.github/workflows/deploy.yml) 自動 build 並發佈到 `gh-page` 分支，
+GitHub Pages 從該分支供應網站（自訂網域 `pochunyeh.com`，CNAME 在 `react-app/public/`）。
 
-# 讀取設定檔
-with open("_config.yml", "r", encoding="utf-8") as f:
-    config = yaml.load(f, Loader=yaml.FullLoader)
+也可以在 Actions 頁面手動觸發（workflow_dispatch）。
 
-github_url = config["github_deploy"]["repo"]
-github_branch = config["github_deploy"]["branch"]
+**手動（備用）**：
 
+```bash
+cd react-app && npm run deploy   # gh-pages -d dist -b gh-page
+# 或互動式：python PushGit.py
 ```
 
+## 發文流程
 
-為了文章裡方便連結，所以把文章的路徑改成
-``` yaml
-原先
-  permalink: posts/:year/:month/:day/:title/
-改成
-  permalink: posts/:title/
-```
+1. 在 `source/_posts/` 新增/編輯 Markdown
+2. commit 並 push 到 `main`
+3. Actions 自動部署，約 1–2 分鐘後生效

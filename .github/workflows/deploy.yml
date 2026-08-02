@@ -1,0 +1,49 @@
+name: Deploy site
+
+# Build the React (Vite) app and publish dist/ to the gh-page branch,
+# which GitHub Pages serves at https://pochunyeh.com/.
+# Manual fallback: cd react-app && npm run deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "react-app/**"
+      - "source/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-gh-page
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: react-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: react-app
+        run: npm ci
+
+      - name: Build (content JSON + tsc + vite)
+        working-directory: react-app
+        run: npm run build
+
+      - name: Deploy to gh-page branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: react-app/dist
+          publish_branch: gh-page
+          force_orphan: true
