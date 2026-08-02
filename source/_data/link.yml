@@ -1,12 +1,12 @@
-# 1. 確保你使用 Butterfly 主題
-# 2. 確保你的網站是 https
-# 3. 修改 source/_data/link.yml
-# 4. 按要求新增內容
-#     - name: 博客名
-#       link: 博客地址
-#       avatar: 博客頭像
-#       descr: 博客描述
-# 5. 發起 Pull requests ，合併到 butterfly.js.org 倉庫
+# 友情連結資料，build 時由 react-app/scripts/build-content.ts 轉成 links.json
+# 格式：
+#   - class_name: 分組標題（可含 HTML）
+#     class_desc: 分組描述
+#     link_list:
+#       - name: 名稱
+#         link: 網址
+#         avatar: 頭像（/img/... 或外部 URL）
+#         descr: 描述
 
 - class_name: '<i class="fas fa-check-double" style="color: #FF6666;padding-right: 0.4rem"></i>網站'
   class_desc: '<span style="font-style: italic;">與怪物戰鬥的人，應當小心自己不要成為怪物</span>'
@@ -31,10 +31,6 @@
       link: https://www.instagram.com/xiebojun/
       avatar: /img/IG.png
       descr: 我的IG
-    - name: Butterfly
-      link: https://butterfly.js.org/
-      avatar: https://file.crazywong.com/gh/jerryc127/butterfly_cdn@2.1.0/top_img/index.jpg
-      descr: Butterfly 作者
 - class_name: '<i class="fa-solid fa-seedling"></i>other portfolio'
   class_desc: '<span style="font-style: italic;">一些其他實作</span>'
   link_list:

@@ -2,13 +2,13 @@
 
 https://pochunyeh.com/
 
-個人部落格。原為 Hexo（Butterfly 主題），2026-08 起改為 **React SPA（Vite + React Router）**，文章仍是 `source/_posts/` 下的 Markdown。
+個人部落格 — **React SPA（Vite + React Router）**，文章為 `source/_posts/` 下的 Markdown。
 
 ## 架構
 
 - `react-app/` — Vite + React 19 + React Router 7 + Tailwind CSS v4
 - `react-app/scripts/build-content.ts` — build 時把 `source/_posts/` 轉成 JSON（含搜尋索引、sitemap、RSS）
-- `source/_posts/` — Markdown 文章（front matter 格式沿用 Hexo 時代）
+- `source/_posts/` — Markdown 文章
 - `source/_data/link.yml` — 友情連結
 - `openspec/` — 變更規格與任務記錄
 
@@ -38,6 +38,6 @@ cd react-app && npm run deploy   # gh-pages -d dist -b gh-page
 
 ## 發文流程
 
-1. 在 `source/_posts/` 新增/編輯 Markdown
+1. 在 `source/_posts/` 新增/編輯 Markdown（front matter：`title`、`date`、`tags`、`categories`、`cover`）
 2. commit 並 push 到 `main`
 3. Actions 自動部署，約 1–2 分鐘後生效
