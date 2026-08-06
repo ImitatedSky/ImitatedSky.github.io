@@ -2,7 +2,7 @@
 title: shioaji 永豐API
 tags:
   - [api]
-  - [python]
+  - [Python]
   - [shioaji]
 cover: /img/cover/cover02.jpg
 date: 2023-09-13 14:50:32

@@ -4,26 +4,34 @@ import type Fuse from "fuse.js";
 import { FiSearch, FiX } from "react-icons/fi";
 import type { SearchEntry } from "../types";
 
-let _index: SearchEntry[] | null = null;
-let _fuse: Fuse<SearchEntry> | null = null;
-
 // fuse.js is only needed once search is actually opened — keep it out of the
-// initial bundle alongside the already-lazy search index.
-async function getFuse(): Promise<Fuse<SearchEntry>> {
-  if (_fuse) return _fuse;
-  const [{ default: FuseCtor }, index] = await Promise.all([
-    import("fuse.js"),
-    _index
-      ? Promise.resolve(_index)
-      : fetch("/content/search-index.json").then((r) => r.json() as Promise<SearchEntry[]>),
-  ]);
-  _index = index;
-  _fuse = new FuseCtor(index, {
-    keys: ["title", "tags", "categories", "excerpt"],
-    threshold: 0.35,
-    includeScore: true,
-  });
-  return _fuse;
+// initial bundle alongside the already-lazy search index. The promise is
+// memoised so concurrent keystrokes during the first search share one import
+// and one index fetch instead of racing.
+let _fusePromise: Promise<Fuse<SearchEntry>> | null = null;
+
+function getFuse(): Promise<Fuse<SearchEntry>> {
+  if (!_fusePromise) {
+    _fusePromise = Promise.all([
+      import("fuse.js"),
+      fetch("/content/search-index.json").then((r) => {
+        if (!r.ok) throw new Error(`search index ${r.status}`);
+        return r.json() as Promise<SearchEntry[]>;
+      }),
+    ])
+      .then(([{ default: FuseCtor }, index]) =>
+        new FuseCtor(index, {
+          keys: ["title", "tags", "categories", "excerpt"],
+          threshold: 0.35,
+          includeScore: true,
+        }),
+      )
+      .catch((e) => {
+        _fusePromise = null; // let the next keystroke retry
+        throw e;
+      });
+  }
+  return _fusePromise;
 }
 
 interface Props {
@@ -46,9 +54,18 @@ export default function Search({ open, onClose }: Props) {
 
   useEffect(() => {
     if (!query.trim()) { setResults([]); return; }
-    getFuse().then(fuse => {
-      setResults(fuse.search(query).slice(0, 10).map(r => r.item));
-    });
+    // Without the guard, results from a slower earlier keystroke (or from a
+    // query the user already cleared) land after a newer one and win.
+    let cancelled = false;
+    getFuse()
+      .then(fuse => {
+        if (cancelled) return;
+        setResults(fuse.search(query).slice(0, 10).map(r => r.item));
+      })
+      .catch(() => {
+        if (!cancelled) setResults([]);
+      });
+    return () => { cancelled = true; };
   }, [query]);
 
   useEffect(() => {

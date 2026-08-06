@@ -1,8 +1,8 @@
 ---
 title: python 螢幕、鏡頭錄製
 tags:
-  - [python]
-  - [opencv]
+  - [Python]
+  - [OpenCV]
   - [pyautogui]
   - [tips]
 cover: /img/cover/code.jpg

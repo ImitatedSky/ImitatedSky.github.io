@@ -2,7 +2,7 @@
 title: Conda 指令
 tags:
   - [conda]
-  - [python]
+  - [Python]
   - [gossip]
 cover: /img/cover/cover02.jpg
 date: 2023-09-19 16:47:10

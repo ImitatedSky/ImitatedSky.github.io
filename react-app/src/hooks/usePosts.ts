@@ -10,10 +10,18 @@ export function usePosts() {
   useEffect(() => {
     if (_cache) return;
     fetch("/content/index.json")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`index.json ${r.status}`);
+        return r.json();
+      })
       .then((data: PostMeta[]) => {
         _cache = data;
         setPosts(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        // This list drives every page; without a catch a failed fetch leaves
+        // the whole site on "Loading…" with an unhandled rejection.
         setLoading(false);
       });
   }, []);

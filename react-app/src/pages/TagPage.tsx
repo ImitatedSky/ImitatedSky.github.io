@@ -6,8 +6,9 @@ import ContentWithAside from "../components/ContentWithAside";
 import PageBanner from "../components/PageBanner";
 
 export default function TagPage() {
-  const { tag = "" } = useParams<{ tag: string }>();
-  const decoded = decodeURIComponent(tag);
+  // React Router already decodes path params — decoding again throws
+  // URIError on a legitimate "%" in a tag name.
+  const { tag: decoded = "" } = useParams<{ tag: string }>();
   const { posts, loading } = usePosts();
   usePageTitle(`Tag: ${decoded}`);
 

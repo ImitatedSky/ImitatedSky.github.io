@@ -2,7 +2,7 @@
 title: visual studio ctrl+z delete whole cell(Solve)
 tags:
   - [visual studio]
-  - [python]
+  - [Python]
   - [gossip]
 cover: /img/cover/code.jpg
 date: 2023-09-19 11:38:58
