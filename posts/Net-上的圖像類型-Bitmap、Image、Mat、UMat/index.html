@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/img/MyAvatar.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>.Net 上的圖像類型(Bitmap、Image、Mat、UMat) | Imisky</title>
+    <meta name="description" content="1. - Bitmap 是一個在 C# 中常用的圖像類型，它屬於 System.Drawing 命名空間。它用於表示和處理點陣圖圖像。 - Bitmap 是一個基於像素的圖像，每個像素都包含顏色信息。您可以輕鬆地創建、讀取、繪製和處理 Bitmap 圖像。 - 這是一個簡單且易於使用的圖像類型，適用於大多數基本圖像處理需求，但在某些情況下可能會有性能問題。 2. - Image&lt;TColor, T" />
+    <link rel="canonical" href="https://pochunyeh.com/posts/Net-%E4%B8%8A%E7%9A%84%E5%9C%96%E5%83%8F%E9%A1%9E%E5%9E%8B-Bitmap%E3%80%81Image%E3%80%81Mat%E3%80%81UMat/" />
+    <meta property="og:site_name" content="Imisky" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://pochunyeh.com/posts/Net-%E4%B8%8A%E7%9A%84%E5%9C%96%E5%83%8F%E9%A1%9E%E5%9E%8B-Bitmap%E3%80%81Image%E3%80%81Mat%E3%80%81UMat/" />
+    <meta property="og:title" content=".Net 上的圖像類型(Bitmap、Image、Mat、UMat) | Imisky" />
+    <meta property="og:description" content="1. - Bitmap 是一個在 C# 中常用的圖像類型，它屬於 System.Drawing 命名空間。它用於表示和處理點陣圖圖像。 - Bitmap 是一個基於像素的圖像，每個像素都包含顏色信息。您可以輕鬆地創建、讀取、繪製和處理 Bitmap 圖像。 - 這是一個簡單且易於使用的圖像類型，適用於大多數基本圖像處理需求，但在某些情況下可能會有性能問題。 2. - Image&lt;TColor, T" />
+    <meta property="og:image" content="https://pochunyeh.com/img/cover/code.jpg" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content=".Net 上的圖像類型(Bitmap、Image、Mat、UMat) | Imisky" />
+    <meta name="twitter:description" content="1. - Bitmap 是一個在 C# 中常用的圖像類型，它屬於 System.Drawing 命名空間。它用於表示和處理點陣圖圖像。 - Bitmap 是一個基於像素的圖像，每個像素都包含顏色信息。您可以輕鬆地創建、讀取、繪製和處理 Bitmap 圖像。 - 這是一個簡單且易於使用的圖像類型，適用於大多數基本圖像處理需求，但在某些情況下可能會有性能問題。 2. - Image&lt;TColor, T" />
+    <meta name="twitter:image" content="https://pochunyeh.com/img/cover/code.jpg" />
+    <meta property="article:modified_time" content="2023-10-03" />
+    <!-- Dark mode: apply before first paint to avoid flash -->
+    <script>
+      (function () {
+        var t = localStorage.getItem("theme");
+        document.documentElement.classList.toggle("dark", t === null ? true : t === "dark");
+      })();
+    </script>
+    <!-- GitHub Pages SPA redirect: restore path from query string -->
+    <script>
+      (function () {
+        var l = window.location;
+        if (l.search[1] === "/") {
+          var decoded = l.search.slice(1).split("&").map(function (s) {
+            return s.replace(/~and~/g, "&");
+          }).join("?");
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-DPAwkItx.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/CoverImage-CuUq4Ifc.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-C0Wg-2zt.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

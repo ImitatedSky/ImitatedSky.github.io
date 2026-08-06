@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>PocHun's Blog</title>
+    <link>https://pochunyeh.com</link>
+    <description>Coding · LeetCode · Life</description>
+    <language>zh-TW</language>
+    <item>
+      <title>Leetcode 快速複習的題目</title>
+      <link>https://pochunyeh.com/posts/Leetcode-快速複習的題目/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-快速複習的題目/</guid>
+      <pubDate>Wed, 25 Oct 2023 00:00:00 GMT</pubDate>
+      <description>個人刷 leetcode 地方，不一定每題都為最佳最速解 入門 - &lt;input type=&quot;checkbox&quot; Leetcode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array - &lt;input type=&quot;checkbox&quot; Leetcode-35-Search-Insert-Position - &lt;input type=&quot;</description>
+    </item>
+    <item>
+      <title>coding 前python快速複習公式</title>
+      <link>https://pochunyeh.com/posts/coding-前python快速複習公式/</link>
+      <guid>https://pochunyeh.com/posts/coding-前python快速複習公式/</guid>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 GMT</pubDate>
+      <description>linknode 好處 插入只要O(1) 壞處 訪問要O(n) full binary tree v.s. complete binary tree 所有使用公式進行排列的時間複雜度 都是 O(nlogn) 方法從列表中移除並返回指定位置的元素，如果不指定索引，則默認移除並返回列表的最後一個元素。 方法在列表的末尾添加一個元素。 方法在指定位置插入元素 方法移除列表中第一次出現的指定元素。 函數用</description>
+    </item>
+    <item>
+      <title>Leetcode#36. Valid Sudoku</title>
+      <link>https://pochunyeh.com/posts/Leetcode-36-Valid-Sudoku/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-36-Valid-Sudoku/</guid>
+      <pubDate>Tue, 18 Feb 2025 00:00:00 GMT</pubDate>
+      <description>Determine if a Sudoku board is valid. Only the filled cells need to be validated according to the following rules: 1. Each row must contain the digits without repetition. 2. Each column must contain t</description>
+    </item>
+    <item>
+      <title>Leetcode#134. Gas Station</title>
+      <link>https://pochunyeh.com/posts/Leetcode-134-Gas-Station/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-134-Gas-Station/</guid>
+      <pubDate>Tue, 10 Sep 2024 00:00:00 GMT</pubDate>
+      <description>There are gas stations along a circular route, where the amount of gas at the station is . You have a car with an unlimited gas tank and it costs of gas to travel from the station to its next station.</description>
+    </item>
+    <item>
+      <title>Leetcode#300. Longest Increasing Subsequence</title>
+      <link>https://pochunyeh.com/posts/Leetcode-300-Longest-Increasing-Subsequence/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-300-Longest-Increasing-Subsequence/</guid>
+      <pubDate>Tue, 10 Sep 2024 00:00:00 GMT</pubDate>
+      <description>Given an integer array , return the length of the longest strictly increasing subsequence . Example 1: Example 2: Example 3: Constraints: - - Follow up: Can you come up with an algorithm that runs in </description>
+    </item>
+    <item>
+      <title>Leetcode#949. Largest Time for Given Digits</title>
+      <link>https://pochunyeh.com/posts/Leetcode-949-Largest-Time-for-Given-Digits/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-949-Largest-Time-for-Given-Digits/</guid>
+      <pubDate>Tue, 10 Sep 2024 00:00:00 GMT</pubDate>
+      <description>Given an array of 4 digits, find the latest 24-hour time that can be made using each digit exactly once. 24-hour times are formatted as , where is between and , and is between and . The earliest 24-ho</description>
+    </item>
+    <item>
+      <title>Leetcode#133. Clone Graph</title>
+      <link>https://pochunyeh.com/posts/Leetcode-133-Clone-Graph/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-133-Clone-Graph/</guid>
+      <pubDate>Mon, 09 Sep 2024 00:00:00 GMT</pubDate>
+      <description>Given a reference of a node in a connected#Connectedgraph) undirected graph. Return a deep copy (clone) of the graph. Each node in the graph contains a value () and a list () of its neighbors. Test ca</description>
+    </item>
+    <item>
+      <title>Leetcode#205. Isomorphic Strings</title>
+      <link>https://pochunyeh.com/posts/Leetcode-205-Isomorphic-Strings/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-205-Isomorphic-Strings/</guid>
+      <pubDate>Fri, 30 Aug 2024 00:00:00 GMT</pubDate>
+      <description>Given two strings and , determine if they are isomorphic. Two strings and are isomorphic if the characters in can be replaced to get . All occurrences of a character must be replaced with another char</description>
+    </item>
+    <item>
+      <title>Leetcode#383. Ransom Note</title>
+      <link>https://pochunyeh.com/posts/Leetcode-383-Ransom-Note/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-383-Ransom-Note/</guid>
+      <pubDate>Fri, 30 Aug 2024 00:00:00 GMT</pubDate>
+      <description>Given two strings and , return if can be constructed by using the letters from and otherwise. Each letter in can only be used once in . Example 1: Example 2: Example 3: Constraints: - - and consist of</description>
+    </item>
+    <item>
+      <title>Leetcode#20. Valid Parentheses</title>
+      <link>https://pochunyeh.com/posts/Leetcode-20-Valid-Parentheses/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-20-Valid-Parentheses/</guid>
+      <pubDate>Thu, 04 Jul 2024 00:00:00 GMT</pubDate>
+      <description>Given a string containing just the characters , , , , and , determine if the input string is valid. An input string is valid if: 1. Open brackets must be closed by the same type of brackets. 2. Open b</description>
+    </item>
+    <item>
+      <title>Leetcode#1319. Number of Operations to Make Network Connected</title>
+      <link>https://pochunyeh.com/posts/Leetcode-1319-Number-of-Operations-to-Make-Network-Connected/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-1319-Number-of-Operations-to-Make-Network-Connected/</guid>
+      <pubDate>Tue, 02 Jul 2024 00:00:00 GMT</pubDate>
+      <description>There are computers numbered from to connected by ethernet cables forming a network where represents a connection between computers and . Any computer can reach any other computer directly or indirect</description>
+    </item>
+    <item>
+      <title>Leetcode#114. Flatten Binary Tree to Linked List</title>
+      <link>https://pochunyeh.com/posts/Leetcode-114-Flatten-Binary-Tree-to-Linked-List/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-114-Flatten-Binary-Tree-to-Linked-List/</guid>
+      <pubDate>Mon, 01 Jul 2024 00:00:00 GMT</pubDate>
+      <description>Given the of a binary tree, flatten the tree into a &quot;linked list&quot;: - The &quot;linked list&quot; should use the same class where the child pointer points to the next node in the list and the child pointer is al</description>
+    </item>
+    <item>
+      <title>Leetcode#101. Symmetric Tree</title>
+      <link>https://pochunyeh.com/posts/Leetcode-101-Symmetric-Tree/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-101-Symmetric-Tree/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>Given the of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center). Example 1: Example 2: Constraints: - The number of nodes in the tree is in the range . - Follow </description>
+    </item>
+    <item>
+      <title>Leetcode#104. Maximum Depth of Binary Tree</title>
+      <link>https://pochunyeh.com/posts/Leetcode-104-Maximum-Depth-of-Binary-Tree/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-104-Maximum-Depth-of-Binary-Tree/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>Given the of a binary tree, return its maximum depth. A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Example 1: Example </description>
+    </item>
+    <item>
+      <title>Leetcode#122. Best Time to Buy and Sell Stock II</title>
+      <link>https://pochunyeh.com/posts/Leetcode-122-Best-Time-to-Buy-and-Sell-Stock-II/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-122-Best-Time-to-Buy-and-Sell-Stock-II/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>You are given an integer array where is the price of a given stock on the day. On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. H</description>
+    </item>
+    <item>
+      <title>Leetcode#169. Majority Element</title>
+      <link>https://pochunyeh.com/posts/Leetcode-169-Majority-Element/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-169-Majority-Element/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>Given an array of size , return the majority element. The majority element is the element that appears more than times. You may assume that the majority element always exists in the array. Example 1: </description>
+    </item>
+    <item>
+      <title>Leetcode#189. Rotate Arra</title>
+      <link>https://pochunyeh.com/posts/Leetcode-189-Rotate-Arra/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-189-Rotate-Arra/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>Given an integer array , rotate the array to the right by steps, where is non-negative. Example 1: Example 2: Constraints: - - - Follow up: - Try to come up with as many solutions as you can. There ar</description>
+    </item>
+    <item>
+      <title>Leetcode#274. H-Index</title>
+      <link>https://pochunyeh.com/posts/Leetcode-274-H-Index/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-274-H-Index/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>Given an array of integers where is the number of citations a researcher received for their paper, return the researcher's h-index. According to the definition of h-index on Wikipedia: The h-index is </description>
+    </item>
+    <item>
+      <title>Leetcode#322. Coin Change</title>
+      <link>https://pochunyeh.com/posts/Leetcode-322-Coin-Change/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-322-Coin-Change/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>You are given an integer array representing coins of different denominations and an integer representing a total amount of money. Return the fewest number of coins that you need to make up that amount</description>
+    </item>
+    <item>
+      <title>Leetcode#380. Insert Delete GetRandom O(1)</title>
+      <link>https://pochunyeh.com/posts/Leetcode-380-Insert-Delete-GetRandom-O-1/</link>
+      <guid>https://pochunyeh.com/posts/Leetcode-380-Insert-Delete-GetRandom-O-1/</guid>
+      <pubDate>Sun, 30 Jun 2024 00:00:00 GMT</pubDate>
+      <description>Implement the class: - Initializes the object. - Inserts an item into the set if not present. Returns if the item was not present, otherwise. - Removes an item from the set if present. Returns if the </description>
+    </item>
+  </channel>
+</rss>

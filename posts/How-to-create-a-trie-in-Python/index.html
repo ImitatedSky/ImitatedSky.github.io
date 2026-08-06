@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/img/MyAvatar.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to create a trie in Python | Imisky</title>
+    <meta name="description" content="Trie 像一顆特別的樹，每個節點都是一個字母，從根節點到葉節點的路徑上的字母連起來就是一個單詞。 搜尋提示，比如輸入一個單詞，自動提示可能的後續單詞。 搜尋效率高，不用像哈希表一樣，需要計算哈希值，直接根據單詞的每個字母，一層一層的往下搜尋即可。 空間消耗大，因為每個節點都需要存儲子節點的指針，當單詞數量很多時，需要的空間就很大。" />
+    <link rel="canonical" href="https://pochunyeh.com/posts/How-to-create-a-trie-in-Python/" />
+    <meta property="og:site_name" content="Imisky" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://pochunyeh.com/posts/How-to-create-a-trie-in-Python/" />
+    <meta property="og:title" content="How to create a trie in Python | Imisky" />
+    <meta property="og:description" content="Trie 像一顆特別的樹，每個節點都是一個字母，從根節點到葉節點的路徑上的字母連起來就是一個單詞。 搜尋提示，比如輸入一個單詞，自動提示可能的後續單詞。 搜尋效率高，不用像哈希表一樣，需要計算哈希值，直接根據單詞的每個字母，一層一層的往下搜尋即可。 空間消耗大，因為每個節點都需要存儲子節點的指針，當單詞數量很多時，需要的空間就很大。" />
+    <meta property="og:image" content="https://pochunyeh.com/img/cover/code.jpg" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How to create a trie in Python | Imisky" />
+    <meta name="twitter:description" content="Trie 像一顆特別的樹，每個節點都是一個字母，從根節點到葉節點的路徑上的字母連起來就是一個單詞。 搜尋提示，比如輸入一個單詞，自動提示可能的後續單詞。 搜尋效率高，不用像哈希表一樣，需要計算哈希值，直接根據單詞的每個字母，一層一層的往下搜尋即可。 空間消耗大，因為每個節點都需要存儲子節點的指針，當單詞數量很多時，需要的空間就很大。" />
+    <meta name="twitter:image" content="https://pochunyeh.com/img/cover/code.jpg" />
+    <meta property="article:modified_time" content="2023-08-15" />
+    <!-- Dark mode: apply before first paint to avoid flash -->
+    <script>
+      (function () {
+        var t = localStorage.getItem("theme");
+        document.documentElement.classList.toggle("dark", t === null ? true : t === "dark");
+      })();
+    </script>
+    <!-- GitHub Pages SPA redirect: restore path from query string -->
+    <script>
+      (function () {
+        var l = window.location;
+        if (l.search[1] === "/") {
+          var decoded = l.search.slice(1).split("&").map(function (s) {
+            return s.replace(/~and~/g, "&");
+          }).join("?");
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-DPAwkItx.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/CoverImage-CuUq4Ifc.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-C0Wg-2zt.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
