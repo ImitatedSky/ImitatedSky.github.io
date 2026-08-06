@@ -112,6 +112,7 @@ interface PostMeta {
 interface Post extends PostMeta { contentHtml: string; }
 
 const allMeta: PostMeta[] = [];
+const failures: string[] = [];
 const searchIndex: { slug: string; title: string; tags: string[]; category: string; excerpt: string }[] = [];
 
 for (const file of files) {
@@ -149,6 +150,17 @@ for (const file of files) {
       /href="\.\.\/[^/"]+\/([^"?#]+)([^"]*)"/g,
       (_, slug, rest) => `href="/posts/${slug}${rest}"`
     );
+    // Absolutise relative image sources. Post URLs are served with a trailing
+    // slash, so "../img/x.png" or "x.png" would resolve under /posts/<slug>/
+    // and 404 — images live at /img/… regardless of which post embeds them.
+    contentHtml = contentHtml.replace(
+      /src="(?!https?:|\/|data:)([^"]+)"/g,
+      (_, rel: string) => {
+        const cleaned = rel.replace(/^(?:\.\.?\/)+/, "");
+        const abs = cleaned.startsWith("img/") ? `/${cleaned}` : `/img/${cleaned}`;
+        return `src="${abs}"`;
+      }
+    );
     // Add target="_blank" rel="noopener noreferrer" to external links
     contentHtml = contentHtml.replace(
       /<a\s([^>]*href="https?:\/\/[^"]*"[^>]*)>/gi,
@@ -164,8 +176,17 @@ for (const file of files) {
     allMeta.push({ slug, title, date, updated, tags, categories, cover, excerpt, sticky });
     searchIndex.push({ slug, title, date, tags, categories, excerpt });
   } catch (e) {
-    console.warn(`  WARN: skipping ${slug}: ${(e as Error).message}`);
+    // A swallowed error here silently removes a post from the site while the
+    // build still succeeds — collect and fail loudly instead.
+    failures.push(`${slug}: ${(e as Error).message}`);
   }
+}
+
+if (failures.length > 0) {
+  console.error(`\n  ✗ ${failures.length} post(s) failed to build:`);
+  for (const f of failures) console.error(`      ${f}`);
+  console.error("\n  Refusing to publish a site with missing posts.\n");
+  process.exit(1);
 }
 
 // sort: sticky posts first (higher sticky value = higher priority), then date descending

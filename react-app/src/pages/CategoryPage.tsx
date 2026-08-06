@@ -6,8 +6,9 @@ import ContentWithAside from "../components/ContentWithAside";
 import PageBanner from "../components/PageBanner";
 
 export default function CategoryPage() {
-  const { cat = "" } = useParams<{ cat: string }>();
-  const decoded = decodeURIComponent(cat);
+  // React Router already decodes path params — decoding again throws
+  // URIError on a legitimate "%" in a category name.
+  const { cat: decoded = "" } = useParams<{ cat: string }>();
   const { posts, loading } = usePosts();
   usePageTitle(decoded);
 

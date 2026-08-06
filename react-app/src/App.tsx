@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import Nav from "./components/Nav";
 // Home and PostPage carry nearly all traffic — keep them in the main bundle.
 import Home from "./pages/Home";
@@ -12,6 +12,7 @@ const ArchivesPage = lazy(() => import("./pages/ArchivesPage"));
 const LinksPage = lazy(() => import("./pages/LinksPage"));
 const MessageBoardPage = lazy(() => import("./pages/MessageBoardPage"));
 import Search from "./components/Search";
+import ChunkErrorBoundary from "./components/ChunkErrorBoundary";
 import BackToTop from "./components/BackToTop";
 import PowerMode from "./components/PowerMode";
 import CanvasNest from "./components/CanvasNest";
@@ -22,12 +23,22 @@ import { SITE } from "./config/site";
 export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const { pathname } = useLocation();
+  const navType = useNavigationType();
 
   // SPA route changes keep the scroll position; jump to top like a full page
-  // load would (otherwise prev/next at the bottom of a post looks like a no-op)
+  // load would (otherwise prev/next at the bottom of a post looks like a
+  // no-op). Skip on POP so the browser's own scroll restoration wins when the
+  // reader presses Back.
   useEffect(() => {
+    if (navType === "POP") return;
+    // Paging through the list shouldn't bounce the reader back over the
+    // full-viewport hero — land them on the posts instead.
+    if (/^\/page\/\d+$/.test(pathname)) {
+      document.getElementById("post-list")?.scrollIntoView();
+      return;
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, navType]);
 
   // Global search keyboard shortcut: / or Ctrl+K
   useEffect(() => {
@@ -51,6 +62,7 @@ export default function App() {
       <BackToTop />
       <PowerMode />
       <main className="flex-1">
+        <ChunkErrorBoundary key={pathname}>
         <Suspense fallback={<div className="flex justify-center py-32 text-zinc-400">Loading…</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -66,6 +78,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        </ChunkErrorBoundary>
       </main>
       <footer className="py-6 text-center text-xs text-zinc-400 dark:text-zinc-600 border-t border-zinc-200 dark:border-zinc-800">
         ©{SITE.copyrightFrom} – {new Date().getFullYear()} By {SITE.author}

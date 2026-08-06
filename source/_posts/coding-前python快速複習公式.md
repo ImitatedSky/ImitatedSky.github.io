@@ -1,7 +1,7 @@
 ---
 title: coding 前python快速複習公式
 tags:
-  - [python]
+  - [Python]
 cover: /img/cover/cover02.jpg
 date: 2024-06-05 19:42:44
 sticky: 99

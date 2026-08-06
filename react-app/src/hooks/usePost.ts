@@ -34,6 +34,13 @@ export function usePost(slug: string) {
         if (cancelled) return;
         setPost(data);
         setLoading(false);
+      })
+      .catch(() => {
+        // Without this a network error or malformed JSON leaves the page
+        // stuck on "Loading…" forever with an unhandled rejection.
+        if (cancelled) return;
+        setNotFound(true);
+        setLoading(false);
       });
     return () => {
       cancelled = true;
