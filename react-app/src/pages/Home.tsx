@@ -42,7 +42,14 @@ export default function Home() {
     <>
       {/* Full-viewport hero */}
       <div className="relative w-full h-screen overflow-hidden">
-        <img src="/img/index_img.jpg" alt="banner" className="w-full h-full object-cover" />
+        {/* LCP element — hint the browser to fetch it first */}
+        <img
+          src="/img/index_img.jpg"
+          alt="banner"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4">
           <h1 className="text-5xl font-bold tracking-tight drop-shadow-lg">{SITE.name}</h1>
           <p className="mt-3 text-white/80 text-lg drop-shadow min-h-[2em]">
