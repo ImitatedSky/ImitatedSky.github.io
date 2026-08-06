@@ -92,9 +92,9 @@ Trade(
         ordno='000003',
         account=Account(
             account_type=<AccountType.Stock: 'S'>,
-            person_id='F129760296',
-            broker_id='9A9K',
-            account_id='0264271'
+            person_id='YOUR_PERSON_ID',
+            broker_id='YOUR_BROKER_ID',
+            account_id='YOUR_ACCOUNT_ID'
         ),
         price_type=<StockPriceType.LMT: 'LMT'>,
         order_type=<OrderType.ROD: 'ROD'>
