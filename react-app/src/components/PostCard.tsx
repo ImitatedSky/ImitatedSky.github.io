@@ -20,6 +20,8 @@ export default function PostCard({ post, index = 0 }: Props) {
             <img
               src={post.cover}
               alt={post.title}
+              loading={index < 2 ? "eager" : "lazy"}
+              decoding="async"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>

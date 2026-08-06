@@ -14,9 +14,14 @@ import yaml from "js-yaml";
 const ROOT = path.join(process.cwd(), "..");
 const POSTS_DIR = path.join(ROOT, "source/_posts");
 const LINKS_FILE = path.join(ROOT, "source/_data/link.yml");
+const IMG_SRC = path.join(ROOT, "source/img");
+const IMG_DEST = path.join(process.cwd(), "public/img");
 const OUT_DIR = path.join(process.cwd(), "public/content");
 const OUT_POSTS = path.join(OUT_DIR, "posts");
 const BASE_URL = "https://pochunyeh.com";
+const SITE_NAME = "Imisky";
+const DEFAULT_DESC = "Coding · LeetCode · Life";
+const PAGE_SIZE = 10; // keep in sync with Home.tsx
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -53,6 +58,30 @@ function preprocessContent(content: string): string {
   return content.replace(/^!(https?:\/\/\S+)$/gm, "![]($1)");
 }
 
+/** source/img is the single source of truth; top up public/img from it */
+function copyImages(src: string, dest: string): number {
+  if (!fs.existsSync(src)) return 0;
+  fs.mkdirSync(dest, { recursive: true });
+  let n = 0;
+  for (const e of fs.readdirSync(src, { withFileTypes: true })) {
+    const from = path.join(src, e.name);
+    const to = path.join(dest, e.name);
+    if (e.isDirectory()) {
+      n += copyImages(from, to);
+    } else if (e.isFile()) {
+      // skip if destination is already identical in size and not older
+      const s = fs.statSync(from);
+      if (fs.existsSync(to)) {
+        const d = fs.statSync(to);
+        if (d.size === s.size && d.mtimeMs >= s.mtimeMs) continue;
+      }
+      fs.copyFileSync(from, to);
+      n++;
+    }
+  }
+  return n;
+}
+
 function makeExcerpt(content: string): string {
   return content
     .replace(/^#{1,6}\s+.+$/gm, "")
@@ -69,6 +98,9 @@ function makeExcerpt(content: string): string {
 // ── main ─────────────────────────────────────────────────────────────────────
 
 fs.mkdirSync(OUT_POSTS, { recursive: true });
+
+const copied = copyImages(IMG_SRC, IMG_DEST);
+console.log(`  ✓ img (${copied} copied from source/img)`);
 
 const files = collectMarkdownFiles(POSTS_DIR);
 console.log(`Processing ${files.length} posts…`);
@@ -156,14 +188,74 @@ if (fs.existsSync(LINKS_FILE)) {
   console.log("  ✓ links.json");
 }
 
-// ── sitemap ──────────────────────────────────────────────────────────────────
-const urls = [
-  "/", "/archives/", "/tags/", "/categories/", "/links/",
-  ...allMeta.map((p) => `/posts/${p.slug}/`),
+// ── routes (drives both sitemap and prerender, so neither can drift) ─────────
+interface Route {
+  path: string;        // e.g. "/posts/foo" — no trailing slash except "/"
+  title: string;       // full <title>
+  description: string;
+  image: string;       // absolute URL
+  type: "website" | "article";
+  lastmod?: string;
+}
+
+const DEFAULT_IMG = `${BASE_URL}/img/index_img.jpg`;
+const abs = (p: string) => (p.startsWith("http") ? p : `${BASE_URL}${p}`);
+
+const tagNames = Array.from(new Set(allMeta.flatMap((p) => p.tags)));
+const catNames = Array.from(new Set(allMeta.flatMap((p) => p.categories)));
+const pageCount = Math.ceil(allMeta.length / PAGE_SIZE);
+
+const routes: Route[] = [
+  { path: "/", title: "Imisky's Blog", description: DEFAULT_DESC, image: DEFAULT_IMG, type: "website" },
+  ...Array.from({ length: Math.max(0, pageCount - 1) }, (_, i) => ({
+    path: `/page/${i + 2}`,
+    title: `第 ${i + 2} 頁 | ${SITE_NAME}`,
+    description: DEFAULT_DESC,
+    image: DEFAULT_IMG,
+    type: "website" as const,
+  })),
+  { path: "/archives", title: `Archives | ${SITE_NAME}`, description: `全部 ${allMeta.length} 篇文章的時間軸`, image: DEFAULT_IMG, type: "website" },
+  { path: "/tags", title: `Tags | ${SITE_NAME}`, description: `共 ${tagNames.length} 個標籤`, image: DEFAULT_IMG, type: "website" },
+  { path: "/categories", title: `Categories | ${SITE_NAME}`, description: `共 ${catNames.length} 個分類`, image: DEFAULT_IMG, type: "website" },
+  { path: "/links", title: `Links | ${SITE_NAME}`, description: "友情連結", image: DEFAULT_IMG, type: "website" },
+  { path: "/messageboard", title: `留言板 | ${SITE_NAME}`, description: "歡迎留言交流", image: DEFAULT_IMG, type: "website" },
+  ...tagNames.map((t) => ({
+    path: `/tags/${encodeURIComponent(t)}`,
+    title: `Tag: ${t} | ${SITE_NAME}`,
+    description: `標記為 ${t} 的文章`,
+    image: DEFAULT_IMG,
+    type: "website" as const,
+  })),
+  ...catNames.map((c) => ({
+    path: `/categories/${encodeURIComponent(c)}`,
+    title: `${c} | ${SITE_NAME}`,
+    description: `分類 ${c} 的文章`,
+    image: DEFAULT_IMG,
+    type: "website" as const,
+  })),
+  ...allMeta.map((p) => ({
+    path: `/posts/${encodeURIComponent(p.slug)}`,
+    title: `${p.title} | ${SITE_NAME}`,
+    description: p.excerpt || DEFAULT_DESC,
+    image: abs(p.cover),
+    type: "article" as const,
+    lastmod: p.updated || p.date || undefined,
+  })),
 ];
+
+fs.writeFileSync(path.join(OUT_DIR, "routes.json"), JSON.stringify(routes));
+console.log(`  ✓ routes.json (${routes.length} routes)`);
+
+// ── sitemap ──────────────────────────────────────────────────────────────────
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${BASE_URL}${u}</loc></url>`).join("\n")}
+${routes
+  .map((r) => {
+    const loc = `${BASE_URL}${r.path === "/" ? "/" : `${r.path}/`}`;
+    const lastmod = r.lastmod ? `<lastmod>${r.lastmod}</lastmod>` : "";
+    return `  <url><loc>${loc}</loc>${lastmod}</url>`;
+  })
+  .join("\n")}
 </urlset>`;
 fs.writeFileSync(path.join(process.cwd(), "public/sitemap.xml"), sitemap);
 console.log("  ✓ sitemap.xml");

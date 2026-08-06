@@ -17,3 +17,5 @@ react-app/dist/
 react-app/public/content/
 react-app/public/sitemap.xml
 react-app/public/rss.xml
+# copied from source/img at build time — source/img is the single source of truth
+react-app/public/img/

@@ -1,19 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Fuse from "fuse.js";
+import type Fuse from "fuse.js";
 import { FiSearch, FiX } from "react-icons/fi";
 import type { SearchEntry } from "../types";
 
 let _index: SearchEntry[] | null = null;
 let _fuse: Fuse<SearchEntry> | null = null;
 
+// fuse.js is only needed once search is actually opened — keep it out of the
+// initial bundle alongside the already-lazy search index.
 async function getFuse(): Promise<Fuse<SearchEntry>> {
   if (_fuse) return _fuse;
-  if (!_index) {
-    const res = await fetch("/content/search-index.json");
-    _index = await res.json();
-  }
-  _fuse = new Fuse(_index!, {
+  const [{ default: FuseCtor }, index] = await Promise.all([
+    import("fuse.js"),
+    _index
+      ? Promise.resolve(_index)
+      : fetch("/content/search-index.json").then((r) => r.json() as Promise<SearchEntry[]>),
+  ]);
+  _index = index;
+  _fuse = new FuseCtor(index, {
     keys: ["title", "tags", "categories", "excerpt"],
     threshold: 0.35,
     includeScore: true,
