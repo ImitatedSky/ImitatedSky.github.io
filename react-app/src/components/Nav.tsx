@@ -22,7 +22,12 @@ export default function Nav({ onSearchOpen }: { onSearchOpen: () => void }) {
 
   useEffect(() => {
     const stored = localStorage.getItem("theme");
-    const isDark = stored === null ? true : stored === "dark";
+    // Mirrors the inline script in index.html: no explicit choice yet means
+    // follow the OS preference, otherwise honour what the user picked.
+    const isDark =
+      stored === null
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : stored === "dark";
     setDark(isDark);
     document.documentElement.classList.toggle("dark", isDark);
   }, []);

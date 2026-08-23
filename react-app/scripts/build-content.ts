@@ -113,6 +113,8 @@ interface Post extends PostMeta { contentHtml: string; }
 
 const allMeta: PostMeta[] = [];
 const failures: string[] = [];
+/** slug -> rendered HTML, kept in memory so the RSS feed can carry full text */
+const fullHtml = new Map<string, string>();
 const searchIndex: { slug: string; title: string; tags: string[]; category: string; excerpt: string }[] = [];
 
 for (const file of files) {
@@ -173,6 +175,7 @@ for (const file of files) {
     const post: Post = { slug, title, date, updated, tags, categories, cover, excerpt, sticky, contentHtml };
     fs.writeFileSync(path.join(OUT_POSTS, `${slug}.json`), JSON.stringify(post));
 
+    fullHtml.set(slug, contentHtml);
     allMeta.push({ slug, title, date, updated, tags, categories, cover, excerpt, sticky });
     searchIndex.push({ slug, title, date, tags, categories, excerpt });
   } catch (e) {
@@ -235,6 +238,7 @@ const routes: Route[] = [
     image: DEFAULT_IMG,
     type: "website" as const,
   })),
+  { path: "/leetcode", title: `LeetCode 題目索引 | ${SITE_NAME}`, description: "所有 LeetCode 題解筆記的索引，可依難度與演算法篩選", image: DEFAULT_IMG, type: "website" },
   { path: "/archives", title: `Archives | ${SITE_NAME}`, description: `全部 ${allMeta.length} 篇文章的時間軸`, image: DEFAULT_IMG, type: "website" },
   { path: "/tags", title: `Tags | ${SITE_NAME}`, description: `共 ${tagNames.length} 個標籤`, image: DEFAULT_IMG, type: "website" },
   { path: "/categories", title: `Categories | ${SITE_NAME}`, description: `共 ${catNames.length} 個分類`, image: DEFAULT_IMG, type: "website" },
@@ -287,7 +291,7 @@ function esc(s: string) {
 }
 const recent = allMeta.filter(p => p.date).slice(0, 20);
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>PocHun's Blog</title>
     <link>${BASE_URL}</link>
@@ -299,6 +303,7 @@ ${recent.map(p => `    <item>
       <guid>${BASE_URL}/posts/${p.slug}/</guid>
       <pubDate>${new Date(p.date).toUTCString()}</pubDate>
       <description>${esc(p.excerpt)}</description>
+      <content:encoded><![CDATA[${(fullHtml.get(p.slug) ?? "").replace(/]]>/g, "]]&gt;")}]]></content:encoded>
     </item>`).join("\n")}
   </channel>
 </rss>`;

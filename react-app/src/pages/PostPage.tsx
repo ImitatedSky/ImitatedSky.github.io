@@ -13,6 +13,7 @@ import TagPill from "../components/TagPill";
 import CoverImage from "../components/CoverImage";
 import Comments from "../components/Comments";
 import { SITE, SHARE_URLS } from "../config/site";
+import { LEETCODE_CATEGORY, problemNumber } from "../lib/leetcode";
 import type { PostMeta } from "../types";
 
 /** Intercept clicks on internal <a> links inside rendered post HTML so React Router
@@ -216,10 +217,27 @@ export default function PostPage() {
     );
   }
 
-  // Prev / Next (posts are sorted newest-first, so "prev" = older = higher index)
-  const idx = posts.findIndex((p) => p.slug === slug);
-  const newer = idx > 0 ? posts[idx - 1] : null; // 下一篇 (newer)
-  const older = idx >= 0 && idx < posts.length - 1 ? posts[idx + 1] : null; // 上一篇 (older)
+  // Prev / Next walk the post's own category rather than the whole site: on a
+  // LeetCode note the useful neighbour is the adjacent problem number, not
+  // whatever happened to be published next. Falls back to the site-wide date
+  // order when the category has no other posts.
+  const siblings = (() => {
+    const cat = post.categories[0];
+    const inCat = cat ? posts.filter((p) => p.categories.includes(cat)) : [];
+    if (inCat.length < 2) return posts; // already newest-first
+    if (cat === LEETCODE_CATEGORY) {
+      // ascending problem number, then reversed so index order stays
+      // "earlier index = 下一篇" like the date-sorted list
+      return [...inCat]
+        .sort((a, b) => (problemNumber(a) ?? Infinity) - (problemNumber(b) ?? Infinity))
+        .reverse();
+    }
+    return inCat; // usePosts already returns newest-first
+  })();
+
+  const idx = siblings.findIndex((p) => p.slug === slug);
+  const newer = idx > 0 ? siblings[idx - 1] : null; // 下一篇
+  const older = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null; // 上一篇
 
   // Related: same category or shared tags, exclude self, top 3 by overlap score
   const related: PostMeta[] = posts

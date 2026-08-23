@@ -9,6 +9,7 @@ const TagPage = lazy(() => import("./pages/TagPage"));
 const CategoriesPage = lazy(() => import("./pages/CategoriesPage"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const ArchivesPage = lazy(() => import("./pages/ArchivesPage"));
+const LeetcodePage = lazy(() => import("./pages/LeetcodePage"));
 const LinksPage = lazy(() => import("./pages/LinksPage"));
 const MessageBoardPage = lazy(() => import("./pages/MessageBoardPage"));
 import Search from "./components/Search";
@@ -73,6 +74,7 @@ export default function App() {
             <Route path="/categories" element={<CategoriesPage />} />
             <Route path="/categories/:cat" element={<CategoryPage />} />
             <Route path="/archives" element={<ArchivesPage />} />
+            <Route path="/leetcode" element={<LeetcodePage />} />
             <Route path="/links" element={<LinksPage />} />
             <Route path="/messageboard" element={<MessageBoardPage />} />
             <Route path="*" element={<NotFound />} />
