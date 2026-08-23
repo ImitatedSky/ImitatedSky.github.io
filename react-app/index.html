@@ -9,7 +9,11 @@
     <script>
       (function () {
         var t = localStorage.getItem("theme");
-        document.documentElement.classList.toggle("dark", t === null ? true : t === "dark");
+        // No explicit choice yet -> follow the OS preference
+        var dark = t === null
+          ? window.matchMedia("(prefers-color-scheme: dark)").matches
+          : t === "dark";
+        document.documentElement.classList.toggle("dark", dark);
       })();
     </script>
     <!-- GitHub Pages SPA redirect: restore path from query string -->
