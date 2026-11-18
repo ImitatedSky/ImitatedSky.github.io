@@ -8,6 +8,7 @@
     "prebuild": "tsx scripts/build-content.ts",
     "build": "tsc -b && vite build && tsx scripts/prerender.ts",
     "preview": "vite preview",
+    "verify:algo": "tsx scripts/verify-algo.ts",
     "deploy": "npm run build && gh-pages -d dist -b gh-page"
   },
   "dependencies": {

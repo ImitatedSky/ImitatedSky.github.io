@@ -10,6 +10,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 import yaml from "js-yaml";
+import { PROBLEMS as ALGO_PROBLEMS } from "../src/algo/catalog";
 
 const ROOT = path.join(process.cwd(), "..");
 const POSTS_DIR = path.join(ROOT, "source/_posts");
@@ -239,6 +240,16 @@ const routes: Route[] = [
     type: "website" as const,
   })),
   { path: "/leetcode", title: `LeetCode 題目索引 | ${SITE_NAME}`, description: "所有 LeetCode 題解筆記的索引，可依難度與演算法篩選", image: DEFAULT_IMG, type: "website" },
+  { path: "/algo", title: `Algo Lab — LeetCode 150 動畫圖解 | ${SITE_NAME}`, description: "LeetCode Top Interview 150 的逐步動畫圖解、Python 解法與瀏覽器內練習", image: DEFAULT_IMG, type: "website" },
+  { path: "/algo/problems", title: `題庫 150 — Algo Lab | ${SITE_NAME}`, description: "LeetCode Top Interview 150 全部題目，依主題與難度篩選", image: DEFAULT_IMG, type: "website" },
+  { path: "/algo/sorting", title: `排序視覺化 — Algo Lab | ${SITE_NAME}`, description: "十種排序演算法的長條圖動畫與 Python 寫法", image: DEFAULT_IMG, type: "website" },
+  ...ALGO_PROBLEMS.map((p) => ({
+    path: `/algo/p/${p.slug}`,
+    title: `${p.id}. ${p.titleZh} — Algo Lab | ${SITE_NAME}`,
+    description: `LeetCode ${p.id}. ${p.title}（${p.titleZh}）動畫圖解與 Python 解法`,
+    image: DEFAULT_IMG,
+    type: "website" as const,
+  })),
   { path: "/archives", title: `Archives | ${SITE_NAME}`, description: `全部 ${allMeta.length} 篇文章的時間軸`, image: DEFAULT_IMG, type: "website" },
   { path: "/tags", title: `Tags | ${SITE_NAME}`, description: `共 ${tagNames.length} 個標籤`, image: DEFAULT_IMG, type: "website" },
   { path: "/categories", title: `Categories | ${SITE_NAME}`, description: `共 ${catNames.length} 個分類`, image: DEFAULT_IMG, type: "website" },

@@ -1,0 +1,196 @@
+import type {
+  GridView as GridViewT,
+  IntervalsView as IntervalsViewT,
+  MapView as MapViewT,
+  QueueView as QueueViewT,
+  StackView as StackViewT,
+} from "../types";
+import { ViewFrame, fmt, pointerClass, toneClass } from "./shared";
+
+export function GridView({ view }: { view: GridViewT }) {
+  const rows = view.cells.length;
+  const cols = Math.max(0, ...view.cells.map((r) => r.length));
+  const size = cols <= 6 ? 44 : cols <= 10 ? 36 : cols <= 14 ? 30 : 24;
+
+  const pointersAt = new Map<string, string[]>();
+  for (const [name, [r, c]] of Object.entries(view.pointers ?? {})) {
+    const k = `${r},${c}`;
+    pointersAt.set(k, [...(pointersAt.get(k) ?? []), name]);
+  }
+  const hasRowLabels = !!view.rowLabels;
+
+  return (
+    <ViewFrame label={view.label}>
+      <div className="algo-scroll-x">
+        <div
+          className="algo-grid"
+          style={{
+            gridTemplateColumns: `${hasRowLabels ? "auto " : ""}repeat(${cols}, ${size}px)`,
+          }}
+        >
+          {view.colLabels && (
+            <>
+              {hasRowLabels && <span />}
+              {Array.from({ length: cols }, (_, c) => (
+                <span key={c} className="algo-grid-label">
+                  {c < view.colLabels!.length ? fmt(view.colLabels![c]) : ""}
+                </span>
+              ))}
+            </>
+          )}
+          {Array.from({ length: rows }, (_, r) => (
+            <div key={r} style={{ display: "contents" }}>
+              {hasRowLabels && (
+                <span className="algo-grid-label algo-grid-label-row">
+                  {r < view.rowLabels!.length ? fmt(view.rowLabels![r]) : ""}
+                </span>
+              )}
+              {Array.from({ length: cols }, (_, c) => {
+                const k = `${r},${c}`;
+                const v = view.cells[r][c];
+                const text = v === undefined ? "" : fmt(v);
+                const names = pointersAt.get(k);
+                return (
+                  <div
+                    key={c}
+                    className={`algo-cell algo-grid-cell ${toneClass(view.marks?.[k])} ${names ? "has-pointer" : ""}`}
+                    style={{
+                      width: size,
+                      height: size,
+                      fontSize: text.length > 3 ? size * 0.26 : size * 0.36,
+                    }}
+                  >
+                    {text}
+                    {names && (
+                      <span className={`algo-grid-pointer ${pointerClass(names[0])}`}>
+                        {names.join(",")}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    </ViewFrame>
+  );
+}
+
+export function MapView({ view }: { view: MapViewT }) {
+  return (
+    <ViewFrame label={view.label}>
+      <div className="algo-map">
+        {view.entries.length === 0 && <span className="algo-empty">空</span>}
+        {view.entries.map(([k, v]) => (
+          <div key={String(k)} className={`algo-map-entry ${toneClass(view.marks?.[String(k)])}`}>
+            <span className="algo-map-key">{fmt(k)}</span>
+            {v !== undefined && (
+              <>
+                <span className="algo-map-arrow">→</span>
+                <span className="algo-map-val">{fmt(v)}</span>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    </ViewFrame>
+  );
+}
+
+export function StackView({ view }: { view: StackViewT }) {
+  const top = view.items.length - 1;
+  return (
+    <ViewFrame label={view.label}>
+      <div className="algo-stack">
+        {view.items.length === 0 && <span className="algo-empty">空</span>}
+        {view.items.map((v, i) => (
+          <div key={i} className={`algo-stack-item ${toneClass(view.marks?.[i])}`}>
+            {fmt(v)}
+            {i === top && <span className="algo-tag">top</span>}
+          </div>
+        ))}
+      </div>
+    </ViewFrame>
+  );
+}
+
+export function QueueView({ view }: { view: QueueViewT }) {
+  const last = view.items.length - 1;
+  return (
+    <ViewFrame label={view.label}>
+      <div className="algo-queue">
+        <span className="algo-queue-end">出 ←</span>
+        {view.items.length === 0 && <span className="algo-empty">空</span>}
+        {view.items.map((v, i) => (
+          <div key={i} className={`algo-queue-item ${toneClass(view.marks?.[i])}`}>
+            {fmt(v)}
+            {i === 0 && <span className="algo-tag">front</span>}
+            {i === last && i !== 0 && <span className="algo-tag">back</span>}
+          </div>
+        ))}
+        <span className="algo-queue-end">← 入</span>
+      </div>
+    </ViewFrame>
+  );
+}
+
+export function IntervalsView({ view }: { view: IntervalsViewT }) {
+  const nums = [
+    ...view.items.flatMap((it) => [it.start, it.end]),
+    ...(view.points ?? []).map((p) => p.at),
+  ];
+  const lo = nums.length ? Math.min(...nums) : 0;
+  const hi = nums.length ? Math.max(...nums) : 1;
+  const span = Math.max(1, hi - lo);
+  const pct = (v: number) => ((v - lo) / span) * 100;
+
+  // Greedy lane packing, in the given order, so overlapping intervals stack
+  const laneEnds: number[] = [];
+  const lanes = view.items.map((it) => {
+    let lane = laneEnds.findIndex((end) => end < it.start);
+    if (lane === -1) lane = laneEnds.length;
+    laneEnds[lane] = it.end;
+    return lane;
+  });
+  const laneCount = Math.max(1, laneEnds.length);
+  const ticks = [...new Set(nums)].sort((a, b) => a - b);
+
+  return (
+    <ViewFrame label={view.label}>
+      <div className="algo-intervals">
+        <div className="algo-intervals-lanes" style={{ height: laneCount * 30 }}>
+          {view.items.map((it, i) => (
+            <div
+              key={i}
+              className={`algo-interval ${toneClass(it.tone)}`}
+              style={{
+                left: `${pct(it.start)}%`,
+                width: `max(${pct(it.end) - pct(it.start)}%, 10px)`,
+                top: lanes[i] * 30,
+              }}
+            >
+              <span>{it.label ?? `[${it.start}, ${it.end}]`}</span>
+            </div>
+          ))}
+          {(view.points ?? []).map((p, i) => (
+            <div
+              key={`p${i}`}
+              className={`algo-interval-point ${toneClass(p.tone ?? "bad")}`}
+              style={{ left: `${pct(p.at)}%` }}
+            >
+              {p.label && <span>{p.label}</span>}
+            </div>
+          ))}
+        </div>
+        <div className="algo-intervals-axis">
+          {ticks.map((t) => (
+            <span key={t} style={{ left: `${pct(t)}%` }}>
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </ViewFrame>
+  );
+}
