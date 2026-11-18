@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiSearch, FiMenu, FiX, FiSun, FiMoon, FiChevronDown } from "react-icons/fi";
 import { usePosts } from "../hooks/usePosts";
 import { SITE, NAV_LINKS } from "../config/site";
+import { useTheme } from "../hooks/useTheme";
 
 export default function Nav({ onSearchOpen }: { onSearchOpen: () => void }) {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileCatsOpen, setMobileCatsOpen] = useState(false);
-  const [dark, setDark] = useState(true);
+  const { dark, toggle: toggleTheme } = useTheme();
   const { posts } = usePosts();
 
   // Categories for the dropdown, sorted by post count desc
@@ -19,25 +20,6 @@ export default function Nav({ onSearchOpen }: { onSearchOpen: () => void }) {
   const categories = Array.from(catCounts.entries())
     .sort((a, b) => b[1] - a[1])
     .map(([c]) => c);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    // Mirrors the inline script in index.html: no explicit choice yet means
-    // follow the OS preference, otherwise honour what the user picked.
-    const isDark =
-      stored === null
-        ? window.matchMedia("(prefers-color-scheme: dark)").matches
-        : stored === "dark";
-    setDark(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
-  }, []);
-
-  function toggleTheme() {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-  }
 
   function isActive(to: string) {
     if (to === "/") return pathname === "/";

@@ -1,0 +1,109 @@
+import { defineProblem } from "../types";
+import type { Tone } from "../types";
+import { V, py, tracer } from "../trace";
+
+const code = `class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        i = len(s) - 1
+        while i >= 0 and s[i] == " ":    # 先跳過尾端的空白
+            i -= 1
+        length = 0
+        while i >= 0 and s[i] != " ":    # 再一路數到下一個空白
+            length += 1
+            i -= 1
+        return length`;
+
+export default defineProblem<{ s: string }>({
+  id: 58,
+  summary:
+    "給一個由英文字母和空白組成的字串 `s`，回傳**最後一個單字的長度**。單字是指中間沒有空白的一段連續字母；字串的頭尾都可能有多餘的空白。",
+  examples: [
+    { input: 's = "Hello World"', output: "5" },
+    { input: 's = "   fly me   to   the moon  "', output: "4" },
+  ],
+  constraints: ["1 ≤ s.length ≤ 10⁴", "s 至少包含一個單字"],
+  idea:
+    "答案在字串的**尾巴**，所以從後面往前看最省事：先跳過結尾的空白，接著碰到的第一段字母就是最後一個單字，一路數到再次遇到空白（或走到開頭）為止。",
+  steps: [
+    "`i` 指向最後一個字元。",
+    "只要 `s[i]` 是空白就往左移 —— 跳過尾端的空白。",
+    "現在 `i` 停在最後一個單字的最後一個字母。只要 `s[i]` 不是空白就 `length += 1` 並往左移。",
+    "遇到空白或 `i` 走出字串開頭時停止，回傳 `length`。",
+  ],
+  pitfalls: [
+    "兩個迴圈都要先檢查 `i >= 0`：整個字串只有一個單字時，`i` 會走到 -1。",
+    "別忘了尾端可能有空白，直接從最後一格開始數會得到 0。",
+  ],
+  complexity: { time: "O(n)", space: "O(1)" },
+  code,
+  starter: `class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        `,
+  presets: [
+    { label: '"go to the moon  "', input: { s: "go to the moon  " }, expected: "4" },
+    { label: '"  hello world"', input: { s: "  hello world" }, expected: "5" },
+    { label: '"day"', input: { s: "day" }, expected: "3" },
+  ],
+  trace({ s }) {
+    const t = tracer();
+    const n = s.length;
+    const marks: Record<number, Tone> = {};
+    let i = n - 1;
+    const view = (extra: Record<number, Tone> = {}, word?: { from: number; to: number }) =>
+      V.chars("s", s, {
+        pointers: { i },
+        marks: { ...marks, ...extra },
+        ranges: word && word.from <= word.to ? [{ ...word, tone: "good", label: `length = ${word.to - word.from + 1}` }] : [],
+      });
+
+    t.push({
+      line: 3,
+      note: "最後一個單字在字串尾巴，所以 `i` 從最後一個字元開始**往左**看。",
+      views: [view({ [i]: "active" })],
+      vars: { i },
+    });
+
+    while (i >= 0 && s[i] === " ") {
+      marks[i] = "muted";
+      i--;
+      t.push({
+        line: [4, 5],
+        note: `\`s[${i + 1}]\` 是空白，不屬於任何單字，跳過，\`i\` 往左移。`,
+        views: [view()],
+        vars: { i },
+      });
+    }
+
+    const end = i;
+    let length = 0;
+    t.push({
+      line: 6,
+      note: `\`s[${i}] = "${s[i]}"\` 不是空白 —— 這就是最後一個單字的**最後一個字母**。從這裡開始數，\`length = 0\`。`,
+      views: [view({ [i]: "active" })],
+      vars: { i, length },
+    });
+
+    while (i >= 0 && s[i] !== " ") {
+      marks[i] = "good";
+      length++;
+      i--;
+      t.push({
+        line: [7, 8, 9],
+        note: `\`s[${i + 1}] = "${s[i + 1]}"\` 是字母，算進單字：\`length = ${length}\`，\`i\` 往左移。`,
+        views: [view({}, { from: i + 1, to: end })],
+        vars: { i, length },
+      });
+    }
+
+    t.push({
+      line: [7, 10],
+      note:
+        (i < 0 ? "`i` 已經走出字串開頭（`i = -1`），" : `\`s[${i}]\` 是空白，`) +
+        `單字到此為止。最後一個單字是 \`${s.slice(i + 1, end + 1)}\`，長度 ${length}。`,
+      views: [view(i >= 0 ? { [i]: "compare" } : {}, { from: i + 1, to: end })],
+      vars: { i, length },
+      result: py(length),
+    });
+    return t.frames;
+  },
+});

@@ -1,0 +1,8 @@
+s = Solution()
+check(s.rightSideView(build_tree([1, 2, 3, None, 5, None, 4])), [1, 3, 4], "範例 1")
+check(s.rightSideView(build_tree([1, 2, 3, 4, None, None, None, 5])), [1, 3, 4, 5], "左子樹比較深")
+check(s.rightSideView(build_tree([])), [], "空樹")
+check(s.rightSideView(build_tree([1, None, 3])), [1, 3], "只有右小孩")
+check(s.rightSideView(build_tree([1, 2])), [1, 2], "只有左小孩")
+check(s.rightSideView(build_tree([1, 2, 3, 4, 5, 6, 7])), [1, 3, 7], "完滿二元樹")
+check(s.rightSideView(build_tree([1, 2, None, 3, None, 4])), [1, 2, 3, 4], "左斜樹")

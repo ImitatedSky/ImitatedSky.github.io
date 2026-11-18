@@ -1,4 +1,4 @@
-import { FaHome, FaArchive, FaTags, FaFolderOpen, FaLink, FaCommentDots, FaListOl } from "react-icons/fa";
+import { FaHome, FaArchive, FaTags, FaFolderOpen, FaLink, FaCommentDots, FaListOl, FaCubes } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
 export const SITE = {
@@ -43,6 +43,7 @@ export interface NavLink {
 export const NAV_LINKS: NavLink[] = [
   { to: "/", label: "Home", icon: FaHome },
   { to: "/leetcode", label: "LeetCode", icon: FaListOl },
+  { to: "/algo", label: "Algo Lab", icon: FaCubes },
   { to: "/archives", label: "Archives", icon: FaArchive },
   { to: "/tags", label: "Tags", icon: FaTags },
   { to: "/categories", label: "Categories", icon: FaFolderOpen },

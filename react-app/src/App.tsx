@@ -12,6 +12,8 @@ const ArchivesPage = lazy(() => import("./pages/ArchivesPage"));
 const LeetcodePage = lazy(() => import("./pages/LeetcodePage"));
 const LinksPage = lazy(() => import("./pages/LinksPage"));
 const MessageBoardPage = lazy(() => import("./pages/MessageBoardPage"));
+// The /algo practice area is a self-contained app with its own layout.
+const AlgoApp = lazy(() => import("./algo/AlgoApp"));
 import Search from "./components/Search";
 import ChunkErrorBoundary from "./components/ChunkErrorBoundary";
 import BackToTop from "./components/BackToTop";
@@ -54,6 +56,17 @@ export default function App() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  // /algo renders without the blog chrome (nav, canvas background, footer)
+  if (pathname === "/algo" || pathname.startsWith("/algo/")) {
+    return (
+      <ChunkErrorBoundary key="algo">
+        <Suspense fallback={<div className="flex justify-center py-32 text-zinc-400">Loading…</div>}>
+          <AlgoApp />
+        </Suspense>
+      </ChunkErrorBoundary>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">

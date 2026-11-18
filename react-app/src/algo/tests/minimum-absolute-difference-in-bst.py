@@ -1,0 +1,8 @@
+check(Solution().getMinimumDifference(build_tree([4, 2, 6, 1, 3])), 1, "範例 1")
+check(Solution().getMinimumDifference(build_tree([1, 0, 48, None, None, 12, 49])), 1, "範例 2")
+check(Solution().getMinimumDifference(build_tree([10, 4, 20, 1, None, 17, 22])), 2, "最小差距在右子樹")
+check(Solution().getMinimumDifference(build_tree([10, 5, None, 1, 9])), 1, "最接近的不是父子")
+check(Solution().getMinimumDifference(build_tree([1, None, 100000])), 99999, "只有兩個節點")
+check(Solution().getMinimumDifference(build_tree([0, None, 7])), 7, "值為 0（prev 不能用真假值判斷）")
+check(Solution().getMinimumDifference(build_tree([1, None, 3, None, 6, None, 10])), 2, "右斜樹")
+check(Solution().getMinimumDifference(build_tree([236, 104, 701, None, 227, None, 911])), 9, "跨層的相鄰值")
