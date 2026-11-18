@@ -93,10 +93,13 @@ export default function Player({
 
         <div className="algo-player-views">
           {frame.views.map((v, i) => (
-            <ViewRenderer key={`${v.type}-${v.label ?? i}`} view={v} />
+            <div key={`${v.type}-${v.label ?? i}`} className={`algo-view-slot is-${v.type}`}>
+              <ViewRenderer view={v} />
+            </div>
           ))}
         </div>
 
+        <div className="algo-player-dock">
         <div className={`algo-note ${frame.result !== undefined ? "is-result" : ""}`} aria-live="polite">
           <span className="algo-note-step">
             {idx + 1}
@@ -141,6 +144,7 @@ export default function Player({
           >
             {speed}×
           </button>
+        </div>
         </div>
       </div>
 

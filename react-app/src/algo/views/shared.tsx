@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import type { Cell, Tone } from "../types";
 
@@ -56,4 +57,19 @@ export function rich(text: string): ReactNode[] {
       return <strong key={i}>{p.slice(2, -2)}</strong>;
     return p;
   });
+}
+
+/** Width of an element, tracked with ResizeObserver, so a view can size itself to fit */
+export function useWidth<T extends HTMLElement>(fallback = 680) {
+  const ref = useRef<T>(null);
+  const [width, setWidth] = useState(fallback);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    setWidth(el.clientWidth);
+    const ro = new ResizeObserver(() => setWidth(el.clientWidth));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return [ref, width] as const;
 }

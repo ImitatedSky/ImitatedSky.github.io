@@ -1,21 +1,26 @@
 import type { ArrayView as ArrayViewT } from "../types";
-import { ViewFrame, fmt, groupPointers, pointerClass, toneClass } from "./shared";
+import { ViewFrame, fmt, groupPointers, pointerClass, toneClass, useWidth } from "./shared";
 
 const BAR_MAX = 132;
 
 export default function ArrayView({ view }: { view: ArrayViewT }) {
   const n = view.values.length;
-  const size = n <= 12 ? 46 : n <= 18 ? 38 : n <= 26 ? 30 : 24;
-  const gap = n <= 18 ? 6 : 4;
-  // Long values (words, tuples) get wider cells instead of overflowing
-  const longest = view.bars ? 0 : Math.max(0, ...view.values.map((v) => fmt(v).length));
-  const wide = longest > 4;
-  const cellW = wide ? Math.min(150, Math.round(longest * 8.2 + 16)) : size;
-  const step = cellW + gap;
-
+  const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
   const pointerEntries = Object.entries(view.pointers ?? {});
   const outside = pointerEntries.some(([, i]) => i < 0 || i >= n);
   const pad = outside ? 1 : 0;
+
+  // Long values (words, tuples) get wider cells instead of overflowing
+  const longest = view.bars ? 0 : Math.max(0, ...view.values.map((v) => fmt(v).length));
+  const wide = longest > 4;
+  // Otherwise shrink the cells until the whole array fits the stage (down to a readable minimum)
+  const preferred = n <= 12 ? 46 : n <= 18 ? 38 : n <= 26 ? 30 : 24;
+  const fit = Math.floor((boxWidth - 8) / Math.max(1, n + pad * 2));
+  const size = wide ? preferred : Math.max(16, Math.min(preferred, fit - (fit < 30 ? 3 : 6)));
+  const gap = size < 24 ? 3 : n <= 18 ? 6 : 4;
+  const cellW = wide ? Math.min(150, Math.round(longest * 8.2 + 16)) : size;
+  const step = cellW + gap;
+
   // Room for "just outside" pointers is symmetric padding on the (centred) container
   // rather than an offset on every cell, so cells don't slide when a pointer steps out
   const x = (i: number) => Math.max(-1, Math.min(n, i)) * step;
@@ -35,7 +40,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
 
   return (
     <ViewFrame label={view.label}>
-      <div className="algo-scroll-x">
+      <div className="algo-scroll-x" ref={boxRef}>
         <div className="algo-array" style={{ width, margin: `0 ${pad * step}px`, boxSizing: "content-box" }}>
           {hasRanges && (
             <div className="algo-array-ranges">
@@ -86,7 +91,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
                     width: cellW,
                     height: size,
                     transform: `translateX(${x(i)}px)`,
-                    fontSize: wide ? 13 : text.length > 3 ? size * 0.26 : size * 0.36,
+                    fontSize: wide ? 13 : Math.max(9, text.length > 3 ? size * 0.26 : size * 0.36),
                   }}
                 >
                   {text}
@@ -97,7 +102,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
 
           <div className="algo-array-indices">
             {view.values.map((_, i) => (
-              <span key={i} style={{ width: cellW, transform: `translateX(${x(i)}px)` }}>
+              <span key={i} style={{ width: cellW, transform: `translateX(${x(i)}px)`, opacity: size < 20 && i % 2 ? 0 : 1 }}>
                 {i}
               </span>
             ))}

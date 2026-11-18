@@ -1060,10 +1060,41 @@
 .algo-player-views {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
   gap: 10px;
   min-height: 250px;
+}
+/* Rows of cells keep a full line each (so stacked arrays stay aligned);
+   compact structures share a line when they fit */
+.algo-view-slot {
+  flex: 1 1 100%;
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+}
+.algo-view-slot > .algo-view {
+  flex: 1;
+  min-width: 0;
+}
+.algo-view-slot:is(.is-tree, .is-graph, .is-map, .is-stack, .is-queue) {
+  flex: 1 1 auto;
+}
+/* Step text and transport stay reachable while a tall stage is scrolled */
+.algo-player-dock {
+  position: sticky;
+  bottom: 10px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  margin: 0 -6px -6px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
 }
 .algo-player-side {
   min-width: 0;
