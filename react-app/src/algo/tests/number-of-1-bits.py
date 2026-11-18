@@ -1,0 +1,10 @@
+s = Solution()
+check(s.hammingWeight(11), 3, "範例 1")
+check(s.hammingWeight(128), 1, "範例 2")
+check(s.hammingWeight(2147483645), 30, "範例 3")
+check(s.hammingWeight(1), 1, "最小值")
+check(s.hammingWeight(2147483647), 31, "2^31 - 1，31 個 1")
+check(s.hammingWeight(244), 5, "11110100")
+check(s.hammingWeight(1073741824), 1, "2^30")
+for v in [3, 7, 255, 256, 1023, 123456789]:
+    check(s.hammingWeight(v), bin(v).count("1"), f"對照 bin().count n={v}")

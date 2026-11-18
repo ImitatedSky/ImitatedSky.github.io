@@ -1,0 +1,11 @@
+s = Solution()
+check(s.reverseBits(43261596), 964176192, "範例 1")
+check(s.reverseBits(4294967293), 3221225471, "範例 2")
+check(s.reverseBits(0), 0, "全 0")
+check(s.reverseBits(1), 2147483648, "只有最低位")
+check(s.reverseBits(2147483648), 1, "只有最高位")
+check(s.reverseBits(4294967295), 4294967295, "全 1")
+check(s.reverseBits(2147483644), 1073741822, "接近 2^31")
+for v in [0, 1, 6, 12345, 987654321, 4000000000]:
+    check(s.reverseBits(v), int(format(v, "032b")[::-1], 2), f"對照字串反轉 n={v}")
+    check(s.reverseBits(s.reverseBits(v)), v, f"反轉兩次回到原值 n={v}")

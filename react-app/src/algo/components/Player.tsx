@@ -146,7 +146,7 @@ export default function Player({
 
       <div className="algo-player-side">
         <div className="algo-side-title">Python</div>
-        <CodePanel code={code} activeLines={activeLines} maxHeight={440} />
+        <CodePanel code={code} activeLines={activeLines} maxHeight={520} />
         {vars.length > 0 && (
           <div className="algo-vars">
             {vars.map(([k, v]) => (

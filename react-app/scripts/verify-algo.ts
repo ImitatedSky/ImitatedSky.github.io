@@ -15,13 +15,19 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 import { pathToFileURL } from "url";
+import React, { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { BY_SLUG, PROBLEMS } from "../src/algo/catalog";
+import { ViewRenderer } from "../src/algo/views";
 import type { AnyProblem, Frame, SortAlgo, View } from "../src/algo/types";
+
+// tsx compiles the views with the classic JSX transform, which expects a global React
+(globalThis as { React?: unknown }).React = React;
 
 const ALGO = path.join(process.cwd(), "src/algo");
 const PRELUDE = fs.readFileSync(path.join(ALGO, "prelude.py"), "utf-8");
 const MAX_FRAMES = 220;
-const MIN_CHECKS = 3;
+const MIN_CHECKS = 5;
 
 const args = process.argv.slice(2);
 const strict = args.includes("--strict");
@@ -131,7 +137,18 @@ function checkFrames(frames: Frame[], codeLines: number, where: string, errs: st
     else {
       const labels = f.views.map((v) => `${v.type}-${v.label ?? ""}`);
       if (new Set(labels).size !== labels.length) errs.push(`${at}: two views share the same type + label`);
-      f.views.forEach((v) => checkView(v, at, errs));
+      f.views.forEach((v) => {
+        const before = errs.length;
+        checkView(v, at, errs);
+        if (errs.length !== before) return;
+        // Actually render it — catches anything the structural checks miss
+        try {
+          const html = renderToStaticMarkup(createElement(ViewRenderer, { view: v }));
+          if (/NaN|undefined/.test(html.replace(/>[^<]*</g, "><"))) errs.push(`${at} ${v.type}: rendered markup contains NaN/undefined`);
+        } catch (e) {
+          errs.push(`${at} ${v.type}: render threw ${e instanceof Error ? e.message : e}`);
+        }
+      });
     }
     if (f.result !== undefined && i !== frames.length - 1) errs.push(`${at}: only the last frame may set result`);
   });

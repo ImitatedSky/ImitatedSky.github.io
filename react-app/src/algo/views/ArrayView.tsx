@@ -7,13 +7,19 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
   const n = view.values.length;
   const size = n <= 12 ? 46 : n <= 18 ? 38 : n <= 26 ? 30 : 24;
   const gap = n <= 18 ? 6 : 4;
-  const step = size + gap;
+  // Long values (words, tuples) get wider cells instead of overflowing
+  const longest = view.bars ? 0 : Math.max(0, ...view.values.map((v) => fmt(v).length));
+  const wide = longest > 4;
+  const cellW = wide ? Math.min(150, Math.round(longest * 8.2 + 16)) : size;
+  const step = cellW + gap;
 
   const pointerEntries = Object.entries(view.pointers ?? {});
   const outside = pointerEntries.some(([, i]) => i < 0 || i >= n);
   const pad = outside ? 1 : 0;
-  const x = (i: number) => (Math.max(-1, Math.min(n, i)) + pad) * step;
-  const width = Math.max(1, n + pad * 2) * step - gap;
+  // Room for "just outside" pointers is symmetric padding on the (centred) container
+  // rather than an offset on every cell, so cells don't slide when a pointer steps out
+  const x = (i: number) => Math.max(-1, Math.min(n, i)) * step;
+  const width = Math.max(1, n) * step - gap;
 
   const groups = groupPointers<number>(view.pointers);
   const maxStack = Math.max(0, ...[...groups.values()].map((g) => g.length));
@@ -24,12 +30,13 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
   const fill = view.fill ?? [];
   const max = view.bars ? Math.max(1, ...nums.map((v, i) => v + (fill[i] ?? 0))) : 1;
   const cellH = view.bars ? BAR_MAX + 22 : size;
-  const hasRanges = !!view.ranges?.length;
+  // `ranges: []` still reserves the row, so the layout does not jump when a window closes
+  const hasRanges = view.ranges !== undefined;
 
   return (
     <ViewFrame label={view.label}>
       <div className="algo-scroll-x">
-        <div className="algo-array" style={{ width }}>
+        <div className="algo-array" style={{ width, margin: `0 ${pad * step}px`, boxSizing: "content-box" }}>
           {hasRanges && (
             <div className="algo-array-ranges">
               {view.ranges!.map((r, k) => (
@@ -76,10 +83,10 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
                   key={key}
                   className={`algo-cell ${tone}`}
                   style={{
-                    width: size,
+                    width: cellW,
                     height: size,
                     transform: `translateX(${x(i)}px)`,
-                    fontSize: text.length > 3 ? size * 0.26 : size * 0.36,
+                    fontSize: wide ? 13 : text.length > 3 ? size * 0.26 : size * 0.36,
                   }}
                 >
                   {text}
@@ -90,7 +97,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
 
           <div className="algo-array-indices">
             {view.values.map((_, i) => (
-              <span key={i} style={{ width: size, transform: `translateX(${x(i)}px)` }}>
+              <span key={i} style={{ width: cellW, transform: `translateX(${x(i)}px)` }}>
                 {i}
               </span>
             ))}
@@ -103,7 +110,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
                   key={name}
                   className={`algo-pointer ${pointerClass(name)}`}
                   style={{
-                    width: size,
+                    width: cellW,
                     transform: `translate(${x(i)}px, ${(slot.get(name) ?? 0) * 22}px)`,
                   }}
                 >

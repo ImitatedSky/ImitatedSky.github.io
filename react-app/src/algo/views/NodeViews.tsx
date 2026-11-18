@@ -141,7 +141,7 @@ export function ListView({ view }: { view: ListViewT }) {
 // ── tree ─────────────────────────────────────────────────────────────────────
 
 const TR = 18;
-const TX = 46;
+const TX0 = 46;
 const TY = 62;
 
 function layoutTree(nodes: TreeNodeSpec[], root: string | null) {
@@ -207,7 +207,11 @@ function layoutTree(nodes: TreeNodeSpec[], root: string | null) {
 
 export function TreeView({ view }: { view: TreeViewT }) {
   const { pos, width: slots, depth } = layoutTree(view.nodes, view.root);
-  const pad = TR + 26;
+  // Values too long for a circle (tuples, words) are drawn as pills, with wider spacing
+  const longest = Math.max(0, ...view.nodes.map((n) => fmt(n.val).length));
+  const halfW = longest > 4 ? Math.min(60, longest * 3.9 + 8) : TR;
+  const TX = Math.max(TX0, halfW * 2 + 10);
+  const pad = halfW + 26;
   const X = (id: string) => pad + pos.get(id)!.x * TX;
   const Y = (id: string) => pad - 6 + pos.get(id)!.y * TY;
   const width = pad * 2 + (slots - 1) * TX;
@@ -240,7 +244,13 @@ export function TreeView({ view }: { view: TreeViewT }) {
                   <line x1={X(n.id)} y1={Y(n.id)} x2={X(c)} y2={Y(c)} />
                   {label !== undefined && (
                     <>
-                      <rect x={mx - 9} y={my - 9} width={18} height={18} rx={5} />
+                      <rect
+                        x={mx - Math.max(9, label.length * 3.6 + 5)}
+                        y={my - 9}
+                        width={Math.max(18, label.length * 7.2 + 10)}
+                        height={18}
+                        rx={5}
+                      />
                       <text x={mx} y={my}>
                         {label}
                       </text>
@@ -279,8 +289,12 @@ export function TreeView({ view }: { view: TreeViewT }) {
             const names = groups.get(n.id);
             return (
               <g key={n.id} className={`algo-node ${toneClass(view.marks?.[n.id])}`}>
-                <circle cx={X(n.id)} cy={Y(n.id)} r={TR} />
-                <text x={X(n.id)} y={Y(n.id)} fontSize={fontFor(text, 14)}>
+                {halfW > TR ? (
+                  <rect x={X(n.id) - halfW} y={Y(n.id) - TR} width={halfW * 2} height={TR * 2} rx={TR} />
+                ) : (
+                  <circle cx={X(n.id)} cy={Y(n.id)} r={TR} />
+                )}
+                <text x={X(n.id)} y={Y(n.id)} fontSize={halfW > TR ? 11.5 : fontFor(text, 14)}>
                   {text}
                 </text>
                 {names?.map((name, k) => (

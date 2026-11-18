@@ -33,6 +33,8 @@ export default function SortingPage() {
   const [size, setSize] = useState(8);
   const [run, setRun] = useState(0);
   const max = algo?.maxValue ?? DEFAULT_MAX;
+  // Keep random bars readable, but let wide-range algorithms (radix) show every digit
+  const randomMax = max > DEFAULT_MAX ? max : Math.min(max, 60);
 
   // An input typed for one algorithm may exceed another's value limit
   const safe = useMemo(() => values.map((v) => Math.min(v, max)), [values, max]);
@@ -90,7 +92,7 @@ export default function SortingPage() {
             <button type="submit" className="algo-btn is-small" disabled={!parsed.values}>
               套用
             </button>
-            <button type="button" className="algo-btn is-small" onClick={() => apply(randomArray(size, Math.min(max, 60)))}>
+            <button type="button" className="algo-btn is-small" onClick={() => apply(randomArray(size, randomMax))}>
               <FiShuffle /> 隨機
             </button>
             <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.76rem", color: "var(--muted)" }}>
@@ -103,7 +105,7 @@ export default function SortingPage() {
                 onChange={(e) => {
                   const n = Number(e.target.value);
                   setSize(n);
-                  apply(randomArray(n, Math.min(max, 60)));
+                  apply(randomArray(n, randomMax));
                 }}
                 style={{ width: 90, accentColor: "var(--accent)" }}
               />

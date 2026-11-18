@@ -10,6 +10,13 @@ import { ViewFrame, fmt, pointerClass, toneClass } from "./shared";
 export function GridView({ view }: { view: GridViewT }) {
   const rows = view.cells.length;
   const cols = Math.max(0, ...view.cells.map((r) => r.length));
+  if (rows === 0 || cols === 0) {
+    return (
+      <ViewFrame label={view.label}>
+        <span className="algo-empty">空</span>
+      </ViewFrame>
+    );
+  }
   const size = cols <= 6 ? 44 : cols <= 10 ? 36 : cols <= 14 ? 30 : 24;
 
   const pointersAt = new Map<string, string[]>();
@@ -53,7 +60,7 @@ export function GridView({ view }: { view: GridViewT }) {
                 return (
                   <div
                     key={c}
-                    className={`algo-cell algo-grid-cell ${toneClass(view.marks?.[k])} ${names ? "has-pointer" : ""}`}
+                    className={`algo-cell algo-grid-cell ${toneClass(view.marks?.[k])} ${names ? "has-pointer" : ""} ${text === "" ? "is-blank" : ""}`}
                     style={{
                       width: size,
                       height: size,
