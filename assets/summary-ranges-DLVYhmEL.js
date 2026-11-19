@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.summaryRanges([0, 1, 2, 4, 5, 7]), ["0->2", "4->5", "7"], "範例 1")
+check(s.summaryRanges([0, 2, 3, 4, 6, 8, 9]), ["0", "2->4", "6", "8->9"], "範例 2")
+check(s.summaryRanges([]), [], "空陣列")
+check(s.summaryRanges([5]), ["5"], "只有一個數")
+check(s.summaryRanges([1, 2, 3, 4, 5]), ["1->5"], "整個陣列是一段")
+check(s.summaryRanges([1, 3, 5, 7]), ["1", "3", "5", "7"], "完全不連續")
+check(s.summaryRanges([-3, -2, -1, 1, 2]), ["-3->-1", "1->2"], "負數")
+check(s.summaryRanges([-1, 0, 1]), ["-1->1"], "跨過 0")
+check(s.summaryRanges([-2147483648, -2147483647, 2147483647]), ["-2147483648->-2147483647", "2147483647"], "32 位元邊界")
+check(s.summaryRanges([3, 4]), ["3->4"], "兩個連續的數")
+`;export{e as default};

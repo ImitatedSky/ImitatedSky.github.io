@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.lengthOfLastWord("Hello World"), 5, "兩個單字")
+check(s.lengthOfLastWord("go to the moon  "), 4, "尾端有空白")
+check(s.lengthOfLastWord("  hello world"), 5, "開頭有空白")
+check(s.lengthOfLastWord("day"), 3, "只有一個單字")
+check(s.lengthOfLastWord("a"), 1, "單一字元")
+check(s.lengthOfLastWord("a "), 1, "單一字元加空白")
+check(s.lengthOfLastWord("   x   "), 1, "前後都是空白")
+check(s.lengthOfLastWord("luffy is still joyboy"), 6, "多個單字")
+check(s.lengthOfLastWord("b   a    "), 1, "單字間有多個空白")
+check(s.lengthOfLastWord("x" * 9999 + " "), 9999, "很長的單字")
+`;export{e as default};

@@ -1,0 +1,21 @@
+import{a as e,n as t,o as n,r,s as i}from"./AlgoApp-D095I_J-.js";import{t as a}from"./types-Dfvzj6n2.js";var o=a({id:103,summary:`給一棵二元樹的根節點，回傳它的**鋸齒狀層序走訪**：第一層由左到右，第二層由右到左，第三層再由左到右…… 方向一層一層交替。每一層的值各自放在一個陣列裡。`,summaryEn:`Given the root of a binary tree, return its **zigzag level order traversal**: the first level left to right, the second right to left, the third left to right again, and so on, alternating each level. Each level's values go in their own array.`,examples:[{input:`root = [3,9,20,null,null,15,7]`,output:`[[3],[20,9],[15,7]]`},{input:`root = [1]`,output:`[[1]]`},{input:`root = []`,output:`[]`}],constraints:[`0 ≤ 節點數 ≤ 2000`],constraintsEn:[`0 ≤ number of nodes ≤ 2000`],idea:"走訪本身完全照一般的 BFS 層序（永遠由左到右、先左後右進佇列），**只在收集完一層之後決定要不要反轉**。`len(res)` 剛好是目前的層數，奇數層就把 `level` 反過來。",steps:["空樹回傳 `[]`；否則把 root 放進佇列。","每一輪依佇列長度 pop 出一整層，值依序放進 `level`，小孩先左後右 push 進佇列。","若 `len(res)` 是奇數（第 1、3、5… 層），把 `level` 反轉。","把 `level` 加進 `res`。"],pitfalls:[`只反轉**輸出**，不要改變小孩進佇列的順序 —— 佇列的順序一亂，下一層的左右關係就錯了。`,"用 `len(res)` 判斷層數，就不用另外維護方向旗標。"],complexity:{time:`O(n)`,space:`O(n)`},code:`class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        res = []
+        q = deque([root])
+        while q:
+            level = []
+            for _ in range(len(q)):
+                node = q.popleft()
+                level.append(node.val)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            if len(res) % 2 == 1:  # 奇數層（從 0 算起）要右到左
+                level.reverse()
+            res.append(level)
+        return res`,starter:`class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        `,presets:[{label:`[3,9,20,null,null,15,7]`,input:{root:[3,9,20,null,null,15,7]},expected:`[[3], [20, 9], [15, 7]]`},{label:`四層 [1,2,3,4,5,6,7,8,null,null,9]`,input:{root:[1,2,3,4,5,6,7,8,null,null,9]},expected:`[[1], [3, 2], [4, 5, 6, 7], [9, 8]]`},{label:`[]`,input:{root:[]},expected:`[]`}],trace({root:a}){let o=n(),s=r(a),c=i(s);if(!s)return o.push({line:[3,4],note:`空樹，直接回傳空陣列。`,views:[t.tree(`tree`,c)],result:`[]`}),o.frames;let l=[],u=[s],d=new Set,f=(e,n={})=>{let r={};d.forEach(e=>r[e]=`visited`),u.forEach(e=>r[e.id]=`compare`),n.treeLevel&&e.forEach(e=>r[e.id]=n.levelTone??`good`),n.node&&(r[n.node.id]=`active`);let i={};return n.levelTone&&e.forEach((e,t)=>i[t]=n.levelTone),[t.tree(`tree`,c,{marks:r,pointers:n.node?{node:n.node.id}:{}}),t.queue(`q`,u.map(e=>e.val)),t.array(`level`,e.map(e=>e.val),{ids:e.map(e=>e.id),marks:i})]},p=()=>l.length%2==1?`右 → 左`:`左 → 右`;for(o.push({line:[5,6],note:`把 root 放進佇列。走訪方式和一般層序一模一樣，鋸齒只是**輸出時**的處理。`,views:f([]),vars:{res:e(l)}});u.length;){let t=u.length,n=[];o.push({line:[7,8,9],note:`佇列裡的 ${t} 個節點就是第 ${l.length} 層（\`len(res) = ${l.length}\`）。這一層最後要以「${p()}」的方向輸出。`,views:f(n),vars:{"len(res)":l.length,方向:p(),res:e(l)}});for(let r=0;r<t;r++){let t=u.shift();n.push(t);let r=[t.left,t.right].filter(e=>e!==null);u.push(...r),o.push({line:r.length?[10,11,12,13,14,15]:[10,11],note:`取出 \`${t.val}\` 接到 \`level\` 後面（先照左到右收集）。`+(r.length?`小孩 ${r.map(e=>`\`${e.val}\``).join(`、`)} 照常先左後右進佇列。`:`它沒有小孩。`),views:f(n,{node:t}),vars:{"len(res)":l.length,方向:p(),res:e(l)}}),d.add(t.id)}if(l.length%2==1){let t=e(n.map(e=>e.val));n.reverse(),o.push({line:[16,17],note:`\`len(res) = ${l.length}\` 是奇數，這一層要由右到左：把 \`${t}\` 反轉成 \`${e(n.map(e=>e.val))}\`。`,views:f(n,{levelTone:`alt`,treeLevel:!0}),vars:{"len(res)":l.length,方向:p(),res:e(l)}})}else o.push({line:16,note:`\`len(res) = ${l.length}\` 是偶數，這一層維持由左到右，不用反轉。`,views:f(n,{levelTone:`compare`,treeLevel:!0}),vars:{"len(res)":l.length,方向:p(),res:e(l)}});let r=n.map(e=>e.val);l.push(r),o.push({line:18,note:`把 \`${e(r)}\` 加進 \`res\`。下一層的方向會跟著 \`len(res)\` 的奇偶自動翻轉。`,views:f(n,{levelTone:`good`,treeLevel:!0}),vars:{"len(res)":l.length,res:e(l)}})}let m={};return c.nodes.forEach(e=>m[e.id]=`good`),o.push({line:19,note:`佇列空了，所有層都依鋸齒方向收集完畢。`,views:[t.tree(`tree`,c,{marks:m}),t.queue(`q`,[]),t.array(`level`,[])],vars:{res:e(l)},result:e(l)}),o.frames}});export{o as default};

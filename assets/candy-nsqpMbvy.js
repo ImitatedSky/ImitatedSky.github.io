@@ -1,0 +1,13 @@
+var e=`s = Solution()
+check(s.candy([1, 0, 2]), 5, "範例 1")
+check(s.candy([1, 2, 2]), 4, "相同評分不必一樣多")
+check(s.candy([1, 0, 2, 3, 2, 1, 0]), 15, "山峰要同時滿足兩邊")
+check(s.candy([1, 3, 2, 1]), 7, "第二趟要取 max")
+check(s.candy([7]), 1, "只有一個人")
+check(s.candy([4, 4, 4, 4]), 4, "全部同分")
+check(s.candy([1, 2, 3, 4, 5]), 15, "嚴格遞增")
+check(s.candy([5, 4, 3, 2, 1]), 15, "嚴格遞減")
+check(s.candy([1, 3, 4, 5, 2]), 11, "右邊陡降")
+check(s.candy([1, 2, 87, 87, 87, 2, 1]), 13, "中間一段同分")
+check(s.candy(list(range(20000))), 20000 * 20001 // 2, "大輸入")
+`;export{e as default};

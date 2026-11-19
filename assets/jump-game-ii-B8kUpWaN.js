@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.jump([2, 3, 1, 1, 4]), 2, "範例 1")
+check(s.jump([2, 3, 0, 1, 4]), 2, "範例 2")
+check(s.jump([0]), 0, "只有一格")
+check(s.jump([1, 2]), 1, "兩格")
+check(s.jump([1, 1, 1, 1]), 3, "每次只能跳一格")
+check(s.jump([5, 1, 1, 1, 1]), 1, "一步到底")
+check(s.jump([1, 2, 1, 1, 3, 1, 1, 1]), 4, "多層")
+check(s.jump([2, 1]), 1, "end 剛好落在最後一格，不能多算")
+check(s.jump([3, 4, 3, 2, 5, 4, 3]), 3, "貪心選最遠的不一定是下一步")
+check(s.jump([1] * 1000), 999, "較長的輸入")
+`;export{e as default};

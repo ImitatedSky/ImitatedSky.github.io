@@ -1,0 +1,11 @@
+var e=`s = Solution()
+check(s.coinChange([1, 2, 5], 11), 3, "範例 1")
+check(s.coinChange([2], 3), -1, "湊不出來")
+check(s.coinChange([1], 0), 0, "金額為 0")
+check(s.coinChange([1, 3, 4], 6), 2, "貪心會得到 3")
+check(s.coinChange([5, 2, 1], 11), 3, "面額順序不影響答案")
+check(s.coinChange([2, 5, 10, 1], 27), 4, "10 + 10 + 5 + 2")
+check(s.coinChange([186, 419, 83, 408], 6249), 20, "大金額")
+check(s.coinChange([7], 10000), -1, "大金額且湊不出來")
+check(type(s.coinChange([1, 2, 5], 11)), int, "回傳型別要是 int")
+`;export{e as default};

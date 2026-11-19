@@ -1,0 +1,10 @@
+var e=`s = Solution()
+check(s.rob([1, 2, 3, 1]), 4, "範例 1")
+check(s.rob([2, 7, 9, 3, 1]), 12, "範例 2")
+check(s.rob([5]), 5, "只有一間")
+check(s.rob([2, 1, 1, 2]), 4, "中間連跳兩間")
+check(s.rob([0, 0, 0]), 0, "全部是 0")
+check(s.rob([1, 2]), 2, "兩間取較大")
+check(s.rob([2, 1]), 2, "兩間取較大（反過來）")
+check(s.rob([400] * 100), 20000, "長度上限")
+`;export{e as default};

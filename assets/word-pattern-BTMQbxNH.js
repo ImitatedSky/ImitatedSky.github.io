@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.wordPattern("abba", "dog cat cat dog"), True, "範例 1")
+check(s.wordPattern("abba", "dog cat cat fish"), False, "同一個字母配到兩個單字")
+check(s.wordPattern("aaaa", "dog cat cat dog"), False, "同一個字母配到不同單字")
+check(s.wordPattern("abba", "dog dog dog dog"), False, "兩個字母搶同一個單字")
+check(s.wordPattern("aaa", "dog dog"), False, "字母比單字多")
+check(s.wordPattern("a", "dog cat"), False, "單字比字母多")
+check(s.wordPattern("a", "dog"), True, "單一配對")
+check(s.wordPattern("abc", "b c a"), True, "單字剛好長得像別的字母")
+check(s.wordPattern("abc", "dog cat dog"), False, "第三個字母搶了第一個的單字")
+check(s.wordPattern("ab" * 150, "x yy " * 149 + "x yy"), True, "長輸入")
+`;export{e as default};

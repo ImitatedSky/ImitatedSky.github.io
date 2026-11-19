@@ -1,0 +1,19 @@
+import{a as e,n as t,o as n,r,s as i}from"./AlgoApp-D095I_J-.js";import{t as a}from"./types-Dfvzj6n2.js";var o=a({id:530,summary:`給一棵**二元搜尋樹**（BST）的根節點，找出樹中**任意兩個不同節點**的值相差的絕對值最小是多少。`,summaryEn:`Given the root of a **binary search tree** (BST), find the smallest absolute difference between the values of **any two different nodes**.`,examples:[{input:`root = [4,2,6,1,3]`,output:`1`},{input:`root = [1,0,48,null,null,12,49]`,output:`1`}],constraints:[`2 ≤ 節點數 ≤ 10⁴`,`0 ≤ Node.val ≤ 10⁵`],constraintsEn:[`2 ≤ number of nodes ≤ 10⁴`,`0 ≤ Node.val ≤ 10⁵`],idea:"BST 的**中序走訪會得到由小到大的序列**，而排序後的數列裡，差距最小的一對一定是**相鄰**的兩個。所以只要在中序走訪時記住上一個值 `prev`，每到一個節點就算 `node.val - prev`，取最小值即可。",steps:["`prev = None`（還沒有上一個值）、`ans = inf`。",`中序走訪：先遞迴走完左子樹（所有比自己小的值）。`,"輪到自己：若 `prev` 存在，用 `node.val - prev` 更新 `ans`；接著 `prev = node.val`。","再遞迴走右子樹，最後回傳 `ans`。"],pitfalls:[`只比較父子節點是錯的：最接近的兩個值可能隔了好幾層（例如根節點與左子樹的最右節點）。`,"第一個節點沒有 `prev`，要跳過比較；用 `prev is not None` 判斷，因為值可能是 `0`。","中序序列已經遞增，`node.val - prev` 一定 > 0，不需要 `abs`。"],complexity:{time:`O(n)`,space:`O(h)，h 為樹高（遞迴堆疊）`},code:`class Solution:
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        prev = None  # 中序走訪的上一個值
+        ans = inf
+
+        def inorder(node):
+            nonlocal prev, ans
+            if not node:
+                return
+            inorder(node.left)
+            if prev is not None:
+                ans = min(ans, node.val - prev)
+            prev = node.val
+            inorder(node.right)
+
+        inorder(root)
+        return ans`,starter:`class Solution:
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        `,presets:[{label:`[10,4,20,1,null,17,22]`,input:{root:[10,4,20,1,null,17,22]},expected:`2`},{label:`[4,2,6,1,3]`,input:{root:[4,2,6,1,3]},expected:`1`},{label:`最近的不是父子 [10,5,null,1,9]`,input:{root:[10,5,null,1,9]},expected:`1`}],trace({root:a}){let o=n(),s=r(a),c=i(s),l=null,u=1/0,d=null,f=[],p=[],m=()=>u===1/0?`inf`:u,h=(e,n={})=>{let r={};f.forEach(e=>r[e.id]=`visited`),d&&(r[d[0].id]=`good`,r[d[1].id]=`good`),e&&(r[e.id]=`active`),n.comparing&&l&&(r[l.id]=n.improved?`good`:`compare`),n.comparing&&e&&(r[e.id]=n.improved?`good`:`active`);let i={};l&&e&&l.id===e.id?i[`node = prev`]=e.id:(l&&(i.prev=l.id),e&&(i.node=e.id));let a=f.map(e=>e.val),o={};if(d){let e=f.indexOf(d[1]);e>=1&&(o[e-1]=o[e]=`good`)}let s=n.comparing&&e?[...a,e.val]:a;return n.comparing&&e&&l?(o[s.length-2]=n.improved?`good`:`compare`,o[s.length-1]=n.improved?`good`:`active`):n.comparing&&e&&(o[s.length-1]=`active`),[t.tree(`BST`,c,{marks:r,pointers:i}),t.stack(`遞迴堆疊`,p.map(e=>`inorder(${e.val})`)),t.array(`中序序列（由小到大）`,s,{marks:o})]};o.push({line:[3,4],note:"BST 的中序走訪是遞增序列，最小差距一定出現在**相鄰**的兩個值之間。用 `prev` 記住上一個走訪到的值。",views:h(null),vars:{prev:`None`,ans:`inf`}});let g=e=>{if(!e)return;p.push(e),e.left&&o.push({line:[8,10],note:`來到 \`${e.val}\`，但還不能處理它：左子樹裡的值都比它小，要先走完（中序 = 左 → 自己 → 右）。`,views:h(e),vars:{prev:l?l.val:`None`,ans:m()}}),g(e.left);let t=e.left?`左子樹走完，回到 \`${e.val}\`。`:`\`${e.val}\` 沒有左子樹，直接輪到它。`;if(l===null)o.push({line:[11,13],note:`${t}它是整棵樹最小的值，前面還沒有任何數（\`prev\` 是 \`None\`），不用比較，只要記下 \`prev = ${e.val}\`。`,views:h(e,{comparing:!0}),vars:{prev:`None`,ans:m()}});else{let n=e.val-l.val,r=n<u,i=m();r&&(u=n,d=[l,e]),o.push({line:[11,12,13],note:`${t}它在排序後緊接在 \`prev = ${l.val}\` 後面，差距 \`${e.val} - ${l.val} = ${n}\``+(r?`，比 \`${i}\` 小，更新 \`ans = ${n}\`。`:`，沒有比 \`ans = ${i}\` 小，不更新。`)+`接著 \`prev = ${e.val}\`。`,views:h(e,{comparing:!0,improved:r}),vars:{prev:l.val,"node.val - prev":n,ans:m()}})}f.push(e),l=e,e.right&&o.push({line:14,note:`\`${e.val}\` 處理完，往右子樹走：那裡的值都比 \`${e.val}\` 大，其中最小的會是下一個和 \`prev = ${e.val}\` 相比的對象。`,views:h(e),vars:{prev:e.val,ans:m()}}),g(e.right),p.pop()};return g(s),o.push({line:[16,17],note:d?`走訪結束。相鄰差距最小的是 \`${d[0].val}\` 和 \`${d[1].val}\`，答案是 \`${u}\`。`:`走訪結束。`,views:h(null),vars:{ans:m()},result:e(u)}),o.frames}});export{o as default};

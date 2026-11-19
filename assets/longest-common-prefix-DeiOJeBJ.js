@@ -1,0 +1,13 @@
+var e=`s = Solution()
+check(s.longestCommonPrefix(["flower", "flow", "flight"]), "fl", "一般情況")
+check(s.longestCommonPrefix(["dog", "racecar", "car"]), "", "沒有共同前綴")
+check(s.longestCommonPrefix(["interview", "internet", "interval", "into"]), "int", "四個字串")
+check(s.longestCommonPrefix(["apple", "app", "apply"]), "app", "中間的字串最短")
+check(s.longestCommonPrefix(["alone"]), "alone", "只有一個字串")
+check(s.longestCommonPrefix(["", "abc"]), "", "第一個是空字串")
+check(s.longestCommonPrefix(["abc", ""]), "", "後面有空字串")
+check(s.longestCommonPrefix(["same", "same", "same"]), "same", "全部相同")
+check(s.longestCommonPrefix(["ab", "abc", "abcd"]), "ab", "第一個最短")
+check(s.longestCommonPrefix(["abcd", "abc", "ab"]), "ab", "最後一個最短")
+check(s.longestCommonPrefix(["a" * 200] * 200), "a" * 200, "大輸入")
+`;export{e as default};

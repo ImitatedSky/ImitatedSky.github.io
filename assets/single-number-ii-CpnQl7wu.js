@@ -1,0 +1,17 @@
+import{a as e,n as t,o as n}from"./AlgoApp-D095I_J-.js";import{t as r}from"./types-Dfvzj6n2.js";var i=`class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        res = 0
+        for i in range(32):
+            total = sum((x >> i) & 1 for x in nums)  # 第 i 位總共有幾個 1
+            if total % 3:
+                res |= 1 << i
+        # 第 31 位是符號位：是 1 的話代表答案是負數
+        if res >= 1 << 31:
+            res -= 1 << 32
+        return res`,a=`每個數的二進位（上方是位元編號 i，右邊是最低位）`,o=r({id:137,summary:`給一個整數陣列 \`nums\`，其中**只有一個數出現一次，其餘每個數都剛好出現三次**。找出那個只出現一次的數。
+
+要求線性時間、常數額外空間。`,summaryEn:`In an integer array \`nums\`, **every number appears exactly three times except one, which appears once**. Find that number.
+
+It must run in linear time with constant extra space.`,examples:[{input:`nums = [2,2,3,2]`,output:`3`},{input:`nums = [0,1,0,1,0,1,99]`,output:`99`}],constraints:[`1 ≤ nums.length ≤ 3 × 10⁴`,`−2³¹ ≤ nums[i] ≤ 2³¹ − 1`],constraintsEn:[`1 ≤ nums.length ≤ 3 × 10⁴`,`−2³¹ ≤ nums[i] ≤ 2³¹ − 1`],idea:"XOR 只能抵消「出現偶數次」的數，三次的抵消不掉。改成**一個位元一個位元看**：把所有數在第 `i` 位的 0/1 加起來，出現三次的數對這個總和的貢獻一定是 0 或 3，所以 `total % 3` 剩下的就是**落單那個數在第 `i` 位的值**。32 個位元各做一次，就能把答案拼回來。",steps:["`res = 0`，對位元 `i = 0 … 31` 逐一處理。","`total` = 所有數的第 `i` 位加起來（`(x >> i) & 1`）。","若 `total % 3 != 0`，代表落單的數在這一位是 1，用 `res |= 1 << i` 把它寫進答案。",`Python 的整數沒有固定位數：如果第 31 位（符號位）是 1，要減掉 2³² 轉回負數。`],pitfalls:[`Python 一定要處理符號位，否則答案是負數時會回傳一個很大的正數。`,"還有一個用 `ones`、`twos` 兩個變數的狀態機寫法（同樣 O(1) 空間、只掃一遍），但比較難當場推導；逐位計數的想法直接、不容易寫錯，也能推廣到「其他數出現 k 次」。"],complexity:{time:`O(32 · n) = O(n)`,space:`O(1)`},code:i,starter:`class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        `,presets:[{label:`[2,2,3,2]`,input:{nums:[2,2,3,2]},expected:`3`},{label:`[0,1,0,1,0,1,99]`,input:{nums:[0,1,0,1,0,1,99]},expected:`99`},{label:`[5,9,5,5]`,input:{nums:[5,9,5,5]},expected:`9`}],trace({nums:r}){let i=n(),o=Math.max(4,...r.map(e=>Math.abs(e).toString(2).length)),s=(e,t)=>Math.floor(e/2**t)%2,c=r.map(e=>Array.from({length:o},(t,n)=>s(e,o-1-n))),l=Array.from({length:o},()=>``),u=Array.from({length:o},()=>``),d=Array.from({length:o},(e,t)=>o-1-t),f=[...r.map((e,t)=>`nums[${t}] = ${e}`),`total`,`total % 3 → res`],p=r.length,m=r.length+1,h=e=>t.grid(a,[...c,l,u],{rowLabels:f,colLabels:d,marks:e}),g=()=>{let e={};return u.forEach((t,n)=>{t===1?e[`${m},${n}`]=`good`:t===0&&(e[`${m},${n}`]=`muted`)}),e},_=0;i.push({line:3,note:`把每個數寫成二進位、上下對齊。接下來**一欄一欄（一個位元一個位元）往下加**：出現三次的數在每一欄貢獻 0 或 3，除以 3 的餘數就是落單那個數在這一欄的位元。`,views:[h({})],vars:{res:_}});for(let e=0;e<o;e++){let t=o-1-e,n=r.reduce((t,n)=>t+s(n,e),0),a=n%3;l[t]=n,u[t]=+!!a,a&&(_+=2**e);let c=g();r.forEach((n,r)=>c[`${r},${t}`]=s(n,e)?`active`:`compare`),c[`${p},${t}`]=`alt`,c[`${m},${t}`]=a?`good`:`muted`,i.push({line:a?[4,5,6,7]:[4,5,6],note:`第 ${e} 位：這一欄共有 ${n} 個 1，\`${n} % 3 = ${a}\`。`+(a?`餘數不是 0 —— 扣掉三個三個一組的之後還多一個 1，那一定是落單的數帶來的，所以 \`res\` 的第 ${e} 位設成 1（\`res |= 1 << ${e}\`）。`:n===0?`沒有任何數在這一位是 1，落單的數這一位當然也是 0。`:`剛好被 3 整除，這些 1 全都來自出現三次的數，落單的數這一位是 0。`),views:[h(c)],vars:{i:e,total:n,"total % 3":a,res:_}})}i.push({line:[4,5,6],note:`第 ${o} ～ 31 位：這組輸入的每個數在這些位元都是 0，\`total\` 都是 0，\`res\` 不會再變。（程式仍然會把 32 個位元都跑完。）`,views:[h(g())],vars:{i:`${o} … 31`,total:0,"total % 3":0,res:_}});let v=g();return r.forEach((e,t)=>{if(e===_)for(let e=0;e<o;e++)v[`${t},${e}`]=`good`}),i.push({line:[9,11],note:`\`res = ${_}\` 小於 2³¹，符號位是 0，不用轉成負數。最下面一列拼出來的就是只出現一次的數：**${_}**。`,views:[h(v)],vars:{res:_},result:e(_)}),i.frames}});export{o as default};

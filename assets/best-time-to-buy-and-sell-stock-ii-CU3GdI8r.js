@@ -1,0 +1,11 @@
+var e=`s = Solution()
+check(s.maxProfit([7, 1, 5, 3, 6, 4]), 7, "範例 1")
+check(s.maxProfit([1, 2, 3, 4, 5]), 4, "一路上漲")
+check(s.maxProfit([7, 6, 4, 3, 1]), 0, "一路下跌")
+check(s.maxProfit([5]), 0, "只有一天")
+check(s.maxProfit([1, 3, 4, 8, 2, 2, 6]), 11, "兩個波段，中間有平盤")
+check(s.maxProfit([3, 3, 3]), 0, "價格都一樣")
+check(s.maxProfit([2, 1, 2, 1, 2, 1, 2]), 3, "鋸齒狀")
+check(s.maxProfit([1, 9, 2, 8]), 14, "分兩次交易比一次好")
+check(s.maxProfit([0, 10000] * 500), 5000000, "較長的輸入")
+`;export{e as default};

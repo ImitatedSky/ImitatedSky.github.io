@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.isIsomorphic("egg", "add"), True, "範例 1")
+check(s.isIsomorphic("foo", "bar"), False, "一個字元對到兩個")
+check(s.isIsomorphic("paper", "title"), True, "範例 3")
+check(s.isIsomorphic("badc", "baba"), False, "兩個字元對到同一個（反方向衝突）")
+check(s.isIsomorphic("ab", "aa"), False, "反方向衝突，最短例子")
+check(s.isIsomorphic("aa", "ab"), False, "正方向衝突，最短例子")
+check(s.isIsomorphic("a", "a"), True, "單一字元，對應到自己")
+check(s.isIsomorphic("ab", "ba"), True, "互相交換")
+check(s.isIsomorphic("13", "42"), True, "數字字元")
+check(s.isIsomorphic("abcabc" * 200, "xyzxyz" * 200), True, "長字串")
+`;export{e as default};

@@ -1,0 +1,16 @@
+var e=`s = Solution()
+check(s.searchRange([5, 7, 7, 8, 8, 10], 8), [3, 4], "範例 1")
+check(s.searchRange([5, 7, 7, 8, 8, 10], 6), [-1, -1], "範例 2：不存在")
+check(s.searchRange([], 0), [-1, -1], "空陣列")
+check(s.searchRange([1], 1), [0, 0], "單一元素，找得到")
+check(s.searchRange([1], 2), [-1, -1], "單一元素，target 太大")
+check(s.searchRange([1], 0), [-1, -1], "單一元素，target 太小")
+check(s.searchRange([2, 2, 2, 2], 2), [0, 3], "整個陣列都是 target")
+check(s.searchRange([5, 7, 7, 8, 8, 8, 10], 8), [3, 5], "連續三個")
+check(s.searchRange([1, 2, 2, 2, 2, 3, 5, 5], 5), [6, 7], "在尾端")
+check(s.searchRange([1, 1, 2, 3], 1), [0, 1], "在開頭")
+check(s.searchRange([1, 3, 5, 7], 5), [2, 2], "只出現一次")
+check(s.searchRange([-3, -3, -1, 0, 0, 0, 4], -3), [0, 1], "負數")
+big = [1] * 30000 + [2] * 40000 + [3] * 30000
+check(s.searchRange(big, 2), [30000, 69999], "大陣列（需要 O(log n)）")
+`;export{e as default};

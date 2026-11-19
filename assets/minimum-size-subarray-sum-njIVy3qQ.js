@@ -1,0 +1,13 @@
+var e=`s = Solution()
+check(s.minSubArrayLen(7, [2, 3, 1, 2, 4, 3]), 2, "範例 1")
+check(s.minSubArrayLen(4, [1, 4, 4]), 1, "單一元素就達標")
+check(s.minSubArrayLen(11, [1, 1, 1, 1, 1, 1, 1, 1]), 0, "沒有答案")
+check(s.minSubArrayLen(8, [1, 2, 1, 8, 1, 3, 5]), 1, "中間有一個大數")
+check(s.minSubArrayLen(11, [1, 2, 1, 1, 2, 1]), 0, "總和不夠")
+check(s.minSubArrayLen(15, [1, 2, 3, 4, 5]), 5, "要用整個陣列")
+check(s.minSubArrayLen(1, [5]), 1, "只有一個數")
+check(s.minSubArrayLen(6, [5]), 0, "只有一個數且不夠")
+check(s.minSubArrayLen(11, [1, 2, 3, 4, 5]), 3, "答案在尾端")
+check(s.minSubArrayLen(7, [5, 1, 3, 5, 10, 7, 4, 9, 2, 8]), 1, "剛好等於 target")
+check(s.minSubArrayLen(10**9, [10**4] * 10**5), 10**5, "大陣列")
+`;export{e as default};

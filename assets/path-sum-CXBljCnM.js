@@ -1,0 +1,16 @@
+var e=`s = Solution()
+big = [5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1]
+check(s.hasPathSum(build_tree(big), 22), True, "範例 1：5→4→11→2")
+check(s.hasPathSum(build_tree(big), 26), True, "5→8→13")
+check(s.hasPathSum(build_tree(big), 18), True, "5→8→4→1")
+check(s.hasPathSum(build_tree(big), 20), False, "20 只到中間節點，不是葉")
+check(s.hasPathSum(build_tree([1, 2, 3]), 5), False, "範例 2")
+check(s.hasPathSum(build_tree([]), 0), False, "空樹")
+check(s.hasPathSum(build_tree([1, 2]), 1), False, "根不是葉節點")
+check(s.hasPathSum(build_tree([1, 2]), 3), True, "只有左小孩")
+check(s.hasPathSum(build_tree([7]), 7), True, "單一節點命中")
+check(s.hasPathSum(build_tree([7]), 0), False, "單一節點未命中")
+check(s.hasPathSum(build_tree([-2, None, -3]), -5), True, "負數")
+check(s.hasPathSum(build_tree([1, -2, 3]), -1), True, "總和先超過再扣回來")
+check(s.hasPathSum(build_tree([1, 2, 3, 4, None, None, 5]), 6), False, "所有路徑都不對")
+`;export{e as default};

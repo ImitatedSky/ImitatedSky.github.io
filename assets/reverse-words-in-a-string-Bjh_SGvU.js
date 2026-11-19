@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.reverseWords("the sky is blue"), "blue is sky the", "一般情況")
+check(s.reverseWords("  hello world  "), "world hello", "頭尾有空白")
+check(s.reverseWords("a good   example"), "example good a", "單字間多個空白")
+check(s.reverseWords("  sky is  blue "), "blue is sky", "各種空白混合")
+check(s.reverseWords("word"), "word", "只有一個單字")
+check(s.reverseWords("   word   "), "word", "一個單字加空白")
+check(s.reverseWords("a"), "a", "單一字元")
+check(s.reverseWords("a b c d e"), "e d c b a", "單字元的單字")
+check(s.reverseWords("EPY2giL 3x"), "3x EPY2giL", "含數字與大小寫")
+check(s.reverseWords(" ".join(["ab"] * 3000 + ["z"])), " ".join(["z"] + ["ab"] * 3000), "大輸入")
+`;export{e as default};

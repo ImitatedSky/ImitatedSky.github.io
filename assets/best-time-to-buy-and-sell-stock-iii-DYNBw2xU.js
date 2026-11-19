@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.maxProfit([3, 3, 5, 0, 0, 3, 1, 4]), 6, "範例 1")
+check(s.maxProfit([1, 2, 3, 4, 5]), 4, "一路上漲：一筆交易就夠")
+check(s.maxProfit([7, 6, 4, 3, 1]), 0, "一路下跌：不交易")
+check(s.maxProfit([5]), 0, "只有一天")
+check(s.maxProfit([1, 2, 4, 2, 5, 7, 2, 4, 9, 0]), 13, "三段上漲只能挑兩段")
+check(s.maxProfit([2, 2, 2, 2]), 0, "價格不變")
+check(s.maxProfit([1, 4, 2, 7]), 8, "兩筆交易比一筆好")
+check(s.maxProfit([6, 1, 3, 2, 4, 7]), 7, "一筆 6 或兩筆 2 + 5")
+check(s.maxProfit([0, 100000] * 3), 200000, "價格上限")
+check(type(s.maxProfit([3, 3, 5, 0, 0, 3, 1, 4])), int, "回傳型別要是 int")
+`;export{e as default};

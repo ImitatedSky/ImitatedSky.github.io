@@ -1,0 +1,20 @@
+import{a as e,n as t,o as n}from"./AlgoApp-D095I_J-.js";import{t as r}from"./types-Dfvzj6n2.js";var i=`class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for tok in tokens:
+            if tok not in "+-*/":
+                stack.append(int(tok))
+                continue
+            b = stack.pop()  # 先 pop 出來的是「右邊」的運算元
+            a = stack.pop()
+            if tok == "+":
+                stack.append(a + b)
+            elif tok == "-":
+                stack.append(a - b)
+            elif tok == "*":
+                stack.append(a * b)
+            else:
+                stack.append(int(a / b))  # 向零截斷，不能用 //
+        return stack[0]`,a={"+":[10,11],"-":[12,13],"*":[14,15],"/":[16,17]},o={"+":`+`,"-":`−`,"*":`×`,"/":`÷`},s=r({id:150,summary:"給一個用**逆波蘭表示法**（後序表示法）寫成的算式 `tokens`，算出它的值。\n\n後序的意思是運算子寫在兩個運算元的**後面**，例如 `2 1 +` 就是 `2 + 1`。運算子只有 `+`、`-`、`*`、`/`，其中除法的結果要**往 0 的方向捨去**小數。保證算式合法、不會除以 0。",summaryEn:"You get an expression `tokens` written in **Reverse Polish Notation** (postfix). Compute its value.\n\nPostfix means each operator comes **after** its two operands, so `2 1 +` means `2 + 1`. The only operators are `+`, `-`, `*` and `/`, and division **truncates toward zero**. The expression is guaranteed to be valid and never divides by zero.",examples:[{input:`tokens = ["2","1","+","3","*"]`,output:`9`,note:`(2 + 1) × 3`,noteEn:`(2 + 1) × 3`},{input:`tokens = ["4","13","5","/","+"]`,output:`6`,note:`4 + (13 ÷ 5)`,noteEn:`4 + (13 ÷ 5)`},{input:`tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]`,output:`22`}],constraints:[`1 ≤ tokens.length ≤ 10⁴`,`每個 token 是運算子或 [-200, 200] 之間的整數`],constraintsEn:[`1 ≤ tokens.length ≤ 10⁴`,`Each token is an operator or an integer in [-200, 200]`],idea:`後序表示法不需要括號，因為每個運算子作用的對象永遠是**它前面最近的兩個還沒被用掉的值**。「最近的」就是堆疊頂端：數字 push，遇到運算子就 pop 兩個出來計算，再把結果 push 回去當成新的運算元。`,steps:[`準備空堆疊，由左到右讀每個 token。`,`是數字：轉成整數後 push。`,"是運算子：先 pop 出 `b`（右運算元），再 pop 出 `a`（左運算元），計算 `a 運算 b`，把結果 push 回去。",`讀完後堆疊只剩一個值，就是答案。`],pitfalls:["**順序**：先 pop 出來的是右邊的運算元。減法和除法寫成 `b - a`、`b / a` 就錯了。","**除法要向零截斷**：Python 的 `//` 是向下取整，`-7 // 2` 會得到 `-4`；題目要的是 `-3`，所以用 `int(a / b)`。",'判斷是不是數字不能只看第一個字元是不是 `-`：`"-11"` 是數字、`"-"` 才是運算子。'],complexity:{time:`O(n)`,space:`O(n)`},code:i,starter:`class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        `,presets:[{label:`["2","1","+","3","*"]`,input:{tokens:[`2`,`1`,`+`,`3`,`*`]},expected:`9`},{label:`["4","-13","5","/","+"]（負數除法）`,input:{tokens:[`4`,`-13`,`5`,`/`,`+`]},expected:`2`},{label:`["10","6","9","3","+","-11","*","/","*","17","+","5","+"]`,input:{tokens:[`10`,`6`,`9`,`3`,`+`,`-11`,`*`,`/`,`*`,`17`,`+`,`5`,`+`]},expected:`22`}],trace({tokens:r}){let i=n(),s=[],c={},l=(e,n,i={})=>[t.array(`tokens`,r,{pointers:e===null?{}:{i:e},marks:e!==null&&n?{...c,[e]:n}:{...c}}),t.stack(`stack（還沒被用掉的運算元）`,s,{marks:i})];i.push({line:3,note:`準備一個空堆疊，用來放「已經讀到、還在等運算子」的數值。`,views:l(null)});for(let e=0;e<r.length;e++){let t=r[e];if(![`+`,`-`,`*`,`/`].includes(t)){s.push(Number(t)),c[e]=`visited`,i.push({line:[4,5,6,7],note:`\`${t}\` 是數字。現在還不知道它要和誰運算，先 push 進堆疊等運算子出現。`,views:l(e,`active`,{[s.length-1]:`active`}),vars:{tok:t}});continue}let n=s[s.length-1],u=s[s.length-2];i.push({line:[4,5,8,9],note:`\`${t}\` 是運算子，它的對象是堆疊最上面的兩個值。**先 pop 出來的是右邊**的運算元 \`b = ${n}\`，再 pop 出左邊的 \`a = ${u}\`。`,views:l(e,`active`,{[s.length-1]:`compare`,[s.length-2]:`alt`}),vars:{tok:t,a:u,b:n}}),s.pop(),s.pop();let d,f=``;if(t===`+`)d=u+n;else if(t===`-`)d=u-n;else if(t===`*`)d=u*n;else if(d=Math.trunc(u/n),Object.is(d,-0)&&(d=0),u%n!==0){let e=Math.round(u/n*100)/100;f=u/n<0?`實際大約是 ${e}，要**往 0 的方向**捨去得到 \`${d}\`。用 \`//\` 會往下取整變成 \`${Math.floor(u/n)}\`，就錯了。`:`實際大約是 ${e}，捨去小數得到 \`${d}\`。`}s.push(d),c[e]=`visited`,i.push({line:a[t],note:`計算 \`${u} ${o[t]} ${n} = ${d}\`。`+f+`把結果 push 回堆疊：這一小段算式已經濃縮成一個數，可以當作後面運算子的運算元。`,views:l(e,`good`,{[s.length-1]:`good`}),vars:{tok:t,a:u,b:n,結果:d}})}return i.push({line:18,note:`所有 token 讀完，堆疊只剩一個值 \`${s[0]}\`，它就是整個算式的結果。`,views:l(null,void 0,{0:`good`}),result:e(s[0])}),i.frames}});export{s as default};

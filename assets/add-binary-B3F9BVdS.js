@@ -1,0 +1,10 @@
+var e=`s = Solution()
+check(s.addBinary("11", "1"), "100", "範例 1")
+check(s.addBinary("1010", "1011"), "10101", "範例 2")
+check(s.addBinary("0", "0"), "0", "0 + 0")
+check(s.addBinary("1", "1"), "10", "最後還有進位")
+check(s.addBinary("1111", "1"), "10000", "連續進位")
+check(s.addBinary("0", "101"), "101", "長度不同")
+check(s.addBinary("1" * 200, "1"), "1" + "0" * 200, "很長的字串")
+check(s.addBinary("110010", "10111"), "1001001", "一般情況")
+`;export{e as default};

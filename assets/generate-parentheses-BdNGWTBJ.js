@@ -1,0 +1,22 @@
+import{a as e,n as t,o as n}from"./AlgoApp-D095I_J-.js";import{t as r}from"./types-Dfvzj6n2.js";var i=`class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        path = []
+
+        def backtrack(open: int, close: int) -> None:
+            if len(path) == 2 * n:        # 2n 個字元都放好了
+                res.append("".join(path))
+                return
+            if open < n:                  # 左括號還有額度
+                path.append("(")
+                backtrack(open + 1, close)
+                path.pop()
+            if close < open:              # 有還沒配對的左括號，才能放右括號
+                path.append(")")
+                backtrack(open, close + 1)
+                path.pop()
+
+        backtrack(0, 0)
+        return res`;function a(e){let n=[{id:`r`,val:e,children:[]}],r={},i={},a=[`r`];return{down(e,t){let r=a[a.length-1],o=`d${n.length}`;n.push({id:o,val:e,children:[]}),n.find(e=>e.id===r).children.push(o),i[`${r}>${o}`]=t,a.push(o)},settle(e){r[a[a.length-1]]=e},up(){let e=a.pop();r[e]??=`visited`},view(e){let o={...r},s={};return a.forEach((e,t)=>{o[e]=t===a.length-1?r[e]??`active`:`compare`,t>0&&(s[`${a[t-1]}>${e}`]=`active`)}),t.tree(e,{nodes:n,root:`r`},{marks:o,edgeLabels:i,edgeMarks:s})}}}var o=r({id:22,summary:"給一個整數 `n`，代表有 `n` 對括號。列出所有由這 `n` 對括號組成的**合法括號字串**（每個左括號都有對應的右括號，而且順序正確）。\n\n答案之間的順序不限。",summaryEn:"Given an integer `n` meaning `n` pairs of parentheses, list every **well-formed string** you can build from them (each opening bracket is closed by a matching one, in the right order).\n\nThe strings can be returned in any order.",examples:[{input:`n = 3`,output:`["((()))","(()())","(())()","()(())","()()()"]`},{input:`n = 1`,output:`["()"]`}],constraints:[`1 ≤ n ≤ 8`],constraintsEn:[`1 ≤ n ≤ 8`],idea:"不要先產生全部 2²ⁿ 種字串再檢查，而是**邊放邊保證合法**。一個字一個字往後放，只要守住兩條規則就不會走錯：左括號最多放 `n` 個（`open < n`）；右括號只能在「還有沒配對的左括號」時放（`close < open`）。照這樣走到長度 `2n` 的每一條路徑都是合法答案 —— 決策樹上**沒有死路**。",steps:["`backtrack(open, close)`：目前 `path` 裡已經放了幾個左括號、幾個右括號。","`len(path) == 2n`：放滿了，把 `path` 接成字串收進 `res`。","`open < n` 時可以放 `(`：`append` → 遞迴 → `pop`。","`close < open` 時可以放 `)`：`append` → 遞迴 → `pop`。"],pitfalls:["右括號的條件是 `close < open`，不是 `close < n` —— 後者會產生 `())(` 這種不合法的字串。","兩個 `if` 是各自獨立的（不是 `if / else`）：同一個位置兩種括號都可能可以放，兩條分支都要走。"],complexity:{time:`O(4ⁿ / √n)（第 n 個卡塔蘭數 × 長度）`,space:`O(n)（遞迴深度，不含輸出）`},code:i,starter:`class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        `,presets:[{label:`n = 3`,input:{n:3},expected:`["((()))", "(()())", "(())()", "()(())", "()()()"]`},{label:`n = 2`,input:{n:2},expected:`["(())", "()()"]`},{label:`n = 1`,input:{n:1},expected:`["()"]`}],trace({n:r}){let i=n(),o=[],s=[],c=a(`""`),l=e=>[c.view(`決策樹（節點 = 目前的 path，邊 = 放的括號）`),t.array(`res`,o,{marks:e?{[o.length-1]:`good`}:{}})],u=()=>`"${s.join(``)}"`;i.push({line:[3,4,19],note:`要放 ${2*r} 個字元。用 \`open\`、\`close\` 記錄已經放了幾個左、右括號，從 \`backtrack(0, 0)\` 開始。`,views:l(),vars:{n:r,open:0,close:0,path:`""`}});let d=(e,t)=>{if(s.length===2*r){let n=s.join(``);o.push(n),c.settle(`good`),i.push({line:[7,8,9],note:`\`path\` 長度到 ${2*r} 了。一路上都守著兩條規則，所以它一定合法 —— 把 \`"${n}"\` 收進 \`res\`。`,views:l(n),vars:{open:e,close:t,path:`"${n}"`,已收集:o.length}});return}let n=t<e;e<r&&(s.push(`(`),c.down(s.join(``),`(`),i.push({line:[10,11,12],note:`\`open = ${e} < ${r}\`，左括號還有額度。**放** \`(\`，\`path\` 變成 \`${u()}\`，繼續往下。`,views:l(),vars:{open:e+1,close:t,path:u()}}),d(e+1,t),s.pop(),c.up(),i.push({line:13,note:`**撤銷**剛才的 \`(\`，回到 \`${u()}\`（open = ${e}, close = ${t}）。`+(n?`同一個位置還可以改放 \`)\`，因為 \`close = ${t} < open = ${e}\`。`:`這個位置不能放 \`)\`：\`close == open == ${e}\`，沒有等待配對的左括號。這一層結束。`),views:l(),vars:{open:e,close:t,path:u()}})),n&&(s.push(`)`),c.down(s.join(``),`)`),i.push({line:[14,15,16],note:(e===r?`\`open == ${r}\`，左括號已經用完，只剩一種選擇。`:``)+`\`close = ${t} < open = ${e}\`，還有 ${e-t} 個左括號等著配對。**放** \`)\`，\`path\` 變成 \`${u()}\`。`,views:l(),vars:{open:e,close:t+1,path:u()}}),d(e,t+1),s.pop(),c.up(),i.push({line:17,note:`**撤銷**剛才的 \`)\`，回到 \`${u()}\`。這個位置能放的括號都試過了，返回上一層。`,views:l(),vars:{open:e,close:t,path:u()}}))};return d(0,0),i.push({line:20,note:`全部走完，共 ${o.length} 個合法字串。注意樹上每一片葉子都是綠色 —— 兩條規則讓我們從頭到尾沒走過任何一條不合法的路。`,views:l(),vars:{n:r,已收集:o.length},result:e(o)}),i.frames}});export{o as default};

@@ -1,0 +1,18 @@
+var e=`s = Solution()
+M = [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]]
+check(s.searchMatrix(M, 3), True, "範例 1")
+check(s.searchMatrix(M, 13), False, "範例 2")
+check(s.searchMatrix(M, 16), True, "中間那一列")
+check(s.searchMatrix(M, 1), True, "第一格")
+check(s.searchMatrix(M, 60), True, "最後一格")
+check(s.searchMatrix(M, 0), False, "比全部都小")
+check(s.searchMatrix(M, 61), False, "比全部都大")
+check(s.searchMatrix(M, 10), True, "某一列的開頭")
+check(s.searchMatrix(M, 8), False, "落在兩列之間")
+check(s.searchMatrix([[5]], 5), True, "1×1 找得到")
+check(s.searchMatrix([[5]], 4), False, "1×1 找不到")
+check(s.searchMatrix([[1, 3, 5]], 3), True, "只有一列")
+check(s.searchMatrix([[1], [3], [5]], 5), True, "只有一行")
+check(s.searchMatrix([[1], [3], [5]], 2), False, "只有一行，找不到")
+check(all(s.searchMatrix(M, v) for row in M for v in row), True, "每一格都找得到")
+`;export{e as default};

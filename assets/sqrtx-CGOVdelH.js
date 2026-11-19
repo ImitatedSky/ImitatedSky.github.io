@@ -1,0 +1,17 @@
+var e=`s = Solution()
+check(s.mySqrt(4), 2, "範例 1")
+check(s.mySqrt(8), 2, "範例 2")
+check(s.mySqrt(0), 0, "x = 0")
+check(s.mySqrt(1), 1, "x = 1")
+check(s.mySqrt(2), 1, "x = 2")
+check(s.mySqrt(3), 1, "x = 3")
+check(s.mySqrt(15), 3, "完全平方數的前一個")
+check(s.mySqrt(16), 4, "完全平方數")
+check(s.mySqrt(17), 4, "完全平方數的後一個")
+check(s.mySqrt(25), 5, "x = 25")
+check(s.mySqrt(2147395599), 46339, "46340² − 1")
+check(s.mySqrt(2147395600), 46340, "46340²")
+check(s.mySqrt(2147483647), 46340, "上限")
+for v in range(0, 300):
+    check(s.mySqrt(v), isqrt(v), f"對照 isqrt x={v}")
+`;export{e as default};
