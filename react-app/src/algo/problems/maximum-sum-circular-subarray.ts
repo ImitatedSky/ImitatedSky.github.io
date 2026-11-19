@@ -23,12 +23,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 918,
   summary:
     "給一個**環形**的整數陣列 `nums`：最後一個元素的下一個是第一個元素。找出總和最大的非空連續子陣列，回傳這個最大總和。\n\n子陣列可以跨過尾端繞回開頭，但每個元素最多只能用一次。",
+  summaryEn:
+    "Treat the integer array `nums` as a **ring**: after the last element comes the first one again. Find the non-empty contiguous subarray with the largest sum and return that sum.\n\nA subarray may wrap past the end back to the start, but each element can be used at most once.",
   examples: [
-    { input: "nums = [1,-2,3,-2]", output: "3", note: "不繞圈的 [3] 最大" },
-    { input: "nums = [5,-3,5]", output: "10", note: "繞圈取 [5,5]" },
+    { input: "nums = [1,-2,3,-2]", output: "3", note: "不繞圈的 [3] 最大", noteEn: "The non-wrapping [3] is the best" },
+    { input: "nums = [5,-3,5]", output: "10", note: "繞圈取 [5,5]", noteEn: "Wrap around to take [5,5]" },
     { input: "nums = [-3,-2,-3]", output: "-2" },
   ],
   constraints: ["1 ≤ nums.length ≤ 3 × 10⁴", "−3 × 10⁴ ≤ nums[i] ≤ 3 × 10⁴"],
+  constraintsEn: ["1 ≤ nums.length ≤ 3 × 10⁴", "−3 × 10⁴ ≤ nums[i] ≤ 3 × 10⁴"],
   idea:
     "答案只有兩種長相。**不繞圈**：就是一般的最大子陣列（Kadane）。**繞圈**：取了頭和尾，沒取的是中間一段連續的元素 —— 要讓頭尾的和最大，就要讓中間被挖掉的那段和**最小**，所以是 `total - 最小子陣列和`。兩者取大的即可，而最小子陣列同樣用 Kadane 一趟算出來。",
   steps: [

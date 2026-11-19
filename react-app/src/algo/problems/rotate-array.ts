@@ -20,11 +20,14 @@ export default defineProblem<{ nums: number[]; k: number }>({
   id: 189,
   summary:
     "給一個整數陣列 `nums` 和非負整數 `k`，把陣列**向右輪轉 `k` 步**：每一步所有元素往右移一格，最右邊的元素繞回最左邊。\n\n要直接修改 `nums`，不需要回傳。進階要求是只用 O(1) 的額外空間。",
+  summaryEn:
+    "Given an integer array `nums` and a non-negative integer `k`, **rotate the array to the right by `k` steps**: in each step every element moves one slot right, and the last element wraps around to the front.\n\nModify `nums` directly; nothing needs to be returned. The follow-up asks for O(1) extra space.",
   examples: [
     { input: "nums = [1,2,3,4,5,6,7], k = 3", output: "[5,6,7,1,2,3,4]" },
     { input: "nums = [-1,-100,3,99], k = 2", output: "[3,99,-1,-100]" },
   ],
   constraints: ["1 ≤ nums.length ≤ 10⁵", "0 ≤ k ≤ 10⁵"],
+  constraintsEn: ["1 ≤ nums.length ≤ 10⁵", "0 ≤ k ≤ 10⁵"],
   idea:
     "向右轉 `k` 步，其實就是把**最後 `k` 個**整塊搬到最前面。**三次反轉**可以原地做到：先把整個陣列反轉，後 `k` 個就跑到前面了（但兩塊內部的順序都顛倒）；再分別把前 `k` 個和後 `n - k` 個各自反轉回來，內部順序就恢復了。",
   steps: [

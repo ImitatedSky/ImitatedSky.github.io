@@ -38,12 +38,15 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 114,
   summary:
     "給一棵二元樹，把它**原地**攤平成一條「鏈結串列」：每個節點的 `left` 都是 `None`，`right` 指向下一個節點，而且節點的順序要跟**前序走訪**（根 → 左 → 右）一樣。\n\n不需要回傳任何東西，直接修改原本的樹。進階要求是只用 O(1) 的額外空間。",
+  summaryEn:
+    "Given a binary tree, flatten it **in place** into a \"linked list\": every node's `left` is `None`, `right` points to the next node, and the nodes appear in **preorder** (root → left → right).\n\nReturn nothing; modify the tree directly. The follow-up asks for only O(1) extra space.",
   examples: [
     { input: "root = [1,2,5,3,4,null,6]", output: "[1,null,2,null,3,null,4,null,5,null,6]" },
     { input: "root = []", output: "[]" },
     { input: "root = [0]", output: "[0]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 2000", "-100 ≤ Node.val ≤ 100"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 2000", "-100 ≤ Node.val ≤ 100"],
   idea:
     "前序是「根 → 左子樹 → 右子樹」，所以右子樹的第一個節點，一定緊接在**左子樹最後被走訪的節點**後面 —— 也就是左子樹一路往右走到底的那個節點 `pre`。把右子樹掛到 `pre.right`，再把整棵左子樹搬到右邊，`cur` 這一格就攤平了；接著往右走一步，重複同樣的事。",
   steps: [

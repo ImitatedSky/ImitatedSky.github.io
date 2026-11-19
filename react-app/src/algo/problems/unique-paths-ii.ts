@@ -23,11 +23,14 @@ export default defineProblem<{ obstacleGrid: number[][] }>({
   id: 63,
   summary:
     "機器人從 `m × n` 方格的**左上角**出發，每一步只能**往右或往下**，要走到**右下角**。\n\n方格中 `1` 代表障礙物、`0` 代表空地，障礙物不能踩。問一共有幾條不同的路徑。",
+  summaryEn:
+    "A robot starts at the **top-left corner** of an `m × n` grid and moves only **right or down** until it reaches the **bottom-right corner**.\n\nIn the grid, `1` marks an obstacle and `0` an empty cell; obstacles can't be stepped on. How many distinct paths are there?",
   examples: [
-    { input: "obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]", output: "2", note: "正中間有障礙，只能繞上面或繞下面" },
+    { input: "obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]", output: "2", note: "正中間有障礙，只能繞上面或繞下面", noteEn: "The center is blocked, so you go around either the top or the bottom" },
     { input: "obstacleGrid = [[0,1],[0,0]]", output: "1" },
   ],
   constraints: ["1 ≤ m, n ≤ 100", "obstacleGrid[i][j] 只會是 0 或 1"],
+  constraintsEn: ["1 ≤ m, n ≤ 100", "obstacleGrid[i][j] is either 0 or 1"],
   idea:
     "定義 `dp[i][j]` = 走到 `(i, j)` 的路徑數。到達一格的前一步只可能在**上面**或**左邊**，所以路徑數是兩者相加：`dp[i][j] = dp[i-1][j] + dp[i][j-1]`；遇到障礙物這格直接是 0，它自然就不會貢獻給後面的格子。",
   steps: [

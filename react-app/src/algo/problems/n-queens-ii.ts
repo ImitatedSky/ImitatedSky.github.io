@@ -32,11 +32,14 @@ export default defineProblem<{ n: number }>({
   id: 52,
   summary:
     "在 `n × n` 的棋盤上放 `n` 個皇后，讓任兩個皇后都**不能互相攻擊**（不在同一列、同一行、同一條斜線上）。\n\n回傳總共有**幾種**不同的擺法（只要數量，不用列出盤面）。",
+  summaryEn:
+    "Place `n` queens on an `n × n` chessboard so that **no two queens attack each other** (no shared row, column, or diagonal).\n\nReturn **how many** distinct placements exist; you only need the count, not the boards.",
   examples: [
     { input: "n = 4", output: "2" },
     { input: "n = 1", output: "1" },
   ],
   constraints: ["1 ≤ n ≤ 9"],
+  constraintsEn: ["1 ≤ n ≤ 9"],
   idea:
     "每一列一定剛好放一個皇后，所以**一列一列往下放**，每列只需要決定放在哪一行。要 O(1) 判斷某格會不會被攻擊，用三個集合：`cols` 記用過的直行；同一條「＼」斜線上 `r - c` 相同、同一條「／」斜線上 `r + c` 相同，各用一個集合記下來。",
   steps: [

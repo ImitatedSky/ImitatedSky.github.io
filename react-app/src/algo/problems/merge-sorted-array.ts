@@ -18,12 +18,15 @@ export default defineProblem<{ nums1: number[]; m: number; nums2: number[]; n: n
   id: 88,
   summary:
     "有兩個已經由小到大排好的陣列 `nums1` 和 `nums2`。`nums1` 的長度是 `m + n`：前 `m` 格是真正的資料，後 `n` 格是預留的空位（填 0）。\n\n請把 `nums2` 的 `n` 個數**原地合併**進 `nums1`，讓整個 `nums1` 維持由小到大。不需要回傳任何東西。",
+  summaryEn:
+    "You get two arrays, `nums1` and `nums2`, both already sorted in ascending order. `nums1` has length `m + n`: its first `m` slots hold real data and the last `n` slots are reserved space (filled with 0).\n\nMerge the `n` numbers of `nums2` **into `nums1` in-place** so that all of `nums1` ends up sorted in ascending order. Nothing needs to be returned.",
   examples: [
     { input: "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3", output: "[1,2,2,3,5,6]" },
     { input: "nums1 = [1], m = 1, nums2 = [], n = 0", output: "[1]" },
     { input: "nums1 = [0], m = 0, nums2 = [1], n = 1", output: "[1]" },
   ],
   constraints: ["nums1.length == m + n", "0 ≤ m, n ≤ 200", "1 ≤ m + n ≤ 200"],
+  constraintsEn: ["nums1.length == m + n", "0 ≤ m, n ≤ 200", "1 ≤ m + n ≤ 200"],
   idea:
     "空位在 `nums1` 的**尾巴**，所以從尾巴開始填：每次比較兩邊還沒用掉的**最大值**，把比較大的那個放到最後一個空格。由後往前寫，寫入的位置 `k` 永遠不會追上還沒讀的 `i`，所以不會蓋掉任何還沒用到的資料。",
   steps: [

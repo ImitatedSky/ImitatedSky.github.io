@@ -18,12 +18,15 @@ export default defineProblem<{ s: string; t: string }>({
   id: 205,
   summary:
     "給兩個長度相同的字串 `s` 和 `t`，判斷它們是否**同構**：能不能把 `s` 的每一種字元固定換成另一種字元，換完剛好得到 `t`。\n\n同一種字元必須永遠換成同一個字元，而且**不同的字元不能換成同一個字元**（字元可以換成自己）。",
+  summaryEn:
+    "Given two strings `s` and `t` of the same length, decide whether they are **isomorphic**: can each kind of character in `s` be consistently replaced by some character so that the result is exactly `t`?\n\nThe same character must always map to the same character, and **two different characters cannot map to the same character** (a character may map to itself).",
   examples: [
-    { input: 's = "egg", t = "add"', output: "true", note: "e→a、g→d" },
-    { input: 's = "foo", t = "bar"', output: "false", note: "o 不能同時對應 a 和 r" },
+    { input: 's = "egg", t = "add"', output: "true", note: "e→a、g→d", noteEn: "e->a, g->d" },
+    { input: 's = "foo", t = "bar"', output: "false", note: "o 不能同時對應 a 和 r", noteEn: "o cannot map to both a and r" },
     { input: 's = "paper", t = "title"', output: "true" },
   ],
   constraints: ["1 ≤ s.length ≤ 5 × 10⁴", "t.length == s.length", "由任意 ASCII 字元組成"],
+  constraintsEn: ["1 ≤ s.length ≤ 5 × 10⁴", "t.length == s.length", "Made of any ASCII characters"],
   idea:
     "同構就是字元之間的**一對一對應**。只記 `s → t` 一個方向會漏掉「兩個不同字元對到同一個字元」的情況，所以要**兩個方向各一張雜湊表**：`s2t` 保證同一個 `a` 不會對到兩個 `b`，`t2s` 保證同一個 `b` 不會被兩個 `a` 搶。",
   steps: [

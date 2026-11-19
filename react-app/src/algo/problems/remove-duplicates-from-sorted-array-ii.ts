@@ -16,11 +16,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 80,
   summary:
     "給一個**由小到大排序**的整數陣列 `nums`，請原地刪掉多餘的重複，讓每個數值**最多出現兩次**，並保持原本的相對順序。\n\n回傳處理後的長度 `k`；`nums` 的前 `k` 格必須是結果，之後的內容不重要。只能用 O(1) 的額外空間。",
+  summaryEn:
+    "Given an integer array `nums` **sorted in ascending order**, delete the extra duplicates in-place so each value appears **at most twice**, keeping the original relative order.\n\nReturn the resulting length `k`; the first `k` slots of `nums` must hold the result, and the rest does not matter. Use only O(1) extra space.",
   examples: [
     { input: "nums = [1,1,1,2,2,3]", output: "5, nums = [1,1,2,2,3,_]" },
     { input: "nums = [0,0,1,1,1,1,2,3,3]", output: "7, nums = [0,0,1,1,2,3,3,_,_]" },
   ],
   constraints: ["1 ≤ nums.length ≤ 3 × 10⁴", "nums 已經由小到大排序"],
+  constraintsEn: ["1 ≤ nums.length ≤ 3 × 10⁴", "nums is sorted in ascending order"],
   idea:
     "保留區 `nums[:k]` 也是排序的。新來的 `x` 能不能放進去，只要看保留區**倒數第 2 個** `nums[k - 2]`：如果它也等於 `x`，那倒數第 1 個一定也是 `x`（夾在中間），代表 `x` 已經有兩個了，不能再放；否則就可以放。",
   steps: [

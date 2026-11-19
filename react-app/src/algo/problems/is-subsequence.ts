@@ -15,11 +15,14 @@ export default defineProblem<{ s: string; t: string }>({
   id: 392,
   summary:
     "給兩個字串 `s` 和 `t`，判斷 `s` 是不是 `t` 的**子序列**。\n\n子序列的意思是：從 `t` 裡刪掉若干個字元（也可以不刪），剩下的字元**維持原本的先後順序**，剛好拼成 `s`。",
+  summaryEn:
+    "Given two strings `s` and `t`, decide whether `s` is a **subsequence** of `t`.\n\nA subsequence is what you get by deleting some characters of `t` (possibly none) while the remaining characters **keep their original order** - if that can spell out `s` exactly, the answer is yes.",
   examples: [
     { input: 's = "abc", t = "ahbgdc"', output: "true" },
     { input: 's = "axc", t = "ahbgdc"', output: "false" },
   ],
   constraints: ["0 ≤ s.length ≤ 100", "0 ≤ t.length ≤ 10⁴", "兩個字串都只有小寫英文字母"],
+  constraintsEn: ["0 ≤ s.length ≤ 100", "0 ≤ t.length ≤ 10⁴", "Both strings contain only lowercase English letters"],
   idea:
     "**貪心 + 雙指標**：`s` 目前要找的字元，在 `t` 裡越早配到越好 —— 越早配到，後面留給剩下字元的空間就越多，絕對不會吃虧。所以只要由左到右掃 `t`，遇到相同的字元就配對。",
   steps: [

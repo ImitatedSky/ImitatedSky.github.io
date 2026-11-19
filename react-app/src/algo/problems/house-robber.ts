@@ -16,11 +16,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 198,
   summary:
     "一排房子，`nums[i]` 是第 `i` 間屋裡的現金。**相鄰的兩間不能同一晚都偷**，否則會觸發警報。\n\n問在不觸發警報的前提下，最多能偷到多少錢。",
+  summaryEn:
+    "Houses stand in a row, and `nums[i]` is the cash in house `i`. **Robbing two adjacent houses on the same night** sets off the alarm.\n\nWhat is the most money you can take without triggering it?",
   examples: [
-    { input: "nums = [1,2,3,1]", output: "4", note: "偷第 1、3 間：1 + 3" },
-    { input: "nums = [2,7,9,3,1]", output: "12", note: "偷第 1、3、5 間：2 + 9 + 1" },
+    { input: "nums = [1,2,3,1]", output: "4", note: "偷第 1、3 間：1 + 3", noteEn: "Rob houses 1 and 3: 1 + 3" },
+    { input: "nums = [2,7,9,3,1]", output: "12", note: "偷第 1、3、5 間：2 + 9 + 1", noteEn: "Rob houses 1, 3 and 5: 2 + 9 + 1" },
   ],
   constraints: ["1 ≤ nums.length ≤ 100", "0 ≤ nums[i] ≤ 400"],
+  constraintsEn: ["1 ≤ nums.length ≤ 100", "0 ≤ nums[i] ≤ 400"],
   idea:
     "定義 `dp[i]` = 只考慮**前 `i` 間**房子時能偷到的最大金額。對第 `i` 間只有兩個選擇：**不偷**（答案沿用 `dp[i-1]`），或**偷**（上一間就不能碰，所以是 `dp[i-2] + nums[i-1]`），取較大者。",
   steps: [

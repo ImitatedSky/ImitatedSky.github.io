@@ -23,12 +23,15 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 199,
   summary:
     "想像你站在一棵二元樹的**右邊**往左看，每一層只看得到最靠右的那個節點。\n\n給根節點 `root`，由上到下回傳你看得到的節點值。",
+  summaryEn:
+    "Imagine standing on the **right side** of a binary tree and looking left: on each level you can only see the rightmost node.\n\nGiven `root`, return the values you can see, from top to bottom.",
   examples: [
     { input: "root = [1,2,3,null,5,null,4]", output: "[1,3,4]" },
-    { input: "root = [1,2,3,4,null,null,null,5]", output: "[1,3,4,5]", note: "右邊比較淺時，左子樹深處的節點會露出來" },
+    { input: "root = [1,2,3,4,null,null,null,5]", output: "[1,3,4,5]", note: "右邊比較淺時，左子樹深處的節點會露出來", noteEn: "when the right side is shallower, deeper nodes of the left subtree show through" },
     { input: "root = []", output: "[]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 100"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 100"],
   idea:
     "「從右邊看到的」就是**每一層的最後一個節點**。用 BFS 一層一層走：每一輪開始時，佇列裡剛好裝著一整層（由左到右），所以佇列尾端 `q[-1]` 就是答案。",
   steps: [

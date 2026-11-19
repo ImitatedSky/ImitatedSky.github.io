@@ -25,16 +25,19 @@ export default defineProblem<{ numCourses: number; prerequisites: number[][] }>(
   id: 210,
   summary:
     "一共有 `numCourses` 門課，編號 `0` 到 `numCourses - 1`。`prerequisites` 裡的每一組 `[a, b]` 表示想修 `a` 必須先修完 `b`。\n\n請回傳一個**能把所有課修完的順序**。合法的順序如果不只一種，回傳任何一種都可以；如果根本修不完，回傳空陣列。",
+  summaryEn:
+    "There are `numCourses` courses, numbered `0` to `numCourses - 1`. Each pair `[a, b]` in `prerequisites` means you must finish `b` before taking `a`.\n\nReturn **an order in which you can finish every course**. If several orders work, any of them is fine; if it is impossible, return an empty array.",
   examples: [
     { input: "numCourses = 2, prerequisites = [[1,0]]", output: "[0,1]" },
     {
       input: "numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]",
       output: "[0,1,2,3]",
-      note: "[0,2,1,3] 也是正確答案",
+      note: "[0,2,1,3] 也是正確答案", noteEn: "[0,2,1,3] is also a correct answer",
     },
     { input: "numCourses = 1, prerequisites = []", output: "[0]" },
   ],
   constraints: ["1 ≤ numCourses ≤ 2000", "0 ≤ prerequisites.length ≤ numCourses · (numCourses − 1)", "每組先修關係都不重複"],
+  constraintsEn: ["1 ≤ numCourses ≤ 2000", "0 ≤ prerequisites.length ≤ numCourses · (numCourses − 1)", "No prerequisite pair is repeated"],
   idea:
     "**入度** = 這門課還有幾門先修課沒修。入度是 0 的課現在就能修；修完之後，把它指向的課入度各減 1，就會有新的課變成 0。一直重複「挑入度 0 的課來修」（Kahn 演算法），修課的先後就是一個拓撲排序。如果有課永遠降不到 0，代表它們卡在環裡。",
   steps: [

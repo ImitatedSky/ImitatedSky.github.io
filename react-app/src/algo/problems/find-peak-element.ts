@@ -17,11 +17,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 162,
   summary:
     "**峰值**是指嚴格大於左右鄰居的元素。給一個相鄰元素都不相等的陣列 `nums`，回傳**任意一個**峰值的索引。\n\n可以把陣列兩端之外想成負無限大（`nums[-1] = nums[n] = -∞`），所以邊界上的元素只要比唯一的鄰居大就算峰值。時間複雜度必須是 O(log n)。",
+  summaryEn:
+    "A **peak** is an element strictly greater than its neighbors. Given an array `nums` where adjacent elements are never equal, return the index of **any one** peak.\n\nPretend the positions just outside the array are negative infinity (`nums[-1] = nums[n] = -∞`), so an element at either end is a peak if it beats its only neighbor. The solution must run in O(log n) time.",
   examples: [
-    { input: "nums = [1,2,3,1]", output: "2", note: "3 比兩邊的 2 和 1 都大" },
-    { input: "nums = [1,2,1,3,5,6,4]", output: "5", note: "回傳 1（值 2）也算對" },
+    { input: "nums = [1,2,3,1]", output: "2", note: "3 比兩邊的 2 和 1 都大", noteEn: "3 is larger than both neighbors, 2 and 1" },
+    { input: "nums = [1,2,1,3,5,6,4]", output: "5", note: "回傳 1（值 2）也算對", noteEn: "Returning 1 (value 2) is also correct" },
   ],
   constraints: ["1 ≤ nums.length ≤ 1000", "nums[i] ≠ nums[i + 1]"],
+  constraintsEn: ["1 ≤ nums.length ≤ 1000", "nums[i] ≠ nums[i + 1]"],
   idea:
     "陣列沒排序也能二分，因為我們只需要**一個保證有峰的方向**。看 `mid` 和右鄰居：往右是上坡，那一路往上爬，要嘛遇到下坡（那就是峰）、要嘛爬到最右端（右端外面是 −∞，也是峰）——右半一定有峰。下坡的話同理，`mid` 或它左邊一定有峰。",
   steps: [

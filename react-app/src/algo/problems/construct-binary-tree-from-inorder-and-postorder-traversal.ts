@@ -41,11 +41,14 @@ export default defineProblem<{ inorder: number[]; postorder: number[] }>({
   id: 106,
   summary:
     "給同一棵二元樹的**中序走訪** `inorder` 和**後序走訪** `postorder`（節點值都不重複），把這棵樹還原出來，回傳根節點。",
+  summaryEn:
+    "You get the **inorder traversal** `inorder` and the **postorder traversal** `postorder` of the same binary tree (no duplicate values). Rebuild the tree and return its root.",
   examples: [
     { input: "inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]", output: "[3,9,20,null,null,15,7]" },
     { input: "inorder = [-1], postorder = [-1]", output: "[-1]" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 3000", "所有節點值互不相同", "兩個陣列保證是同一棵樹的中序與後序"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 3000", "All node values are distinct", "Both arrays are guaranteed to be the inorder and postorder of the same tree"],
   idea:
     "後序是「左 → 右 → **根**」，所以後序的**最後一個**值一定是根。在中序（左 → 根 → 右）裡找到根，就能把它切成左子樹和右子樹兩段。從後序的尾巴一個一個往前拿，順序會是「根 → 右 → 左」，所以遞迴時要**先建右子樹、再建左子樹**。",
   steps: [

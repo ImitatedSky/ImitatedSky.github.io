@@ -28,15 +28,18 @@ export default defineProblem<{ tokens: string[] }>({
   id: 150,
   summary:
     "給一個用**逆波蘭表示法**（後序表示法）寫成的算式 `tokens`，算出它的值。\n\n後序的意思是運算子寫在兩個運算元的**後面**，例如 `2 1 +` 就是 `2 + 1`。運算子只有 `+`、`-`、`*`、`/`，其中除法的結果要**往 0 的方向捨去**小數。保證算式合法、不會除以 0。",
+  summaryEn:
+    "You get an expression `tokens` written in **Reverse Polish Notation** (postfix). Compute its value.\n\nPostfix means each operator comes **after** its two operands, so `2 1 +` means `2 + 1`. The only operators are `+`, `-`, `*` and `/`, and division **truncates toward zero**. The expression is guaranteed to be valid and never divides by zero.",
   examples: [
-    { input: 'tokens = ["2","1","+","3","*"]', output: "9", note: "(2 + 1) × 3" },
-    { input: 'tokens = ["4","13","5","/","+"]', output: "6", note: "4 + (13 ÷ 5)" },
+    { input: 'tokens = ["2","1","+","3","*"]', output: "9", note: "(2 + 1) × 3", noteEn: "(2 + 1) × 3" },
+    { input: 'tokens = ["4","13","5","/","+"]', output: "6", note: "4 + (13 ÷ 5)", noteEn: "4 + (13 ÷ 5)" },
     {
       input: 'tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]',
       output: "22",
     },
   ],
   constraints: ["1 ≤ tokens.length ≤ 10⁴", "每個 token 是運算子或 [-200, 200] 之間的整數"],
+  constraintsEn: ["1 ≤ tokens.length ≤ 10⁴", "Each token is an operator or an integer in [-200, 200]"],
   idea:
     "後序表示法不需要括號，因為每個運算子作用的對象永遠是**它前面最近的兩個還沒被用掉的值**。「最近的」就是堆疊頂端：數字 push，遇到運算子就 pop 兩個出來計算，再把結果 push 回去當成新的運算元。",
   steps: [

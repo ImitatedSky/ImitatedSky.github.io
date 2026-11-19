@@ -24,12 +24,15 @@ export default defineProblem<{ s1: string; s2: string; s3: string }>({
   id: 97,
   summary:
     "給三個字串 `s1`、`s2`、`s3`，判斷 `s3` 是不是由 `s1` 和 `s2` **交錯**組成的。\n\n交錯的意思是：把 `s1` 和 `s2` 的字元混在一起，但各自原本的**先後順序不能變**，而且兩個字串的每個字元都要剛好用到一次。",
+  summaryEn:
+    "Given three strings `s1`, `s2`, and `s3`, decide whether `s3` is an **interleaving** of `s1` and `s2`.\n\nInterleaving means mixing the characters of `s1` and `s2` together while **keeping each string's own order**, using every character of both strings exactly once.",
   examples: [
     { input: 's1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"', output: "true" },
     { input: 's1 = "aabcc", s2 = "dbbca", s3 = "aadbbbaccc"', output: "false" },
     { input: 's1 = "", s2 = "", s3 = ""', output: "true" },
   ],
   constraints: ["0 ≤ s1.length, s2.length ≤ 100", "0 ≤ s3.length ≤ 200"],
+  constraintsEn: ["0 ≤ s1.length, s2.length ≤ 100", "0 ≤ s3.length ≤ 200"],
   idea:
     "定義 `dp[i][j]` = `s1` 的前 `i` 個字元和 `s2` 的前 `j` 個字元，能不能交錯出 `s3` 的前 `i + j` 個字元。看 `s3` 的**最後一個字元** `s3[i+j-1]` 是誰提供的：來自 `s1`（那就要 `dp[i-1][j]` 成立且 `s1[i-1]` 相符），或來自 `s2`（`dp[i][j-1]` 成立且 `s2[j-1]` 相符），兩者有一個成立即可。在表格上就是「從上面來」或「從左邊來」。",
   steps: [

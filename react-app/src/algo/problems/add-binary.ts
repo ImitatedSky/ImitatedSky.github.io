@@ -22,11 +22,14 @@ export default defineProblem<{ a: string; b: string }>({
   id: 67,
   summary:
     "給兩個只含 `0`、`1` 的字串 `a` 和 `b`，各代表一個二進位數。把它們**相加**，結果一樣用二進位字串回傳。\n\n字串可能很長，不能指望直接轉成一般整數來算。",
+  summaryEn:
+    "You get two strings `a` and `b` containing only `0` and `1`, each representing a binary number. **Add them** and return the sum as a binary string.\n\nThe strings can be very long, so you can't rely on converting them to ordinary integers.",
   examples: [
-    { input: 'a = "11", b = "1"', output: '"100"', note: "3 + 1 = 4" },
-    { input: 'a = "1010", b = "1011"', output: '"10101"', note: "10 + 11 = 21" },
+    { input: 'a = "11", b = "1"', output: '"100"', note: "3 + 1 = 4", noteEn: "3 + 1 = 4" },
+    { input: 'a = "1010", b = "1011"', output: '"10101"', note: "10 + 11 = 21", noteEn: "10 + 11 = 21" },
   ],
   constraints: ["1 ≤ a.length, b.length ≤ 10⁴", "除了 \"0\" 本身以外沒有前導零"],
+  constraintsEn: ["1 ≤ a.length, b.length ≤ 10⁴", "No leading zeros except for \"0\" itself"],
   idea:
     "就是小學的**直式加法**，只是逢二進一。兩個指標從最右邊（最低位）一起往左走，每一欄把「`a` 的位元 + `b` 的位元 + 進位」加起來：`total % 2` 是這一欄要寫下的數字，`total // 2` 是帶到下一欄的進位。",
   steps: [

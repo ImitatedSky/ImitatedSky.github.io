@@ -5,6 +5,7 @@ import { usePageTitle } from "../../hooks/usePageTitle";
 import { CATEGORIES, CATEGORY_BY_ID, PROBLEMS } from "../catalog";
 import { useProgress } from "../progress";
 import { useLang } from "../lang";
+import LangToggle from "../components/LangToggle";
 import type { Difficulty } from "../types";
 
 const DIFFS: Difficulty[] = ["Easy", "Medium", "Hard"];
@@ -58,7 +59,7 @@ export default function ProblemList() {
 
   return (
     <>
-      <div className="algo-section-head">
+      <div className="algo-section-head" style={{ alignItems: "center" }}>
         <div>
           <div className="algo-eyebrow">Problems</div>
           <h1 className="algo-h1" style={{ fontSize: "2.1rem", marginTop: 6 }}>
@@ -68,6 +69,7 @@ export default function ProblemList() {
             已完成 {doneTotal} / {PROBLEMS.length} 題 · 顯示 {filtered.length} 題
           </p>
         </div>
+        <LangToggle />
       </div>
 
       <div className="algo-list-layout">

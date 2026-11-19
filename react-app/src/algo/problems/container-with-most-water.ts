@@ -19,11 +19,14 @@ export default defineProblem<{ height: number[] }>({
   id: 11,
   summary:
     "有一排垂直的線，第 `i` 條的高度是 `height[i]`。任選兩條線，和 x 軸一起圍成一個容器，**能裝的水量 = 兩線的距離 × 較矮那條的高度**。\n\n找出能裝最多水的那一組，回傳最大水量。容器不能傾斜，中間的線不會擋住水。",
+  summaryEn:
+    "There is a row of vertical lines, and line `i` has height `height[i]`. Any two lines together with the x-axis form a container, and **the water it holds = the distance between the lines × the height of the shorter line**.\n\nFind the pair that holds the most water and return that amount. The container cannot be tilted, and the lines in between do not block the water.",
   examples: [
-    { input: "height = [1,8,6,2,5,4,8,3,7]", output: "49", note: "選索引 1 和 8：寬 7 × 高 min(8, 7) = 49" },
+    { input: "height = [1,8,6,2,5,4,8,3,7]", output: "49", note: "選索引 1 和 8：寬 7 × 高 min(8, 7) = 49", noteEn: "Pick indices 1 and 8: width 7 × height min(8, 7) = 49" },
     { input: "height = [1,1]", output: "1" },
   ],
   constraints: ["2 ≤ height.length ≤ 10⁵", "0 ≤ height[i] ≤ 10⁴"],
+  constraintsEn: ["2 ≤ height.length ≤ 10⁵", "0 ≤ height[i] ≤ 10⁴"],
   idea:
     "從**最寬**的容器開始，兩個指標往內縮。每縮一步寬度一定變小，想讓面積變大只能靠「變高」—— 而高度被**短板**限制住，所以移動長板絕對沒用，每次都該**丟掉短板**那一邊。",
   steps: [

@@ -14,11 +14,14 @@ export default defineProblem<{ n: number }>({
   id: 191,
   summary:
     "給一個正整數 `n`，回傳它的二進位表示裡**有幾個 `1`**（也叫 Hamming weight、popcount）。",
+  summaryEn:
+    "Given a positive integer `n`, return **how many `1` bits** its binary form contains (also called the Hamming weight or popcount).",
   examples: [
-    { input: "n = 11", output: "3", note: "11 = 1011₂，有三個 1" },
-    { input: "n = 128", output: "1", note: "128 = 10000000₂" },
+    { input: "n = 11", output: "3", note: "11 = 1011₂，有三個 1", noteEn: "11 = 1011₂, which has three 1s" },
+    { input: "n = 128", output: "1", note: "128 = 10000000₂", noteEn: "128 = 10000000₂" },
   ],
   constraints: ["1 ≤ n ≤ 2³¹ − 1"],
+  constraintsEn: ["1 ≤ n ≤ 2³¹ − 1"],
   idea:
     "`n & (n - 1)` 會剛好**消掉 `n` 最低位的那個 1**。因為減 1 時會向最低位的 1 借位：那個 1 變成 0、它右邊的 0 全變成 1、左邊完全不動；兩者做 AND，左邊保留、從那個 1 開始往右全部歸零。所以能消幾次，就有幾個 1。",
   steps: [

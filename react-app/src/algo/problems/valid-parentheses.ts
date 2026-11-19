@@ -20,13 +20,16 @@ export default defineProblem<{ s: string }>({
   id: 20,
   summary:
     "給一個只由 `(`、`)`、`[`、`]`、`{`、`}` 組成的字串，判斷括號是否**合法**。\n\n合法的意思是：每個左括號都有同類型的右括號把它關起來，而且關閉的順序正確 —— 後開的要先關，不能交錯。",
+  summaryEn:
+    "You get a string made only of `(`, `)`, `[`, `]`, `{` and `}`. Decide whether the brackets are **valid**.\n\nValid means every opening bracket is closed by a bracket of the same type, and they close in the right order: the one opened last must be closed first, with no interleaving.",
   examples: [
     { input: 's = "()[]{}"', output: "true" },
     { input: 's = "(]"', output: "false" },
-    { input: 's = "([)]"', output: "false", note: "括號交錯" },
+    { input: 's = "([)]"', output: "false", note: "括號交錯", noteEn: "the brackets interleave" },
     { input: 's = "{[]}"', output: "true" },
   ],
   constraints: ["1 ≤ s.length ≤ 10⁴"],
+  constraintsEn: ["1 ≤ s.length ≤ 10⁴"],
   idea:
     "括號是巢狀的：**最後打開的一定要最先關上**，這正是堆疊「後進先出」的行為。遇到左括號就 push；遇到右括號，它唯一能配對的對象就是堆疊頂端那個還沒關的左括號。",
   steps: [

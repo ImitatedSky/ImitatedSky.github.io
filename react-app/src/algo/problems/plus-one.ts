@@ -15,12 +15,15 @@ export default defineProblem<{ digits: number[] }>({
   id: 66,
   summary:
     "一個很大的非負整數被拆成陣列 `digits`，每格放一位數字，最高位在最前面、沒有前導零。把這個整數**加 1**，用同樣的陣列形式回傳。",
+  summaryEn:
+    "A large non-negative integer is stored digit by digit in the array `digits`, most significant digit first, with no leading zeros. **Add 1** to it and return the result in the same array form.",
   examples: [
     { input: "digits = [1,2,3]", output: "[1,2,4]" },
     { input: "digits = [4,3,2,1]", output: "[4,3,2,2]" },
     { input: "digits = [9]", output: "[1,0]" },
   ],
   constraints: ["1 ≤ digits.length ≤ 100", "0 ≤ digits[i] ≤ 9"],
+  constraintsEn: ["1 ≤ digits.length ≤ 100", "0 ≤ digits[i] ≤ 9"],
   idea:
     "加 1 只會從最低位開始往左「傳進位」，而且進位只有在遇到 **9** 時才會繼續傳。所以從右往左找：遇到 9 就把它變 0、繼續往左；遇到第一個不是 9 的數字，加 1 之後就可以**直接收工**。如果整串都是 9，全部歸零後在最前面補一個 1。",
   steps: [

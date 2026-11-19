@@ -28,13 +28,16 @@ export default defineProblem<{ root: (number | null)[]; ops: Op[] }>({
   id: 173,
   summary:
     "設計一個二元搜尋樹（BST）的迭代器，依照**中序走訪**的順序（也就是由小到大）一次吐出一個節點值。\n\n`BSTIterator(root)` 用 BST 的根節點初始化；`next()` 回傳下一個最小的值；`hasNext()` 回傳後面還有沒有值。進階要求：`next()` 和 `hasNext()` 平均 O(1) 時間，且只用 O(h) 的空間（h 是樹高）。",
+  summaryEn:
+    "Design an iterator over a binary search tree (BST) that yields node values one at a time in **inorder** order (that is, ascending).\n\n`BSTIterator(root)` initializes it with the BST's root; `next()` returns the next smallest value; `hasNext()` tells whether any values remain. Follow-up: `next()` and `hasNext()` in O(1) average time, using only O(h) space (h is the tree height).",
   examples: [
     {
-      input: 'root = [7,3,15,null,null,9,20]，依序呼叫 next, next, hasNext, next, hasNext, next, hasNext, next, hasNext',
+      input: 'root = [7,3,15,null,null,9,20]; calls: next, next, hasNext, next, hasNext, next, hasNext, next, hasNext',
       output: "[3, 7, true, 9, true, 15, true, 20, false]",
     },
   ],
   constraints: ["1 ≤ 節點數 ≤ 10⁵", "最多呼叫 10⁵ 次 next / hasNext", "呼叫 next 時保證還有下一個值"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 10⁵", "At most 10⁵ calls to next / hasNext", "next is only called when a next value exists"],
   idea:
     "把「用堆疊做中序走訪」的迴圈**拆開、暫停**在每次輸出之間。堆疊裡放的是「左邊已經處理完、自己還沒輸出」的節點 —— 也就是從目前位置一路往左的那條**左脊**，所以堆疊頂端永遠是下一個最小值。pop 出一個節點後，它的右子樹才輪到，於是把右小孩的左脊補進堆疊。",
   steps: [

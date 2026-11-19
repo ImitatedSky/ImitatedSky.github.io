@@ -14,11 +14,14 @@ export default defineProblem<{ citations: number[] }>({
   id: 274,
   summary:
     "`citations[i]` 是一位研究者第 `i` 篇論文被引用的次數。**h 指數**的定義是：最大的 `h`，使得至少有 `h` 篇論文各自被引用了**至少 `h` 次**。\n\n回傳這位研究者的 h 指數。",
+  summaryEn:
+    "`citations[i]` is how many times a researcher's `i`-th paper has been cited. The **h-index** is the largest `h` such that at least `h` papers have each been cited **at least `h` times**.\n\nReturn the researcher's h-index.",
   examples: [
-    { input: "citations = [3,0,6,1,5]", output: "3", note: "有 3 篇（3、6、5）被引用至少 3 次" },
+    { input: "citations = [3,0,6,1,5]", output: "3", note: "有 3 篇（3、6、5）被引用至少 3 次", noteEn: "3 papers (3, 6, 5) have at least 3 citations each" },
     { input: "citations = [1,3,1]", output: "1" },
   ],
   constraints: ["1 ≤ citations.length ≤ 5000", "0 ≤ citations[i] ≤ 1000"],
+  constraintsEn: ["1 ≤ citations.length ≤ 5000", "0 ≤ citations[i] ≤ 1000"],
   idea:
     "把引用數**由大到小**排好之後，排在第 `h + 1` 名的論文前面（含自己）剛好有 `h + 1` 篇、而且每一篇的引用數都不比它少。所以只要它的引用數 `≥ h + 1`，就代表「有 `h + 1` 篇至少被引用 `h + 1` 次」成立。從第 1 名一路往後檢查，第一次不成立的地方就是答案。",
   steps: [

@@ -41,15 +41,18 @@ export default defineProblem<Input>({
   id: 433,
   summary:
     "基因是一條長度 8、只由 `A`、`C`、`G`、`T` 組成的字串。**一次突變**只能改掉其中一個字元，而且突變後的結果必須出現在基因庫 `bank` 裡才算有效。\n\n給起點 `startGene` 和目標 `endGene`，求最少要突變幾次才能變成目標；做不到就回傳 `-1`。起點本身不需要在基因庫裡。",
+  summaryEn:
+    "A gene is a string of length 8 made only of `A`, `C`, `G` and `T`. **One mutation** changes exactly one character, and the result only counts if it appears in the gene bank `bank`.\n\nGiven `startGene` and `endGene`, find the minimum number of mutations needed to reach the target, or `-1` if it cannot be done. The start gene itself does not need to be in the bank.",
   examples: [
     { input: 'startGene = "AACCGGTT", endGene = "AACCGGTA", bank = ["AACCGGTA"]', output: "1" },
     {
       input: 'startGene = "AACCGGTT", endGene = "AAACGGTA", bank = ["AACCGGTA","AACCGCTA","AAACGGTA"]',
       output: "2",
-      note: "AACCGGTT → AACCGGTA → AAACGGTA",
+      note: "AACCGGTT → AACCGGTA → AAACGGTA", noteEn: "AACCGGTT → AACCGGTA → AAACGGTA",
     },
   ],
   constraints: ["0 ≤ bank.length ≤ 10", "startGene.length == endGene.length == bank[i].length == 8", "字元只會是 A、C、G、T"],
+  constraintsEn: ["0 ≤ bank.length ≤ 10", "startGene.length == endGene.length == bank[i].length == 8", "Characters are only A, C, G and T"],
   idea:
     "把每個基因想成一個節點，**只差一個字元**的兩個基因之間連一條邊，題目就變成「從起點到目標的最短路徑」。每條邊的代價都是 1，所以用 BFS：一層一層往外擴，第一次碰到目標時的層數就是最少突變次數。",
   steps: [

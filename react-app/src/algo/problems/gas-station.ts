@@ -19,11 +19,14 @@ export default defineProblem<{ gas: number[]; cost: number[] }>({
   id: 134,
   summary:
     "環狀路線上有 `n` 個加油站，第 `i` 站可以加 `gas[i]` 的油，從第 `i` 站開到下一站要花 `cost[i]` 的油。油箱一開始是空的、容量無限。\n\n問從哪一站出發可以**順時針繞完一整圈**？回傳那一站的索引；如果辦不到就回傳 `-1`。題目保證有解時答案唯一。",
+  summaryEn:
+    "There are `n` gas stations on a circular route. Station `i` gives you `gas[i]` fuel, and driving from station `i` to the next one burns `cost[i]` fuel. The tank starts empty and has unlimited capacity.\n\nFrom which station can you **drive one full loop clockwise**? Return its index, or `-1` if no station works. When a solution exists, it is guaranteed to be unique.",
   examples: [
     { input: "gas = [1,2,3,4,5], cost = [3,4,5,1,2]", output: "3" },
     { input: "gas = [2,3,4], cost = [3,4,3]", output: "-1" },
   ],
   constraints: ["1 ≤ n ≤ 10⁵", "0 ≤ gas[i], cost[i] ≤ 10⁴"],
+  constraintsEn: ["1 ≤ n ≤ 10⁵", "0 ≤ gas[i], cost[i] ≤ 10⁴"],
   idea:
     "兩個觀察：① 只要**總油量 ≥ 總花費**就一定有解。② 如果從 `start` 出發，開到第 `i` 站之後油箱變負的，那麼 `start` 到 `i` 之間**任何一站**都不可能是起點 —— 因為從 `start` 開到它們時油箱至少是 0，帶著更多油都撐不過去，從那裡空手出發更不行。所以直接把起點跳到 `i + 1`。",
   steps: [

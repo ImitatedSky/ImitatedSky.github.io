@@ -15,11 +15,14 @@ export default defineProblem<{ ransomNote: string; magazine: string }>({
   id: 383,
   summary:
     "給兩個字串 `ransomNote` 和 `magazine`。想像要從雜誌上**剪下字母**來拼出一封信：雜誌裡的每個字母只能用一次。\n\n判斷 `magazine` 的字母夠不夠拼出 `ransomNote`。",
+  summaryEn:
+    "Given two strings `ransomNote` and `magazine`, imagine **cutting letters out of a magazine** to spell a note: each letter in the magazine can be used only once.\n\nDecide whether `magazine` has enough letters to build `ransomNote`.",
   examples: [
-    { input: 'ransomNote = "aa", magazine = "ab"', output: "false", note: "雜誌只有一個 a" },
+    { input: 'ransomNote = "aa", magazine = "ab"', output: "false", note: "雜誌只有一個 a", noteEn: "The magazine has only one a" },
     { input: 'ransomNote = "aa", magazine = "aab"', output: "true" },
   ],
   constraints: ["1 ≤ 兩個字串的長度 ≤ 10⁵", "只包含小寫英文字母"],
+  constraintsEn: ["1 ≤ length of each string ≤ 10⁵", "Only lowercase English letters"],
   idea:
     "這是一個**庫存問題**：先數出雜誌裡每個字母有幾個，再照著信的內容一個一個「領用」。只要有任何一個字母領不到（庫存為 0），就拼不出來。",
   steps: [

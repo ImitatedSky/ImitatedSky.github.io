@@ -53,11 +53,14 @@ export default defineProblem<{ nums: number[]; k: number }>({
   id: 215,
   summary:
     "給一個整數陣列 `nums` 和整數 `k`，回傳陣列中**第 k 大**的元素。\n\n這裡指的是排序後的第 k 個（重複的數各算一次），不是第 k 個「不同」的數。希望不要把整個陣列排序。",
+  summaryEn:
+    "Given an integer array `nums` and an integer `k`, return the **k-th largest** element.\n\nThis means the k-th element in sorted order (duplicates each count), not the k-th distinct value. Try to do it without sorting the whole array.",
   examples: [
     { input: "nums = [3,2,1,5,6,4], k = 2", output: "5" },
     { input: "nums = [3,2,3,1,2,4,5,5,6], k = 4", output: "4" },
   ],
   constraints: ["1 ≤ k ≤ nums.length ≤ 10⁵"],
+  constraintsEn: ["1 ≤ k ≤ nums.length ≤ 10⁵"],
   idea:
     "維護一個**大小固定為 k 的 min-heap**，裡面永遠放著「目前看過最大的 k 個數」。每來一個數就丟進去，超過 k 個就把堆頂（最小的）踢掉。全部看完後，堆頂就是這 k 個大數裡最小的那個 —— 正好是第 k 大。",
   steps: [

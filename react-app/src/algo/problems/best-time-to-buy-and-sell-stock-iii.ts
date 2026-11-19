@@ -19,12 +19,15 @@ export default defineProblem<{ prices: number[] }>({
   id: 123,
   summary:
     "`prices[i]` 是某支股票第 `i` 天的價格。你**最多可以完成兩筆交易**（一買一賣算一筆），而且手上同時只能持有一張 —— 必須先賣掉才能再買。\n\n求能賺到的最大利潤；賺不到錢就回傳 0。",
+  summaryEn:
+    "`prices[i]` is a stock's price on day `i`. You may complete **at most two transactions** (one buy plus one sell each), and you can hold only one share at a time, so you must sell before buying again.\n\nReturn the maximum profit; if no profit is possible, return 0.",
   examples: [
-    { input: "prices = [3,3,5,0,0,3,1,4]", output: "6", note: "0 買 3 賣賺 3，1 買 4 賣再賺 3" },
-    { input: "prices = [1,2,3,4,5]", output: "4", note: "1 買 5 賣，一筆交易就夠" },
-    { input: "prices = [7,6,4,3,1]", output: "0", note: "一路下跌，不交易" },
+    { input: "prices = [3,3,5,0,0,3,1,4]", output: "6", note: "0 買 3 賣賺 3，1 買 4 賣再賺 3", noteEn: "Buy at 0, sell at 3 for +3; buy at 1, sell at 4 for another +3" },
+    { input: "prices = [1,2,3,4,5]", output: "4", note: "1 買 5 賣，一筆交易就夠", noteEn: "Buy at 1, sell at 5; one transaction is enough" },
+    { input: "prices = [7,6,4,3,1]", output: "0", note: "一路下跌，不交易", noteEn: "Prices only fall, so don't trade" },
   ],
   constraints: ["1 ≤ prices.length ≤ 10⁵", "0 ≤ prices[i] ≤ 10⁵"],
+  constraintsEn: ["1 ≤ prices.length ≤ 10⁵", "0 ≤ prices[i] ≤ 10⁵"],
   idea:
     "把「兩筆交易」拆成依序經過的四個狀態：`buy1 → sell1 → buy2 → sell2`，每個變數記錄**走到那個狀態時手上最多有多少現金**（從 0 元開始，買進會變負的）。每天對每個狀態只有兩個選擇：維持原狀，或是今天從前一個狀態做一次買／賣走過來。四個 `max` 掃一遍就結束。",
   steps: [

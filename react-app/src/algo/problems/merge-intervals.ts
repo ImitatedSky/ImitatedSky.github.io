@@ -20,11 +20,14 @@ export default defineProblem<{ intervals: number[][] }>({
   id: 56,
   summary:
     "給一組區間 `[start, end]`，把所有**互相重疊**的區間合併起來，回傳一組彼此不重疊、而且剛好涵蓋原本所有區間的結果。\n\n端點碰在一起也算重疊，例如 `[1,4]` 和 `[4,5]` 要合併成 `[1,5]`。",
+  summaryEn:
+    "Given a list of intervals `[start, end]`, merge all intervals that **overlap** and return a set of non-overlapping intervals that covers exactly the same ranges as the input.\n\nTouching endpoints count as overlapping, so `[1,4]` and `[4,5]` merge into `[1,5]`.",
   examples: [
     { input: "intervals = [[1,3],[2,6],[8,10],[15,18]]", output: "[[1,6],[8,10],[15,18]]" },
     { input: "intervals = [[1,4],[4,5]]", output: "[[1,5]]" },
   ],
   constraints: ["1 ≤ intervals.length ≤ 10⁴", "0 ≤ start ≤ end ≤ 10⁴"],
+  constraintsEn: ["1 ≤ intervals.length ≤ 10⁴", "0 ≤ start ≤ end ≤ 10⁴"],
   idea:
     "先**依起點排序**。排序之後，會和目前這個區間重疊的，只可能是「結果裡的最後一個」—— 因為後面來的起點都不會更小。所以每個區間只要和 `res[-1]` 比一次：起點沒超過它的終點就併進去，否則另開一個。",
   steps: [

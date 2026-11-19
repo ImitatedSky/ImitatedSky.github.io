@@ -21,11 +21,14 @@ export default defineProblem<{ matrix: number[][]; target: number }>({
   id: 74,
   summary:
     "給一個 `m × n` 的整數矩陣，它有兩個性質：**每一列由左到右遞增**，而且**每一列的第一個數都大於上一列的最後一個數**。判斷 `target` 是否在矩陣裡。\n\n時間複雜度必須是 O(log(m·n))。",
+  summaryEn:
+    "An `m × n` integer matrix has two properties: **each row increases from left to right**, and **the first number of each row is greater than the last number of the row above**. Decide whether `target` appears in the matrix.\n\nThe solution must run in O(log(m·n)) time.",
   examples: [
     { input: "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3", output: "true" },
     { input: "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13", output: "false" },
   ],
   constraints: ["1 ≤ m, n ≤ 100"],
+  constraintsEn: ["1 ≤ m, n ≤ 100"],
   idea:
     "把每一列頭尾相接，整個矩陣其實就是**一條排好序的一維陣列**。直接在索引 `0 … m·n − 1` 上做二分搜尋，需要讀值時再把一維索引 `k` 換回座標：列是 `k // n`、行是 `k % n`。",
   steps: [

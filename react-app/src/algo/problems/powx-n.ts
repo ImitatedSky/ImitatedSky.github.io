@@ -24,12 +24,15 @@ export default defineProblem<{ x: number; n: number }>({
   id: 50,
   summary:
     "實作 `pow(x, n)`：計算浮點數 `x` 的整數 `n` 次方。`n` 可以是負數，而且絕對值可以大到 2³¹，所以一個一個乘一定太慢。",
+  summaryEn:
+    "Implement `pow(x, n)`: raise the floating-point number `x` to the integer power `n`. `n` can be negative and its magnitude can reach 2³¹, so multiplying one step at a time is far too slow.",
   examples: [
     { input: "x = 2.00000, n = 10", output: "1024.00000" },
     { input: "x = 2.10000, n = 3", output: "9.26100" },
-    { input: "x = 2.00000, n = -2", output: "0.25000", note: "2⁻² = 1 / 2² = 0.25" },
+    { input: "x = 2.00000, n = -2", output: "0.25000", note: "2⁻² = 1 / 2² = 0.25", noteEn: "2⁻² = 1 / 2² = 0.25" },
   ],
   constraints: ["−100.0 < x < 100.0", "−2³¹ ≤ n ≤ 2³¹ − 1", "x 不為 0，或 n > 0"],
+  constraintsEn: ["−100.0 < x < 100.0", "−2³¹ ≤ n ≤ 2³¹ − 1", "Either x is not 0, or n > 0"],
   idea:
     "**快速冪**：把指數 `n` 寫成二進位，例如 `10 = 1010₂ = 8 + 2`，那 `x¹⁰ = x⁸ × x²`。而 `x¹, x², x⁴, x⁸ …` 只要不斷**自己乘自己**就能依序得到。所以從 `n` 的最低位開始看，每一位讓 `x` 平方一次；遇到位元是 1，就把當下的 `x` 乘進答案。只需要 log n 次乘法。",
   steps: [

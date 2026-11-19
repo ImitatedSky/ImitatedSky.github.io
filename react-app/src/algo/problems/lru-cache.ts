@@ -70,14 +70,17 @@ export default defineProblem<{ capacity: number; ops: Op[] }>({
   id: 146,
   summary:
     "設計一個容量固定的 **LRU（Least Recently Used，最近最少使用）快取**，支援兩個操作：\n\n`get(key)`：key 存在就回傳它的值，否則回傳 `-1`。\n\n`put(key, value)`：新增或更新這筆資料；如果因此超過容量，就把**最久沒有被使用**的那一筆淘汰掉。`get` 和 `put` 都算「使用」，而且兩者都必須是平均 O(1)。",
+  summaryEn:
+    "Design a fixed-capacity **LRU (Least Recently Used) cache** with two operations:\n\n`get(key)`: return the key's value if it exists, otherwise `-1`.\n\n`put(key, value)`: insert or update the entry; if that pushes the cache over capacity, evict the entry that has gone **unused the longest**. Both `get` and `put` count as a use, and both must run in O(1) on average.",
   examples: [
     {
       input: "LRUCache(2), put(1,1), put(2,2), get(1), put(3,3), get(2), put(4,4), get(1), get(3), get(4)",
       output: "[null, null, null, 1, null, -1, null, -1, 3, 4]",
-      note: "put(3,3) 淘汰 key 2；put(4,4) 淘汰 key 1",
+      note: "put(3,3) 淘汰 key 2；put(4,4) 淘汰 key 1", noteEn: "put(3,3) evicts key 2; put(4,4) evicts key 1",
     },
   ],
   constraints: ["1 ≤ capacity ≤ 3000", "0 ≤ key, value ≤ 10⁵", "get 與 put 平均時間複雜度必須是 O(1)"],
+  constraintsEn: ["1 ≤ capacity ≤ 3000", "0 ≤ key, value ≤ 10⁵", "get and put must run in O(1) average time"],
   idea:
     "需要兩種能力：**O(1) 找到 key**（雜湊表）以及 **O(1) 維護「誰最久沒用」的順序**（雙向鏈結串列）。串列依使用時間排序：`head` 這一側最久沒用，`tail` 這一側最近用過。雜湊表存 `key → 節點`，所以一拿到節點就能原地把它拔掉、再接到 `tail` 前面，完全不用走訪。",
   steps: [

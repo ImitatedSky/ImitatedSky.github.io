@@ -34,12 +34,15 @@ export default defineProblem<{ board: string[][]; word: string }>({
   id: 79,
   summary:
     "給一個 `m × n` 的字母方格 `board` 和一個字串 `word`，判斷 `word` 能不能在方格裡**連續走出來**。\n\n每一步只能走到上下左右相鄰的格子，而且**同一格在一條路徑裡不能重複使用**。",
+  summaryEn:
+    "Given an `m × n` grid of letters `board` and a string `word`, decide whether `word` can be **traced as a continuous path** through the grid.\n\nEach step moves to a cell directly above, below, left, or right, and **a cell may not be used twice in the same path**.",
   examples: [
     { input: 'board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"', output: "true" },
     { input: 'board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"', output: "true" },
     { input: 'board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"', output: "false" },
   ],
   constraints: ["1 ≤ m, n ≤ 6", "1 ≤ word.length ≤ 15", "board 和 word 只包含大小寫英文字母"],
+  constraintsEn: ["1 ≤ m, n ≤ 6", "1 ≤ word.length ≤ 15", "board and word contain only upper- and lowercase English letters"],
   idea:
     "從每一格當起點做 DFS：`dfs(r, c, k)` 問的是「從這一格出發，能不能對上 `word[k:]`？」對上一個字就把那格**暫時改成 `#`**（代表這條路徑已經用過），再往四個方向找下一個字；四個方向都失敗就把字母**改回來**再回頭 —— 這個「標記 → 往下找 → 還原」就是回溯。",
   steps: [

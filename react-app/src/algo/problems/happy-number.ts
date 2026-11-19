@@ -18,11 +18,14 @@ export default defineProblem<{ n: number }>({
   id: 202,
   summary:
     "對一個正整數反覆做同一件事：把它**每一位數字的平方加起來**，得到新的數。\n\n如果最後會變成 1，它就是「快樂數」；如果永遠到不了 1（會陷入無窮循環），就不是。判斷 `n` 是不是快樂數。",
+  summaryEn:
+    "Take a positive integer and keep repeating one step: **add up the squares of its digits** to get a new number.\n\nIf this eventually reaches 1, the number is \"happy\"; if it never reaches 1 (it gets stuck in an endless cycle), it is not. Decide whether `n` is a happy number.",
   examples: [
-    { input: "n = 19", output: "true", note: "19 → 82 → 68 → 100 → 1" },
-    { input: "n = 2", output: "false", note: "2 → 4 → 16 → … → 20 → 4，回到 4 開始繞圈" },
+    { input: "n = 19", output: "true", note: "19 → 82 → 68 → 100 → 1", noteEn: "19 -> 82 -> 68 -> 100 -> 1" },
+    { input: "n = 2", output: "false", note: "2 → 4 → 16 → … → 20 → 4，回到 4 開始繞圈", noteEn: "2 -> 4 -> 16 -> ... -> 20 -> 4, back at 4 and looping forever" },
   ],
   constraints: ["1 ≤ n ≤ 2³¹ − 1"],
+  constraintsEn: ["1 ≤ n ≤ 2³¹ − 1"],
   idea:
     "數字不會無限變大（三位數以上做一次就會變小），所以這個過程只有兩種結局：**走到 1**，或是**走回某個出現過的數字**而開始繞圈。用一個 `set` 記住走過的數字，一旦重複就知道進了循環。",
   steps: [

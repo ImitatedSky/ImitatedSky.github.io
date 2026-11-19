@@ -20,11 +20,14 @@ export default defineProblem<{ ratings: number[] }>({
   id: 135,
   summary:
     "一排小朋友各有一個評分 `ratings[i]`。要發糖果給他們，規則是：**每個人至少一顆**，而且**評分比相鄰同學高的人，糖果一定要比那位同學多**。\n\n問最少總共要準備幾顆糖果？",
+  summaryEn:
+    "A row of children each have a rating `ratings[i]`. You hand out candy with two rules: **everyone gets at least one**, and **a child with a higher rating than a neighbor must get more candy than that neighbor**.\n\nWhat is the minimum total number of candies you need?",
   examples: [
-    { input: "ratings = [1,0,2]", output: "5", note: "分別發 2、1、2 顆" },
-    { input: "ratings = [1,2,2]", output: "4", note: "分別發 1、2、1 顆（評分相同不需要一樣多）" },
+    { input: "ratings = [1,0,2]", output: "5", note: "分別發 2、1、2 顆", noteEn: "Give 2, 1 and 2 candies" },
+    { input: "ratings = [1,2,2]", output: "4", note: "分別發 1、2、1 顆（評分相同不需要一樣多）", noteEn: "Give 1, 2 and 1 candies (equal ratings do not need equal candy)" },
   ],
   constraints: ["1 ≤ n ≤ 2 × 10⁴", "0 ≤ ratings[i] ≤ 2 × 10⁴"],
+  constraintsEn: ["1 ≤ n ≤ 2 × 10⁴", "0 ≤ ratings[i] ≤ 2 × 10⁴"],
   idea:
     "「比兩邊鄰居都要多」同時看兩邊很難處理，但**拆成兩條單向規則**就簡單了：先由左往右只管「比左邊高分 → 比左邊多」，再由右往左只管「比右邊高分 → 比右邊多」。第二趟用 `max` 保留第一趟的結果，兩條規則就同時成立。",
   steps: [

@@ -18,12 +18,15 @@ export default defineProblem<{ s: string }>({
   id: 3,
   summary:
     "給一個字串 `s`，找出其中**沒有任何重複字元**的最長子字串，回傳它的長度。\n\n子字串必須是連續的一段，不能跳著選。",
+  summaryEn:
+    "Given a string `s`, find the longest substring that has **no repeated characters** and return its length.\n\nA substring must be one contiguous piece; you cannot skip characters.",
   examples: [
-    { input: 's = "abcabcbb"', output: "3", note: '"abc"' },
-    { input: 's = "bbbbb"', output: "1", note: '"b"' },
-    { input: 's = "pwwkew"', output: "3", note: '"wke"' },
+    { input: 's = "abcabcbb"', output: "3", note: '"abc"', noteEn: "\"abc\"" },
+    { input: 's = "bbbbb"', output: "1", note: '"b"', noteEn: "\"b\"" },
+    { input: 's = "pwwkew"', output: "3", note: '"wke"', noteEn: "\"wke\"" },
   ],
   constraints: ["0 ≤ s.length ≤ 5 × 10⁴", "s 由英文字母、數字、符號和空白組成"],
+  constraintsEn: ["0 ≤ s.length ≤ 5 × 10⁴", "s consists of English letters, digits, symbols and spaces"],
   idea:
     "維護一個**內容不重複的滑動視窗** `s[l..r]`。右邊界每次收進一個字元 `c`；如果 `c` 已經在視窗裡，就把左邊界直接跳到「上一個 `c` 的下一格」，視窗馬上恢復不重複。用雜湊表記住每個字元**最後出現的位置**，這一跳只要 O(1)。",
   steps: [

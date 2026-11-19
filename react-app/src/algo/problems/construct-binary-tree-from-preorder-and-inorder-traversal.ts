@@ -43,11 +43,14 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
   id: 105,
   summary:
     "給同一棵二元樹的**前序走訪** `preorder` 和**中序走訪** `inorder`（節點值都不重複），把這棵樹還原出來，回傳根節點。",
+  summaryEn:
+    "You get the **preorder traversal** `preorder` and the **inorder traversal** `inorder` of the same binary tree (no duplicate values). Rebuild the tree and return its root.",
   examples: [
     { input: "preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]", output: "[3,9,20,null,null,15,7]" },
     { input: "preorder = [-1], inorder = [-1]", output: "[-1]" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 3000", "所有節點值互不相同", "兩個陣列保證是同一棵樹的前序與中序"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 3000", "All node values are distinct", "Both arrays are guaranteed to be the preorder and inorder of the same tree"],
   idea:
     "前序是「**根** → 左 → 右」，所以前序的第一個值一定是根。中序是「左 → **根** → 右」，在中序裡找到根的位置，它左邊那一段就是整棵左子樹、右邊那一段就是整棵右子樹。左右兩段各自又是同樣的問題，遞迴下去即可。用雜湊表記住每個值在中序的位置，找根只要 O(1)。",
   steps: [

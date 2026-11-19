@@ -16,11 +16,14 @@ export default defineProblem<{ strs: string[] }>({
   id: 14,
   summary:
     "給一個字串陣列 `strs`，找出**所有字串共同的最長開頭**（前綴）。如果連第一個字元都不一樣，就回傳空字串。",
+  summaryEn:
+    "Given an array of strings `strs`, find **the longest prefix shared by every string**. If even the first characters differ, return an empty string.",
   examples: [
     { input: 'strs = ["flower","flow","flight"]', output: '"fl"' },
     { input: 'strs = ["dog","racecar","car"]', output: '""' },
   ],
   constraints: ["1 ≤ strs.length ≤ 200", "0 ≤ strs[i].length ≤ 200", "只包含小寫英文字母"],
+  constraintsEn: ["1 ≤ strs.length ≤ 200", "0 ≤ strs[i].length ≤ 200", "Only lowercase English letters"],
   idea:
     "把字串**一列一列疊起來**，共同前綴就是「從左邊數起，整欄字元都相同」的那幾欄。所以用**直向掃描**：拿第一個字串當基準，一欄一欄往右比，只要有任何一個字串在這一欄不同（或已經沒有字元），前面那幾欄就是答案。",
   steps: [

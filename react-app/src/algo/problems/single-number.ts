@@ -13,12 +13,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 136,
   summary:
     "給一個非空的整數陣列 `nums`，其中**只有一個數出現一次，其餘每個數都剛好出現兩次**。找出那個落單的數。\n\n要求線性時間，而且只能用常數的額外空間。",
+  summaryEn:
+    "In a non-empty integer array `nums`, **every number appears exactly twice except one, which appears once**. Find that lone number.\n\nIt must run in linear time using only constant extra space.",
   examples: [
     { input: "nums = [2,2,1]", output: "1" },
     { input: "nums = [4,1,2,1,2]", output: "4" },
     { input: "nums = [1]", output: "1" },
   ],
   constraints: ["1 ≤ nums.length ≤ 3 × 10⁴", "除了一個數以外，每個數都出現兩次"],
+  constraintsEn: ["1 ≤ nums.length ≤ 3 × 10⁴", "Every number appears twice except for one"],
   idea:
     "XOR 有三個性質：`a ^ a = 0`（自己跟自己抵消）、`a ^ 0 = a`、而且**順序可以任意交換**。所以把所有數 XOR 在一起，成對的數不管隔多遠都會互相抵消成 0，最後剩下的就是落單的那個。",
   steps: [

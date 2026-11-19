@@ -59,12 +59,15 @@ export default defineProblem<{ lists: number[][] }>({
   id: 23,
   summary:
     "給 `k` 條**各自已經由小到大排好**的鏈結串列（放在陣列 `lists` 裡），把它們全部合併成**一條**排好的鏈結串列並回傳。\n\n`lists` 可能是空的，裡面的串列也可能是空的。",
+  summaryEn:
+    "You are given `k` linked lists in the array `lists`, **each already sorted in ascending order**. Merge them all into **one** sorted linked list and return it.\n\n`lists` may be empty, and any list inside it may be empty too.",
   examples: [
     { input: "lists = [[1,4,5],[1,3,4],[2,6]]", output: "[1,1,2,3,4,4,5,6]" },
     { input: "lists = []", output: "[]" },
     { input: "lists = [[]]", output: "[]" },
   ],
   constraints: ["0 ≤ k ≤ 10⁴", "每條串列長度 0 ~ 500，且已遞增排序", "所有節點總數不超過 10⁴"],
+  constraintsEn: ["0 ≤ k ≤ 10⁴", "Each list has length 0 to 500 and is sorted ascending", "The total number of nodes is at most 10⁴"],
   idea:
     "每條串列都排好了，所以**下一個要接到答案的節點，一定是某一條串列的頭**。問題變成：「k 個頭裡面誰最小？」每次都掃一遍要 O(k)，改用**最小堆積**存 `(值, 第幾條)`，就能 O(log k) 拿到最小的；拿走之後，把同一條串列的下一個節點補進堆積。堆積裡永遠最多 k 個元素。",
   steps: [

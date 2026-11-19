@@ -23,12 +23,15 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 222,
   summary:
     "給一棵**完全二元樹**（除了最後一層以外每層都是滿的，而且最後一層的節點全部靠左排），回傳它的節點總數。\n\n一個一個數當然可以，但題目要求設計出比 O(n) 更快的演算法。",
+  summaryEn:
+    "Given a **complete binary tree** (every level is full except possibly the last, whose nodes are packed to the left), return the total number of nodes.\n\nCounting them one by one works, but the task asks for an algorithm faster than O(n).",
   examples: [
     { input: "root = [1,2,3,4,5,6]", output: "6" },
     { input: "root = []", output: "0" },
     { input: "root = [1]", output: "1" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 5 × 10⁴", "保證是完全二元樹"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 5 × 10⁴", "The tree is guaranteed to be complete"],
   idea:
     "高度為 `h` 的**滿**二元樹剛好有 `2^h − 1` 個節點，不用數。而完全二元樹的最後一層靠左排，所以只要比較「一路往左走的深度」和「一路往右走的深度」：兩者相等就代表最後一層是滿的，整棵直接套公式；不相等才需要拆成左右子樹遞迴。完全二元樹的左右子樹中**至少有一棵是滿的**，所以每一層遞迴只有一邊會繼續往下拆。",
   steps: [

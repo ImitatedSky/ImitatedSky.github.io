@@ -15,11 +15,14 @@ export default defineProblem<{ nums: number[]; target: number }>({
   id: 1,
   summary:
     "給一個整數陣列 `nums` 和一個目標值 `target`，找出**和為 target 的兩個數**，回傳它們的索引。\n\n保證恰好有一組答案，而且同一個元素不能用兩次。",
+  summaryEn:
+    "Given an integer array `nums` and a target value `target`, find **the two numbers that add up to target** and return their indices.\n\nThere is exactly one answer, and the same element cannot be used twice.",
   examples: [
-    { input: "nums = [2,7,11,15], target = 9", output: "[0,1]", note: "nums[0] + nums[1] = 2 + 7 = 9" },
+    { input: "nums = [2,7,11,15], target = 9", output: "[0,1]", note: "nums[0] + nums[1] = 2 + 7 = 9", noteEn: "nums[0] + nums[1] = 2 + 7 = 9" },
     { input: "nums = [3,2,4], target = 6", output: "[1,2]" },
   ],
   constraints: ["2 ≤ nums.length ≤ 10⁴", "只會有一組有效答案"],
+  constraintsEn: ["2 ≤ nums.length ≤ 10⁴", "There is exactly one valid answer"],
   idea:
     "看到 `x` 時，我們真正想問的是：「`target - x` 之前出現過嗎？」用雜湊表記住**看過的數值 → 索引**，這個問題就能 O(1) 回答，整體只要掃一遍。",
   steps: [

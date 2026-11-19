@@ -15,11 +15,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 55,
   summary:
     "你站在陣列 `nums` 的第 0 格。`nums[i]` 表示站在第 `i` 格時**最多**可以往右跳幾格（可以跳比較少）。\n\n判斷有沒有辦法跳到最後一格，可以回傳 `True`，否則回傳 `False`。",
+  summaryEn:
+    "You start at index 0 of the array `nums`. `nums[i]` is the **maximum** number of steps you can jump to the right from index `i` (shorter jumps are fine too).\n\nDecide whether you can reach the last index: return `True` if so, otherwise `False`.",
   examples: [
-    { input: "nums = [2,3,1,1,4]", output: "true", note: "0 → 1 → 4" },
-    { input: "nums = [3,2,1,0,4]", output: "false", note: "怎麼跳都會停在索引 3，那格是 0" },
+    { input: "nums = [2,3,1,1,4]", output: "true", note: "0 → 1 → 4", noteEn: "0 -> 1 -> 4" },
+    { input: "nums = [3,2,1,0,4]", output: "false", note: "怎麼跳都會停在索引 3，那格是 0", noteEn: "Every path gets stuck at index 3, whose value is 0" },
   ],
   constraints: ["1 ≤ nums.length ≤ 10⁴", "0 ≤ nums[i] ≤ 10⁵"],
+  constraintsEn: ["1 ≤ nums.length ≤ 10⁴", "0 ≤ nums[i] ≤ 10⁵"],
   idea:
     "不用管「實際怎麼跳」，只要記一個數：**目前最遠能到哪裡** `farthest`。因為可以跳少一點，`farthest` 以內的每一格都到得了；每走到一格就用 `i + nums[i]` 把邊界往外推。如果哪天走到的 `i` 已經超出 `farthest`，代表中間斷掉了，之後都到不了。",
   steps: [

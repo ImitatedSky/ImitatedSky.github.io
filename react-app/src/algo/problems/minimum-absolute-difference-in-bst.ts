@@ -25,11 +25,14 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 530,
   summary:
     "給一棵**二元搜尋樹**（BST）的根節點，找出樹中**任意兩個不同節點**的值相差的絕對值最小是多少。",
+  summaryEn:
+    "Given the root of a **binary search tree** (BST), find the smallest absolute difference between the values of **any two different nodes**.",
   examples: [
     { input: "root = [4,2,6,1,3]", output: "1" },
     { input: "root = [1,0,48,null,null,12,49]", output: "1" },
   ],
   constraints: ["2 ≤ 節點數 ≤ 10⁴", "0 ≤ Node.val ≤ 10⁵"],
+  constraintsEn: ["2 ≤ number of nodes ≤ 10⁴", "0 ≤ Node.val ≤ 10⁵"],
   idea:
     "BST 的**中序走訪會得到由小到大的序列**，而排序後的數列裡，差距最小的一對一定是**相鄰**的兩個。所以只要在中序走訪時記住上一個值 `prev`，每到一個節點就算 `node.val - prev`，取最小值即可。",
   steps: [

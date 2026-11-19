@@ -17,11 +17,14 @@ export default defineProblem<{ x: number }>({
   id: 69,
   summary:
     "給一個非負整數 `x`，回傳它的**平方根無條件捨去到整數**的結果，也就是滿足 `k × k ≤ x` 的最大整數 `k`。\n\n不能使用內建的開根號或次方函式。",
+  summaryEn:
+    "Given a non-negative integer `x`, return its **square root rounded down to an integer**, i.e. the largest integer `k` with `k × k ≤ x`.\n\nBuilt-in square-root or power functions are not allowed.",
   examples: [
     { input: "x = 4", output: "2" },
-    { input: "x = 8", output: "2", note: "√8 ≈ 2.828，捨去小數" },
+    { input: "x = 8", output: "2", note: "√8 ≈ 2.828，捨去小數", noteEn: "√8 ≈ 2.828; drop the fraction" },
   ],
   constraints: ["0 ≤ x ≤ 2³¹ − 1"],
+  constraintsEn: ["0 ≤ x ≤ 2³¹ − 1"],
   idea:
     "**對答案做二分搜尋**。候選答案 `k` 從 0 到 `x`，而 `k × k ≤ x` 這個條件有單調性：小的 `k` 都成立，超過某個點之後全部不成立。我們要找的就是「最後一個成立的 `k`」—— 每次猜中間，成立就往右找更大的，不成立就往左縮。",
   steps: [

@@ -58,11 +58,14 @@ export default defineProblem<{ k: number; w: number; profits: number[]; capital:
   id: 502,
   summary:
     "手上有初始資金 `w`，最多可以做 `k` 個專案。第 `i` 個專案需要**至少 `capital[i]` 的資金才能啟動**（資金不會被扣掉），做完後資金增加 `profits[i]`，每個專案只能做一次。\n\n挑選並安排專案，讓最後的資金最大，回傳這個最大值。",
+  summaryEn:
+    "You start with capital `w` and may complete at most `k` projects. Project `i` **can only start if you have at least `capital[i]`** (that amount is not spent), and finishing it adds `profits[i]` to your capital. Each project can be done once.\n\nChoose and order the projects to end with the most capital, and return that amount.",
   examples: [
-    { input: "k = 2, w = 0, profits = [1,2,3], capital = [0,1,1]", output: "4", note: "先做專案 0（資金變 1），再做專案 2（資金變 4）" },
+    { input: "k = 2, w = 0, profits = [1,2,3], capital = [0,1,1]", output: "4", note: "先做專案 0（資金變 1），再做專案 2（資金變 4）", noteEn: "Do project 0 first (capital becomes 1), then project 2 (capital becomes 4)" },
     { input: "k = 3, w = 0, profits = [1,2,3], capital = [0,1,2]", output: "6" },
   ],
   constraints: ["1 ≤ k ≤ 10⁵", "0 ≤ w ≤ 10⁹", "1 ≤ n ≤ 10⁵"],
+  constraintsEn: ["1 ≤ k ≤ 10⁵", "0 ≤ w ≤ 10⁹", "1 ≤ n ≤ 10⁵"],
   idea:
     "貪心：每一輪都在**現在做得起的專案**裡挑利潤最高的。因為做專案不花錢、資金只會變多，選最賺的絕對不吃虧，而且能解鎖的專案只會越來越多。把專案依門檻排序，用一個指標把「剛解鎖」的專案倒進 max-heap，每輪從堆頂拿一個。",
   steps: [

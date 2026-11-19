@@ -28,11 +28,14 @@ export default defineProblem<{ board: number[][] }>({
   id: 289,
   summary:
     "康威的**生命遊戲**：盤面上每一格不是活的（1）就是死的（0），下一代的狀態由周圍 8 個鄰居決定 —— 活細胞的活鄰居少於 2 個或多於 3 個就會死，剛好 2 或 3 個則存活；死細胞的活鄰居剛好 3 個就會復活。\n\n所有格子是**同時**更新的。請原地把盤面改成下一代。",
+  summaryEn:
+    "Conway's **Game of Life**: every cell on the board is either alive (1) or dead (0), and its next state depends on its 8 neighbors - a live cell with fewer than 2 or more than 3 live neighbors dies, while one with exactly 2 or 3 survives; a dead cell with exactly 3 live neighbors comes back to life.\n\nAll cells update **at the same time**. Change the board in-place to the next generation.",
   examples: [
     { input: "board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]", output: "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]" },
     { input: "board = [[1,1],[1,0]]", output: "[[1,1],[1,1]]" },
   ],
   constraints: ["1 ≤ m, n ≤ 25", "每格是 0 或 1"],
+  constraintsEn: ["1 ≤ m, n ≤ 25", "Each cell is 0 or 1"],
   idea:
     "難處在「同時更新」：改了一格，後面的鄰居還需要它**原本**的狀態。每格其實只用到 1 個位元，所以把**下一代的狀態塞進第二個位元**：最低位元永遠是這一代，`& 1` 就能讀回原值。全部算完後整體右移一位，下一代就出現了。",
   steps: [

@@ -24,11 +24,14 @@ export default defineProblem<{ head: number[]; k: number }>({
   id: 25,
   summary:
     "給一條鏈結串列和正整數 `k`，從頭開始**每 k 個節點為一組，把組內順序反轉**，回傳處理後的串列。\n\n最後剩下不足 `k` 個的節點要保持原本的順序。只能改指標，不能只是交換節點裡的值。",
+  summaryEn:
+    "Given a linked list and a positive integer `k`, walk from the head and **reverse each group of k nodes in place**, then return the resulting list.\n\nAny leftover nodes at the end (fewer than `k`) keep their original order. You must relink the pointers, not just swap the values inside the nodes.",
   examples: [
     { input: "head = [1,2,3,4,5], k = 2", output: "[2,1,4,3,5]" },
     { input: "head = [1,2,3,4,5], k = 3", output: "[3,2,1,4,5]" },
   ],
   constraints: ["1 ≤ k ≤ 節點數 ≤ 5000", "進階：只用 O(1) 額外空間"],
+  constraintsEn: ["1 ≤ k ≤ number of nodes ≤ 5000", "Follow-up: use only O(1) extra space"],
   idea:
     "把問題拆成「重複做很多次區間反轉」。讓 `prev` 停在每一組的前一格：先往後數 `k` 個確認這一組湊得滿，再用**頭插法**（跟 LC 92 一樣）把組內第 2 ~ k 個節點依序搬到 `prev` 的正後方。反轉完，原本的第一個節點 `cur` 會變成組尾，正好是下一組的 `prev`。",
   steps: [

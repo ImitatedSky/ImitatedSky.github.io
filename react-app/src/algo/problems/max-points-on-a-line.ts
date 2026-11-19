@@ -32,11 +32,14 @@ export default defineProblem<{ points: number[][] }>({
   id: 149,
   summary:
     "給平面上一些**互不相同**的整數座標點 `points[i] = [x, y]`，問**最多有幾個點落在同一條直線上**。",
+  summaryEn:
+    "Given some **distinct** integer points on a plane, `points[i] = [x, y]`, find **the largest number of points that lie on one straight line**.",
   examples: [
     { input: "points = [[1,1],[2,2],[3,3]]", output: "3" },
     { input: "points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]", output: "4" },
   ],
   constraints: ["1 ≤ points.length ≤ 300", "−10⁴ ≤ x, y ≤ 10⁴", "所有點都不重複"],
+  constraintsEn: ["1 ≤ points.length ≤ 300", "−10⁴ ≤ x, y ≤ 10⁴", "All points are distinct"],
   idea:
     "固定一個點當**錨點**，通過它的直線完全由**斜率**決定：其他點只要相對於錨點的斜率相同，就一定在同一條線上。所以對每個錨點開一張雜湊表，數「每種斜率有幾個點」，最大的那組加上錨點自己就是通過它的最佳直線。斜率不要用浮點數（會有誤差），改用 `gcd` 化簡後的整數對 `(dy, dx)` 當 key。",
   steps: [

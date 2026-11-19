@@ -17,12 +17,15 @@ export default defineProblem<{ p: Level; q: Level }>({
   id: 100,
   summary:
     "給兩棵二元樹的根節點 `p` 和 `q`，判斷它們是不是**同一棵樹**。\n\n「相同」的意思是：形狀完全一樣，而且每個對應位置上的節點值也都相等。",
+  summaryEn:
+    "Given the roots `p` and `q` of two binary trees, decide whether they are **the same tree**.\n\nThe same means identical shape, and equal values at every matching position.",
   examples: [
     { input: "p = [1,2,3], q = [1,2,3]", output: "true" },
-    { input: "p = [1,2], q = [1,null,2]", output: "false", note: "值一樣但形狀不同：一個是左小孩，一個是右小孩" },
+    { input: "p = [1,2], q = [1,null,2]", output: "false", note: "值一樣但形狀不同：一個是左小孩，一個是右小孩", noteEn: "same values, different shape: one is a left child, the other a right child" },
     { input: "p = [1,2,1], q = [1,1,2]", output: "false" },
   ],
   constraints: ["0 ≤ 兩棵樹的節點數 ≤ 100", "-10⁴ ≤ Node.val ≤ 10⁴"],
+  constraintsEn: ["0 ≤ number of nodes in each tree ≤ 100", "-10⁴ ≤ Node.val ≤ 10⁴"],
   idea:
     "兩棵樹**同步往下走**：同一時間各拿一個節點出來比。兩個都空 → 這個位置相同；只有一邊空或值不同 → 不同；否則這一格沒問題，把「左對左、右對右」交給遞迴，兩邊都相同才算相同。",
   steps: [

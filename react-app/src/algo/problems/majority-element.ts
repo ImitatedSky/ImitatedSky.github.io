@@ -15,11 +15,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 169,
   summary:
     "給一個長度為 `n` 的陣列 `nums`，找出其中的**多數元素** —— 出現次數**超過** `n / 2` 的那個數。題目保證這個數一定存在。\n\n進階要求：時間 O(n)、額外空間 O(1)。",
+  summaryEn:
+    "Given an array `nums` of length `n`, find its **majority element**: the value that appears **more than** `n / 2` times. Such a value is guaranteed to exist.\n\nFollow-up: O(n) time and O(1) extra space.",
   examples: [
     { input: "nums = [3,2,3]", output: "3" },
     { input: "nums = [2,2,1,1,1,2,2]", output: "2" },
   ],
   constraints: ["1 ≤ n ≤ 5 × 10⁴", "多數元素一定存在"],
+  constraintsEn: ["1 ≤ n ≤ 5 × 10⁴", "A majority element always exists"],
   idea:
     "**Boyer–Moore 投票法**：把不同的數兩兩「互相抵銷」。每次抵銷拿掉一個候選人的票和一個別人的票 —— 多數元素的票數超過一半，就算其他所有數聯合起來跟它對消，它也一定還有剩。所以最後留在場上的候選人就是答案。",
   steps: [

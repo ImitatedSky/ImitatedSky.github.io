@@ -16,11 +16,14 @@ export default defineProblem<{ k: number; prices: number[] }>({
   id: 188,
   summary:
     "`prices[i]` 是某支股票第 `i` 天的價格。你**最多可以完成 `k` 筆交易**（一買一賣算一筆），而且必須先賣掉手上的股票才能再買。\n\n求能賺到的最大利潤。",
+  summaryEn:
+    "`prices[i]` is a stock's price on day `i`. You may complete **at most `k` transactions** (one buy plus one sell each), and you must sell what you hold before buying again.\n\nReturn the maximum profit you can make.",
   examples: [
-    { input: "k = 2, prices = [2,4,1]", output: "2", note: "2 買 4 賣" },
-    { input: "k = 2, prices = [3,2,6,5,0,3]", output: "7", note: "2 買 6 賣賺 4，0 買 3 賣賺 3" },
+    { input: "k = 2, prices = [2,4,1]", output: "2", note: "2 買 4 賣", noteEn: "Buy at 2, sell at 4" },
+    { input: "k = 2, prices = [3,2,6,5,0,3]", output: "7", note: "2 買 6 賣賺 4，0 買 3 賣賺 3", noteEn: "Buy at 2, sell at 6 for +4; buy at 0, sell at 3 for +3" },
   ],
   constraints: ["1 ≤ k ≤ 100", "1 ≤ prices.length ≤ 1000", "0 ≤ prices[i] ≤ 1000"],
+  constraintsEn: ["1 ≤ k ≤ 100", "1 ≤ prices.length ≤ 1000", "0 ≤ prices[i] ≤ 1000"],
   idea:
     "這是 LC 123 的推廣：把 `buy1, sell1, buy2, sell2` 換成兩個陣列。`buy[j]` = 買進第 `j` 張後手上最多的現金，`sell[j]` = 至多完成 `j` 筆交易後最多的現金。第 `j` 張只能用「完成 `j - 1` 筆」的錢去買，所以 `buy[j]` 看 `sell[j-1]`；賣掉它就完成第 `j` 筆，所以 `sell[j]` 看 `buy[j]`。",
   steps: [

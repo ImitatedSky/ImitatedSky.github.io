@@ -41,11 +41,13 @@ export default defineProblem<Input>({
   id: 399,
   summary:
     "給一些除法等式，例如 `a / b = 2.0`、`b / c = 3.0`，每個變數都代表一個非零實數。接著有一批查詢 `x / y = ?`，請利用已知等式算出每個查詢的值。\n\n如果答案推不出來（變數沒出現過，或兩個變數之間沒有任何等式能串起來），該筆回傳 `-1.0`。",
+  summaryEn:
+    "You get some division equations such as `a / b = 2.0` and `b / c = 3.0`, where each variable stands for a non-zero real number. Then comes a batch of queries `x / y = ?`; answer each one using the known equations.\n\nIf an answer cannot be derived (a variable never appeared, or no chain of equations connects the two variables), return `-1.0` for that query.",
   examples: [
     {
       input: 'equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]',
       output: "[6.0, 0.5, -1.0, 1.0, -1.0]",
-      note: "a / c = (a / b) × (b / c) = 2 × 3",
+      note: "a / c = (a / b) × (b / c) = 2 × 3", noteEn: "a / c = (a / b) × (b / c) = 2 × 3",
     },
     {
       input: 'equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]',
@@ -53,6 +55,7 @@ export default defineProblem<Input>({
     },
   ],
   constraints: ["1 ≤ equations.length ≤ 20", "1 ≤ queries.length ≤ 20", "0.0 < values[i] ≤ 20.0", "輸入保證不會有矛盾，也不會除以零"],
+  constraintsEn: ["1 ≤ equations.length ≤ 20", "1 ≤ queries.length ≤ 20", "0.0 < values[i] ≤ 20.0", "The input never contradicts itself and never divides by zero"],
   idea:
     "把每個變數當成節點，`a / b = v` 畫成一條 `a → b`、權重 `v` 的邊，再補一條反向邊 `b → a`、權重 `1 / v`。這樣 **`x / y` 就是從 `x` 走到 `y` 的路徑上所有權重相乘**（中間的變數會一路約掉），問題就變成在圖上找路徑。",
   steps: [

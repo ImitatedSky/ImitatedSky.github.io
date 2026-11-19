@@ -32,12 +32,15 @@ export default defineProblem<{ s: string; words: string[] }>({
   id: 30,
   summary:
     "給一個字串 `s` 和一組**長度都相同**的單字 `words`。把 `words` 裡的每個單字**各用一次**、以任意順序首尾相接，會得到一個「串聯字串」。\n\n找出 `s` 裡所有等於某個串聯字串的子字串，回傳它們的起始索引（順序不限）。`words` 裡可能有重複的單字，重複幾次就得用幾次。",
+  summaryEn:
+    "Given a string `s` and a list of words `words` that **all have the same length**, joining every word in `words` end to end **exactly once each**, in any order, gives a \"concatenated string\".\n\nFind every substring of `s` that equals some concatenated string and return their starting indices (in any order). `words` may contain duplicates; a word that appears several times must be used that many times.",
   examples: [
-    { input: 's = "barfoothefoobarman", words = ["foo","bar"]', output: "[0,9]", note: '"barfoo" 和 "foobar"' },
+    { input: 's = "barfoothefoobarman", words = ["foo","bar"]', output: "[0,9]", note: '"barfoo" 和 "foobar"', noteEn: "\"barfoo\" and \"foobar\"" },
     { input: 's = "wordgoodgoodgoodbestword", words = ["word","good","best","word"]', output: "[]" },
     { input: 's = "barfoofoobarthefoobarman", words = ["bar","foo","the"]', output: "[6,9,12]" },
   ],
   constraints: ["1 ≤ s.length ≤ 10⁴", "1 ≤ words.length ≤ 5000", "1 ≤ words[i].length ≤ 30", "所有單字長度相同"],
+  constraintsEn: ["1 ≤ s.length ≤ 10⁴", "1 ≤ words.length ≤ 5000", "1 ≤ words[i].length ≤ 30", "All words have the same length"],
   idea:
     "單字長度固定是 `k`，所以只要決定「從哪裡開始切」，`s` 就會變成**一排單字**。切割起點只有 `0 … k-1` 這 `k` 種；對每一種，把單字當成一個「字元」，問題就變成經典的滑動視窗：找出單字數量與 `need` 完全一致的視窗。",
   steps: [

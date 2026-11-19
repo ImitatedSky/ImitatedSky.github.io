@@ -17,12 +17,15 @@ export default defineProblem<{ nums: number[]; k: number }>({
   id: 219,
   summary:
     "給一個整數陣列 `nums` 和整數 `k`。判斷陣列裡有沒有**兩個相同的數**，而且它們的索引距離不超過 `k`。\n\n也就是是否存在不同的 `i`、`j`，使得 `nums[i] == nums[j]` 且 `|i - j| ≤ k`。",
+  summaryEn:
+    "Given an integer array `nums` and an integer `k`, decide whether the array has **two equal numbers** whose indices are at most `k` apart.\n\nThat is, whether there are distinct `i` and `j` with `nums[i] == nums[j]` and `|i - j| ≤ k`.",
   examples: [
-    { input: "nums = [1,2,3,1], k = 3", output: "true", note: "兩個 1 在索引 0 和 3，距離 3" },
+    { input: "nums = [1,2,3,1], k = 3", output: "true", note: "兩個 1 在索引 0 和 3，距離 3", noteEn: "The two 1s are at indices 0 and 3, distance 3" },
     { input: "nums = [1,0,1,1], k = 1", output: "true" },
-    { input: "nums = [1,2,3,1,2,3], k = 2", output: "false", note: "相同的數都相隔 3" },
+    { input: "nums = [1,2,3,1,2,3], k = 2", output: "false", note: "相同的數都相隔 3", noteEn: "Equal numbers are always 3 apart" },
   ],
   constraints: ["1 ≤ nums.length ≤ 10⁵", "0 ≤ k ≤ 10⁵"],
+  constraintsEn: ["1 ≤ nums.length ≤ 10⁵", "0 ≤ k ≤ 10⁵"],
   idea:
     "走到 `nums[i] = x` 時，往左邊找相同的數，**最有機會夠近的一定是離我最近的那一個**。所以雜湊表只要記每個數值「最近一次出現的索引」，比一次距離就夠了。",
   steps: [

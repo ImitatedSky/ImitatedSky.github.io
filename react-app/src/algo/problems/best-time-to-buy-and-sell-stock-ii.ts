@@ -14,12 +14,15 @@ export default defineProblem<{ prices: number[] }>({
   id: 122,
   summary:
     "`prices[i]` 是某支股票第 `i` 天的價格。這次你可以**買賣任意多次**，但手上同時最多只能有一股（要先賣掉才能再買；同一天可以先賣再買）。\n\n回傳能賺到的最大總利潤。",
+  summaryEn:
+    "`prices[i]` is a stock's price on day `i`. This time you may **trade as many times as you like**, but you can hold at most one share at a time (sell before buying again; selling and buying on the same day is allowed).\n\nReturn the largest total profit you can make.",
   examples: [
-    { input: "prices = [7,1,5,3,6,4]", output: "7", note: "1 買 5 賣賺 4，3 買 6 賣賺 3" },
-    { input: "prices = [1,2,3,4,5]", output: "4", note: "1 買 5 賣，等同每天的漲幅加總" },
+    { input: "prices = [7,1,5,3,6,4]", output: "7", note: "1 買 5 賣賺 4，3 買 6 賣賺 3", noteEn: "Buy at 1, sell at 5 for 4; buy at 3, sell at 6 for 3" },
+    { input: "prices = [1,2,3,4,5]", output: "4", note: "1 買 5 賣，等同每天的漲幅加總", noteEn: "Buy at 1, sell at 5 - the same as adding up every daily rise" },
     { input: "prices = [7,6,4,3,1]", output: "0" },
   ],
   constraints: ["1 ≤ prices.length ≤ 3 × 10⁴", "0 ≤ prices[i] ≤ 10⁴"],
+  constraintsEn: ["1 ≤ prices.length ≤ 3 × 10⁴", "0 ≤ prices[i] ≤ 10⁴"],
   idea:
     "**貪心：把每一段上漲都賺走。**任何一筆「低點買、高點賣」的利潤，都可以拆成中間每一天漲幅的總和（`5 - 1 = (3 - 1) + (5 - 3)`）。所以不必找谷底和山頂，只要相鄰兩天有漲就把差價加進來，下跌的那幾天當作沒持股就好。",
   steps: [

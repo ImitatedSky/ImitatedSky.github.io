@@ -15,11 +15,14 @@ export default defineProblem<{ nums: number[]; val: number }>({
   id: 27,
   summary:
     "給一個整數陣列 `nums` 和一個數值 `val`，請**原地**把所有等於 `val` 的元素拿掉，並回傳剩下的元素個數 `k`。\n\n評分只看 `nums` 的前 `k` 格：裡面必須正好是那些不等於 `val` 的數（順序不限），第 `k` 格之後放什麼都無所謂。",
+  summaryEn:
+    "Given an integer array `nums` and a value `val`, remove every element equal to `val` **in-place** and return the number of elements that remain, `k`.\n\nOnly the first `k` slots of `nums` are checked: they must hold exactly the elements not equal to `val` (in any order). Whatever sits after index `k` does not matter.",
   examples: [
     { input: "nums = [3,2,2,3], val = 3", output: "2, nums = [2,2,_,_]" },
     { input: "nums = [0,1,2,2,3,0,4,2], val = 2", output: "5, nums = [0,1,3,0,4,_,_,_]" },
   ],
   constraints: ["0 ≤ nums.length ≤ 100", "0 ≤ nums[i] ≤ 50", "0 ≤ val ≤ 100"],
+  constraintsEn: ["0 ≤ nums.length ≤ 100", "0 ≤ nums[i] ≤ 50", "0 ≤ val ≤ 100"],
   idea:
     "用**快慢雙指標**：快指標 `i` 負責把每個數看過一遍，慢指標 `k` 指著「下一個要保留的數該放哪」。遇到要留的數就抄到 `nums[k]`、`k` 前進；遇到 `val` 就直接跳過。因為 `k ≤ i`，寫入永遠不會蓋掉還沒看過的數。",
   steps: [

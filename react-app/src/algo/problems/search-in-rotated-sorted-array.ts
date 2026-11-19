@@ -25,12 +25,15 @@ export default defineProblem<{ nums: number[]; target: number }>({
   id: 33,
   summary:
     "一個**由小到大、元素不重複**的陣列，在某個位置被「旋轉」過：前面一段被搬到後面，例如 `[0,1,2,4,5,6,7]` 變成 `[4,5,6,7,0,1,2]`。\n\n給旋轉後的陣列 `nums` 和 `target`，回傳 `target` 的索引，不存在就回傳 `-1`。時間複雜度必須是 O(log n)。",
+  summaryEn:
+    "An array **sorted ascending with distinct values** has been \"rotated\" at some point: a leading chunk was moved to the back, e.g. `[0,1,2,4,5,6,7]` became `[4,5,6,7,0,1,2]`.\n\nGiven the rotated array `nums` and a `target`, return the index of `target`, or `-1` if it isn't there. The solution must run in O(log n) time.",
   examples: [
     { input: "nums = [4,5,6,7,0,1,2], target = 0", output: "4" },
     { input: "nums = [4,5,6,7,0,1,2], target = 3", output: "-1" },
     { input: "nums = [1], target = 0", output: "-1" },
   ],
   constraints: ["1 ≤ nums.length ≤ 5000", "nums 的值互不相同"],
+  constraintsEn: ["1 ≤ nums.length ≤ 5000", "All values in nums are distinct"],
   idea:
     "旋轉後的陣列只有**一個斷點**，所以從 `mid` 切開，左右兩半**至少有一半是完全有序的**。有序的那一半只要看頭尾兩個數，就能確定 `target` 在不在裡面：在就往那一半找，不在就一定在另一半。",
   steps: [

@@ -47,15 +47,18 @@ export default defineProblem<{ ops: Op[]; args: string[] }>({
   id: 208,
   summary:
     "實作 **Trie（字首樹）**，支援三種操作：\n\n`insert(word)` 把單字存進去；`search(word)` 回答這個單字**完整地**被存過嗎；`startsWith(prefix)` 回答有沒有任何已存的單字以 `prefix` 開頭。",
+  summaryEn:
+    "Implement a **Trie (prefix tree)** with three operations:\n\n`insert(word)` stores a word; `search(word)` tells whether that exact word was **stored in full**; `startsWith(prefix)` tells whether any stored word begins with `prefix`.",
   examples: [
     {
       input:
         'ops = ["Trie","insert","search","search","startsWith","insert","search"]\nargs = [[],["apple"],["apple"],["app"],["app"],["app"],["app"]]',
       output: "[null,null,true,false,true,null,true]",
-      note: '第一次 search("app") 是 false：路徑存在，但沒有單字在那裡結束',
+      note: '第一次 search("app") 是 false：路徑存在，但沒有單字在那裡結束', noteEn: "the first search(\"app\") is false: the path exists, but no word ends there",
     },
   ],
   constraints: ["1 ≤ word.length, prefix.length ≤ 2000", "只包含小寫英文字母", "操作總數 ≤ 3 × 10⁴"],
+  constraintsEn: ["1 ≤ word.length, prefix.length ≤ 2000", "Only lowercase English letters", "Total operations ≤ 3 × 10⁴"],
   idea:
     "Trie 是一棵「**邊上寫字母**」的樹：從根沿著邊走，經過的字母串起來就是一個前綴，所以有共同前綴的單字會**共用同一段路徑**。每個節點多記一個 `end` 旗標表示「有單字剛好在這裡結束」—— `search` 和 `startsWith` 的差別就只在要不要看這個旗標。",
   steps: [

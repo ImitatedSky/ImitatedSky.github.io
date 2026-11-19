@@ -64,11 +64,14 @@ export default defineProblem<{ n: number }>({
   id: 22,
   summary:
     "給一個整數 `n`，代表有 `n` 對括號。列出所有由這 `n` 對括號組成的**合法括號字串**（每個左括號都有對應的右括號，而且順序正確）。\n\n答案之間的順序不限。",
+  summaryEn:
+    "Given an integer `n` meaning `n` pairs of parentheses, list every **well-formed string** you can build from them (each opening bracket is closed by a matching one, in the right order).\n\nThe strings can be returned in any order.",
   examples: [
     { input: "n = 3", output: '["((()))","(()())","(())()","()(())","()()()"]' },
     { input: "n = 1", output: '["()"]' },
   ],
   constraints: ["1 ≤ n ≤ 8"],
+  constraintsEn: ["1 ≤ n ≤ 8"],
   idea:
     "不要先產生全部 2²ⁿ 種字串再檢查，而是**邊放邊保證合法**。一個字一個字往後放，只要守住兩條規則就不會走錯：左括號最多放 `n` 個（`open < n`）；右括號只能在「還有沒配對的左括號」時放（`close < open`）。照這樣走到長度 `2n` 的每一條路徑都是合法答案 —— 決策樹上**沒有死路**。",
   steps: [

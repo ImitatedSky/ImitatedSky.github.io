@@ -20,12 +20,15 @@ export default defineProblem<{ s: string }>({
   id: 151,
   summary:
     "給一個字串 `s`，把裡面的**單字順序反過來**（每個單字本身的字母順序不變）。\n\n`s` 的開頭、結尾或單字之間可能有多餘的空白；回傳的字串裡，單字之間只能有**一個**空白，頭尾不能有空白。",
+  summaryEn:
+    "Given a string `s`, **reverse the order of its words** (the letters inside each word stay as they are).\n\n`s` may have extra spaces at the start, at the end, or between words; the returned string must have exactly **one** space between words and no leading or trailing spaces.",
   examples: [
     { input: 's = "the sky is blue"', output: '"blue is sky the"' },
     { input: 's = "  hello world  "', output: '"world hello"' },
     { input: 's = "a good   example"', output: '"example good a"' },
   ],
   constraints: ["1 ≤ s.length ≤ 10⁴", "s 至少包含一個單字"],
+  constraintsEn: ["1 ≤ s.length ≤ 10⁴", "s contains at least one word"],
   idea:
     "要的是「最後一個單字排最前面」，所以**從字串尾巴往前掃**：遇到空白就跳過，遇到字母就用兩個指標框出一整個單字並收集起來。收集的順序自然就是反過來的，最後用單一空白接起來，多餘的空白也順便處理掉了。",
   steps: [

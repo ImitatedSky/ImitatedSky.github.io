@@ -26,11 +26,14 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 637,
   summary:
     "給一棵非空二元樹的根節點，算出**每一層節點值的平均**，由上到下依序放進陣列回傳（浮點數）。",
+  summaryEn:
+    "Given the root of a non-empty binary tree, compute **the average of the node values on each level** and return them top to bottom in an array (as floats).",
   examples: [
-    { input: "root = [3,9,20,null,null,15,7]", output: "[3.0,14.5,11.0]", note: "第 1 層 (9 + 20) / 2 = 14.5" },
+    { input: "root = [3,9,20,null,null,15,7]", output: "[3.0,14.5,11.0]", note: "第 1 層 (9 + 20) / 2 = 14.5", noteEn: "level 1: (9 + 20) / 2 = 14.5" },
     { input: "root = [3,9,20,15,7]", output: "[3.0,14.5,11.0]" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 10⁴", "−2³¹ ≤ Node.val ≤ 2³¹ − 1"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 10⁴", "−2³¹ ≤ Node.val ≤ 2³¹ − 1"],
   idea:
     "層序走訪（BFS）的直接應用：每一輪開始時佇列長度 `size` 就是這一層的節點數，把這 `size` 個節點的值加總成 `total`，平均就是 `total / size`。",
   steps: [

@@ -6,6 +6,7 @@ import { BY_SLUG, CATEGORY_BY_ID, PROBLEMS, leetcodeUrl } from "../catalog";
 import CodePanel from "../components/CodePanel";
 import Player from "../components/Player";
 import Practice from "../components/Practice";
+import LangToggle from "../components/LangToggle";
 import { setStatus, useProgress } from "../progress";
 import { loadProblem } from "../registry";
 import type { AnyProblem, Frame } from "../types";
@@ -23,7 +24,7 @@ export default function ProblemPage() {
   const [tab, setTab] = useState<Tab>("visual");
   const [presetIdx, setPresetIdx] = useState(0);
   const { status, toggleDone, toggleReview } = useProgress();
-  const { lang, setLang } = useLang();
+  const { lang } = useLang();
 
   usePageTitle(meta ? `${meta.id}. ${meta.titleZh} — Algo Lab` : "找不到題目");
 
@@ -115,7 +116,7 @@ export default function ProblemPage() {
 
       {problem && (
         <>
-          <Statement problem={problem} lang={lang} onLang={setLang} />
+          <Statement problem={problem} lang={lang} />
 
           <div className="algo-tabs" role="tablist">
             <button role="tab" aria-selected={tab === "visual"} className={tab === "visual" ? "is-on" : ""} onClick={() => setTab("visual")}>
@@ -231,7 +232,7 @@ const STATEMENT_TEXT = {
 };
 
 /** Problem statement with an EN / 中文 switch. Falls back to 中文 where no English text exists yet. */
-function Statement({ problem, lang, onLang }: { problem: AnyProblem; lang: Lang; onLang: (l: Lang) => void }) {
+function Statement({ problem, lang }: { problem: AnyProblem; lang: Lang }) {
   const en = lang === "en" && !!problem.summaryEn;
   const t = STATEMENT_TEXT[en ? "en" : "zh"];
   const summary = en ? problem.summaryEn! : problem.summary;
@@ -241,14 +242,7 @@ function Statement({ problem, lang, onLang }: { problem: AnyProblem; lang: Lang;
     <section className="algo-card algo-prose" style={{ marginBottom: 18 }} lang={en ? "en" : "zh-Hant"}>
       <div className="algo-statement-head">
         <h3>{t.heading}</h3>
-        <div className="algo-lang" role="group" aria-label="Language / 語言">
-          <button className={lang === "en" ? "is-on" : ""} aria-pressed={lang === "en"} onClick={() => onLang("en")}>
-            EN
-          </button>
-          <button className={lang === "zh" ? "is-on" : ""} aria-pressed={lang === "zh"} onClick={() => onLang("zh")}>
-            中文
-          </button>
-        </div>
+        <LangToggle />
       </div>
       {lang === "en" && !problem.summaryEn && <p className="algo-lang-note">English version coming soon — showing 中文.</p>}
       {summary.split(/\n\s*\n/).map((para, i) => (

@@ -21,11 +21,14 @@ export default defineProblem<{ root: (number | null)[]; k: number }>({
   id: 230,
   summary:
     "給一棵**二元搜尋樹**（BST）的根節點和一個整數 `k`，回傳樹中**第 k 小**的值（k 從 1 開始數）。",
+  summaryEn:
+    "Given the root of a **binary search tree** (BST) and an integer `k`, return the **k-th smallest** value in the tree (k counts from 1).",
   examples: [
     { input: "root = [3,1,4,null,2], k = 1", output: "1" },
     { input: "root = [5,3,6,2,4,null,null,1], k = 3", output: "3" },
   ],
   constraints: ["1 ≤ k ≤ 節點數 ≤ 10⁴", "0 ≤ Node.val ≤ 10⁴"],
+  constraintsEn: ["1 ≤ k ≤ number of nodes ≤ 10⁴", "0 ≤ Node.val ≤ 10⁴"],
   idea:
     "BST 的中序走訪會**由小到大**吐出每個值，所以第 k 個被走訪到的節點就是答案。用**明確的堆疊**做迭代版中序走訪，數到第 k 個就能立刻 `return`，不用把整棵樹走完。",
   steps: [

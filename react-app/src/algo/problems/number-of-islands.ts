@@ -37,14 +37,17 @@ export default defineProblem<{ grid: string[][] }>({
   id: 200,
   summary:
     "給一張由 `\"1\"`（陸地）和 `\"0\"`（水）組成的二維地圖，算出上面有**幾座島**。\n\n上下左右相連的陸地算同一座島，斜對角不算相連；地圖外面全部當作水。",
+  summaryEn:
+    "You get a 2D map of `\"1\"` (land) and `\"0\"` (water). Count **how many islands** it has.\n\nLand cells that touch up, down, left or right belong to the same island; diagonal neighbors do not count as connected. Everything outside the map is water.",
   examples: [
     {
       input: 'grid = [["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]',
       output: "3",
     },
-    { input: 'grid = [["1","0","1"],["0","1","0"],["1","0","1"]]', output: "5", note: "斜對角不相連，每格各自是一座島" },
+    { input: 'grid = [["1","0","1"],["0","1","0"],["1","0","1"]]', output: "5", note: "斜對角不相連，每格各自是一座島", noteEn: "diagonal cells are not connected, so each one is its own island" },
   ],
   constraints: ["1 ≤ m, n ≤ 300", "grid[i][j] 只會是 \"0\" 或 \"1\""],
+  constraintsEn: ["1 ≤ m, n ≤ 300", "grid[i][j] is either \"0\" or \"1\""],
   idea:
     "由左上掃到右下，**每碰到一格還沒處理過的陸地，就代表發現一座新島**。這時立刻用 DFS 把整座島「沉掉」（改成 `0`），同一座島之後就不會再被重複計算。",
   steps: [

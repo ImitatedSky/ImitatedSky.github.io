@@ -21,12 +21,15 @@ export default defineProblem<{ s: string; numRows: number }>({
   id: 6,
   summary:
     "把字串 `s` 的字元依序排成 `numRows` 列的**鋸齒形**：先由上往下寫滿一直行，再沿著斜線往右上爬回第一列，如此反覆。\n\n排完之後**一列一列由左到右讀**，把讀到的字元接成新字串回傳。",
+  summaryEn:
+    "Lay out the characters of `s` in order as a **zigzag** across `numRows` rows: write down one column from top to bottom, then climb diagonally up and to the right back to the first row, and repeat.\n\nThen **read the rows one at a time, left to right**, and return the characters joined into a new string.",
   examples: [
     { input: 's = "PAYPALISHIRING", numRows = 3', output: '"PAHNAPLSIIGYIR"' },
     { input: 's = "PAYPALISHIRING", numRows = 4', output: '"PINALSIGYAHRPI"' },
     { input: 's = "A", numRows = 1', output: '"A"' },
   ],
   constraints: ["1 ≤ s.length ≤ 1000", "1 ≤ numRows ≤ 1000"],
+  constraintsEn: ["1 ≤ s.length ≤ 1000", "1 ≤ numRows ≤ 1000"],
   idea:
     "不需要真的畫出二維圖形。最後是一列一列讀，所以每個字元**只要知道它落在第幾列**就夠了。列號的變化像乒乓球：0, 1, 2, …, numRows−1, …, 2, 1, 0, 1, …，用一個方向變數 `step` 在碰到頂端和底端時反轉即可。",
   steps: [

@@ -23,11 +23,14 @@ export default defineProblem<{ grid: number[][] }>({
   id: 64,
   summary:
     "給一個 `m × n` 的非負整數方格，從**左上角**走到**右下角**，每一步只能**往右或往下**。\n\n求路徑上所有數字總和的最小值。",
+  summaryEn:
+    "Given an `m × n` grid of non-negative integers, walk from the **top-left corner** to the **bottom-right corner**, moving only **right or down**.\n\nFind the smallest possible sum of the numbers along the path.",
   examples: [
-    { input: "grid = [[1,3,1],[1,5,1],[4,2,1]]", output: "7", note: "1 → 3 → 1 → 1 → 1" },
+    { input: "grid = [[1,3,1],[1,5,1],[4,2,1]]", output: "7", note: "1 → 3 → 1 → 1 → 1", noteEn: "1 → 3 → 1 → 1 → 1" },
     { input: "grid = [[1,2,3],[4,5,6]]", output: "12" },
   ],
   constraints: ["1 ≤ m, n ≤ 200", "0 ≤ grid[i][j] ≤ 200"],
+  constraintsEn: ["1 ≤ m, n ≤ 200", "0 ≤ grid[i][j] ≤ 200"],
   idea:
     "定義 `dp[i][j]` = 從左上角走到 `(i, j)` 的最小路徑和。因為只能往右或往下，要到 `(i, j)` 的**前一步只可能在上面或左邊**，挑比較小的那個再加上自己：`dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]`。",
   steps: [

@@ -16,12 +16,15 @@ export default defineProblem<{ n: number }>({
   id: 172,
   summary:
     "給一個整數 `n`，回傳 `n!`（`1 × 2 × … × n`）的十進位表示**尾端有幾個連續的 0**。\n\n`n` 可以到 10⁴，階乘本身大到不可能真的算出來再數。",
+  summaryEn:
+    "Given an integer `n`, return **how many consecutive zeros are at the end** of `n!` (`1 × 2 × … × n`) written in decimal.\n\n`n` goes up to 10⁴, so the factorial is far too large to compute and then count.",
   examples: [
-    { input: "n = 3", output: "0", note: "3! = 6" },
-    { input: "n = 5", output: "1", note: "5! = 120" },
-    { input: "n = 25", output: "6", note: "25 自己就帶了兩個 5" },
+    { input: "n = 3", output: "0", note: "3! = 6", noteEn: "3! = 6" },
+    { input: "n = 5", output: "1", note: "5! = 120", noteEn: "5! = 120" },
+    { input: "n = 25", output: "6", note: "25 自己就帶了兩個 5", noteEn: "25 itself contributes two factors of 5" },
   ],
   constraints: ["0 ≤ n ≤ 10⁴"],
+  constraintsEn: ["0 ≤ n ≤ 10⁴"],
   idea:
     "尾端每多一個 0 就是多乘了一個 `10 = 2 × 5`。階乘裡因數 2 遠比 5 多（每兩個數就有一個偶數），所以**0 的個數 = 因數 5 的總數**。`1…n` 中 5 的倍數有 `n // 5` 個，各貢獻一個 5；25 的倍數有 `n // 25` 個，各自**再多**一個；125 的倍數再多一個……全部加起來就是答案。",
   steps: [

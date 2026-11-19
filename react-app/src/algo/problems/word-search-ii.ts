@@ -43,16 +43,19 @@ export default defineProblem<{ board: string[][]; words: string[] }>({
   id: 212,
   summary:
     "給一個字母方格 `board` 和一串單字 `words`，找出**所有**能在方格上拼出來的單字。\n\n拼字時從任一格出發，每一步走到上下左右相鄰的格子，同一個單字裡**同一格不能用兩次**。",
+  summaryEn:
+    "Given a grid of letters `board` and a list of words `words`, find **all** the words that can be spelled out on the grid.\n\nA word starts from any cell and each step moves to an adjacent cell up, down, left or right; within one word, **the same cell cannot be used twice**.",
   examples: [
     {
       input:
         'board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]\nwords = ["oath","pea","eat","rain"]',
       output: '["eat","oath"]',
-      note: "順序不限",
+      note: "順序不限", noteEn: "order does not matter",
     },
     { input: 'board = [["a","b"],["c","d"]], words = ["abcb"]', output: "[]" },
   ],
   constraints: ["1 ≤ m, n ≤ 12", "1 ≤ words.length ≤ 3 × 10⁴", "1 ≤ words[i].length ≤ 10", "單字互不相同"],
+  constraintsEn: ["1 ≤ m, n ≤ 12", "1 ≤ words.length ≤ 3 × 10⁴", "1 ≤ words[i].length ≤ 10", "All words are distinct"],
   idea:
     "對每個單字各做一次方格搜尋太慢。把**所有單字放進一棵 trie**，然後只做一輪回溯：在方格上每走一步，就在 trie 裡跟著往下走一層 —— trie 沒有那條邊，代表沒有任何單字有這個前綴，立刻回頭。找到的單字從 trie 拿掉，變空的分支順手**剪掉**，之後的搜尋就不會再白走。",
   steps: [

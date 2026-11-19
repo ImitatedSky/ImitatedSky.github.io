@@ -24,11 +24,14 @@ export default defineProblem<{ s: string }>({
   id: 5,
   summary:
     "給一個字串 `s`，找出其中**最長的回文子字串**（正著讀和反著讀都一樣的連續片段）。\n\n如果有好幾個一樣長的，回傳任何一個都可以。",
+  summaryEn:
+    "Given a string `s`, find its **longest palindromic substring** (a contiguous piece that reads the same forwards and backwards).\n\nIf several have the same maximum length, return any of them.",
   examples: [
-    { input: 's = "babad"', output: '"bab"', note: '"aba" 也是正確答案' },
+    { input: 's = "babad"', output: '"bab"', note: '"aba" 也是正確答案', noteEn: "\"aba\" is also a correct answer" },
     { input: 's = "cbbd"', output: '"bb"' },
   ],
   constraints: ["1 ≤ s.length ≤ 1000", "s 只包含英文字母與數字"],
+  constraintsEn: ["1 ≤ s.length ≤ 1000", "s contains only English letters and digits"],
   idea:
     "回文是**左右對稱**的，所以一定有個中心。枚舉每一個可能的中心，從中心往兩邊一格一格擴張，只要兩端字元相同就繼續，直到不同或撞到邊界。中心有兩種：落在一個字元上（奇數長度，如 `aba`）或落在兩個字元之間（偶數長度，如 `abba`），一共 `2n - 1` 個。",
   steps: [

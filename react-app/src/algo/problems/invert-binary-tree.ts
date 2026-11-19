@@ -29,12 +29,15 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 226,
   summary:
     "給一棵二元樹的根節點，把整棵樹**左右翻轉**（像照鏡子一樣）：每個節點的左子樹和右子樹都要對調，最後回傳根節點。",
+  summaryEn:
+    "Given the root of a binary tree, **mirror the whole tree left to right**: swap the left and right subtrees of every node, then return the root.",
   examples: [
     { input: "root = [4,2,7,1,3,6,9]", output: "[4,7,2,9,6,3,1]" },
     { input: "root = [2,1,3]", output: "[2,3,1]" },
     { input: "root = []", output: "[]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 100", "-100 ≤ Node.val ≤ 100"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 100", "-100 ≤ Node.val ≤ 100"],
   idea:
     "翻轉整棵樹 = **每個節點都把自己的左右小孩對調一次**。對調是整棵子樹跟著搬家，所以只要走訪到每個節點、各做一次交換，整棵樹就鏡像了。",
   steps: [

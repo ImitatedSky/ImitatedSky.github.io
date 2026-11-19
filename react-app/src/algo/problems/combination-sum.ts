@@ -69,12 +69,15 @@ export default defineProblem<{ candidates: number[]; target: number }>({
   id: 39,
   summary:
     "給一組**互不相同**的正整數 `candidates` 和一個目標值 `target`，找出所有**總和等於 target** 的組合。\n\n同一個數可以**重複選任意多次**。組合不看順序，只要其中某個數被選的次數不同，就算不同的組合。",
+  summaryEn:
+    "You have a set of **distinct** positive integers `candidates` and a number `target`. Find every combination whose **sum equals target**.\n\nA number may be **reused as many times as you like**. Order doesn't matter; two combinations differ only if some number is used a different number of times.",
   examples: [
-    { input: "candidates = [2,3,6,7], target = 7", output: "[[2,2,3],[7]]", note: "2 + 2 + 3 = 7，7 = 7" },
+    { input: "candidates = [2,3,6,7], target = 7", output: "[[2,2,3],[7]]", note: "2 + 2 + 3 = 7，7 = 7", noteEn: "2 + 2 + 3 = 7, and 7 = 7" },
     { input: "candidates = [2,3,5], target = 8", output: "[[2,2,2,2],[2,3,3],[3,5]]" },
     { input: "candidates = [2], target = 1", output: "[]" },
   ],
   constraints: ["1 ≤ candidates.length ≤ 30", "2 ≤ candidates[i] ≤ 40，互不相同", "1 ≤ target ≤ 40"],
+  constraintsEn: ["1 ≤ candidates.length ≤ 30", "2 ≤ candidates[i] ≤ 40, all distinct", "1 ≤ target ≤ 40"],
   idea:
     "把狀態想成「**還差多少**」：每選一個數，`remain` 就減掉它，減到 0 就是一組答案。為了不重複，規定只能選「目前這個或更後面」的數（`start`）—— 遞迴時傳 `i` 而不是 `i + 1`，代表同一個數可以再選一次。先排序，遇到 `x > remain` 就能直接 `break`，因為後面只會更大。",
   steps: [

@@ -62,11 +62,14 @@ export default defineProblem<{ n: number; k: number }>({
   id: 77,
   summary:
     "給兩個整數 `n` 和 `k`，從 `1` 到 `n` 這些數字裡**挑出 k 個**，列出所有可能的組合。\n\n組合不看順序：`[1,2]` 和 `[2,1]` 算同一組，只能出現一次。答案之間的順序不限。",
+  summaryEn:
+    "Given two integers `n` and `k`, list every way to **pick k numbers** out of `1` through `n`.\n\nOrder inside a combination doesn't matter: `[1,2]` and `[2,1]` are the same pick and must appear only once. The combinations themselves can come in any order.",
   examples: [
     { input: "n = 4, k = 2", output: "[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]" },
     { input: "n = 1, k = 1", output: "[[1]]" },
   ],
   constraints: ["1 ≤ n ≤ 20", "1 ≤ k ≤ n"],
+  constraintsEn: ["1 ≤ n ≤ 20", "1 ≤ k ≤ n"],
   idea:
     "為了不產生 `[1,2]`、`[2,1]` 這種重複，規定**每次只能挑比上一個更大的數**：`backtrack(start)` 只從 `start` 往後選。再加一個剪枝 —— 還缺 `need` 個數時，`x` 最大只能到 `n - need + 1`，再大的話後面的數根本不夠湊滿 `k` 個。",
   steps: [

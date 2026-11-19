@@ -23,12 +23,15 @@ export default defineProblem<{ adjList: number[][] }>({
   id: 133,
   summary:
     "給一張**連通的無向圖**裡的某個節點，每個節點有一個值 `val` 和一份鄰居清單 `neighbors`。請做出整張圖的**深拷貝**：每個節點都要是全新的物件，彼此之間的連線關係和原圖一模一樣，最後回傳對應的那個新節點。\n\n這裡用相鄰串列表示圖：第 `i` 個清單是節點 `i + 1` 的鄰居，函式拿到的是值為 1 的節點。",
+  summaryEn:
+    "You are given one node of a **connected undirected graph**; each node has a value `val` and a list of `neighbors`. Make a **deep copy** of the whole graph: every node must be a brand-new object, wired together exactly like the original, and return the copy of the node you were given.\n\nThe graph is written as an adjacency list: list `i` holds the neighbors of node `i + 1`, and the function receives the node with value 1.",
   examples: [
-    { input: "adjList = [[2,4],[1,3],[2,4],[1,3]]", output: "[[2,4],[1,3],[2,4],[1,3]]", note: "四個節點圍成一圈" },
-    { input: "adjList = [[]]", output: "[[]]", note: "只有一個節點、沒有鄰居" },
-    { input: "adjList = []", output: "[]", note: "空圖，回傳 None" },
+    { input: "adjList = [[2,4],[1,3],[2,4],[1,3]]", output: "[[2,4],[1,3],[2,4],[1,3]]", note: "四個節點圍成一圈", noteEn: "four nodes in a ring" },
+    { input: "adjList = [[]]", output: "[[]]", note: "只有一個節點、沒有鄰居", noteEn: "a single node with no neighbors" },
+    { input: "adjList = []", output: "[]", note: "空圖，回傳 None", noteEn: "an empty graph, return None" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 100", "節點值各不相同，沒有重邊與自環", "整張圖是連通的"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 100", "Node values are distinct; no repeated edges or self-loops", "The graph is connected"],
   idea:
     "圖有環，同一個節點會從不同的鄰居被走到好幾次。用一張雜湊表記住**原節點 → 複製品**：第一次遇到才建立新節點，之後再遇到就直接拿表裡那一個來接線，這樣每個節點只會被複製一次，也不會繞圈繞不出來。",
   steps: [

@@ -25,11 +25,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 108,
   summary:
     "給一個**由小到大排好**的整數陣列 `nums`，把它轉成一棵**高度平衡**的二元搜尋樹（BST）。\n\n高度平衡的意思是：每個節點的左右子樹高度差不超過 1。符合條件的樹可能不只一棵，回傳任何一棵都可以。",
+  summaryEn:
+    "Given an integer array `nums` **sorted in ascending order**, turn it into a **height-balanced** binary search tree (BST).\n\nHeight-balanced means that at every node, the heights of the left and right subtrees differ by at most 1. More than one tree may qualify; any of them is accepted.",
   examples: [
-    { input: "nums = [-10,-3,0,5,9]", output: "[0,-10,5,null,-3,null,9]", note: "[0,-3,9,-10,null,5] 也是正確答案" },
-    { input: "nums = [1,3]", output: "[1,null,3]", note: "[3,1] 也可以" },
+    { input: "nums = [-10,-3,0,5,9]", output: "[0,-10,5,null,-3,null,9]", note: "[0,-3,9,-10,null,5] 也是正確答案", noteEn: "[0,-3,9,-10,null,5] is also a valid answer" },
+    { input: "nums = [1,3]", output: "[1,null,3]", note: "[3,1] 也可以", noteEn: "[3,1] works too" },
   ],
   constraints: ["1 ≤ nums.length ≤ 10⁴", "nums 嚴格遞增"],
+  constraintsEn: ["1 ≤ nums.length ≤ 10⁴", "nums is strictly increasing"],
   idea:
     "BST 的中序走訪剛好是排序好的陣列，所以反過來：**挑中間的數當根**，它左邊的數全部比它小 → 組成左子樹，右邊的數全部比它大 → 組成右子樹。每次都從正中間切，左右兩邊的數量最多差 1，樹自然就平衡。對左右兩半遞迴做同一件事。",
   steps: [

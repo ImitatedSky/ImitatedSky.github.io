@@ -75,12 +75,15 @@ export default defineProblem<{ digits: string }>({
   id: 17,
   summary:
     "給一個只包含 `2`–`9` 的數字字串 `digits`。照著傳統手機九宮格鍵盤的對應（`2 → abc`、`3 → def`、…、`9 → wxyz`），列出這串數字**可能代表的所有字母組合**。\n\n答案的順序不限；如果 `digits` 是空字串，就回傳空陣列。",
+  summaryEn:
+    "You get a string `digits` made only of the characters `2`–`9`. Using the letters printed on an old phone keypad (`2 → abc`, `3 → def`, …, `9 → wxyz`), list **every letter combination the digits could spell**.\n\nAny order is fine; if `digits` is empty, return an empty list.",
   examples: [
     { input: 'digits = "23"', output: '["ad","ae","af","bd","be","bf","cd","ce","cf"]' },
     { input: 'digits = "2"', output: '["a","b","c"]' },
     { input: 'digits = ""', output: "[]" },
   ],
   constraints: ["0 ≤ digits.length ≤ 4", "digits[i] 是 '2' 到 '9' 的數字"],
+  constraintsEn: ["0 ≤ digits.length ≤ 4", "digits[i] is a digit from '2' to '9'"],
   idea:
     "每個數字是一層「選擇」：第 `i` 層要從 `digits[i]` 對應的幾個字母裡挑一個。把所有選擇畫出來就是一棵樹，**每一條從根走到葉子的路徑就是一個答案**。回溯就是用一個共用的 `path` 走遍這棵樹：選一個字母 → 往下一層 → 回來時把它拿掉，再換下一個。",
   steps: [

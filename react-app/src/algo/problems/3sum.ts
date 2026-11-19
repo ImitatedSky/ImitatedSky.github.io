@@ -32,12 +32,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 15,
   summary:
     "給一個整數陣列 `nums`，找出所有**相加等於 0 的三個數**（三個位置必須不同）。\n\n答案裡不能有重複的組合：`[-1, 0, 1]` 和 `[0, 1, -1]` 算同一組，只能出現一次。組合之間的順序不限。",
+  summaryEn:
+    "Given an integer array `nums`, find every **triple of numbers that sums to 0** (the three positions must be different).\n\nThe answer must not repeat a combination: `[-1, 0, 1]` and `[0, 1, -1]` count as the same triple and may appear only once. The triples can be in any order.",
   examples: [
     { input: "nums = [-1,0,1,2,-1,-4]", output: "[[-1,-1,2],[-1,0,1]]" },
     { input: "nums = [0,1,1]", output: "[]" },
     { input: "nums = [0,0,0]", output: "[[0,0,0]]" },
   ],
   constraints: ["3 ≤ nums.length ≤ 3000", "-10⁵ ≤ nums[i] ≤ 10⁵"],
+  constraintsEn: ["3 ≤ nums.length ≤ 3000", "-10⁵ ≤ nums[i] ≤ 10⁵"],
   idea:
     "**先排序**，然後固定第一個數 `nums[i]`，剩下的問題就變成「在右邊的有序區間裡找兩個數，和為 `-nums[i]`」—— 這正是頭尾雙指標的拿手好戲。排序還順便讓相同的值排在一起，**跳過相鄰的重複值**就能去重，不需要用集合。",
   steps: [

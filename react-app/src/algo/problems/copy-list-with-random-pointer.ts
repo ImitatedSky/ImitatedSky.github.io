@@ -23,12 +23,15 @@ export default defineProblem<{ head: Pair[] }>({
   id: 138,
   summary:
     "一條鏈結串列的每個節點除了 `next` 以外，還多一個 `random` 指標，可以指向串列中**任何一個節點**（包含自己），也可以是空的。請做出這條串列的**深複製**：全部都是新建立的節點，而且新節點的 `next`、`random` 都只能指向新節點，不能指回原串列。\n\n輸入輸出用 `[val, random_index]` 表示每個節點，`random_index` 是 `random` 所指節點的索引（沒有就是 `null`）。",
+  summaryEn:
+    "Each node of a linked list has, besides `next`, a `random` pointer that can point to **any node** in the list (itself included) or be empty. Make a **deep copy** of the list: every node must be newly created, and the new nodes' `next` and `random` must point only at new nodes, never back into the original list.\n\nInput and output describe each node as `[val, random_index]`, where `random_index` is the index of the node `random` points to (`null` if none).",
   examples: [
     { input: "head = [[7,null],[13,0],[11,4],[10,2],[1,0]]", output: "[[7,null],[13,0],[11,4],[10,2],[1,0]]" },
     { input: "head = [[1,1],[2,1]]", output: "[[1,1],[2,1]]" },
     { input: "head = [[3,null],[3,0],[3,null]]", output: "[[3,null],[3,0],[3,null]]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 1000", "`random` 是 `null` 或指向串列中的某個節點"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 1000", "`random` is `null` or points to a node in the list"],
   idea:
     "麻煩在於 `random` 可能指向**還沒複製出來**的節點。解法是拆成兩趟：第一趟先把每個節點的分身建好，並用雜湊表記住「舊節點 → 新節點」；第二趟所有分身都已經存在，舊節點指向誰，就查表把新節點指向對應的分身。",
   steps: [

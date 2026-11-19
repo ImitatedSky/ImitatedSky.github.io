@@ -15,6 +15,8 @@ export default defineProblem<{ matrix: number[][] }>({
   id: 48,
   summary:
     "給一個 `n × n` 的矩陣，把它當成一張圖片**順時針旋轉 90 度**。\n\n必須**原地**修改這個矩陣，不能另外開一個矩陣來放結果。",
+  summaryEn:
+    "Given an `n × n` matrix, treat it as an image and **rotate it 90 degrees clockwise**.\n\nYou must modify the matrix **in-place**; allocating a second matrix for the result is not allowed.",
   examples: [
     { input: "matrix = [[1,2,3],[4,5,6],[7,8,9]]", output: "[[7,4,1],[8,5,2],[9,6,3]]" },
     {
@@ -23,6 +25,7 @@ export default defineProblem<{ matrix: number[][] }>({
     },
   ],
   constraints: ["1 ≤ n ≤ 20"],
+  constraintsEn: ["1 ≤ n ≤ 20"],
   idea:
     "順時針轉 90° 會把 `(r, c)` 搬到 `(c, n-1-r)`。這可以拆成兩個很好寫的原地動作：先**轉置**（`(r, c)` → `(c, r)`，列變成欄），再把**每一列左右反轉**（`(c, r)` → `(c, n-1-r)`）。",
   steps: [

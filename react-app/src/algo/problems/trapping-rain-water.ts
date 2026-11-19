@@ -22,11 +22,14 @@ export default defineProblem<{ height: number[] }>({
   id: 42,
   summary:
     "給一排寬度都是 1 的柱子，`height[i]` 是第 `i` 根的高度。下過雨之後，柱子之間的凹槽會積水，問**總共能接住多少單位的水**？",
+  summaryEn:
+    "You have a row of bars, each 1 unit wide, where `height[i]` is the height of bar `i`. After it rains, water collects in the dips between bars. **How many units of water are trapped in total**?",
   examples: [
     { input: "height = [0,1,0,2,1,0,1,3,2,1,2,1]", output: "6" },
     { input: "height = [4,2,0,3,2,5]", output: "9" },
   ],
   constraints: ["1 ≤ n ≤ 2 × 10⁴", "0 ≤ height[i] ≤ 10⁵"],
+  constraintsEn: ["1 ≤ n ≤ 2 × 10⁴", "0 ≤ height[i] ≤ 10⁵"],
   idea:
     "每一格能積的水 = `min(左邊最高, 右邊最高) − 自己的高度`。用左右兩個指標往中間夾：**哪一邊的柱子比較矮，就先結算哪一邊**。因為較矮那邊的對面已經有一根不比它矮的牆撐著，它的水位只會被自己這一側的最高值決定，不用知道對面真正的最高是多少。",
   steps: [

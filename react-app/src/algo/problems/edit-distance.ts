@@ -27,11 +27,14 @@ export default defineProblem<{ word1: string; word2: string }>({
   id: 72,
   summary:
     "給兩個字串 `word1` 和 `word2`，求把 `word1` 變成 `word2` **最少需要幾次操作**。\n\n每次操作可以：**插入**一個字元、**刪除**一個字元，或把一個字元**取代**成另一個。",
+  summaryEn:
+    "Given two strings `word1` and `word2`, find the **minimum number of operations** needed to turn `word1` into `word2`.\n\nEach operation can **insert** a character, **delete** a character, or **replace** one character with another.",
   examples: [
-    { input: 'word1 = "horse", word2 = "ros"', output: "3", note: "horse → rorse → rose → ros" },
+    { input: 'word1 = "horse", word2 = "ros"', output: "3", note: "horse → rorse → rose → ros", noteEn: "horse → rorse → rose → ros" },
     { input: 'word1 = "intention", word2 = "execution"', output: "5" },
   ],
   constraints: ["0 ≤ word1.length, word2.length ≤ 500", "只包含小寫英文字母"],
+  constraintsEn: ["0 ≤ word1.length, word2.length ≤ 500", "Only lowercase English letters"],
   idea:
     "定義 `dp[i][j]` = 把 `word1` 的前 `i` 個字元變成 `word2` 的前 `j` 個字元的最少步數。只看**兩邊的最後一個字元**：相同就不用動，直接沿用左上角 `dp[i-1][j-1]`；不同就在三種操作裡挑最便宜的再 +1 —— **上方** `dp[i-1][j]` 是刪除、**左方** `dp[i][j-1]` 是插入、**左上** `dp[i-1][j-1]` 是取代。",
   steps: [

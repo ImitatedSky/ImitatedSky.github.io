@@ -34,11 +34,14 @@ export default defineProblem<{ nums1: number[]; nums2: number[] }>({
   id: 4,
   summary:
     "給兩個**各自已排序**的整數陣列 `nums1`（長度 m）和 `nums2`（長度 n），回傳把它們合在一起之後的**中位數**。\n\n總數是奇數時中位數是正中間那個數；偶數時是中間兩個數的平均。時間複雜度必須是 O(log(m + n))，所以不能真的把兩個陣列合併。",
+  summaryEn:
+    "Given two integer arrays `nums1` (length m) and `nums2` (length n), **each already sorted**, return the **median** of all their numbers combined.\n\nWith an odd total, the median is the middle number; with an even total, it is the average of the two middle numbers. The required time is O(log(m + n)), so you can't actually merge the arrays.",
   examples: [
-    { input: "nums1 = [1,3], nums2 = [2]", output: "2.0", note: "合併後是 [1,2,3]" },
-    { input: "nums1 = [1,2], nums2 = [3,4]", output: "2.5", note: "合併後是 [1,2,3,4]，(2 + 3) / 2" },
+    { input: "nums1 = [1,3], nums2 = [2]", output: "2.0", note: "合併後是 [1,2,3]", noteEn: "Merged: [1,2,3]" },
+    { input: "nums1 = [1,2], nums2 = [3,4]", output: "2.5", note: "合併後是 [1,2,3,4]，(2 + 3) / 2", noteEn: "Merged: [1,2,3,4], so (2 + 3) / 2" },
   ],
   constraints: ["0 ≤ m, n ≤ 1000", "1 ≤ m + n ≤ 2000"],
+  constraintsEn: ["0 ≤ m, n ≤ 1000", "1 ≤ m + n ≤ 2000"],
   idea:
     "中位數就是把所有數**切成左右兩半**的那條線：左半邊有 `half` 個數，而且左半邊的每個數都 ≤ 右半邊。左半邊一定是「A 的前 `i` 個 + B 的前 `j` 個」，而 `j = half - i` 被 `i` 決定，所以**只要二分搜尋 `i`**。切得對不對，只要看切口旁的四個數：`a_left <= b_right` 且 `b_left <= a_right`。",
   steps: [

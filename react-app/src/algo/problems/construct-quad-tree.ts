@@ -37,11 +37,14 @@ export default defineProblem<{ grid: number[][] }>({
   id: 427,
   summary:
     "給一個只有 `0` 和 `1` 的 `n × n` 方陣 `grid`（`n` 是 2 的次方），用**四元樹**來表示它，回傳樹的根節點。\n\n四元樹的每個節點代表一塊正方形區域：如果整塊的值都一樣，它就是**葉子**（`isLeaf = True`，`val` 是那個值）；否則把這塊區域切成左上、右上、左下、右下四等分，各自成為它的四個小孩。",
+  summaryEn:
+    "You get an `n × n` matrix `grid` holding only `0` and `1` (`n` is a power of 2). Represent it as a **quad tree** and return the root.\n\nEach quad-tree node covers a square region. If every value in that region is the same, the node is a **leaf** (`isLeaf = True`, `val` is that value); otherwise the region is split into four equal quadrants (top-left, top-right, bottom-left, bottom-right), which become its four children.",
   examples: [
-    { input: "grid = [[0,1],[1,0]]", output: "[[0,1],[1,0],[1,1],[1,1],[1,0]]", note: "每個節點寫成 [isLeaf, val]，照層序列出" },
-    { input: "grid = [[1,1],[1,1]]", output: "[[1,1]]", note: "整塊都是 1，一個葉子就夠了" },
+    { input: "grid = [[0,1],[1,0]]", output: "[[0,1],[1,0],[1,1],[1,1],[1,0]]", note: "每個節點寫成 [isLeaf, val]，照層序列出", noteEn: "Each node is written as [isLeaf, val], listed in level order" },
+    { input: "grid = [[1,1],[1,1]]", output: "[[1,1]]", note: "整塊都是 1，一個葉子就夠了", noteEn: "The whole grid is 1, so a single leaf is enough" },
   ],
   constraints: ["n == grid.length == grid[i].length", "n = 2ˣ，0 ≤ x ≤ 6"],
+  constraintsEn: ["n == grid.length == grid[i].length", "n = 2ˣ, 0 ≤ x ≤ 6"],
   idea:
     "與其每到一塊區域就掃一遍檢查「是不是全部相同」，不如**由下往上**：先把四個小區塊各自建好，再看結果 —— 如果四個小孩**都是葉子而且值相同**，代表這一整塊都是同一個值，直接合併成一個葉子；否則才建立帶四個小孩的內部節點。這樣每個格子只會被看一次。",
   steps: [

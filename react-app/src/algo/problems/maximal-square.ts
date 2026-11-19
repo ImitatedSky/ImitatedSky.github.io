@@ -20,6 +20,8 @@ export default defineProblem<{ matrix: string[][] }>({
   id: 221,
   summary:
     "給一個只包含 `\"0\"` 和 `\"1\"` 的 `m × n` 矩陣，找出**全部由 1 組成的最大正方形**，回傳它的**面積**。",
+  summaryEn:
+    "Given an `m × n` matrix containing only `\"0\"` and `\"1\"`, find the **largest square made entirely of 1s** and return its **area**.",
   examples: [
     {
       input: 'matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]',
@@ -29,6 +31,7 @@ export default defineProblem<{ matrix: string[][] }>({
     { input: 'matrix = [["0"]]', output: "0" },
   ],
   constraints: ["1 ≤ m, n ≤ 300", "matrix[i][j] 只會是 \"0\" 或 \"1\""],
+  constraintsEn: ["1 ≤ m, n ≤ 300", "matrix[i][j] is either \"0\" or \"1\""],
   idea:
     "定義 `dp[i][j]` = 以這一格為**右下角**的最大正方形邊長。一個邊長 `k` 的正方形要成立，它的**上方、左方、左上**三格都必須至少撐得起邊長 `k - 1` 的正方形，三個之中最短的那個就是瓶頸，所以 `dp[i][j] = 1 + min(上, 左, 左上)`；這格是 0 的話就是 0。",
   steps: [

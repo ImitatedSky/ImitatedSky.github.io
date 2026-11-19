@@ -20,11 +20,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 137,
   summary:
     "給一個整數陣列 `nums`，其中**只有一個數出現一次，其餘每個數都剛好出現三次**。找出那個只出現一次的數。\n\n要求線性時間、常數額外空間。",
+  summaryEn:
+    "In an integer array `nums`, **every number appears exactly three times except one, which appears once**. Find that number.\n\nIt must run in linear time with constant extra space.",
   examples: [
     { input: "nums = [2,2,3,2]", output: "3" },
     { input: "nums = [0,1,0,1,0,1,99]", output: "99" },
   ],
   constraints: ["1 ≤ nums.length ≤ 3 × 10⁴", "−2³¹ ≤ nums[i] ≤ 2³¹ − 1"],
+  constraintsEn: ["1 ≤ nums.length ≤ 3 × 10⁴", "−2³¹ ≤ nums[i] ≤ 2³¹ − 1"],
   idea:
     "XOR 只能抵消「出現偶數次」的數，三次的抵消不掉。改成**一個位元一個位元看**：把所有數在第 `i` 位的 0/1 加起來，出現三次的數對這個總和的貢獻一定是 0 或 3，所以 `total % 3` 剩下的就是**落單那個數在第 `i` 位的值**。32 個位元各做一次，就能把答案拼回來。",
   steps: [
