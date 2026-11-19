@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FiCheck, FiCode, FiExternalLink, FiFilm, FiRotateCw, FiZap } from "react-icons/fi";
 import { usePageTitle } from "../../hooks/usePageTitle";
-import { BY_SLUG, CATEGORY_BY_ID, PROBLEMS, leetcodeUrl } from "../catalog";
+import { BY_SLUG, CATEGORY_BY_ID, PROBLEMS, leetcodeUrl, similarProblems } from "../catalog";
+import TagChip from "../components/TagChip";
+import { tagLabel } from "../tags";
 import CodePanel from "../components/CodePanel";
 import Player from "../components/Player";
 import Practice from "../components/Practice";
@@ -91,6 +93,11 @@ export default function ProblemPage() {
             <a href={leetcodeUrl(slug)} target="_blank" rel="noreferrer" style={{ color: "var(--accent)" }}>
               LeetCode 原題 <FiExternalLink style={{ display: "inline", verticalAlign: "-2px" }} />
             </a>
+          </div>
+          <div className="algo-problem-tags">
+            {meta.tags.map((t) => (
+              <TagChip key={t} id={t} lang={lang} />
+            ))}
           </div>
         </div>
         <div className="algo-problem-actions">
@@ -200,6 +207,8 @@ export default function ProblemPage() {
         </>
       )}
 
+      <SimilarProblems slug={slug} lang={lang} />
+
       <nav className="algo-pager">
         {prev ? (
           <Link to={`/algo/p/${prev.slug}`} className="algo-card">
@@ -277,6 +286,42 @@ function Statement({ problem, lang }: { problem: AnyProblem; lang: Lang }) {
           </>
         )}
       </details>
+    </section>
+  );
+}
+
+/** Problems that use the same techniques — for reviewing a pattern across categories */
+function SimilarProblems({ slug, lang }: { slug: string; lang: Lang }) {
+  const { store } = useProgress();
+  const items = similarProblems(slug, 6);
+  if (items.length === 0) return null;
+  return (
+    <section className="algo-similar">
+      <div className="algo-section-head" style={{ marginTop: 32, marginBottom: 12 }}>
+        <div>
+          <h2>相似題目</h2>
+          <p>用到相同技巧的題目，適合一起複習。</p>
+        </div>
+      </div>
+      <div className="algo-similar-grid">
+        {items.map(({ problem: p, shared }) => (
+          <Link key={p.slug} to={`/algo/p/${p.slug}`} className="algo-card algo-similar-card">
+            <div className="algo-similar-top">
+              <span className="algo-row-no">#{p.id}</span>
+              <span className={`algo-diff is-${p.difficulty}`}>{p.difficulty}</span>
+              {store[p.slug] === "done" && (
+                <span className="algo-similar-done" title="已完成">
+                  <FiCheck />
+                </span>
+              )}
+            </div>
+            <b>{lang === "en" ? p.title : p.titleZh}</b>
+            <span className="algo-similar-shared">
+              {shared.map((t) => `#${tagLabel(t, lang)}`).join("  ")}
+            </span>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }

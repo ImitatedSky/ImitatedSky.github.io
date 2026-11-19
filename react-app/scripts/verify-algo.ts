@@ -18,7 +18,7 @@ import path from "path";
 import { pathToFileURL } from "url";
 import React, { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { BY_SLUG, PROBLEMS } from "../src/algo/catalog";
+import { BY_SLUG, PROBLEMS, TAG_BY_ID } from "../src/algo/catalog";
 import { ViewRenderer } from "../src/algo/views";
 import type { AnyProblem, Frame, SortAlgo, View } from "../src/algo/types";
 
@@ -196,6 +196,8 @@ async function verifyProblem(slug: string): Promise<string[]> {
   if (!p || typeof p.trace !== "function") return ["default export is not a Problem"];
 
   if (p.id !== meta.id) errs.push(`id ${p.id} does not match catalog (${meta.id})`);
+  if (meta.tags.length === 0) errs.push("no technique tags — add the slug to src/algo/tags.ts");
+  for (const t of meta.tags) if (!TAG_BY_ID.has(t)) errs.push(`unknown tag "${t}" in tags.ts`);
   for (const key of ["summary", "idea", "code", "starter"] as const)
     if (typeof p[key] !== "string" || !p[key].trim()) errs.push(`${key} is empty`);
   if (!p.examples?.length) errs.push("no examples");
