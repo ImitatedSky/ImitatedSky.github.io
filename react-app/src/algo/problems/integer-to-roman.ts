@@ -26,12 +26,15 @@ export default defineProblem<{ num: number }>({
   id: 12,
   summary:
     "把一個 1 ~ 3999 的整數轉成羅馬數字。符號有 `I=1`、`V=5`、`X=10`、`L=50`、`C=100`、`D=500`、`M=1000`，由大到小排列。\n\n遇到 4 和 9 開頭的位數要用「減法」寫法：`IV=4`、`IX=9`、`XL=40`、`XC=90`、`CD=400`、`CM=900`，而不是把同一個符號連寫四次。",
+  summaryEn:
+    "Convert an integer between 1 and 3999 into a Roman numeral. The symbols are `I=1`, `V=5`, `X=10`, `L=50`, `C=100`, `D=500`, `M=1000`, written from largest to smallest.\n\nDigits starting with 4 or 9 use the \"subtractive\" forms `IV=4`, `IX=9`, `XL=40`, `XC=90`, `CD=400`, `CM=900` instead of repeating one symbol four times.",
   examples: [
-    { input: "num = 58", output: '"LVIII"', note: "50 + 5 + 3" },
-    { input: "num = 1994", output: '"MCMXCIV"', note: "1000 + 900 + 90 + 4" },
+    { input: "num = 58", output: '"LVIII"', note: "50 + 5 + 3", noteEn: "50 + 5 + 3" },
+    { input: "num = 1994", output: '"MCMXCIV"', note: "1000 + 900 + 90 + 4", noteEn: "1000 + 900 + 90 + 4" },
     { input: "num = 3749", output: '"MMMDCCXLIX"' },
   ],
   constraints: ["1 ≤ num ≤ 3999"],
+  constraintsEn: ["1 ≤ num ≤ 3999"],
   idea:
     "把六種減法組合（`CM`、`CD`、`XC`、`XL`、`IX`、`IV`）也當成**獨立的符號**，和原本七個一起由大到小排成 13 個。接下來就是單純的貪心：每次都拿「還塞得下的最大符號」，像用最少的鈔票湊金額一樣。",
   steps: [

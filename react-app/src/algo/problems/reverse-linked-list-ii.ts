@@ -20,11 +20,14 @@ export default defineProblem<{ head: number[]; left: number; right: number }>({
   id: 92,
   summary:
     "給一條單向鏈結串列的頭節點，以及兩個位置 `left ≤ right`（從 1 開始數）。把**第 left 個到第 right 個節點反轉**，回傳反轉後的串列。",
+  summaryEn:
+    "Given the head of a singly linked list and two positions `left ≤ right` (counted from 1), **reverse the nodes from position left to position right** and return the resulting list.",
   examples: [
     { input: "head = [1,2,3,4,5], left = 2, right = 4", output: "[1,4,3,2,5]" },
     { input: "head = [5], left = 1, right = 1", output: "[5]" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 500", "1 ≤ left ≤ right ≤ 節點數"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 500", "1 ≤ left ≤ right ≤ number of nodes"],
   idea:
     "**頭插法**：讓 `prev` 停在反轉區間的前一個節點，`cur` 是區間的第一個節點。每一輪把 `cur` 後面那個節點 `nxt` 拔出來，插到 `prev` 的正後方 —— 做 `right - left` 次，區間就反過來了。",
   steps: [

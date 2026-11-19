@@ -46,6 +46,8 @@ export default defineProblem<{ ops: Op[]; args: string[] }>({
   id: 211,
   summary:
     "設計一個單字字典，支援兩種操作：\n\n`addWord(word)` 把單字加進字典；`search(word)` 回答字典裡有沒有符合的單字 —— 查詢字串可以包含 `.`，每個 `.` 能代表**任意一個字母**。",
+  summaryEn:
+    "Design a word dictionary with two operations:\n\n`addWord(word)` adds a word; `search(word)` tells whether any stored word matches. The query may contain `.`, and each `.` can stand for **any single letter**.",
   examples: [
     {
       input:
@@ -54,6 +56,7 @@ export default defineProblem<{ ops: Op[]; args: string[] }>({
     },
   ],
   constraints: ["1 ≤ word.length ≤ 25", "addWord 的單字只有小寫字母；search 的字串可含 `.`", "操作總數 ≤ 10⁴"],
+  constraintsEn: ["1 ≤ word.length ≤ 25", "addWord words contain only lowercase letters; search strings may contain `.`", "Total operations ≤ 10⁴"],
   idea:
     "用 **Trie** 存單字。查詢時遇到一般字母，只有一條邊可以走；遇到 `.` 就不知道該走哪條 —— 那就**每個小孩都試**（DFS + 回溯），只要有一條路能走到底而且停在單字結尾就算找到。",
   steps: [
@@ -161,17 +164,12 @@ export default defineProblem<{ ops: Op[]; args: string[] }>({
       }
       const entries = calls.map<[Cell, Cell?]>((c, j) => (j < out.length ? [c, py(out[j])] : [c]));
       return [
-        V.tree("trie（邊 = 字母，綠色 ✓ = 單字結尾）", { nodes, root: root.id }, {
-          marks,
-          edgeLabels,
-          edgeMarks,
-          pointers: node ? { node: node.id } : {},
-        }),
-        V.chars("word", word, { marks: cm, pointers: s.stack && i <= word.length && word.length ? { i } : {} }),
+        V.tree("trie（邊 = 字母，✓ = 單字結尾，紫色 = node）", { nodes, root: root.id }, { marks, edgeLabels, edgeMarks }),
         V.stack(
-          "遞迴堆疊 dfs(節點代表的前綴, i)",
+          "遞迴堆疊 dfs(前綴, i)",
           s.stack ? path.map((n, j) => `dfs("${n.prefix}", ${j})`) : [],
         ),
+        V.chars("word", word, { marks: cm, pointers: s.stack && i <= word.length && word.length ? { i } : {} }),
         V.map("操作 → 回傳值", entries, { marks: { [calls[s.k]]: s.opTone ?? "active" } }),
       ];
     };

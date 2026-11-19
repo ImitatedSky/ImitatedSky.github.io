@@ -20,6 +20,8 @@ export default defineProblem<{ path: string }>({
   id: 71,
   summary:
     "給一個 Unix 風格的**絕對路徑**（以 `/` 開頭），把它化簡成標準形式。\n\n規則：`.` 代表目前目錄、`..` 代表回到上一層（在根目錄時原地不動）、連續多個 `/` 視為一個。其他名稱（包含 `...` 這種）都是一般的目錄或檔名。結果要以單一 `/` 開頭、目錄之間只有一個 `/`、結尾不能有 `/`（根目錄除外）。",
+  summaryEn:
+    "You get a Unix-style **absolute path** (starting with `/`). Reduce it to its canonical form.\n\nRules: `.` means the current directory, `..` moves up one level (staying put at the root), and several `/` in a row count as one. Any other name, including something like `...`, is an ordinary file or directory name. The result starts with a single `/`, has exactly one `/` between directories, and has no trailing `/` (except for the root itself).",
   examples: [
     { input: 'path = "/home/"', output: '"/home"' },
     { input: 'path = "/home//foo/"', output: '"/home/foo"' },
@@ -28,6 +30,7 @@ export default defineProblem<{ path: string }>({
     { input: 'path = "/.../a/../b/c/../d/./"', output: '"/.../b/d"' },
   ],
   constraints: ["1 ≤ path.length ≤ 3000", "path 是合法的絕對路徑，由英文字母、數字、`.`、`/`、`_` 組成"],
+  constraintsEn: ["1 ≤ path.length ≤ 3000", "path is a valid absolute path made of English letters, digits, `.`, `/` and `_`"],
   idea:
     "把路徑想成「一步一步走」：進入目錄就往下一層、`..` 就退回上一層 —— **最後進去的目錄最先被退出**，所以用堆疊記錄目前所在的每一層。先用 `/` 把路徑切成一段一段，再依每一段的意思操作堆疊。",
   steps: [
@@ -57,6 +60,7 @@ export default defineProblem<{ path: string }>({
     const parts = path.split("/");
     const shown = parts.map((p) => (p === "" ? '""' : p)); // 空字串畫成 ""
     const stack: string[] = [];
+    const from: number[] = []; // stack[k] 來自 parts 的哪一格
     const done: Record<number, Tone> = {};
     const here = () => "/" + stack.join("/");
 
@@ -88,6 +92,7 @@ export default defineProblem<{ path: string }>({
             vars: { part, 目前位置: here() },
           });
           stack.pop();
+          done[from.pop()!] = "muted"; // 被退出的目錄不再是答案的一部分
           done[i] = "visited";
           t.push({
             line: 7,
@@ -117,6 +122,7 @@ export default defineProblem<{ path: string }>({
         });
       } else {
         stack.push(part);
+        from.push(i);
         done[i] = "good";
         t.push({
           line: [4, 5, 8, 9],

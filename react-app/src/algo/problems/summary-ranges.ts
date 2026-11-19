@@ -23,11 +23,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 228,
   summary:
     "給一個**已排序、沒有重複**的整數陣列。把連續的整數合併成區間，用最少的區間剛好涵蓋所有數字，並依序輸出。\n\n區間 `[a, b]` 在 `a != b` 時寫成 `\"a->b\"`，只有一個數時寫成 `\"a\"`。",
+  summaryEn:
+    "Given a **sorted integer array with no duplicates**, merge runs of consecutive integers into ranges so that the fewest ranges cover every number exactly, and output them in order.\n\nA range `[a, b]` is written as `\"a->b\"` when `a != b`, and as `\"a\"` when it holds a single number.",
   examples: [
     { input: "nums = [0,1,2,4,5,7]", output: '["0->2","4->5","7"]' },
     { input: "nums = [0,2,3,4,6,8,9]", output: '["0","2->4","6","8->9"]' },
   ],
   constraints: ["0 ≤ nums.length ≤ 20", "nums 嚴格遞增"],
+  constraintsEn: ["0 ≤ nums.length ≤ 20", "nums is strictly increasing"],
   idea:
     "陣列已排序又不重複，所以「連續」就是**下一個數剛好等於這個數 + 1**。記下每一段的起點 `start`，讓 `i` 一路往右走到斷掉的地方，那裡就是這一段的終點。",
   steps: [

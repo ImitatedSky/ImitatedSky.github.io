@@ -76,6 +76,8 @@ export default defineProblem<{ ops: Op[]; args: (number | null)[] }>({
   id: 295,
   summary:
     "設計一個資料結構，能一邊接收不斷加入的整數，一邊隨時回答**目前所有數字的中位數**。\n\n`addNum(num)` 加入一個數；`findMedian()` 回傳中位數（個數為偶數時是中間兩個數的平均）。輸入是一連串操作，輸出是每個操作的回傳值（沒有回傳值的記為 `None`）。",
+  summaryEn:
+    "Design a data structure that keeps receiving integers and can answer, at any moment, **the median of all numbers seen so far**.\n\n`addNum(num)` adds a number; `findMedian()` returns the median (the average of the two middle numbers when the count is even). The input is a sequence of operations, and the output lists each operation's return value (`None` for operations that return nothing).",
   examples: [
     {
       input: '["MedianFinder","addNum","addNum","findMedian","addNum","findMedian"]\n[[],[1],[2],[],[3],[]]',
@@ -83,6 +85,7 @@ export default defineProblem<{ ops: Op[]; args: (number | null)[] }>({
     },
   ],
   constraints: ["−10⁵ ≤ num ≤ 10⁵", "呼叫 `findMedian` 時至少已加入一個數", "最多 5 × 10⁴ 次操作"],
+  constraintsEn: ["−10⁵ ≤ num ≤ 10⁵", "At least one number has been added whenever `findMedian` is called", "At most 5 × 10⁴ operations"],
   idea:
     "中位數只跟「正中間」的一兩個數有關，不需要整個排序。把數字切成兩半：**較小的一半放 max-heap `small`，較大的一半放 min-heap `large`**。只要維持兩邊個數相等（或 `small` 多一個），中間的數就永遠在兩個堆頂，O(1) 就能讀到。",
   steps: [

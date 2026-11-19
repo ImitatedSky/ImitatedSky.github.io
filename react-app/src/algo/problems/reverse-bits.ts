@@ -17,15 +17,19 @@ export default defineProblem<{ n: number }>({
   id: 190,
   summary:
     "給一個 32 位元的無號整數 `n`，把它的 **32 個位元整個左右顛倒**（第 0 位換到第 31 位、第 1 位換到第 30 位…），回傳顛倒後的整數。",
+  summaryEn:
+    "Given a 32-bit unsigned integer `n`, **reverse the order of all 32 bits** (bit 0 swaps with bit 31, bit 1 with bit 30, and so on) and return the resulting integer.",
   examples: [
     {
       input: "n = 43261596",
       output: "964176192",
       note: "00000010100101000001111010011100 → 00111001011110000010100101000000",
+      noteEn: "00000010100101000001111010011100 → 00111001011110000010100101000000",
     },
-    { input: "n = 1", output: "2147483648", note: "最低位的 1 跑到最高位" },
+    { input: "n = 1", output: "2147483648", note: "最低位的 1 跑到最高位", noteEn: "The lowest 1 bit moves to the highest position" },
   ],
   constraints: ["輸入固定視為 32 位元"],
+  constraintsEn: ["The input is always treated as 32 bits"],
   idea:
     "把 `n` 想成一疊牌：每次從 `n` 的**最右邊**抽一個位元，放到 `res` 的**最右邊**，放之前先把 `res` 整個左移一格。最先抽出來的位元會被後面的 31 次左移一路推到最高位 —— 先進的跑到最左邊，順序自然就反過來了。",
   steps: [

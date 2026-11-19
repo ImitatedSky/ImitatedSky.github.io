@@ -25,12 +25,15 @@ export default defineProblem<{ nums: number[]; target: number }>({
   id: 34,
   summary:
     "給一個**非遞減排序**（可能有重複）的整數陣列 `nums` 和一個 `target`，回傳 `target` 在陣列中**第一次和最後一次出現的索引** `[first, last]`；不存在就回傳 `[-1, -1]`。\n\n時間複雜度必須是 O(log n)。",
+  summaryEn:
+    "Given an integer array `nums` sorted in **non-decreasing order** (duplicates allowed) and a `target`, return the **indices of its first and last occurrence** as `[first, last]`, or `[-1, -1]` if it doesn't appear.\n\nThe solution must run in O(log n) time.",
   examples: [
     { input: "nums = [5,7,7,8,8,10], target = 8", output: "[3,4]" },
     { input: "nums = [5,7,7,8,8,10], target = 6", output: "[-1,-1]" },
     { input: "nums = [], target = 0", output: "[-1,-1]" },
   ],
   constraints: ["0 ≤ nums.length ≤ 10⁵", "nums 為非遞減排序"],
+  constraintsEn: ["0 ≤ nums.length ≤ 10⁵", "nums is sorted in non-decreasing order"],
   idea:
     "只要會寫一個函式 `lower_bound(x)`：**第一個 ≥ x 的位置**，兩個答案都能用它算出來。開頭是 `lower_bound(target)`；結尾則是「第一個 ≥ target + 1 的位置」**再往左一格**，因為整數裡比 target 大的最小值就是 target + 1。",
   steps: [

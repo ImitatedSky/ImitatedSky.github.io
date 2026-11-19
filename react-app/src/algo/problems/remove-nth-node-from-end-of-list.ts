@@ -18,12 +18,15 @@ export default defineProblem<{ head: number[]; n: number }>({
   id: 19,
   summary:
     "給一條鏈結串列的頭節點，把**從尾巴數回來的第 n 個節點**刪掉，回傳刪除後的串列。\n\n題目保證 `n` 不會超過節點數。希望只走訪一趟就完成。",
+  summaryEn:
+    "Given the head of a linked list, delete the **n-th node counting from the end** and return the resulting list.\n\n`n` is guaranteed not to exceed the number of nodes. Ideally, do it in a single pass.",
   examples: [
     { input: "head = [1,2,3,4,5], n = 2", output: "[1,2,3,5]" },
     { input: "head = [1], n = 1", output: "[]" },
     { input: "head = [1,2], n = 1", output: "[1]" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 30", "1 ≤ n ≤ 節點數", "進階：只走訪一趟"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 30", "1 ≤ n ≤ number of nodes", "Follow-up: do it in one pass"],
   idea:
     "單向串列沒辦法從尾巴往回數，但可以用兩個指標**維持固定的間距**：讓 `fast` 先走 `n` 步，之後 `slow`、`fast` 一起走。當 `fast` 停在最後一個節點時，落後 `n` 步的 `slow` 剛好停在目標的**前一個**節點，改一條 `next` 就能把目標跳過。",
   steps: [

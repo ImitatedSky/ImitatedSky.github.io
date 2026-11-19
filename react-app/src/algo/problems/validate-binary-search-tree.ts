@@ -28,11 +28,14 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 98,
   summary:
     "給一棵二元樹的根節點，判斷它是不是合法的**二元搜尋樹**（BST）。\n\n合法的 BST：每個節點的左子樹裡**所有**值都嚴格小於它，右子樹裡**所有**值都嚴格大於它，而且左右子樹本身也都是 BST。",
+  summaryEn:
+    "Given the root of a binary tree, decide whether it is a valid **binary search tree** (BST).\n\nIn a valid BST, **every** value in a node's left subtree is strictly smaller than the node, **every** value in its right subtree is strictly larger, and both subtrees are BSTs themselves.",
   examples: [
     { input: "root = [2,1,3]", output: "true" },
-    { input: "root = [5,1,4,null,null,3,6]", output: "false", note: "4 在 5 的右子樹裡，卻比 5 小" },
+    { input: "root = [5,1,4,null,null,3,6]", output: "false", note: "4 在 5 的右子樹裡，卻比 5 小", noteEn: "4 sits in the right subtree of 5 but is smaller than 5" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 10⁴", "−2³¹ ≤ Node.val ≤ 2³¹ − 1"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 10⁴", "−2³¹ ≤ Node.val ≤ 2³¹ − 1"],
   idea:
     "BST 的限制不只在父子之間，而是**每個祖先**都會留下限制。把這些限制濃縮成一個開區間 `(low, high)` 往下傳：往左走時上界收緊成父節點的值，往右走時下界收緊成父節點的值。每個節點只要檢查自己有沒有落在區間內。",
   steps: [
@@ -94,10 +97,10 @@ export default defineProblem<{ root: (number | null)[] }>({
         : [{ start: LO, end: HI, label: "(-inf, inf)", tone: (bad ? "bad" : "good") as Tone }];
       return [
         V.tree("tree", spec, { marks: m, pointers: top ? { node: top.node.id } : {} }),
+        V.stack("遞迴堆疊", stack.map((c) => `valid(${c.node.val}, ${show(c.low)}, ${show(c.high)})`)),
         V.intervals("允許範圍（數線兩端代表 ±inf，越深的呼叫越窄）", items, {
           points: top ? [{ at: top.node.val, label: `node = ${top.node.val}`, tone: o.tone ?? "active" }] : [],
         }),
-        V.stack("遞迴堆疊", stack.map((c) => `valid(${c.node.val}, ${show(c.low)}, ${show(c.high)})`)),
       ];
     };
     const vars = () => {

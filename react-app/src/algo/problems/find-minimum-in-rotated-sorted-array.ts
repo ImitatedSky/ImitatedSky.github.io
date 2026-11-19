@@ -17,12 +17,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 153,
   summary:
     "一個**由小到大、元素不重複**的陣列被旋轉了若干次（前面一段搬到後面），例如 `[0,1,2,4,5,6,7]` 可能變成 `[4,5,6,7,0,1,2]`。\n\n給旋轉後的陣列 `nums`，回傳其中的**最小值**。時間複雜度必須是 O(log n)。",
+  summaryEn:
+    "An array **sorted ascending with distinct values** has been rotated some number of times (a leading chunk moved to the back); for example `[0,1,2,4,5,6,7]` might become `[4,5,6,7,0,1,2]`.\n\nGiven the rotated array `nums`, return its **minimum value**. The solution must run in O(log n) time.",
   examples: [
     { input: "nums = [3,4,5,1,2]", output: "1" },
     { input: "nums = [4,5,6,7,0,1,2]", output: "0" },
-    { input: "nums = [11,13,15,17]", output: "11", note: "轉了一整圈，等於沒轉" },
+    { input: "nums = [11,13,15,17]", output: "11", note: "轉了一整圈，等於沒轉", noteEn: "Rotated a full cycle, which is the same as not rotated" },
   ],
   constraints: ["1 ≤ nums.length ≤ 5000", "nums 的值互不相同"],
+  constraintsEn: ["1 ≤ nums.length ≤ 5000", "All values in nums are distinct"],
   idea:
     "旋轉後的陣列是「高的一段 + 低的一段」，最小值就是低段的第一個。拿 `nums[mid]` 跟**最右邊的 `nums[hi]`** 比：比它大，表示 `mid` 還在高段，最小值在右邊；比它小，表示 `mid` 已經在低段，最小值是 `mid` 自己或在它左邊。",
   steps: [

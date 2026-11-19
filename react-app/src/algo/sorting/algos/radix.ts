@@ -29,6 +29,7 @@ const algo: SortAlgo = {
   complexity: { best: "O(d(n + k))", avg: "O(d(n + k))", worst: "O(d(n + k))", space: "O(n + k)", stable: true },
   code,
   maxValue: 999,
+  sample: [170, 45, 75, 90, 802, 24, 2, 66],
   trace(input) {
     const t = tracer();
     let a = [...input];

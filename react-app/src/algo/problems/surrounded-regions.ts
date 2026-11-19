@@ -42,15 +42,18 @@ export default defineProblem<{ board: string[][] }>({
   id: 130,
   summary:
     "給一張由 `\"X\"` 和 `\"O\"` 組成的棋盤。一塊上下左右相連的 `O` 區域，如果**完全被 `X` 包住**（沒有任何一格碰到棋盤邊界），就要把整塊翻成 `X`。\n\n直接修改 `board`，不需要回傳值。",
+  summaryEn:
+    "You get a board of `\"X\"` and `\"O\"`. Any region of `O` cells connected up, down, left or right that is **completely enclosed by `X`** (none of its cells touches the board's edge) must be flipped entirely to `X`.\n\nModify `board` in place; return nothing.",
   examples: [
     {
       input: 'board = [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]',
       output: '[["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]]',
-      note: "最下面那個 O 在邊界上，不會被翻掉",
+      note: "最下面那個 O 在邊界上，不會被翻掉", noteEn: "the bottom O is on the edge, so it is not flipped",
     },
     { input: 'board = [["X"]]', output: '[["X"]]' },
   ],
   constraints: ["1 ≤ m, n ≤ 200", "board[i][j] 只會是 \"X\" 或 \"O\""],
+  constraintsEn: ["1 ≤ m, n ≤ 200", "board[i][j] is either \"X\" or \"O\""],
   idea:
     "直接判斷「這塊 `O` 有沒有被包圍」很麻煩，**反過來想**：不會被翻的 `O`，一定連得到邊界。所以從四條邊上的 `O` 出發做 DFS，把碰得到的都先標成 `#`；剩下還是 `O` 的，就是被包圍的。",
   steps: [

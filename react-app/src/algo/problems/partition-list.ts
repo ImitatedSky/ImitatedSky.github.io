@@ -22,11 +22,14 @@ export default defineProblem<{ head: number[]; x: number }>({
   id: 86,
   summary:
     "給一條鏈結串列和一個數值 `x`，重新排列節點，讓**所有小於 `x` 的節點都排在大於等於 `x` 的節點前面**。\n\n兩邊各自內部的先後順序必須和原本一樣（不是排序，只是分成兩堆）。",
+  summaryEn:
+    "Given a linked list and a value `x`, rearrange the nodes so that **every node less than `x` comes before every node greater than or equal to `x`**.\n\nWithin each side, nodes must keep their original relative order (this is a split into two groups, not a sort).",
   examples: [
     { input: "head = [1,4,3,2,5,2], x = 3", output: "[1,2,2,4,3,5]" },
     { input: "head = [2,1], x = 2", output: "[1,2]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 200", "-100 ≤ Node.val ≤ 100", "-200 ≤ x ≤ 200"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 200", "-100 ≤ Node.val ≤ 100", "-200 ≤ x ≤ 200"],
   idea:
     "不要在原串列裡搬來搬去。準備**兩條新的鏈**：一條收 `< x` 的節點、一條收 `≥ x` 的節點，照原順序走訪，每個節點接到所屬那條鏈的尾巴。因為是依序接上的，各自的相對順序自然保留。最後把 small 鏈的尾巴接到 large 鏈的開頭。",
   steps: [

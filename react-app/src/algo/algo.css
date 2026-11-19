@@ -940,6 +940,42 @@
   font-family: var(--font-mono);
   font-size: 0.86em;
 }
+.algo-statement-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.algo-statement-head h3 {
+  margin: 0;
+}
+.algo-lang {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.algo-lang button {
+  padding: 4px 11px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: all 0.15s;
+}
+.algo-lang button.is-on {
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.algo-lang-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
 .algo-example {
   font-family: var(--font-mono);
   font-size: 0.84rem;
@@ -1061,7 +1097,7 @@
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: flex-start;
   gap: 10px;
   min-height: 250px;
 }
@@ -1077,8 +1113,12 @@
   flex: 1;
   min-width: 0;
 }
-.algo-view-slot:is(.is-tree, .is-graph, .is-map, .is-stack, .is-queue) {
+.algo-view-slot:is(.is-tree, .is-graph, .is-stack, .is-queue, .is-grid) {
   flex: 1 1 auto;
+}
+/* Maps / sets wrap inside a bounded column instead of jumping to the next line as they grow */
+.algo-view-slot.is-map {
+  flex: 1 1 220px;
 }
 /* Step text and transport stay reachable while a tall stage is scrolled */
 .algo-player-dock {
@@ -1324,7 +1364,7 @@
 .p1 { --pc: var(--t-alt); }
 .p2 { --pc: var(--t-compare); }
 .p3 { --pc: var(--t-good); }
-.p4 { --pc: var(--t-bad); }
+.p4 { --pc: #d946ef; }
 
 .algo-view {
   padding: 10px 12px 12px;
@@ -1525,8 +1565,9 @@
   position: absolute;
   top: 1px;
   right: 2px;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
+  line-height: 1;
   color: var(--pc);
 }
 .algo-grid-label {
@@ -1715,7 +1756,8 @@
 
 /* svg views */
 .algo-svg {
-  max-width: none;
+  max-width: 100%;
+  height: auto;
   overflow: visible;
 }
 .algo-svg text {

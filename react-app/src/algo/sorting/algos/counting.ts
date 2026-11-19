@@ -38,7 +38,9 @@ const algo: SortAlgo = {
     const n = a.length;
     const k = Math.max(...a) + 1;
     const count: number[] = new Array(k).fill(0);
-    let out: Cell[] = [];
+    // out 在第 8 行才建立；之前先畫成空白格子佔位，版面才不會在建立時跳動
+    let out: Cell[] = new Array(n).fill("");
+    let outReady = false;
     let outIds: number[] = [];
 
     const views = (
@@ -50,7 +52,7 @@ const algo: SortAlgo = {
     ) => [
       V.bars("a", a, { ids, marks: aMarks, pointers: aPointers }),
       V.array("count（索引 = 數值）", count, { marks: countMarks, pointers: countPointers }),
-      V.array("out", out, { marks: outMarks }),
+      V.array("out", out, { marks: outReady ? outMarks : Object.fromEntries(out.map((_, p) => [p, "muted" as Tone])) }),
     ];
     const seen = (from: number, to: number) => {
       const m: Record<number, Tone> = {};
@@ -88,6 +90,7 @@ const algo: SortAlgo = {
     }
 
     out = new Array(n).fill(null);
+    outReady = true;
     outIds = new Array(n).fill(-1);
     t.push({
       line: 8,

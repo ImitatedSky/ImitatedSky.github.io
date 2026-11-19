@@ -19,11 +19,14 @@ export default defineProblem<{ s: string; t: string }>({
   id: 242,
   summary:
     "給兩個字串 `s` 和 `t`，判斷 `t` 是不是 `s` 的**字母異位詞**（anagram）：把 `s` 的字母重新排列後能不能剛好得到 `t`。\n\n換句話說，兩個字串用到的字母種類與每種的數量要完全相同，只有順序可以不同。",
+  summaryEn:
+    "Given two strings `s` and `t`, decide whether `t` is an **anagram** of `s`: can the letters of `s` be rearranged to form exactly `t`?\n\nIn other words, both strings must use the same letters with the same count of each; only the order may differ.",
   examples: [
     { input: 's = "anagram", t = "nagaram"', output: "true" },
     { input: 's = "rat", t = "car"', output: "false" },
   ],
   constraints: ["1 ≤ s.length, t.length ≤ 5 × 10⁴", "只包含小寫英文字母"],
+  constraintsEn: ["1 ≤ s.length, t.length ≤ 5 × 10⁴", "Only lowercase English letters"],
   idea:
     "順序不重要，重要的只有**每個字母出現幾次**。先確認長度相同，再數 `s` 的字母，接著用 `t` 的字母一個一個去抵銷。因為長度一樣，只要 `t` 沒有任何字母「多出來」，就代表兩邊完全相同。",
   steps: [

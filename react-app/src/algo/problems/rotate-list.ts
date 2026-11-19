@@ -21,11 +21,14 @@ export default defineProblem<{ head: number[]; k: number }>({
   id: 61,
   summary:
     "給一條鏈結串列和非負整數 `k`，把串列**向右旋轉 k 次**：每旋轉一次，最後一個節點會被搬到最前面。回傳旋轉後的頭節點。\n\n`k` 可能比串列長度大很多。",
+  summaryEn:
+    "Given a linked list and a non-negative integer `k`, **rotate the list to the right k times**: each rotation moves the last node to the front. Return the new head.\n\n`k` can be far larger than the length of the list.",
   examples: [
     { input: "head = [1,2,3,4,5], k = 2", output: "[4,5,1,2,3]" },
-    { input: "head = [0,1,2], k = 4", output: "[2,0,1]", note: "長度 3，轉 4 次等於轉 1 次" },
+    { input: "head = [0,1,2], k = 4", output: "[2,0,1]", note: "長度 3，轉 4 次等於轉 1 次", noteEn: "length 3, so rotating 4 times is the same as rotating once" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 500", "0 ≤ k ≤ 2 × 10⁹"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 500", "0 ≤ k ≤ 2 × 10⁹"],
   idea:
     "向右轉 `k` 次，其實就是把**最後 `k % n` 個節點整段搬到前面**。與其真的搬，不如先把尾巴接回頭變成一個環 —— 環上的相對順序完全沒變，只差「從哪裡剪開」。新的尾巴是原本的第 `n - k % n` 個節點，在它後面剪一刀就完成了。",
   steps: [

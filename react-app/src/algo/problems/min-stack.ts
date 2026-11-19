@@ -30,6 +30,8 @@ export default defineProblem<{ ops: Op[]; args: (number | null)[] }>({
   id: 155,
   summary:
     "設計一個堆疊，除了一般的 `push`、`pop`、`top` 之外，還要支援 `getMin`：回傳目前堆疊中的**最小值**。\n\n四個操作都必須是 O(1)。輸入是一連串的操作，輸出是每個操作的回傳值（沒有回傳值的記為 `None`）。",
+  summaryEn:
+    "Design a stack that supports the usual `push`, `pop` and `top`, plus `getMin`, which returns the **smallest value** currently in the stack.\n\nAll four operations must run in O(1). The input is a sequence of operations; the output is each operation's return value (`None` for operations that return nothing).",
   examples: [
     {
       input: '["MinStack","push","push","push","getMin","pop","top","getMin"]\n[[],[-2],[0],[-3],[],[],[],[]]',
@@ -37,6 +39,7 @@ export default defineProblem<{ ops: Op[]; args: (number | null)[] }>({
     },
   ],
   constraints: ["−2³¹ ≤ val ≤ 2³¹ − 1", "`pop`、`top`、`getMin` 只會在堆疊不為空時被呼叫", "最多 3 × 10⁴ 次操作"],
+  constraintsEn: ["−2³¹ ≤ val ≤ 2³¹ − 1", "`pop`, `top` and `getMin` are only called on a non-empty stack", "At most 3 × 10⁴ operations"],
   idea:
     "只用一個變數記最小值不夠：最小值被 pop 掉之後，**「前一個最小值」是誰**就不知道了。因為堆疊只會從頂端增減，「堆疊高度為 i 時的最小值」永遠不會變 —— 所以用第二個堆疊 `min_stack` 同步記下每一層當下的最小值，兩個堆疊一起 push、一起 pop。",
   steps: [

@@ -17,6 +17,8 @@ export default defineProblem<{ strs: string[] }>({
   id: 49,
   summary:
     "給一個字串陣列 `strs`，把其中互為**字母異位詞**的字串分在同一組（用到的字母與數量完全相同，只是順序不同）。\n\n回傳所有分組，組與組之間、組內的順序都不限。",
+  summaryEn:
+    "Given an array of strings `strs`, put strings that are **anagrams** of each other into the same group (same letters with the same counts, just in a different order).\n\nReturn all the groups; neither the order of the groups nor the order within a group matters.",
   examples: [
     {
       input: 'strs = ["eat","tea","tan","ate","nat","bat"]',
@@ -26,6 +28,7 @@ export default defineProblem<{ strs: string[] }>({
     { input: 'strs = ["a"]', output: '[["a"]]' },
   ],
   constraints: ["1 ≤ strs.length ≤ 10⁴", "0 ≤ strs[i].length ≤ 100", "只包含小寫英文字母"],
+  constraintsEn: ["1 ≤ strs.length ≤ 10⁴", "0 ≤ strs[i].length ≤ 100", "Only lowercase English letters"],
   idea:
     "要把「同一組」的字串丟進同一個桶子，就需要一個**同組的字串都算得出相同結果的標籤**。把字母排序就是最簡單的標籤：`eat`、`tea`、`ate` 排序後都是 `aet`。用這個標籤當雜湊表的 key 即可。",
   steps: [

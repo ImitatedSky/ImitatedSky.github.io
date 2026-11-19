@@ -33,12 +33,15 @@ export default defineProblem<{ head: number[] }>({
   id: 148,
   summary:
     "給一條單向鏈結串列的頭節點，把它依節點值**由小到大排序**後回傳。\n\n進階要求：時間 O(n log n)。",
+  summaryEn:
+    "Given the head of a singly linked list, **sort its nodes by value in ascending order** and return the new head.\n\nFollow-up: do it in O(n log n) time.",
   examples: [
     { input: "head = [4,2,1,3]", output: "[1,2,3,4]" },
     { input: "head = [-1,5,3,4,0]", output: "[-1,0,3,4,5]" },
     { input: "head = []", output: "[]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 5 × 10⁴", "-10⁵ ≤ Node.val ≤ 10⁵"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 5 × 10⁴", "-10⁵ ≤ Node.val ≤ 10⁵"],
   idea:
     "鏈結串列不能用索引隨機存取，快速排序、堆積排序都不好做，但**合併排序**非常適合：「找中點切兩半」用快慢指標走一趟就好；「合併兩條排好的串列」只需要改 `next` 指標，不用額外的陣列。切到只剩一個節點就一定是排好的，再兩兩合併回來。",
   steps: [

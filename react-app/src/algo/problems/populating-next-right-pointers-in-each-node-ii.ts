@@ -23,15 +23,18 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 117,
   summary:
     "二元樹的每個節點除了 `left`、`right` 之外還多一個 `next` 指標（一開始都是 `None`）。請把每個節點的 `next` 指向**同一層右邊緊鄰的那個節點**；如果右邊已經沒有節點，就維持 `None`。\n\n這棵樹不一定是完美二元樹，中間可能有缺口。進階要求：只能用常數的額外空間。",
+  summaryEn:
+    "Each binary tree node has, besides `left` and `right`, a `next` pointer that starts out as `None`. Point every node's `next` at **the node immediately to its right on the same level**; if there is nothing to its right, leave it as `None`.\n\nThe tree is not necessarily perfect and may have gaps. Follow-up: use only constant extra space.",
   examples: [
     {
       input: "root = [1,2,3,4,5,null,7]",
       output: "[1,#,2,3,#,4,5,7,#]",
-      note: "每一層用 next 串起來：1 → None、2 → 3 → None、4 → 5 → 7 → None",
+      note: "每一層用 next 串起來：1 → None、2 → 3 → None、4 → 5 → 7 → None", noteEn: "each level is chained by next: 1 → None, 2 → 3 → None, 4 → 5 → 7 → None",
     },
     { input: "root = []", output: "[]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 6000", "-100 ≤ Node.val ≤ 100"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 6000", "-100 ≤ Node.val ≤ 100"],
   idea:
     "一層被 `next` 串好之後，它本身就是一條**鏈結串列** —— 可以直接沿著 `next` 由左走到右，不需要佇列。走的同時，把沿途遇到的小孩一個一個接到「下一層的串列」尾端。用一個 `dummy` 假頭當下一層串列的起點，就不用特判「下一層的第一個節點是誰」。",
   steps: [

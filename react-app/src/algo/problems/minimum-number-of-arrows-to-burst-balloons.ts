@@ -19,12 +19,15 @@ export default defineProblem<{ points: number[][] }>({
   id: 452,
   summary:
     "牆上貼著一些氣球，每顆氣球用它在 x 軸上佔據的範圍 `[x_start, x_end]` 表示。從某個 x 位置垂直往上射一支箭，所有範圍包含這個 x 的氣球都會被射破（端點也算）。\n\n問**最少**要射幾支箭，才能把所有氣球都射破。",
+  summaryEn:
+    "Some balloons are taped to a wall, each described by the span it covers on the x-axis, `[x_start, x_end]`. An arrow shot straight up from position x pops every balloon whose span contains x (endpoints included).\n\nFind the **minimum** number of arrows needed to pop all the balloons.",
   examples: [
-    { input: "points = [[10,16],[2,8],[1,6],[7,12]]", output: "2", note: "x = 6 射破 [2,8]、[1,6]；x = 12 射破 [10,16]、[7,12]" },
+    { input: "points = [[10,16],[2,8],[1,6],[7,12]]", output: "2", note: "x = 6 射破 [2,8]、[1,6]；x = 12 射破 [10,16]、[7,12]", noteEn: "x = 6 pops [2,8] and [1,6]; x = 12 pops [10,16] and [7,12]" },
     { input: "points = [[1,2],[3,4],[5,6],[7,8]]", output: "4" },
     { input: "points = [[1,2],[2,3],[3,4],[4,5]]", output: "2" },
   ],
   constraints: ["1 ≤ points.length ≤ 10⁵", "−2³¹ ≤ x_start < x_end ≤ 2³¹ − 1"],
+  constraintsEn: ["1 ≤ points.length ≤ 10⁵", "−2³¹ ≤ x_start < x_end ≤ 2³¹ − 1"],
   idea:
     "貪心：依**右端點**排序。右端點最小的那顆氣球一定要有一支箭負責，而這支箭射在它的右端點最划算 —— 再往右就射不到它，往左只會少涵蓋後面的氣球。射完之後，起點沒超過這支箭的氣球都順便破了；第一顆起點超過箭的，再用同樣的道理補一支。",
   steps: [

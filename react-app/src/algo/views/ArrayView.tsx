@@ -18,7 +18,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
   const fit = Math.floor((boxWidth - 8) / Math.max(1, n + pad * 2));
   const size = wide ? preferred : Math.max(16, Math.min(preferred, fit - (fit < 30 ? 3 : 6)));
   const gap = size < 24 ? 3 : n <= 18 ? 6 : 4;
-  const cellW = wide ? Math.min(150, Math.round(longest * 8.2 + 16)) : size;
+  const cellW = wide ? Math.max(34, Math.min(150, Math.round(longest * 8.2 + 16), fit - gap)) : size;
   const step = cellW + gap;
 
   // Room for "just outside" pointers is symmetric padding on the (centred) container
@@ -108,8 +108,9 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
             ))}
           </div>
 
-          {maxStack > 0 && (
-            <div className="algo-array-pointers" style={{ height: maxStack * 22 + 8 }}>
+          {/* `pointers: {}` keeps the row reserved, like `ranges: []` */}
+          {(maxStack > 0 || view.pointers !== undefined || !!view.pointerRows) && (
+            <div className="algo-array-pointers" style={{ height: Math.max(1, maxStack, view.pointerRows ?? 0) * 22 + 8 }}>
               {pointerEntries.map(([name, i]) => (
                 <div
                   key={name}

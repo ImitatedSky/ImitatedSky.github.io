@@ -20,12 +20,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 128,
   summary:
     "給一個**沒有排序**的整數陣列 `nums`，找出其中的數字能組成的**最長連續整數序列**有多長（例如 1、2、3、4），數字在陣列中的位置不需要相鄰。\n\n要求時間複雜度 O(n)，所以不能排序。",
+  summaryEn:
+    "Given an **unsorted** integer array `nums`, find how long the **longest run of consecutive integers** is that its numbers can form (for example 1, 2, 3, 4). The numbers do not need to sit next to each other in the array.\n\nThe required time is O(n), so sorting is not an option.",
   examples: [
-    { input: "nums = [100,4,200,1,3,2]", output: "4", note: "最長的是 1, 2, 3, 4" },
+    { input: "nums = [100,4,200,1,3,2]", output: "4", note: "最長的是 1, 2, 3, 4", noteEn: "The longest is 1, 2, 3, 4" },
     { input: "nums = [0,3,7,2,5,8,4,6,0,1]", output: "9" },
     { input: "nums = [1,0,1,2]", output: "3" },
   ],
   constraints: ["0 ≤ nums.length ≤ 10⁵", "−10⁹ ≤ nums[i] ≤ 10⁹"],
+  constraintsEn: ["0 ≤ nums.length ≤ 10⁵", "−10⁹ ≤ nums[i] ≤ 10⁹"],
   idea:
     "把所有數字丟進 `set`，就能 O(1) 問「某個數在不在」。關鍵是**只從每一段的起點開始往右數**：如果 `x - 1` 也在集合裡，`x` 就不是起點，直接跳過。這樣每個數字最多只會被往右走到一次，總共 O(n)。",
   steps: [

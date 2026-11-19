@@ -30,16 +30,19 @@ export default defineProblem<{ board: number[][] }>({
   id: 909,
   summary:
     "一個 `n × n` 的棋盤，格子從**左下角**開始編號 `1`，往右編完一列後換到上一列並**反方向**繼續編（蛇行），一直編到 `n²`。\n\n你從 `1` 出發，每回合擲一顆骰子前進 1～6 格。落點如果 `board` 上寫的不是 `-1`，表示那裡有梯子或蛇，會立刻被送到它寫的那個編號（每回合最多只被送一次）。求走到 `n²` **最少要擲幾次骰子**；到不了就回傳 `-1`。",
+  summaryEn:
+    "On an `n × n` board, squares are numbered from `1` at the **bottom-left**; after finishing a row going right, numbering moves up a row and continues **in the opposite direction** (boustrophedon), all the way to `n²`.\n\nYou start on `1` and each turn roll a die to move 1–6 squares. If the square you land on has a value other than `-1` in `board`, there is a ladder or snake there and you are sent straight to that number (at most once per turn). Find the **minimum number of rolls** to reach `n²`, or `-1` if it is unreachable.",
   examples: [
     {
       input:
         "board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]]",
       output: "4",
-      note: "1 →(梯子) 15 →(蛇) 13 →(梯子) 35 → 36",
+      note: "1 →(梯子) 15 →(蛇) 13 →(梯子) 35 → 36", noteEn: "1 →(ladder) 15 →(snake) 13 →(ladder) 35 → 36",
     },
     { input: "board = [[-1,-1],[-1,3]]", output: "1" },
   ],
   constraints: ["2 ≤ n ≤ 20", "board[i][j] 是 -1 或 1 ~ n² 之間的編號", "編號 1 和 n² 的格子上沒有蛇也沒有梯子"],
+  constraintsEn: ["2 ≤ n ≤ 20", "board[i][j] is -1 or a square number from 1 to n²", "Squares 1 and n² have no snake or ladder"],
   idea:
     "每擲一次骰子的代價都是 1，所以這是**無權重圖的最短路徑** → BFS。節點是格子編號，從 `cur` 可以走到 `cur+1 … cur+6`（遇到蛇或梯子就改成它的終點）。BFS 一層一層往外擴，第一次碰到 `n²` 時的擲骰次數就是最少次數。",
   steps: [

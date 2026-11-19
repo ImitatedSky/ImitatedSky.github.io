@@ -15,11 +15,14 @@ export default defineProblem<{ triangle: number[][] }>({
   id: 120,
   summary:
     "給一個數字三角形，從頂端走到最底層，每一步只能移動到**下一列相鄰的兩格**之一（索引 `j` 或 `j + 1`）。\n\n求路徑上數字總和的最小值。",
+  summaryEn:
+    "You are given a triangle of numbers. Walk from the top to the bottom row, where each step moves to one of the **two adjacent cells in the next row** (index `j` or `j + 1`).\n\nFind the smallest possible sum along such a path.",
   examples: [
-    { input: "triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]", output: "11", note: "2 + 3 + 5 + 1" },
+    { input: "triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]", output: "11", note: "2 + 3 + 5 + 1", noteEn: "2 + 3 + 5 + 1" },
     { input: "triangle = [[-10]]", output: "-10" },
   ],
   constraints: ["1 ≤ triangle.length ≤ 200", "triangle[i].length == i + 1", "-10⁴ ≤ triangle[i][j] ≤ 10⁴"],
+  constraintsEn: ["1 ≤ triangle.length ≤ 200", "triangle[i].length == i + 1", "-10⁴ ≤ triangle[i][j] ≤ 10⁴"],
   idea:
     "**由下往上**算。定義 `dp[j]` = 從目前這一列的第 `j` 格走到底的最小路徑和；最底層就是數字本身，往上一列時每格只要挑下方兩格中較小的那個：`dp[j] = triangle[i][j] + min(dp[j], dp[j+1])`。一路收斂到頂端只剩 `dp[0]`，而且只需要一維陣列。",
   steps: [

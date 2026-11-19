@@ -58,11 +58,14 @@ export default defineProblem<{ nums1: number[]; nums2: number[]; k: number }>({
   id: 373,
   summary:
     "給兩個**由小到大排序**的整數陣列 `nums1`、`nums2` 和整數 `k`。從兩個陣列各挑一個數組成一對 `(u, v)`，回傳**和最小的 k 對**。\n\n如果總共不到 k 對，就全部回傳。",
+  summaryEn:
+    "You get two integer arrays `nums1` and `nums2`, **sorted ascending**, and an integer `k`. A pair `(u, v)` takes one number from each array; return the **k pairs with the smallest sums**.\n\nIf there are fewer than k pairs in total, return all of them.",
   examples: [
     { input: "nums1 = [1,7,11], nums2 = [2,4,6], k = 3", output: "[[1,2],[1,4],[1,6]]" },
     { input: "nums1 = [1,1,2], nums2 = [1,2,3], k = 2", output: "[[1,1],[1,1]]" },
   ],
   constraints: ["1 ≤ nums1.length, nums2.length ≤ 10⁵", "1 ≤ k ≤ 10⁴", "兩個陣列都是非遞減排序"],
+  constraintsEn: ["1 ≤ nums1.length, nums2.length ≤ 10⁵", "1 ≤ k ≤ 10⁴", "Both arrays are sorted in non-decreasing order"],
   idea:
     "把所有的和想成一張表格：第 `i` 列第 `j` 行是 `nums1[i] + nums2[j]`。因為 `nums2` 有序，**每一列都是由左到右遞增**，這就變成「合併好幾條有序串列」：heap 裡每一列只放一個代表（該列目前最左邊還沒取的那格），每次取出最小的，再把它右邊那格補進去。",
   steps: [

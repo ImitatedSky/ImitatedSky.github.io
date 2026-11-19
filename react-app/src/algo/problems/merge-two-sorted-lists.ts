@@ -20,12 +20,15 @@ export default defineProblem<{ list1: number[]; list2: number[] }>({
   id: 21,
   summary:
     "給兩條**已經由小到大排好**的鏈結串列，把它們合併成一條同樣排好序的串列並回傳頭節點。\n\n新串列要用原本兩條串列的節點重新串接而成，不是另外建立新節點。",
+  summaryEn:
+    "You get two linked lists that are **already sorted in ascending order**. Merge them into one sorted list and return its head.\n\nBuild the result by relinking the existing nodes of the two lists, not by creating new ones.",
   examples: [
     { input: "list1 = [1,2,4], list2 = [1,3,4]", output: "[1,1,2,3,4,4]" },
     { input: "list1 = [], list2 = []", output: "[]" },
     { input: "list1 = [], list2 = [0]", output: "[0]" },
   ],
   constraints: ["每條串列有 0 ~ 50 個節點", "兩條串列都是非遞減排序"],
+  constraintsEn: ["Each list has 0 to 50 nodes", "Both lists are sorted in non-decreasing order"],
   idea:
     "兩條串列都排好序，所以**整體最小的節點一定是其中一條的頭**。每次只要比兩個頭、把小的那個摘下來接到結果尾巴，再重複同樣的事。其中一條用完時，另一條剩下的部分本來就有序，整段接上去即可。",
   steps: [

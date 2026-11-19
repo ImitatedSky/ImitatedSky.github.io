@@ -32,12 +32,15 @@ export default defineProblem<{ s: string; words: string[] }>({
   id: 30,
   summary:
     "給一個字串 `s` 和一組**長度都相同**的單字 `words`。把 `words` 裡的每個單字**各用一次**、以任意順序首尾相接，會得到一個「串聯字串」。\n\n找出 `s` 裡所有等於某個串聯字串的子字串，回傳它們的起始索引（順序不限）。`words` 裡可能有重複的單字，重複幾次就得用幾次。",
+  summaryEn:
+    "Given a string `s` and a list of words `words` that **all have the same length**, joining every word in `words` end to end **exactly once each**, in any order, gives a \"concatenated string\".\n\nFind every substring of `s` that equals some concatenated string and return their starting indices (in any order). `words` may contain duplicates; a word that appears several times must be used that many times.",
   examples: [
-    { input: 's = "barfoothefoobarman", words = ["foo","bar"]', output: "[0,9]", note: '"barfoo" 和 "foobar"' },
+    { input: 's = "barfoothefoobarman", words = ["foo","bar"]', output: "[0,9]", note: '"barfoo" 和 "foobar"', noteEn: "\"barfoo\" and \"foobar\"" },
     { input: 's = "wordgoodgoodgoodbestword", words = ["word","good","best","word"]', output: "[]" },
     { input: 's = "barfoofoobarthefoobarman", words = ["bar","foo","the"]', output: "[6,9,12]" },
   ],
   constraints: ["1 ≤ s.length ≤ 10⁴", "1 ≤ words.length ≤ 5000", "1 ≤ words[i].length ≤ 30", "所有單字長度相同"],
+  constraintsEn: ["1 ≤ s.length ≤ 10⁴", "1 ≤ words.length ≤ 5000", "1 ≤ words[i].length ≤ 30", "All words have the same length"],
   idea:
     "單字長度固定是 `k`，所以只要決定「從哪裡開始切」，`s` 就會變成**一排單字**。切割起點只有 `0 … k-1` 這 `k` 種；對每一種，把單字當成一個「字元」，問題就變成經典的滑動視窗：找出單字數量與 `need` 完全一致的視窗。",
   steps: [
@@ -75,7 +78,7 @@ export default defineProblem<{ s: string; words: string[] }>({
     t.push({
       line: [3, 4, 5],
       note: `每個單字長度 \`k = ${k}\`，共 \`m = ${m}\` 個，所以合法的子字串長度一定是 ${k * m}。\`need\` 記下每個單字需要的數量。`,
-      views: [V.chars("s", s), V.map("need", need), V.set("res", res)],
+      views: [V.chars("s", s, { ranges: [] }), V.map("need", need), V.map("have", []), V.set("res", res)],
       vars: { n, k, m },
     });
 
@@ -111,16 +114,16 @@ export default defineProblem<{ s: string; words: string[] }>({
           for (let i = r; i < r + k; i++) sMarks[i] = o.word;
           cMarks[ci(r)] = o.word;
         }
-        const label = `視窗：${count} / ${m} 個單字`;
+        const label = `${count} / ${m} 個單字`;
         return [
           V.chars("s", s, {
             pointers: r >= 0 ? { l, r } : { l },
             marks: sMarks,
-            ...(hasWindow ? { ranges: [{ from: l, to: r + k - 1, tone: o.window ?? "active", label }] } : {}),
+            ranges: hasWindow ? [{ from: l, to: r + k - 1, tone: o.window ?? "active", label }] : [],
           }),
           V.array("切成單字", chunks, {
             marks: cMarks,
-            ...(hasWindow ? { ranges: [{ from: ci(l), to: ci(r), tone: o.window ?? "active", label }] } : {}),
+            ranges: hasWindow ? [{ from: ci(l), to: ci(r), tone: o.window ?? "active" }] : [],
           }),
           V.map("need", need),
           V.map("have", have, { marks: o.haveMarks ?? {} }),
@@ -202,8 +205,9 @@ export default defineProblem<{ s: string; words: string[] }>({
         ? `${k} 種切割起點都滑完了，共找到 ${res.length} 個起點：${res.map((p) => `\`${p}\``).join("、")}。`
         : `${k} 種切割起點都滑完了，沒有任何視窗能湊齊所有單字。`,
       views: [
-        V.chars("s", s, { marks, pointers: Object.fromEntries(res.map((p, i) => [`res[${i}]`, p])) }),
+        V.chars("s", s, { marks, pointers: Object.fromEntries(res.map((p, i) => [`res[${i}]`, p])), ranges: [] }),
         V.map("need", need),
+        V.map("have", []),
         V.set("res", res, { marks: Object.fromEntries(res.map((p) => [String(p), "good" as Tone])) }),
       ],
       result: py(res),

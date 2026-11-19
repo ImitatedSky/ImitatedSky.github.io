@@ -64,11 +64,14 @@ export default defineProblem<{ n: number }>({
   id: 22,
   summary:
     "給一個整數 `n`，代表有 `n` 對括號。列出所有由這 `n` 對括號組成的**合法括號字串**（每個左括號都有對應的右括號，而且順序正確）。\n\n答案之間的順序不限。",
+  summaryEn:
+    "Given an integer `n` meaning `n` pairs of parentheses, list every **well-formed string** you can build from them (each opening bracket is closed by a matching one, in the right order).\n\nThe strings can be returned in any order.",
   examples: [
     { input: "n = 3", output: '["((()))","(()())","(())()","()(())","()()()"]' },
     { input: "n = 1", output: '["()"]' },
   ],
   constraints: ["1 ≤ n ≤ 8"],
+  constraintsEn: ["1 ≤ n ≤ 8"],
   idea:
     "不要先產生全部 2²ⁿ 種字串再檢查，而是**邊放邊保證合法**。一個字一個字往後放，只要守住兩條規則就不會走錯：左括號最多放 `n` 個（`open < n`）；右括號只能在「還有沒配對的左括號」時放（`close < open`）。照這樣走到長度 `2n` 的每一條路徑都是合法答案 —— 決策樹上**沒有死路**。",
   steps: [
@@ -99,32 +102,20 @@ export default defineProblem<{ n: number }>({
     const t = tracer();
     const res: string[] = [];
     const path: string[] = [];
-    const tree = decisionTree("0,0");
+    const tree = decisionTree('""');
 
-    const views = (open: number, close: number, newest?: string) => [
-      V.array("path", path, { marks: path.length ? { [path.length - 1]: newest ? "good" : "active" } : {} }),
-      V.map(
-        "額度",
-        [
-          ["open（上限 n）", `${open} / ${n}`],
-          ["close（上限 open）", `${close} / ${open}`],
-        ],
-        {
-          marks: {
-            ...(open === n ? { "open（上限 n）": "muted" as Tone } : {}),
-            ...(close === open ? { "close（上限 open）": "muted" as Tone } : {}),
-          },
-        },
-      ),
-      tree.view("決策樹（節點 = open,close，邊 = 放的括號）"),
-      V.set("res", res, { marks: newest ? { [newest]: "good" } : {} }),
+    // The tree nodes spell out `path` and the watch panel shows open / close, so the
+    // stage is just the tree plus `res` (an array keeps its own row: no layout jump).
+    const views = (newest?: string) => [
+      tree.view("決策樹（節點 = 目前的 path，邊 = 放的括號）"),
+      V.array("res", res, { marks: newest ? { [res.length - 1]: "good" } : {} }),
     ];
     const str = () => `"${path.join("")}"`;
 
     t.push({
       line: [3, 4, 19],
       note: `要放 ${2 * n} 個字元。用 \`open\`、\`close\` 記錄已經放了幾個左、右括號，從 \`backtrack(0, 0)\` 開始。`,
-      views: views(0, 0),
+      views: views(),
       vars: { n, open: 0, close: 0, path: '""' },
     });
 
@@ -136,7 +127,7 @@ export default defineProblem<{ n: number }>({
         t.push({
           line: [7, 8, 9],
           note: `\`path\` 長度到 ${2 * n} 了。一路上都守著兩條規則，所以它一定合法 —— 把 \`"${s}"\` 收進 \`res\`。`,
-          views: views(open, close, s),
+          views: views(s),
           vars: { open, close, path: `"${s}"`, 已收集: res.length },
         });
         return;
@@ -144,11 +135,11 @@ export default defineProblem<{ n: number }>({
       const canClose = close < open;
       if (open < n) {
         path.push("(");
-        tree.down(`${open + 1},${close}`, "(");
+        tree.down(path.join(""), "(");
         t.push({
           line: [10, 11, 12],
           note: `\`open = ${open} < ${n}\`，左括號還有額度。**放** \`(\`，\`path\` 變成 \`${str()}\`，繼續往下。`,
-          views: views(open + 1, close),
+          views: views(),
           vars: { open: open + 1, close, path: str() },
         });
         backtrack(open + 1, close);
@@ -161,19 +152,19 @@ export default defineProblem<{ n: number }>({
             (canClose
               ? `同一個位置還可以改放 \`)\`，因為 \`close = ${close} < open = ${open}\`。`
               : `這個位置不能放 \`)\`：\`close == open == ${open}\`，沒有等待配對的左括號。這一層結束。`),
-          views: views(open, close),
+          views: views(),
           vars: { open, close, path: str() },
         });
       }
       if (canClose) {
         path.push(")");
-        tree.down(`${open},${close + 1}`, ")");
+        tree.down(path.join(""), ")");
         t.push({
           line: [14, 15, 16],
           note:
             (open === n ? `\`open == ${n}\`，左括號已經用完，只剩一種選擇。` : "") +
             `\`close = ${close} < open = ${open}\`，還有 ${open - close} 個左括號等著配對。**放** \`)\`，\`path\` 變成 \`${str()}\`。`,
-          views: views(open, close + 1),
+          views: views(),
           vars: { open, close: close + 1, path: str() },
         });
         backtrack(open, close + 1);
@@ -182,7 +173,7 @@ export default defineProblem<{ n: number }>({
         t.push({
           line: 17,
           note: `**撤銷**剛才的 \`)\`，回到 \`${str()}\`。這個位置能放的括號都試過了，返回上一層。`,
-          views: views(open, close),
+          views: views(),
           vars: { open, close, path: str() },
         });
       }
@@ -192,7 +183,7 @@ export default defineProblem<{ n: number }>({
     t.push({
       line: 20,
       note: `全部走完，共 ${res.length} 個合法字串。注意樹上每一片葉子都是綠色 —— 兩條規則讓我們從頭到尾沒走過任何一條不合法的路。`,
-      views: views(0, 0),
+      views: views(),
       vars: { n, 已收集: res.length },
       result: py(res),
     });

@@ -17,12 +17,15 @@ export default defineProblem<{ root: (number | null)[]; p: number; q: number }>(
   id: 236,
   summary:
     "給一棵二元樹和樹上的兩個節點 `p`、`q`，找出它們的**最近共同祖先**（LCA）：同時是 `p` 和 `q` 的祖先、而且離它們最近（深度最深）的那個節點。\n\n一個節點也算是自己的祖先，所以如果 `p` 本身就是 `q` 的祖先，答案就是 `p`。樹上的值都不重複，`p`、`q` 一定存在且不是同一個節點。",
+  summaryEn:
+    "Given a binary tree and two of its nodes `p` and `q`, find their **lowest common ancestor** (LCA): the node that is an ancestor of both `p` and `q` and sits closest to them (deepest in the tree).\n\nA node counts as its own ancestor, so if `p` is itself an ancestor of `q`, the answer is `p`. All values are distinct, and `p` and `q` both exist and are different nodes.",
   examples: [
     { input: "root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1", output: "3" },
-    { input: "root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4", output: "5", note: "5 是 4 的祖先，也是自己的祖先" },
+    { input: "root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4", output: "5", note: "5 是 4 的祖先，也是自己的祖先", noteEn: "5 is an ancestor of 4, and also of itself" },
     { input: "root = [1,2], p = 1, q = 2", output: "1" },
   ],
   constraints: ["2 ≤ 節點數 ≤ 10⁵", "所有 Node.val 都不相同", "p ≠ q，且兩者都在樹上"],
+  constraintsEn: ["2 ≤ number of nodes ≤ 10⁵", "All Node.val are distinct", "p ≠ q, and both are in the tree"],
   idea:
     "用後序走訪，讓每棵子樹回答一個問題：「你裡面有沒有 `p` 或 `q`？有的話把找到的節點交上來。」對某個節點來說，如果**左右兩邊都交了東西上來**，代表 `p`、`q` 一個在左、一個在右，它就是兩條路第一次會合的地方 —— 也就是 LCA。只有一邊有東西就原封不動往上傳。",
   steps: [

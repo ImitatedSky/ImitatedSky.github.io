@@ -16,12 +16,15 @@ export default defineProblem<{ x: number }>({
   id: 9,
   summary:
     "給一個整數 `x`，判斷它是不是**回文數**：從左讀到右和從右讀到左完全一樣（例如 `121`）。\n\n進階要求是不要把整數轉成字串。",
+  summaryEn:
+    "Given an integer `x`, decide whether it is a **palindrome**: it reads the same left to right as right to left (like `121`).\n\nFollow-up: do it without converting the integer to a string.",
   examples: [
     { input: "x = 121", output: "true" },
-    { input: "x = -121", output: "false", note: "反過來讀是 121-，負號對不上" },
-    { input: "x = 10", output: "false", note: "反過來讀是 01" },
+    { input: "x = -121", output: "false", note: "反過來讀是 121-，負號對不上", noteEn: "Backwards it reads 121-, so the minus sign doesn't match" },
+    { input: "x = 10", output: "false", note: "反過來讀是 01", noteEn: "Backwards it reads 01" },
   ],
   constraints: ["−2³¹ ≤ x ≤ 2³¹ − 1"],
+  constraintsEn: ["−2³¹ ≤ x ≤ 2³¹ − 1"],
   idea:
     "不用把整個數反轉，**只反轉後半段**就夠了：不斷把 `x` 的個位數拔下來接到 `rev` 後面，等 `rev` 追上 `x`（`x <= rev`）就代表已經處理到中間。這時前半段 `x` 和反轉後的後半段 `rev` 相等就是回文；位數是奇數時 `rev` 會多帶一個正中間的數字，用 `rev // 10` 丟掉它再比。",
   steps: [

@@ -33,6 +33,8 @@ export default defineProblem<{ ops: Op[] }>({
   id: 380,
   summary:
     "設計一個集合 `RandomizedSet`，支援三個操作，而且**平均都要 O(1)**：\n\n`insert(val)`：`val` 不在集合裡就加入並回傳 `True`，已存在則回傳 `False`。`remove(val)`：`val` 在集合裡就移除並回傳 `True`，否則回傳 `False`。`getRandom()`：隨機回傳集合中的一個元素，每個元素被選到的機率要相同（呼叫時保證集合不是空的）。",
+  summaryEn:
+    "Design a set `RandomizedSet` with three operations, each running in **O(1) on average**:\n\n`insert(val)`: add `val` and return `True` if it is not in the set yet, otherwise return `False`. `remove(val)`: remove `val` and return `True` if it is in the set, otherwise return `False`. `getRandom()`: return a random element of the set, with every element equally likely (the set is guaranteed to be non-empty when this is called).",
   examples: [
     {
       input: "insert(1), remove(2), insert(2), getRandom(), remove(1), insert(2), getRandom()",
@@ -40,6 +42,7 @@ export default defineProblem<{ ops: Op[] }>({
     },
   ],
   constraints: ["-2³¹ ≤ val ≤ 2³¹ - 1", "最多呼叫 2 × 10⁵ 次", "呼叫 getRandom 時集合至少有一個元素"],
+  constraintsEn: ["-2³¹ ≤ val ≤ 2³¹ - 1", "At most 2 × 10⁵ calls in total", "The set has at least one element whenever getRandom is called"],
   idea:
     "兩種結構各有一半的本事：**雜湊表**能 O(1) 查找和增刪，但沒辦法「隨機抽第 k 個」；**陣列**能用隨機索引 O(1) 抽，但從中間刪除要 O(n)。把兩個合起來：陣列存元素、雜湊表存「數值 → 索引」。刪除的關鍵是 —— 順序不重要，所以把**最後一個元素搬來補洞**，再把尾巴 pop 掉，就不用搬動其他人。",
   steps: [
@@ -117,7 +120,12 @@ export default defineProblem<{ ops: Op[] }>({
         }),
         V.array("nums", nums, { marks: o.numMarks ?? {}, pointers: o.numPointers ?? {} }),
         V.map("pos（數值 → 索引）", pos, { marks: o.posMarks ?? {} }),
-        V.array("回傳值", out),
+        // 固定長度、和上面的操作一格對一格，版面才不會跟著長大
+        V.array(
+          "回傳值（對應上面每個操作）",
+          ops.map((_, x) => (x < out.length ? out[x] : "")),
+          { marks: cur >= 0 && cur < out.length ? { [cur]: o.opTone === "bad" ? "bad" : "good" } : {} },
+        ),
       ];
     };
 

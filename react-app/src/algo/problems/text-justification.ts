@@ -45,6 +45,8 @@ export default defineProblem<{ words: string[]; maxWidth: number }>({
   id: 68,
   summary:
     "給一串單字 `words` 和寬度 `maxWidth`，把它們排版成**每一行剛好 `maxWidth` 個字元、左右對齊**的文字。\n\n每一行要**盡量多塞單字**（貪心）。行內的空白要盡量平均分配到單字之間；如果分不均勻，**左邊的間隔**要比右邊多。\n\n兩個例外要**靠左對齊**、右邊補空白：最後一行，以及只放得下一個單字的行。",
+  summaryEn:
+    "Given a list of words `words` and a width `maxWidth`, lay them out as **fully justified text where every line is exactly `maxWidth` characters**.\n\nEach line should **fit as many words as possible** (greedy). Spaces in a line are spread as evenly as possible between the words; if they cannot be split evenly, **the gaps on the left** get more than those on the right.\n\nTwo cases are **left-justified** and padded with spaces on the right instead: the last line, and any line that only fits a single word.",
   examples: [
     {
       input: 'words = ["This","is","an","example","of","text","justification."], maxWidth = 16',
@@ -56,6 +58,7 @@ export default defineProblem<{ words: string[]; maxWidth: number }>({
     },
   ],
   constraints: ["1 ≤ words.length ≤ 300", "1 ≤ words[i].length ≤ maxWidth ≤ 100"],
+  constraintsEn: ["1 ≤ words.length ≤ 300", "1 ≤ words[i].length ≤ maxWidth ≤ 100"],
   idea:
     "分成兩件事：**① 這一行能放哪些單字**、**② 空白怎麼分**。①用貪心：只要「字母數 + 每個間隔至少一格 + 新單字」不超過寬度就繼續塞。②不用算除法和餘數 —— 把要補的空白**一個一個輪流發給各個間隔**（round-robin），從最左邊發起，自然就是「盡量平均、多的給左邊」。",
   steps: [

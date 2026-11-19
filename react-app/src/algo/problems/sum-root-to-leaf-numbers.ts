@@ -19,11 +19,14 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 129,
   summary:
     "一棵二元樹的每個節點都是 `0`～`9` 的一位數。從根節點走到任何一個葉節點，把沿路的數字依序串起來就是一個整數（例如 `1 → 2 → 3` 代表 `123`）。\n\n把**所有**根到葉路徑代表的整數加總後回傳。",
+  summaryEn:
+    "Every node of a binary tree holds a single digit `0`–`9`. Reading the digits along a path from the root to a leaf gives an integer (for example `1 → 2 → 3` is `123`).\n\nReturn the sum of the integers formed by **all** root-to-leaf paths.",
   examples: [
-    { input: "root = [1,2,3]", output: "25", note: "12 + 13 = 25" },
-    { input: "root = [4,9,0,5,1]", output: "1026", note: "495 + 491 + 40 = 1026" },
+    { input: "root = [1,2,3]", output: "25", note: "12 + 13 = 25", noteEn: "12 + 13 = 25" },
+    { input: "root = [4,9,0,5,1]", output: "1026", note: "495 + 491 + 40 = 1026", noteEn: "495 + 491 + 40 = 1026" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 1000", "0 ≤ Node.val ≤ 9", "樹的深度不超過 10"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 1000", "0 ≤ Node.val ≤ 9", "The tree depth is at most 10"],
   idea:
     "往下走的時候把「到目前為止組出來的數字」`cur` 當參數帶著：每到一個節點就 `cur = cur * 10 + node.val`，等於在尾巴接上一位。走到葉節點時 `cur` 就是一個完整的數字；往回走時，每個節點把左右子樹回傳的總和加起來往上交。",
   steps: [

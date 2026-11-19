@@ -21,11 +21,14 @@ export default defineProblem<{ head: number[] }>({
   id: 82,
   summary:
     "給一條**已排序**的鏈結串列，把所有「值出現超過一次」的節點**全部刪掉**（一個都不留），只留下原本就只出現一次的值，回傳結果。\n\n和只留一個代表的版本（LC 83）不同，這題重複的值要整組消失。",
+  summaryEn:
+    "Given a **sorted** linked list, **delete every node** whose value appears more than once (keep none of them), so that only values that were unique to begin with remain. Return the result.\n\nUnlike the version that keeps one copy (LC 83), here a repeated value disappears entirely.",
   examples: [
     { input: "head = [1,2,3,3,4,4,5]", output: "[1,2,5]" },
     { input: "head = [1,1,1,2,3]", output: "[2,3]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 300", "串列已依非遞減順序排好"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 300", "The list is sorted in non-decreasing order"],
   idea:
     "因為已排序，**相同的值一定連在一起**。用 `prev` 記住「最後一個確定保留的節點」，`cur` 往前探路：如果 `cur` 和下一個同值，就讓 `cur` 一路走到這段重複的最後一個，再把 `prev.next` 直接接到這段之後；否則 `cur` 是獨一無二的，`prev` 才前進。",
   steps: [

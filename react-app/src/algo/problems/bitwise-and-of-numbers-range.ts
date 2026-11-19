@@ -18,12 +18,15 @@ export default defineProblem<{ left: number; right: number }>({
   id: 201,
   summary:
     "給兩個整數 `left ≤ right`，把閉區間 `[left, right]` 裡**所有整數全部做位元 AND**，回傳結果。\n\n範圍可能很大（到 2³¹ − 1），不能真的一個一個 AND 過去。",
+  summaryEn:
+    "Given two integers `left ≤ right`, take the **bitwise AND of every integer** in the closed range `[left, right]` and return the result.\n\nThe range can be huge (up to 2³¹ − 1), so you can't actually AND them one by one.",
   examples: [
-    { input: "left = 5, right = 7", output: "4", note: "101 & 110 & 111 = 100" },
+    { input: "left = 5, right = 7", output: "4", note: "101 & 110 & 111 = 100", noteEn: "101 & 110 & 111 = 100" },
     { input: "left = 0, right = 0", output: "0" },
     { input: "left = 1, right = 2147483647", output: "0" },
   ],
   constraints: ["0 ≤ left ≤ right ≤ 2³¹ − 1"],
+  constraintsEn: ["0 ≤ left ≤ right ≤ 2³¹ − 1"],
   idea:
     "答案就是 `left` 和 `right` 的**二進位共同前綴**，後面全部補 0。AND 的結果某一位要是 1，範圍內每個數那一位都得是 1；但只要 `left < right`，數字連續遞增的過程中最低位一定同時出現過 0 和 1，所以那一位必為 0。把兩邊一起右移砍掉這一位，同樣的道理可以重複用，直到兩邊相等 —— 剩下的就是從頭到尾沒變過的前綴。",
   steps: [

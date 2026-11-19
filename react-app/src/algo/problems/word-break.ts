@@ -20,12 +20,15 @@ export default defineProblem<{ s: string; wordDict: string[] }>({
   id: 139,
   summary:
     "給一個字串 `s` 和一份單字表 `wordDict`，判斷 `s` 能不能被**切成一個或多個字典裡的單字**（中間不能有剩下的字元）。\n\n同一個單字可以重複使用。",
+  summaryEn:
+    "Given a string `s` and a word list `wordDict`, decide whether `s` can be **split into one or more dictionary words** with no characters left over.\n\nThe same word may be used more than once.",
   examples: [
     { input: 's = "leetcode", wordDict = ["leet","code"]', output: "true" },
-    { input: 's = "applepenapple", wordDict = ["apple","pen"]', output: "true", note: "apple 用了兩次" },
+    { input: 's = "applepenapple", wordDict = ["apple","pen"]', output: "true", note: "apple 用了兩次", noteEn: "apple is used twice" },
     { input: 's = "catsandog", wordDict = ["cats","dog","sand","and","cat"]', output: "false" },
   ],
   constraints: ["1 ≤ s.length ≤ 300", "1 ≤ wordDict.length ≤ 1000", "wordDict 內的單字不重複"],
+  constraintsEn: ["1 ≤ s.length ≤ 300", "1 ≤ wordDict.length ≤ 1000", "The words in wordDict are unique"],
   idea:
     "定義 `dp[i]` = `s` 的**前 `i` 個字元**能不能被切開。要讓 `dp[i]` 成立，只要找到一個切點 `j`：前半段 `dp[j]` 已經切得開，而且最後一段 `s[j:i]` 剛好是字典裡的單字。",
   steps: [

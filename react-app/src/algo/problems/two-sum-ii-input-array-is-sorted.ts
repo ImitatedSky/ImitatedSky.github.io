@@ -19,12 +19,15 @@ export default defineProblem<{ numbers: number[]; target: number }>({
   id: 167,
   summary:
     "給一個**已經由小到大排好**的整數陣列 `numbers` 和目標值 `target`，找出相加剛好等於 `target` 的兩個數，回傳它們的位置（**從 1 開始算**，小的在前）。\n\n保證恰好有一組答案，同一個元素不能用兩次，而且只能使用常數的額外空間。",
+  summaryEn:
+    "Given an integer array `numbers` that is **already sorted in ascending order** and a target `target`, find the two numbers that add up to exactly `target` and return their positions (**counting from 1**, smaller position first).\n\nThere is exactly one answer, the same element cannot be used twice, and only constant extra space is allowed.",
   examples: [
-    { input: "numbers = [2,7,11,15], target = 9", output: "[1,2]", note: "2 + 7 = 9" },
+    { input: "numbers = [2,7,11,15], target = 9", output: "[1,2]", note: "2 + 7 = 9", noteEn: "2 + 7 = 9" },
     { input: "numbers = [2,3,4], target = 6", output: "[1,3]" },
     { input: "numbers = [-1,0], target = -1", output: "[1,2]" },
   ],
   constraints: ["2 ≤ numbers.length ≤ 3 × 10⁴", "numbers 為非遞減排序", "恰好只有一組答案"],
+  constraintsEn: ["2 ≤ numbers.length ≤ 3 × 10⁴", "numbers is sorted in non-decreasing order", "There is exactly one answer"],
   idea:
     "陣列有序，就可以用**頭尾雙指標**。目前的和太小 → 只有把左指標右移才會變大；太大 → 只有把右指標左移才會變小。每次移動都能確定地**淘汰一個數**，所以掃一遍就找得到。",
   steps: [

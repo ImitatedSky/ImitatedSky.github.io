@@ -16,12 +16,15 @@ export default defineProblem<{ coins: number[]; amount: number }>({
   id: 322,
   summary:
     "給幾種面額的硬幣 `coins`（每種數量不限）和一個總金額 `amount`，問**最少要用幾枚硬幣**才能剛好湊出這個金額。\n\n如果怎麼湊都湊不出來，回傳 `-1`。",
+  summaryEn:
+    "You have coins of the denominations in `coins` (unlimited supply of each) and a total `amount`. What is the **fewest number of coins** that add up to exactly that amount?\n\nIf no combination works, return `-1`.",
   examples: [
-    { input: "coins = [1,2,5], amount = 11", output: "3", note: "5 + 5 + 1" },
+    { input: "coins = [1,2,5], amount = 11", output: "3", note: "5 + 5 + 1", noteEn: "5 + 5 + 1" },
     { input: "coins = [2], amount = 3", output: "-1" },
     { input: "coins = [1], amount = 0", output: "0" },
   ],
   constraints: ["1 ≤ coins.length ≤ 12", "0 ≤ amount ≤ 10⁴"],
+  constraintsEn: ["1 ≤ coins.length ≤ 12", "0 ≤ amount ≤ 10⁴"],
   idea:
     "定義 `dp[a]` = 湊出金額 `a` 的最少硬幣數。想像**最後放上去的那一枚**是面額 `c`，那在它之前一定已經用最少的硬幣湊好了 `a - c`，所以 `dp[a] = min(dp[a - c]) + 1`，把每種面額都試一遍取最小。",
   steps: [

@@ -23,12 +23,15 @@ export default defineProblem<{ l1: number[]; l2: number[] }>({
   id: 2,
   summary:
     "兩條鏈結串列各代表一個非負整數，每個節點存一位數字，而且是**倒著存**的（頭節點是個位數）。把這兩個數相加，用同樣的格式回傳和。\n\n除了數字 0 本身以外，兩個數都不會有多餘的前導零。",
+  summaryEn:
+    "Two linked lists each represent a non-negative integer, one digit per node, stored **in reverse order** (the head is the ones digit). Add the two numbers and return the sum in the same format.\n\nNeither number has leading zeros, except the number 0 itself.",
   examples: [
-    { input: "l1 = [2,4,3], l2 = [5,6,4]", output: "[7,0,8]", note: "342 + 465 = 807" },
+    { input: "l1 = [2,4,3], l2 = [5,6,4]", output: "[7,0,8]", note: "342 + 465 = 807", noteEn: "342 + 465 = 807" },
     { input: "l1 = [0], l2 = [0]", output: "[0]" },
-    { input: "l1 = [9,9,9,9], l2 = [9,9]", output: "[8,9,0,0,1]", note: "9999 + 99 = 10098" },
+    { input: "l1 = [9,9,9,9], l2 = [9,9]", output: "[8,9,0,0,1]", note: "9999 + 99 = 10098", noteEn: "9999 + 99 = 10098" },
   ],
   constraints: ["每條串列有 1 ~ 100 個節點", "0 ≤ Node.val ≤ 9"],
+  constraintsEn: ["Each list has 1 to 100 nodes", "0 ≤ Node.val ≤ 9"],
   idea:
     "數字倒著存反而是好事：直式加法本來就是**從個位數開始、由低位往高位加**，剛好就是從頭節點往後走。每一位算 `l1 的數字 + l2 的數字 + 進位`，個位數寫進新節點，十位數留給下一位當進位。",
   steps: [
@@ -92,7 +95,7 @@ export default defineProblem<{ l1: number[]; l2: number[] }>({
       const hasA = i < a.length;
       const hasB = j < b.length;
       const total = carry + (hasA ? a[i] : 0) + (hasB ? b[j] : 0);
-      const terms = [hasA ? `${a[i]}` : null, hasB ? `${b[j]}` : null, `${carry}（進位）`].filter(Boolean).join(" + ");
+      const terms = [hasA ? `${a[i]}` : null, hasB ? `${b[j]}` : null, `${carry}`].filter(Boolean).join(" + ");
       let how: string;
       if (hasA && hasB) how = `這一位：\`l1\` 的 \`${a[i]}\`、\`l2\` 的 \`${b[j]}\`，再加上前一位的進位 \`${carry}\`。`;
       else if (hasA) how = `\`l2\` 已經走完，當作 0；這一位只有 \`l1\` 的 \`${a[i]}\` 加上進位 \`${carry}\`。`;

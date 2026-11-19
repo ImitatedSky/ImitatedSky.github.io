@@ -18,11 +18,14 @@ export default defineProblem<{ n: number }>({
   id: 202,
   summary:
     "對一個正整數反覆做同一件事：把它**每一位數字的平方加起來**，得到新的數。\n\n如果最後會變成 1，它就是「快樂數」；如果永遠到不了 1（會陷入無窮循環），就不是。判斷 `n` 是不是快樂數。",
+  summaryEn:
+    "Take a positive integer and keep repeating one step: **add up the squares of its digits** to get a new number.\n\nIf this eventually reaches 1, the number is \"happy\"; if it never reaches 1 (it gets stuck in an endless cycle), it is not. Decide whether `n` is a happy number.",
   examples: [
-    { input: "n = 19", output: "true", note: "19 → 82 → 68 → 100 → 1" },
-    { input: "n = 2", output: "false", note: "2 → 4 → 16 → … → 20 → 4，回到 4 開始繞圈" },
+    { input: "n = 19", output: "true", note: "19 → 82 → 68 → 100 → 1", noteEn: "19 -> 82 -> 68 -> 100 -> 1" },
+    { input: "n = 2", output: "false", note: "2 → 4 → 16 → … → 20 → 4，回到 4 開始繞圈", noteEn: "2 -> 4 -> 16 -> ... -> 20 -> 4, back at 4 and looping forever" },
   ],
   constraints: ["1 ≤ n ≤ 2³¹ − 1"],
+  constraintsEn: ["1 ≤ n ≤ 2³¹ − 1"],
   idea:
     "數字不會無限變大（三位數以上做一次就會變小），所以這個過程只有兩種結局：**走到 1**，或是**走回某個出現過的數字**而開始繞圈。用一個 `set` 記住走過的數字，一旦重複就知道進了循環。",
   steps: [
@@ -63,11 +66,20 @@ export default defineProblem<{ n: number }>({
       return V.list(CHAIN, chain(), { pointers: { n: String(n) }, marks: { ...marks, ...extra } });
     };
     const digitsOf = (x: number) => [...String(x)].map(Number);
+    /** 兩排固定都在（版面不跳動）；`computing` 時才上色，其餘時候平方那排淡化 */
+    const digitViews = (x: number, computing = false) => {
+      const digits = digitsOf(x);
+      const tone = (tn: Tone) => Object.fromEntries(digits.map((_, i) => [i, tn]));
+      return [
+        V.array(DIGITS, digits, { marks: computing ? tone("compare") : {} }),
+        V.array(SQUARES, digits.map((d) => d * d), { marks: tone(computing ? "active" : "muted") }),
+      ];
+    };
 
     t.push({
       line: 3,
       note: `從 \`n = ${n}\` 出發。這個過程最後不是走到 1，就是繞回走過的數字，所以用 \`seen\` 把走過的數字都記下來。`,
-      views: [chainView({ [String(n)]: "active" }), V.array(DIGITS, digitsOf(n)), V.set("seen", seen)],
+      views: [chainView({ [String(n)]: "active" }), ...digitViews(n), V.set("seen", seen)],
       vars: { n },
     });
 
@@ -78,7 +90,7 @@ export default defineProblem<{ n: number }>({
         note: `\`${n}\` 不是 1，也還沒出現過，可以繼續。先把 \`${n}\` 記進 \`seen\`，之後再遇到它就知道繞圈了。`,
         views: [
           chainView({ [String(n)]: "active" }),
-          V.array(DIGITS, digitsOf(n)),
+          ...digitViews(n),
           V.set("seen", seen, { marks: { [String(n)]: "active" } }),
         ],
         vars: { n },
@@ -99,8 +111,7 @@ export default defineProblem<{ n: number }>({
           (backTo !== null ? `咦，箭頭指回了前面走過的 \`${next}\`。` : ""),
         views: [
           chainView({ [String(n)]: backTo !== null ? "bad" : "active" }),
-          V.array(DIGITS, digits, { marks: Object.fromEntries(digits.map((_, i) => [i, "compare" as Tone])) }),
-          V.array(SQUARES, squares, { marks: Object.fromEntries(squares.map((_, i) => [i, "active" as Tone])) }),
+          ...digitViews(prev, true),
           V.set("seen", seen),
         ],
         vars: { n, 平方和: next },
@@ -115,7 +126,7 @@ export default defineProblem<{ n: number }>({
           n0 === 1
             ? "`n` 一開始就是 1，`while` 的條件 `n != 1` 不成立，迴圈一次都不用跑。"
             : "`n` 變成 1 了，`while` 的條件 `n != 1` 不成立，離開迴圈。（1 的平方還是 1，再算下去也不會變。）",
-        views: [chainView({ "1": "good" }), V.array(DIGITS, digitsOf(n)), V.set("seen", seen)],
+        views: [chainView({ "1": "good" }), ...digitViews(n), V.set("seen", seen)],
         vars: { n },
       });
     } else {
@@ -124,7 +135,7 @@ export default defineProblem<{ n: number }>({
         note: `\`${n}\` 已經在 \`seen\` 裡 —— 我們繞回走過的地方了。同一個數字接下來一定走出同一條路，所以會永遠在這個圈裡打轉，到不了 1。`,
         views: [
           chainView({ [String(n)]: "bad" }),
-          V.array(DIGITS, digitsOf(n)),
+          ...digitViews(n),
           V.set("seen", seen, { marks: { [String(n)]: "bad" } }),
         ],
         vars: { n },
@@ -142,7 +153,7 @@ export default defineProblem<{ n: number }>({
       note: happy
         ? `回傳 \`n == 1\`，也就是 \`True\`：${n0} 是快樂數。`
         : `離開迴圈時 \`n = ${n}\` 不是 1，回傳 \`False\`：${n0} 不是快樂數。`,
-      views: [chainView(finalMarks), V.array(DIGITS, digitsOf(n)), V.set("seen", seen)],
+      views: [chainView(finalMarks), ...digitViews(n), V.set("seen", seen)],
       vars: { n },
       result: py(happy),
     });

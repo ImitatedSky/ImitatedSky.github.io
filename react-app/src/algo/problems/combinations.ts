@@ -62,11 +62,14 @@ export default defineProblem<{ n: number; k: number }>({
   id: 77,
   summary:
     "給兩個整數 `n` 和 `k`，從 `1` 到 `n` 這些數字裡**挑出 k 個**，列出所有可能的組合。\n\n組合不看順序：`[1,2]` 和 `[2,1]` 算同一組，只能出現一次。答案之間的順序不限。",
+  summaryEn:
+    "Given two integers `n` and `k`, list every way to **pick k numbers** out of `1` through `n`.\n\nOrder inside a combination doesn't matter: `[1,2]` and `[2,1]` are the same pick and must appear only once. The combinations themselves can come in any order.",
   examples: [
     { input: "n = 4, k = 2", output: "[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]" },
     { input: "n = 1, k = 1", output: "[[1]]" },
   ],
   constraints: ["1 ≤ n ≤ 20", "1 ≤ k ≤ n"],
+  constraintsEn: ["1 ≤ n ≤ 20", "1 ≤ k ≤ n"],
   idea:
     "為了不產生 `[1,2]`、`[2,1]` 這種重複，規定**每次只能挑比上一個更大的數**：`backtrack(start)` 只從 `start` 往後選。再加一個剪枝 —— 還缺 `need` 個數時，`x` 最大只能到 `n - need + 1`，再大的話後面的數根本不夠湊滿 `k` 個。",
   steps: [
@@ -92,10 +95,9 @@ export default defineProblem<{ n: number; k: number }>({
       expected: "[[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]",
     },
     {
-      label: "n = 5, k = 3",
-      input: { n: 5, k: 3 },
-      expected:
-        "[[1, 2, 3], [1, 2, 4], [1, 2, 5], [1, 3, 4], [1, 3, 5], [1, 4, 5], [2, 3, 4], [2, 3, 5], [2, 4, 5], [3, 4, 5]]",
+      label: "n = 4, k = 3",
+      input: { n: 4, k: 3 },
+      expected: "[[1, 2, 3], [1, 2, 4], [1, 3, 4], [2, 3, 4]]",
     },
     { label: "n = 4, k = 4", input: { n: 4, k: 4 }, expected: "[[1, 2, 3, 4]]" },
   ],
@@ -116,10 +118,10 @@ export default defineProblem<{ n: number; k: number }>({
       });
       if (x !== undefined) marks[x - 1] = "active";
       return [
-        V.array("候選數字 1…n", all, { marks }),
-        V.array("path", path, { marks: path.length ? { [path.length - 1]: "active" } : {} }),
+        // no separate path array: green cells here + the highlighted tree node show it
+        V.array("候選數字 1…n（綠色 = 已在 path 裡）", all, { marks }),
         tree.view("決策樹（節點 = 目前的 path，邊 = 選的數）"),
-        V.set("res", res.map((p) => py(p)), { marks: newest ? { [py(newest)]: "good" } : {} }),
+        V.array("res", res.map((p) => py(p)), { marks: newest ? { [res.length - 1]: "good" } : {} }),
       ];
     };
 
@@ -178,7 +180,7 @@ export default defineProblem<{ n: number; k: number }>({
     t.push({
       line: 18,
       note: `全部走完，共 ${res.length} 組 —— 正好是 C(${n}, ${k})。每片綠色葉子就是一組答案，而且因為有剪枝，樹上沒有任何一條白走的路。`,
-      views: views(1, n - k + 1),
+      views: views(1, n),
       vars: { n, k, 已收集: res.length },
       result: py(res),
     });

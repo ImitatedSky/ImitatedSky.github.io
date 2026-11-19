@@ -16,12 +16,15 @@ export default defineProblem<{ head: number[]; pos: number }>({
   id: 141,
   summary:
     "給一條單向鏈結串列的頭節點，判斷它裡面**有沒有環**：也就是從某個節點出發，一直沿著 `next` 走，會不會又繞回走過的節點。\n\n輸入裡的 `pos` 只是用來描述測資（尾巴接回第 `pos` 個節點，`-1` 代表沒有環），函式本身拿不到它。",
+  summaryEn:
+    "Given the head of a singly linked list, decide whether it **contains a cycle**: if you keep following `next` from some node, do you ever come back to a node you already visited?\n\nThe `pos` in the input only describes the test case (the tail links back to node `pos`, and `-1` means no cycle); your function never sees it.",
   examples: [
-    { input: "head = [3,2,0,-4], pos = 1", output: "true", note: "尾巴 -4 的 next 接回索引 1 的節點 2" },
+    { input: "head = [3,2,0,-4], pos = 1", output: "true", note: "尾巴 -4 的 next 接回索引 1 的節點 2", noteEn: "the tail -4 links back to node 2 at index 1" },
     { input: "head = [1,2], pos = 0", output: "true" },
     { input: "head = [1], pos = -1", output: "false" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 10⁴", "pos 為 -1 或串列中的有效索引", "進階：只用 O(1) 額外空間"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 10⁴", "pos is -1 or a valid index in the list", "Follow-up: use only O(1) extra space"],
   idea:
     "**Floyd 龜兔賽跑**：`slow` 一次走一步、`fast` 一次走兩步。沒有環的話，`fast` 會先走到盡頭；有環的話，兩者遲早都會進到環裡，之後 `fast` 每一輪都比 `slow` 多追近一步，距離一定會縮到 0 —— 也就是相遇。",
   steps: [

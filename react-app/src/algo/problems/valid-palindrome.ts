@@ -24,12 +24,15 @@ export default defineProblem<{ s: string }>({
   id: 125,
   summary:
     "給一個字串 `s`，只看其中的**英文字母和數字**，而且不分大小寫。判斷這樣過濾之後，它從左讀和從右讀是不是一模一樣（回文）。\n\n空白、逗號、冒號等其他符號全部當作不存在。",
+  summaryEn:
+    "Given a string `s`, look only at its **letters and digits**, ignoring case. Decide whether the filtered string reads exactly the same forwards and backwards (a palindrome).\n\nSpaces, commas, colons and every other symbol are treated as if they were not there.",
   examples: [
-    { input: 's = "A man, a plan, a canal: Panama"', output: "true", note: "過濾後是 amanaplanacanalpanama" },
-    { input: 's = "race a car"', output: "false", note: "過濾後是 raceacar" },
-    { input: 's = " "', output: "true", note: "過濾後是空字串" },
+    { input: 's = "A man, a plan, a canal: Panama"', output: "true", note: "過濾後是 amanaplanacanalpanama", noteEn: "After filtering: amanaplanacanalpanama" },
+    { input: 's = "race a car"', output: "false", note: "過濾後是 raceacar", noteEn: "After filtering: raceacar" },
+    { input: 's = " "', output: "true", note: "過濾後是空字串", noteEn: "After filtering: an empty string" },
   ],
   constraints: ["1 ≤ s.length ≤ 2 × 10⁵", "s 只包含可列印的 ASCII 字元"],
+  constraintsEn: ["1 ≤ s.length ≤ 2 × 10⁵", "s contains only printable ASCII characters"],
   idea:
     "回文的定義就是「第 k 個字元 = 倒數第 k 個字元」。所以放兩個指標在頭尾**往中間夾**，每次比一對；遇到不是字母或數字的字元就直接跳過，不必先另外建一個過濾後的字串。",
   steps: [

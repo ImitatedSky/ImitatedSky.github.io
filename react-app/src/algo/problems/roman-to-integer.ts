@@ -19,12 +19,15 @@ export default defineProblem<{ s: string }>({
   id: 13,
   summary:
     "把一個羅馬數字字串轉成整數。七個符號的值是 `I=1`、`V=5`、`X=10`、`L=50`、`C=100`、`D=500`、`M=1000`。\n\n通常符號由大到小排列、直接相加；但有六種「減法」寫法：`IV=4`、`IX=9`、`XL=40`、`XC=90`、`CD=400`、`CM=900` —— 小的符號放在大的符號**左邊**，代表要減掉它。",
+  summaryEn:
+    "Convert a Roman numeral string to an integer. The seven symbols are worth `I=1`, `V=5`, `X=10`, `L=50`, `C=100`, `D=500`, `M=1000`.\n\nNormally symbols go from largest to smallest and are simply added up. There are six \"subtractive\" forms, though: `IV=4`, `IX=9`, `XL=40`, `XC=90`, `CD=400`, `CM=900` - a smaller symbol placed to the **left** of a larger one means it is subtracted.",
   examples: [
     { input: 's = "III"', output: "3" },
-    { input: 's = "LVIII"', output: "58", note: "L = 50, V = 5, III = 3" },
-    { input: 's = "MCMXCIV"', output: "1994", note: "M = 1000, CM = 900, XC = 90, IV = 4" },
+    { input: 's = "LVIII"', output: "58", note: "L = 50, V = 5, III = 3", noteEn: "L = 50, V = 5, III = 3" },
+    { input: 's = "MCMXCIV"', output: "1994", note: "M = 1000, CM = 900, XC = 90, IV = 4", noteEn: "M = 1000, CM = 900, XC = 90, IV = 4" },
   ],
   constraints: ["1 ≤ s.length ≤ 15", "s 是 1 ~ 3999 之間的合法羅馬數字"],
+  constraintsEn: ["1 ≤ s.length ≤ 15", "s is a valid Roman numeral between 1 and 3999"],
   idea:
     "不需要特別記那六種減法組合，只要一條規則：**如果一個符號比它右邊的符號小，就減掉它；否則加上它**。所以每個字元只要往右偷看一格就能決定正負號。",
   steps: [

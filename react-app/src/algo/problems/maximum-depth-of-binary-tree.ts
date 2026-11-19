@@ -22,12 +22,15 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 104,
   summary:
     "給一棵二元樹的根節點，回傳它的**最大深度**：從根節點一路往下走到最遠的葉節點，這條路徑上總共有幾個節點。\n\n空樹的深度是 0，只有一個節點的樹深度是 1。",
+  summaryEn:
+    "Given the root of a binary tree, return its **maximum depth**: the number of nodes on the longest path from the root down to the farthest leaf.\n\nAn empty tree has depth 0; a tree with a single node has depth 1.",
   examples: [
-    { input: "root = [3,9,20,null,null,15,7]", output: "3", note: "最長的路徑是 3 → 20 → 15（或 7），共 3 個節點" },
+    { input: "root = [3,9,20,null,null,15,7]", output: "3", note: "最長的路徑是 3 → 20 → 15（或 7），共 3 個節點", noteEn: "the longest path is 3 → 20 → 15 (or 7), 3 nodes in total" },
     { input: "root = [1,null,2]", output: "2" },
     { input: "root = []", output: "0" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 10⁴", "-100 ≤ Node.val ≤ 100"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 10⁴", "-100 ≤ Node.val ≤ 100"],
   idea:
     "把問題丟給小孩：一棵樹的深度 = **1（自己這一層）+ 左右子樹中比較深的那一個**。空節點的深度是 0，這就是遞迴的終點。每個節點只要相信左右子樹會回報正確的深度，自己加 1 往上回報就好。",
   steps: [

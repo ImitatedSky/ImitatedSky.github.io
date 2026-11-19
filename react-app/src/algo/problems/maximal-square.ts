@@ -20,6 +20,8 @@ export default defineProblem<{ matrix: string[][] }>({
   id: 221,
   summary:
     "給一個只包含 `\"0\"` 和 `\"1\"` 的 `m × n` 矩陣，找出**全部由 1 組成的最大正方形**，回傳它的**面積**。",
+  summaryEn:
+    "Given an `m × n` matrix containing only `\"0\"` and `\"1\"`, find the **largest square made entirely of 1s** and return its **area**.",
   examples: [
     {
       input: 'matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]',
@@ -29,6 +31,7 @@ export default defineProblem<{ matrix: string[][] }>({
     { input: 'matrix = [["0"]]', output: "0" },
   ],
   constraints: ["1 ≤ m, n ≤ 300", "matrix[i][j] 只會是 \"0\" 或 \"1\""],
+  constraintsEn: ["1 ≤ m, n ≤ 300", "matrix[i][j] is either \"0\" or \"1\""],
   idea:
     "定義 `dp[i][j]` = 以這一格為**右下角**的最大正方形邊長。一個邊長 `k` 的正方形要成立，它的**上方、左方、左上**三格都必須至少撐得起邊長 `k - 1` 的正方形，三個之中最短的那個就是瓶頸，所以 `dp[i][j] = 1 + min(上, 左, 左上)`；這格是 0 的話就是 0。",
   steps: [
@@ -49,6 +52,17 @@ export default defineProblem<{ matrix: string[][] }>({
         `,
   presets: [
     {
+      label: "3×4，邊長長到 3",
+      input: {
+        matrix: [
+          ["0", "1", "1", "1"],
+          ["1", "1", "1", "1"],
+          ["0", "1", "1", "1"],
+        ],
+      },
+      expected: "9",
+    },
+    {
       label: "4×5（範例）",
       input: {
         matrix: [
@@ -59,17 +73,6 @@ export default defineProblem<{ matrix: string[][] }>({
         ],
       },
       expected: "4",
-    },
-    {
-      label: "3×4，邊長長到 3",
-      input: {
-        matrix: [
-          ["0", "1", "1", "1"],
-          ["1", "1", "1", "1"],
-          ["0", "1", "1", "1"],
-        ],
-      },
-      expected: "9",
     },
     { label: '[["0","1"],["1","0"]]', input: { matrix: [["0", "1"], ["1", "0"]] }, expected: "1" },
   ],
@@ -152,14 +155,14 @@ export default defineProblem<{ matrix: string[][] }>({
         }
         const why =
           v === 1
-            ? "三個鄰居裡有 0，往外擴不出去，只能是自己這一格。"
-            : `三個方向都至少撐得起邊長 ${v - 1} 的正方形，加上自己這格剛好拼成邊長 ${v}。`;
+            ? "鄰居裡有 0，擴不出去，只能是自己這一格。"
+            : `三邊都撐得起邊長 ${v - 1}，加上這格拼成邊長 ${v}。`;
         t.push({
           line: [10, 11, 12],
           note:
-            `\`matrix[${i - 1}][${j - 1}]\` 是 1。看上（\`${up}\`）、左（\`${left}\`）、左上（\`${diag}\`）三格，最小的那個是瓶頸：` +
+            `\`matrix[${i - 1}][${j - 1}]\` 是 1，上、左、左上三格最小的是瓶頸：` +
             `\`dp[${i}][${j}] = 1 + min(${up}, ${left}, ${diag}) = ${v}\`。${why}` +
-            (grew ? `刷新紀錄，\`side = ${v}\`。` : `沒有超過目前的 \`side = ${side}\`。`),
+            (grew ? `刷新 \`side = ${v}\`。` : ""),
           views: views(
             { ...square(i, j, v, grew ? "good" : "compare"), [mKey]: "active" },
             { [`${i - 1},${j}`]: "compare", [`${i},${j - 1}`]: "compare", [`${i - 1},${j - 1}`]: "compare", [key]: "active" },

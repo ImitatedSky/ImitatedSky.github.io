@@ -65,12 +65,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 46,
   summary:
     "給一個**元素互不相同**的整數陣列 `nums`，列出它所有可能的**排列**（每個元素恰好用一次，順序不同就算不同的排列）。\n\n答案之間的順序不限。",
+  summaryEn:
+    "Given an integer array `nums` whose **elements are all distinct**, list every possible **permutation** of it (each element used exactly once; a different order counts as a different permutation).\n\nThe permutations can be returned in any order.",
   examples: [
     { input: "nums = [1,2,3]", output: "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]" },
     { input: "nums = [0,1]", output: "[[0,1],[1,0]]" },
     { input: "nums = [1]", output: "[[1]]" },
   ],
   constraints: ["1 ≤ nums.length ≤ 6", "nums 裡的整數互不相同"],
+  constraintsEn: ["1 ≤ nums.length ≤ 6", "All integers in nums are distinct"],
   idea:
     "排列是一格一格填位置：第 1 格有 n 種選擇，第 2 格剩 n − 1 種…。跟「組合」不同，**順序有差**，所以每一層都要從頭掃過整個 `nums`，只是要跳過已經放進 `path` 的數 —— 用 `used[i]` 記錄誰被用掉了。",
   steps: [
@@ -115,9 +118,9 @@ export default defineProblem<{ nums: number[] }>({
       if (i !== undefined) marks[i] = "active";
       return [
         V.array("nums（灰色 = 已經用掉）", nums, { marks, pointers: i !== undefined ? { i } : {} }),
-        V.array("path", path, { marks: path.length ? { [path.length - 1]: "active" } : {} }),
+        // no separate path array: the highlighted tree node *is* the current path
         tree.view("決策樹（節點 = 目前的 path，邊 = 選的數）"),
-        V.set("res", res.map((p) => py(p)), { marks: newest ? { [py(newest)]: "good" } : {} }),
+        V.array("res", res.map((p) => py(p)), { marks: newest ? { [res.length - 1]: "good" } : {} }),
       ];
     };
 

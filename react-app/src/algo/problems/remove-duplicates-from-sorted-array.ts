@@ -15,11 +15,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 26,
   summary:
     "給一個**由小到大排序**的整數陣列 `nums`，請原地刪掉重複的數，讓每個數值只出現一次，並保持原本的相對順序。\n\n回傳不重複的數值個數 `k`；`nums` 的前 `k` 格必須依序放著這些數，之後的內容不重要。",
+  summaryEn:
+    "Given an integer array `nums` **sorted in ascending order**, delete the duplicates in-place so each value appears only once, keeping the original relative order.\n\nReturn the number of distinct values `k`; the first `k` slots of `nums` must hold those values in order. The rest of the array does not matter.",
   examples: [
     { input: "nums = [1,1,2]", output: "2, nums = [1,2,_]" },
     { input: "nums = [0,0,1,1,1,2,2,3,3,4]", output: "5, nums = [0,1,2,3,4,_,_,_,_,_]" },
   ],
   constraints: ["1 ≤ nums.length ≤ 3 × 10⁴", "nums 已經由小到大排序"],
+  constraintsEn: ["1 ≤ nums.length ≤ 3 × 10⁴", "nums is sorted in ascending order"],
   idea:
     "因為陣列排序過，**相同的數一定黏在一起**。所以判斷「是不是新的數」不需要雜湊表，只要跟保留區的最後一個 `nums[k - 1]` 比：不一樣就是第一次出現，抄到 `nums[k]`；一樣就是重複，跳過。",
   steps: [

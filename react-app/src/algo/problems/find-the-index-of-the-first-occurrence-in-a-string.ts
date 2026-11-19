@@ -17,11 +17,14 @@ export default defineProblem<{ haystack: string; needle: string }>({
   id: 28,
   summary:
     "給兩個字串 `haystack` 和 `needle`，找出 `needle` 在 `haystack` 裡**第一次出現的起始索引**。如果 `needle` 不是 `haystack` 的一部分，回傳 `-1`。",
+  summaryEn:
+    "Given two strings `haystack` and `needle`, find **the starting index of the first place `needle` appears** in `haystack`. If `needle` is not part of `haystack`, return `-1`.",
   examples: [
-    { input: 'haystack = "sadbutsad", needle = "sad"', output: "0", note: "索引 0 和 6 都有，回傳最前面的" },
+    { input: 'haystack = "sadbutsad", needle = "sad"', output: "0", note: "索引 0 和 6 都有，回傳最前面的", noteEn: "It appears at index 0 and 6; return the earliest one" },
     { input: 'haystack = "leetcode", needle = "leeto"', output: "-1" },
   ],
   constraints: ["1 ≤ haystack.length, needle.length ≤ 10⁴", "只包含小寫英文字母"],
+  constraintsEn: ["1 ≤ haystack.length, needle.length ≤ 10⁴", "Only lowercase English letters"],
   idea:
     "把 `needle` 想成一把尺，貼在 `haystack` 上**從左往右一格一格滑**。每滑到一個位置 `i`，就從頭逐字比對；全部對上就是答案，只要有一個字元不合就放棄這個位置、往右滑一格重來。",
   steps: [
@@ -91,13 +94,13 @@ export default defineProblem<{ haystack: string; needle: string }>({
       t.push({
         line: 3,
         note: `\`n = ${n}\`、\`m = ${m}\`：\`needle\` 比 \`haystack\` 還長。`,
-        views: [V.chars("haystack", haystack), needleView(0, 0)],
+        views: [V.chars("haystack", haystack, { ranges: [] }), needleView(0, 0)],
         vars: { n, m },
       });
       t.push({
         line: [4, 10],
         note: `\`range(n - m + 1) = range(${n - m + 1})\` 是空的，一個起點都不用試，直接回傳 \`-1\`。`,
-        views: [V.chars("haystack", haystack), needleView(0, 0)],
+        views: [V.chars("haystack", haystack, { ranges: [] }), needleView(0, 0)],
         vars: { n, m },
         result: py(-1),
       });
@@ -107,7 +110,7 @@ export default defineProblem<{ haystack: string; needle: string }>({
     t.push({
       line: 3,
       note: `\`n = ${n}\`、\`m = ${m}\`。把 \`needle\` 貼在 \`haystack\` 下面，起點 \`i\` 只需要試 0 ~ ${n - m}（\`n − m\`），再往右就超出去了。`,
-      views: [V.chars("haystack", haystack), needleView(0, 0)],
+      views: [V.chars("haystack", haystack, { ranges: [] }), needleView(0, 0)],
       vars: { n, m },
     });
 
@@ -158,7 +161,7 @@ export default defineProblem<{ haystack: string; needle: string }>({
     t.push({
       line: 10,
       note: `0 ~ ${n - m} 每個起點都試過了，沒有一個能完整對上，\`needle\` 不在 \`haystack\` 裡，回傳 \`-1\`。`,
-      views: [V.chars("haystack", haystack), needleView(n - m, 0)],
+      views: [V.chars("haystack", haystack, { ranges: [] }), needleView(n - m, 0)],
       vars: { n, m },
       result: py(-1),
     });

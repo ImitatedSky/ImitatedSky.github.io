@@ -27,12 +27,15 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 103,
   summary:
     "給一棵二元樹的根節點，回傳它的**鋸齒狀層序走訪**：第一層由左到右，第二層由右到左，第三層再由左到右…… 方向一層一層交替。每一層的值各自放在一個陣列裡。",
+  summaryEn:
+    "Given the root of a binary tree, return its **zigzag level order traversal**: the first level left to right, the second right to left, the third left to right again, and so on, alternating each level. Each level's values go in their own array.",
   examples: [
     { input: "root = [3,9,20,null,null,15,7]", output: "[[3],[20,9],[15,7]]" },
     { input: "root = [1]", output: "[[1]]" },
     { input: "root = []", output: "[]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 2000"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 2000"],
   idea:
     "走訪本身完全照一般的 BFS 層序（永遠由左到右、先左後右進佇列），**只在收集完一層之後決定要不要反轉**。`len(res)` 剛好是目前的層數，奇數層就把 `level` 反過來。",
   steps: [

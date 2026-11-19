@@ -32,12 +32,15 @@ export default defineProblem<{ s: string }>({
   id: 224,
   summary:
     "給一個代表算式的字串 `s`，裡面只有數字、`+`、`-`、左右括號和空白，算出它的值。\n\n`-` 也可能當成負號使用（例如 `-1` 或 `-(2 + 3)`）。不可以使用 `eval` 這類直接把字串當程式執行的內建函式。",
+  summaryEn:
+    "You get a string `s` holding an expression with only digits, `+`, `-`, parentheses and spaces. Compute its value.\n\n`-` can also act as a unary minus (as in `-1` or `-(2 + 3)`). You may not use `eval` or any built-in that runs the string as code.",
   examples: [
     { input: 's = "1 + 1"', output: "2" },
     { input: 's = " 2-1 + 2 "', output: "3" },
     { input: 's = "(1+(4+5+2)-3)+(6+8)"', output: "23" },
   ],
   constraints: ["1 ≤ s.length ≤ 3 × 10⁵", "s 是合法的算式", "不會有連續兩個運算子；`+` 不會當成正號使用"],
+  constraintsEn: ["1 ≤ s.length ≤ 3 × 10⁵", "s is a valid expression", "No two operators appear in a row; `+` is never used as a unary plus"],
   idea:
     "只有加減法，所以可以一路累加：用 `res` 記目前這一層的總和、`sign` 記下一個數字前面的正負號、`num` 累積正在讀的數字。遇到 `(` 就像**暫停外層、開一個全新的算式**：把外層的 `res` 和括號前的 `sign` 存進堆疊；遇到 `)` 再把括號內的結果乘上那個正負號、加回外層的進度。",
   steps: [

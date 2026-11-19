@@ -14,12 +14,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 53,
   summary:
     "給一個整數陣列 `nums`（有正有負），找出**總和最大的連續子陣列**，回傳這個最大總和。子陣列至少要包含一個元素。",
+  summaryEn:
+    "Given an integer array `nums` (with both positive and negative values), find the **contiguous subarray with the largest sum** and return that sum. The subarray must contain at least one element.",
   examples: [
-    { input: "nums = [-2,1,-3,4,-1,2,1,-5,4]", output: "6", note: "子陣列 [4,-1,2,1] 的總和最大" },
+    { input: "nums = [-2,1,-3,4,-1,2,1,-5,4]", output: "6", note: "子陣列 [4,-1,2,1] 的總和最大", noteEn: "The subarray [4,-1,2,1] has the largest sum" },
     { input: "nums = [5,4,-1,7,8]", output: "23" },
     { input: "nums = [-3,-1,-4]", output: "-1" },
   ],
   constraints: ["1 ≤ nums.length ≤ 10⁵", "−10⁴ ≤ nums[i] ≤ 10⁴"],
+  constraintsEn: ["1 ≤ nums.length ≤ 10⁵", "−10⁴ ≤ nums[i] ≤ 10⁴"],
   idea:
     "Kadane 演算法：讓 `cur` 代表**以目前這格結尾**的最大子陣列和。走到 `x` 時只有兩種選擇 —— 接在前一段後面（`cur + x`），或丟掉前面、從 `x` 重新開始。前面累積的和如果是負的，帶著它只會扣分，所以直接丟掉。過程中出現過的最大 `cur` 就是答案。",
   steps: [

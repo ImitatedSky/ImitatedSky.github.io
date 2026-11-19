@@ -42,19 +42,22 @@ export default defineProblem<Input>({
   id: 127,
   summary:
     "給起點單字 `beginWord`、終點單字 `endWord` 和一份字典 `wordList`，所有單字長度相同。每一步只能**改一個字母**，而且改完的單字必須在字典裡。\n\n求從起點變到終點的**最短轉換序列有幾個單字**（起點和終點都要算進去）；變不過去就回傳 `0`。起點不需要在字典裡。",
+  summaryEn:
+    "You get a start word `beginWord`, an end word `endWord` and a dictionary `wordList`, all words of the same length. Each step may **change one letter**, and the new word must be in the dictionary.\n\nReturn **the number of words in the shortest transformation sequence** from start to end (counting both the start and end words), or `0` if no sequence exists. The start word does not need to be in the dictionary.",
   examples: [
     {
       input: 'beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]',
       output: "5",
-      note: "hit → hot → dot → dog → cog，共 5 個單字",
+      note: "hit → hot → dot → dog → cog，共 5 個單字", noteEn: "hit → hot → dot → dog → cog, 5 words in total",
     },
     {
       input: 'beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]',
       output: "0",
-      note: "cog 不在字典裡",
+      note: "cog 不在字典裡", noteEn: "cog is not in the dictionary",
     },
   ],
   constraints: ["1 ≤ beginWord.length ≤ 10", "1 ≤ wordList.length ≤ 5000", "全部是小寫英文字母，字典裡的單字不重複", "beginWord ≠ endWord"],
+  constraintsEn: ["1 ≤ beginWord.length ≤ 10", "1 ≤ wordList.length ≤ 5000", "All lowercase English letters; dictionary words are distinct", "beginWord ≠ endWord"],
   idea:
     "把每個單字當成節點，**只差一個字母**的兩個單字連一條邊，要找的就是起點到終點的最短路徑 → BFS。找鄰居時不要拿字典裡的單字兩兩比較，而是**把目前單字的每個位置換成 26 個字母**，再查結果在不在字典裡：每個單字只要 `L × 26` 次查詢，字典再大也不怕。",
   steps: [
@@ -145,7 +148,6 @@ export default defineProblem<Input>({
       o: {
         word?: string;
         i?: number;
-        nxt?: string;
         marks?: Record<string, Tone>;
         edgeMarks?: Record<string, Tone>;
       } = {},
@@ -162,12 +164,11 @@ export default defineProblem<Input>({
       if (words.has(endWord) || endWord === beginWord) pointers.end = endWord;
       return [
         V.graph("單字圖（有連線 = 只差一個字母；一欄 = BFS 的一層）", { nodes, edges }, { marks, edgeMarks: em, pointers }),
-        V.queue("q（單字, 序列長度）", q.map(([w, s]) => `(${w}, ${s})`)),
-        V.chars("word", o.word ?? beginWord, {
+        V.chars("word（i = 正在改的位置）", o.word ?? beginWord, {
           marks: o.i !== undefined ? { [o.i]: "compare" } : {},
           pointers: o.i !== undefined ? { i: o.i } : {},
         }),
-        ...(o.nxt && o.i !== undefined ? [V.chars("nxt", o.nxt, { marks: { [o.i]: "active" } })] : []),
+        V.queue("q（單字, 序列長度）", q.map(([w, s]) => `(${w}, ${s})`)),
       ];
     };
 
@@ -241,7 +242,6 @@ export default defineProblem<Input>({
             views: views({
               word,
               i,
-              nxt,
               marks: { [nxt]: toneOf(steps + 1) },
               edgeMarks: { [`${word}>${nxt}`]: "active" },
             }),

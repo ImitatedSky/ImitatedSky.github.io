@@ -18,11 +18,14 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 101,
   summary:
     "給一棵二元樹的根節點，判斷這棵樹是不是**左右對稱**：沿著根節點畫一條垂直的中線，左半邊和右半邊要像照鏡子一樣互相對映。",
+  summaryEn:
+    "Given the root of a binary tree, decide whether it is **symmetric**: draw a vertical line through the root, and the left half must be the mirror image of the right half.",
   examples: [
     { input: "root = [1,2,2,3,4,4,3]", output: "true" },
-    { input: "root = [1,2,2,null,3,null,3]", output: "false", note: "兩個 3 都掛在右邊，沒有互為鏡像" },
+    { input: "root = [1,2,2,null,3,null,3]", output: "false", note: "兩個 3 都掛在右邊，沒有互為鏡像", noteEn: "both 3s hang on the right, so they do not mirror each other" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 1000", "-100 ≤ Node.val ≤ 100"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 1000", "-100 ≤ Node.val ≤ 100"],
   idea:
     "對稱不是「左子樹等於右子樹」，而是「左子樹是右子樹的**鏡像**」。同時拿兩個節點 `a`、`b` 比：值要相等，而且 `a` 的**外側**要對 `b` 的外側（`a.left` ↔ `b.right`）、`a` 的**內側**要對 `b` 的內側（`a.right` ↔ `b.left`）。",
   steps: [

@@ -25,15 +25,19 @@ export default defineProblem<{ intervals: number[][]; newInterval: number[] }>({
   id: 57,
   summary:
     "給一組**已依起點排序、彼此不重疊**的區間，以及一個新區間 `newInterval`。把新區間插進去，讓結果仍然依起點排序而且互不重疊 —— 必要時要把重疊的區間合併起來。",
+  summaryEn:
+    "Given a list of intervals that is **sorted by start and non-overlapping**, plus a new interval `newInterval`, insert the new interval so the result is still sorted by start and non-overlapping - merging any intervals that overlap along the way.",
   examples: [
     { input: "intervals = [[1,3],[6,9]], newInterval = [2,5]", output: "[[1,5],[6,9]]" },
     {
       input: "intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]",
       output: "[[1,2],[3,10],[12,16]]",
       note: "新區間和 [3,5]、[6,7]、[8,10] 都重疊",
+      noteEn: "The new interval overlaps [3,5], [6,7] and [8,10]",
     },
   ],
   constraints: ["0 ≤ intervals.length ≤ 10⁴", "intervals 已依起點遞增排序"],
+  constraintsEn: ["0 ≤ intervals.length ≤ 10⁴", "intervals is sorted by start in ascending order"],
   idea:
     "原本的區間已經排好而且不重疊，所以相對於新區間只會分成**三段**：完全在左邊的、有重疊的、完全在右邊的。左右兩段原封不動照抄，中間那段全部吸進新區間（起點取 `min`、終點取 `max`）再放進答案。一趟掃完，不用重新排序。",
   steps: [

@@ -43,11 +43,14 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
   id: 105,
   summary:
     "給同一棵二元樹的**前序走訪** `preorder` 和**中序走訪** `inorder`（節點值都不重複），把這棵樹還原出來，回傳根節點。",
+  summaryEn:
+    "You get the **preorder traversal** `preorder` and the **inorder traversal** `inorder` of the same binary tree (no duplicate values). Rebuild the tree and return its root.",
   examples: [
     { input: "preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]", output: "[3,9,20,null,null,15,7]" },
     { input: "preorder = [-1], inorder = [-1]", output: "[-1]" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 3000", "所有節點值互不相同", "兩個陣列保證是同一棵樹的前序與中序"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 3000", "All node values are distinct", "Both arrays are guaranteed to be the preorder and inorder of the same tree"],
   idea:
     "前序是「**根** → 左 → 右」，所以前序的第一個值一定是根。中序是「左 → **根** → 右」，在中序裡找到根的位置，它左邊那一段就是整棵左子樹、右邊那一段就是整棵右子樹。左右兩段各自又是同樣的問題，遞迴下去即可。用雜湊表記住每個值在中序的位置，找根只要 O(1)。",
   steps: [
@@ -131,7 +134,6 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
       active?: N;
       treeMarks?: Record<string, Tone>;
       preTone?: Tone;
-      idxKey?: number;
       pending?: string;
     }) => {
       const { lo, hi, mid } = o;
@@ -157,10 +159,7 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
       if (o.pending) items[items.length - 1] += o.pending;
       return [
         V.array("preorder", preorder, { marks: preMarks, pointers: inside({ pre }) }),
-        V.array("inorder", inorder, { marks: inMarks, ranges, pointers: inside({ lo, hi }) }),
-        V.map("idx（值 → inorder 位置）", idx, {
-          marks: o.idxKey !== undefined ? { [String(o.idxKey)]: "active" } : {},
-        }),
+        V.array("inorder", inorder, { marks: inMarks, ranges, pointers: inside(lo === hi ? { "lo=hi": lo } : { lo, hi }) }),
         treeView(o.active, o.treeMarks),
         V.stack("呼叫堆疊", items, { marks: items.length ? { [items.length - 1]: "active" } : {} }),
       ];
@@ -172,7 +171,6 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
       views: [
         V.array("preorder", preorder, { pointers: inside({ pre }) }),
         V.array("inorder", inorder),
-        V.map("idx（值 → inorder 位置）", idx),
         treeView(),
         V.stack("呼叫堆疊", []),
       ],
@@ -204,8 +202,8 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
       t.push({
         line: [6, 7, 9, 10],
         note:
-          `\`build(${lo}, ${hi})\`：要用 \`inorder[${lo}..${hi}]\` 建一棵子樹。前序是「根 → 左 → 右」，所以還沒用過的第一個值 \`preorder[${at}] = ${node.val}\` 就是**這棵子樹的根**。建立節點 \`${node.val}\`，\`self.pre\` 前進到 ${pre}。` +
-          (parent ? `（它會是 \`${parent.val}\` 的${zh}小孩，等這次呼叫回傳才真正接上。）` : ""),
+          `\`build(${lo}, ${hi})\`：前序是「根 → 左 → 右」，所以還沒用過的第一個值 \`preorder[${at}] = ${node.val}\` 就是 \`inorder[${lo}..${hi}]\` 這棵子樹的**根**。` +
+          (parent ? `黃線：回傳後才接成 \`${parent.val}\` 的${zh}小孩。` : ""),
         views: views({ lo, hi, active: node, preTone: "active" }),
         vars: { lo, hi, "root.val": node.val, "self.pre": pre },
       });
@@ -220,7 +218,7 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
           (leftN === 0 && rightN === 0
             ? `這一段 \`inorder[${lo}..${hi}]\` 裡只有它自己，左右兩邊都沒有值 —— 它會是**葉節點**（接下來兩次遞迴都會拿到空區間）。`
             : `中序是「左 → 根 → 右」，所以在這一段裡，它左邊的 ${leftN ? `\`inorder[${lo}..${mid - 1}]\`（${leftN} 個值）` : "0 個值"}全屬於**左子樹**，右邊的 ${rightN ? `\`inorder[${mid + 1}..${hi}]\`（${rightN} 個值）` : "0 個值"}全屬於**右子樹**。`),
-        views: views({ lo, hi, mid, active: node, idxKey: node.val }),
+        views: views({ lo, hi, mid, active: node }),
         vars: { lo, hi, mid, "root.val": node.val, "self.pre": pre },
       });
 
@@ -250,7 +248,6 @@ export default defineProblem<{ preorder: number[]; inorder: number[] }>({
       views: [
         V.array("preorder", preorder, { marks: all, pointers: inside({ pre }) }),
         V.array("inorder", inorder, { marks: all }),
-        V.map("idx（值 → inorder 位置）", idx),
         treeView(),
         V.stack("呼叫堆疊", []),
       ],

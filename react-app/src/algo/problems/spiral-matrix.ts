@@ -28,11 +28,14 @@ export default defineProblem<{ matrix: number[][] }>({
   id: 54,
   summary:
     "給一個 `m × n` 的矩陣，從左上角出發，照**順時針螺旋**的順序（往右 → 往下 → 往左 → 往上，一圈一圈往內）把所有元素讀出來，回傳這個順序的陣列。",
+  summaryEn:
+    "Given an `m × n` matrix, start at the top-left corner and read every element in **clockwise spiral** order (right -> down -> left -> up, working inward one ring at a time). Return the elements as an array in that order.",
   examples: [
     { input: "matrix = [[1,2,3],[4,5,6],[7,8,9]]", output: "[1,2,3,6,9,8,7,4,5]" },
     { input: "matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]", output: "[1,2,3,4,8,12,11,10,9,5,6,7]" },
   ],
   constraints: ["1 ≤ m, n ≤ 10"],
+  constraintsEn: ["1 ≤ m, n ≤ 10"],
   idea:
     "用四條邊界 `top`、`bottom`、`left`、`right` 圍住**還沒讀的區域**。每走完一條邊，就把那條邊界往內縮一格 —— 邊界本身就記住了「哪裡走過」，不需要額外的 visited 陣列。",
   steps: [

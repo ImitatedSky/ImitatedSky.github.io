@@ -15,11 +15,14 @@ export default defineProblem<{ prices: number[] }>({
   id: 121,
   summary:
     "`prices[i]` 是某支股票第 `i` 天的價格。你只能**買一次、賣一次**，而且必須先買後賣（賣出日要在買入日之後）。\n\n回傳能賺到的最大利潤；如果怎麼買都不會賺，回傳 `0`。",
+  summaryEn:
+    "`prices[i]` is a stock's price on day `i`. You may **buy once and sell once**, and the sale has to happen on a later day than the purchase.\n\nReturn the largest profit you can make; if no trade earns anything, return `0`.",
   examples: [
-    { input: "prices = [7,1,5,3,6,4]", output: "5", note: "第 1 天用 1 買、第 4 天用 6 賣" },
-    { input: "prices = [7,6,4,3,1]", output: "0", note: "一路下跌，不交易最好" },
+    { input: "prices = [7,1,5,3,6,4]", output: "5", note: "第 1 天用 1 買、第 4 天用 6 賣", noteEn: "Buy on day 1 at 1, sell on day 4 at 6" },
+    { input: "prices = [7,6,4,3,1]", output: "0", note: "一路下跌，不交易最好", noteEn: "Prices only fall, so it is best not to trade" },
   ],
   constraints: ["1 ≤ prices.length ≤ 10⁵", "0 ≤ prices[i] ≤ 10⁴"],
+  constraintsEn: ["1 ≤ prices.length ≤ 10⁵", "0 ≤ prices[i] ≤ 10⁴"],
   idea:
     "把問題換個角度：**假設今天賣**，那買入日一定要選「今天以前的最低價」才賺最多。所以只要一路記住目前為止的最低價 `lowest`，每天算一次 `今天價格 - lowest`，取最大的就是答案 —— 掃一遍就好。",
   steps: [

@@ -17,12 +17,15 @@ export default defineProblem<{ root: (number | null)[]; targetSum: number }>({
   id: 112,
   summary:
     "給一棵二元樹和一個整數 `targetSum`，判斷樹裡有沒有一條**從根節點走到葉節點**的路徑，路徑上所有節點值加起來剛好等於 `targetSum`。\n\n葉節點指的是沒有任何小孩的節點；路徑一定要走到葉節點才算數。",
+  summaryEn:
+    "Given a binary tree and an integer `targetSum`, decide whether there is a **root-to-leaf** path whose node values add up to exactly `targetSum`.\n\nA leaf is a node with no children; a path only counts if it ends at a leaf.",
   examples: [
-    { input: "root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22", output: "true", note: "5 → 4 → 11 → 2" },
+    { input: "root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22", output: "true", note: "5 → 4 → 11 → 2", noteEn: "5 → 4 → 11 → 2" },
     { input: "root = [1,2,3], targetSum = 5", output: "false" },
     { input: "root = [], targetSum = 0", output: "false" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 5000", "-1000 ≤ Node.val、targetSum ≤ 1000"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 5000", "-1000 ≤ Node.val, targetSum ≤ 1000"],
   idea:
     "與其一路把總和加上去，不如把目標**一路扣下來**：每經過一個節點，就把它的值從目標中扣掉，再把「剩下還需要多少」交給小孩。走到葉節點時，如果剛好扣到 0，這條路徑就是答案。",
   steps: [
@@ -92,12 +95,12 @@ export default defineProblem<{ root: (number | null)[]; targetSum: number }>({
           edgeMarks,
           pointers: nullCall ? { root: null } : top ? { root: top.id } : {},
         }),
+        V.stack("呼叫堆疊 hasPathSum(root, targetSum)", calls, { marks: calls.length ? { [calls.length - 1]: "active" } : {} }),
         V.array(
           "目前路徑",
           path.map((n) => n.val),
           { marks: path.length ? { [path.length - 1]: extra[top.id] ?? "active" } : {} },
         ),
-        V.stack("呼叫堆疊 hasPathSum(root, targetSum)", calls, { marks: calls.length ? { [calls.length - 1]: "active" } : {} }),
       ];
     };
     const sumOf = () => path.reduce((s, n) => s + n.val, 0);

@@ -19,12 +19,15 @@ export default defineProblem<{ target: number; nums: number[] }>({
   id: 209,
   summary:
     "給一個**全是正整數**的陣列 `nums` 和一個正整數 `target`，找出總和**大於等於** `target` 的連續子陣列中，長度最短的那一個，回傳它的長度。\n\n如果沒有任何子陣列符合，回傳 `0`。",
+  summaryEn:
+    "Given an array `nums` of **positive integers only** and a positive integer `target`, find the shortest contiguous subarray whose sum is **at least** `target`, and return its length.\n\nIf no subarray qualifies, return `0`.",
   examples: [
-    { input: "target = 7, nums = [2,3,1,2,4,3]", output: "2", note: "[4,3] 是最短的" },
+    { input: "target = 7, nums = [2,3,1,2,4,3]", output: "2", note: "[4,3] 是最短的", noteEn: "[4,3] is the shortest" },
     { input: "target = 4, nums = [1,4,4]", output: "1" },
     { input: "target = 11, nums = [1,1,1,1,1,1,1,1]", output: "0" },
   ],
   constraints: ["1 ≤ target ≤ 10⁹", "1 ≤ nums.length ≤ 10⁵", "1 ≤ nums[i] ≤ 10⁴"],
+  constraintsEn: ["1 ≤ target ≤ 10⁹", "1 ≤ nums.length ≤ 10⁵", "1 ≤ nums[i] ≤ 10⁴"],
   idea:
     "因為數字都是正的，視窗**變長總和一定變大、變短一定變小**。所以用滑動視窗：右邊界不斷往右擴張，一旦總和達標，就從左邊盡量縮 —— 每縮一次都是一個更短的候選答案，縮到不達標再繼續擴張。",
   steps: [

@@ -27,11 +27,14 @@ export default defineProblem<{ word1: string; word2: string }>({
   id: 72,
   summary:
     "給兩個字串 `word1` 和 `word2`，求把 `word1` 變成 `word2` **最少需要幾次操作**。\n\n每次操作可以：**插入**一個字元、**刪除**一個字元，或把一個字元**取代**成另一個。",
+  summaryEn:
+    "Given two strings `word1` and `word2`, find the **minimum number of operations** needed to turn `word1` into `word2`.\n\nEach operation can **insert** a character, **delete** a character, or **replace** one character with another.",
   examples: [
-    { input: 'word1 = "horse", word2 = "ros"', output: "3", note: "horse → rorse → rose → ros" },
+    { input: 'word1 = "horse", word2 = "ros"', output: "3", note: "horse → rorse → rose → ros", noteEn: "horse → rorse → rose → ros" },
     { input: 'word1 = "intention", word2 = "execution"', output: "5" },
   ],
   constraints: ["0 ≤ word1.length, word2.length ≤ 500", "只包含小寫英文字母"],
+  constraintsEn: ["0 ≤ word1.length, word2.length ≤ 500", "Only lowercase English letters"],
   idea:
     "定義 `dp[i][j]` = 把 `word1` 的前 `i` 個字元變成 `word2` 的前 `j` 個字元的最少步數。只看**兩邊的最後一個字元**：相同就不用動，直接沿用左上角 `dp[i-1][j-1]`；不同就在三種操作裡挑最便宜的再 +1 —— **上方** `dp[i-1][j]` 是刪除、**左方** `dp[i][j-1]` 是插入、**左上** `dp[i-1][j-1]` 是取代。",
   steps: [
@@ -64,15 +67,9 @@ export default defineProblem<{ word1: string; word2: string }>({
     const rowLabels: Cell[] = ["∅", ...word1];
     const colLabels: Cell[] = ["∅", ...word2];
     const show = (): Cell[][] => dp.map((row, i) => row.map((v, j) => (filled[i][j] ? v : "")));
-    const views = (
-      marks: Record<string, Tone> = {},
-      ptr?: [number, number],
-      w1: Record<number, Tone> = {},
-      w2: Record<number, Tone> = {},
-    ) => [
-      V.chars("word1", word1, { marks: w1, pointers: ptr && ptr[0] > 0 ? { "i-1": ptr[0] - 1 } : {} }),
-      V.chars("word2", word2, { marks: w2, pointers: ptr && ptr[1] > 0 ? { "j-1": ptr[1] - 1 } : {} }),
-      V.grid("dp", show(), { rowLabels, colLabels, marks, pointers: ptr ? { "i,j": ptr } : {} }),
+    // 只畫 dp 表：列 / 行標籤就是 word1 / word2 的字元，再疊兩條字串會讓舞台太高
+    const views = (marks: Record<string, Tone> = {}, ptr?: [number, number]) => [
+      V.grid("dp（列 = word1，行 = word2）", show(), { rowLabels, colLabels, marks, pointers: ptr ? { "i,j": ptr } : {} }),
     ];
 
     t.push({
@@ -126,7 +123,7 @@ export default defineProblem<{ word1: string; word2: string }>({
           t.push({
             line: [12, 13],
             note: `${head}最後一個字元都是 \`"${a}"\`，這個字元不用動，問題縮小成左上角那格：\`dp[${i}][${j}] = dp[${i - 1}][${j - 1}] = ${diag}\`。`,
-            views: views({ [`${i - 1},${j - 1}`]: "compare", [key]: "active" }, [i, j], { [i - 1]: "good" }, { [j - 1]: "good" }),
+            views: views({ [`${i - 1},${j - 1}`]: "compare", [key]: "active" }, [i, j]),
             vars: { i, j, "word1[i-1]": a, "word2[j-1]": b, "dp[i][j]": dp[i][j] },
           });
         } else {
@@ -145,8 +142,6 @@ export default defineProblem<{ word1: string; word2: string }>({
             views: views(
               { [`${i - 1},${j}`]: "compare", [`${i},${j - 1}`]: "compare", [`${i - 1},${j - 1}`]: "compare", [key]: "active" },
               [i, j],
-              { [i - 1]: "bad" },
-              { [j - 1]: "bad" },
             ),
             vars: { i, j, "word1[i-1]": a, "word2[j-1]": b, 刪除: up, 插入: left, 取代: diag, "dp[i][j]": dp[i][j] },
           });
@@ -180,7 +175,7 @@ export default defineProblem<{ word1: string; word2: string }>({
       note:
         `右下角 \`dp[${m}][${n}] = ${dp[m][n]}\` 就是答案。` +
         (ops.length
-          ? `從終點沿著「每格是從哪裡來的」往回走（綠色路徑），可以還原出一組操作：${ops.map((o) => `\`${o}\``).join("、")}。斜走且數字沒變的那幾步是字元相同、不用花步數。`
+          ? `沿綠色路徑往回走可以還原出一組操作：${ops.map((o) => `\`${o}\``).join("、")}（斜走且數字沒變的是字元相同，不花步數）。`
           : "兩個字串本來就一樣，不需要任何操作。"),
       views: views(path),
       vars: { m, n },

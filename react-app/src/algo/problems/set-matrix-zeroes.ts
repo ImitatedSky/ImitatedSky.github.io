@@ -26,11 +26,14 @@ export default defineProblem<{ matrix: number[][] }>({
   id: 73,
   summary:
     "給一個 `m × n` 的整數矩陣。只要某一格是 0，就把它**所在的整列和整欄**都設成 0。\n\n必須原地修改；進階要求是只用 O(1) 的額外空間。",
+  summaryEn:
+    "Given an `m × n` integer matrix, whenever a cell is 0, set **its entire row and entire column** to 0.\n\nModify the matrix in-place; the follow-up asks for only O(1) extra space.",
   examples: [
     { input: "matrix = [[1,1,1],[1,0,1],[1,1,1]]", output: "[[1,0,1],[0,0,0],[1,0,1]]" },
     { input: "matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]", output: "[[0,0,0,0],[0,4,5,0],[0,3,1,0]]" },
   ],
   constraints: ["1 ≤ m, n ≤ 200"],
+  constraintsEn: ["1 ≤ m, n ≤ 200"],
   idea:
     "需要記住「哪些列、哪些欄要歸零」。與其另外開陣列，不如**借矩陣自己的第一列和第一欄當記號板**：`matrix[r][0] == 0` 代表第 r 列要清、`matrix[0][c] == 0` 代表第 c 欄要清。唯一的麻煩是第一列／第一欄本身會被記號蓋掉，所以先用兩個布林值記下它們原本有沒有 0。",
   steps: [

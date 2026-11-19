@@ -45,7 +45,7 @@ export function ViewFrame({ label, children }: { label?: string; children: React
 
 /** Inline `code` and **bold** → React nodes */
 export function rich(text: string): ReactNode[] {
-  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\*\*(?:`[^`]*`|[^*])+?\*\*|`[^`]+`)/g);
   return parts.map((p, i) => {
     if (p.startsWith("`") && p.endsWith("`") && p.length > 2)
       return (
@@ -54,7 +54,7 @@ export function rich(text: string): ReactNode[] {
         </code>
       );
     if (p.startsWith("**") && p.endsWith("**") && p.length > 4)
-      return <strong key={i}>{p.slice(2, -2)}</strong>;
+      return <strong key={i}>{rich(p.slice(2, -2))}</strong>;
     return p;
   });
 }

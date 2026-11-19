@@ -27,12 +27,15 @@ export default defineProblem<{ s: string; t: string }>({
   id: 76,
   summary:
     "給兩個字串 `s` 和 `t`，在 `s` 裡找出**最短的子字串**，使它包含 `t` 的所有字元 —— `t` 裡重複出現的字元，子字串裡也要有至少那麼多個。\n\n找不到就回傳空字串。題目保證答案唯一。",
+  summaryEn:
+    "Given two strings `s` and `t`, find **the shortest substring** of `s` that contains every character of `t` - a character that appears several times in `t` must appear at least that many times in the substring.\n\nIf there is none, return an empty string. The answer is guaranteed to be unique.",
   examples: [
     { input: 's = "ADOBECODEBANC", t = "ABC"', output: '"BANC"' },
     { input: 's = "a", t = "a"', output: '"a"' },
-    { input: 's = "a", t = "aa"', output: '""', note: "s 裡只有一個 a，不夠" },
+    { input: 's = "a", t = "aa"', output: '""', note: "s 裡只有一個 a，不夠", noteEn: "s has only one a, which is not enough" },
   ],
   constraints: ["1 ≤ s.length, t.length ≤ 10⁵", "s 和 t 由大小寫英文字母組成"],
+  constraintsEn: ["1 ≤ s.length, t.length ≤ 10⁵", "s and t consist of uppercase and lowercase English letters"],
   idea:
     "滑動視窗：右邊界一直擴張到視窗「涵蓋 `t`」為止，接著左邊界盡量收縮、邊縮邊記錄最短紀錄，縮到不合法再繼續擴張。關鍵是**不要每次都重新比對整個計數表**：用 `formed` 記住「有幾種字元已經湊夠」，只在某個字元的數量剛好跨過門檻時加減 1，判斷視窗合不合法就是 O(1)。",
   steps: [

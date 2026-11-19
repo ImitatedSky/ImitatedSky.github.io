@@ -36,11 +36,14 @@ export default defineProblem<{ board: string[] }>({
   id: 36,
   summary:
     "給一個 9×9 的數獨盤面，有些格子已填數字、有些是空的（`.`）。判斷**目前已填的數字**是否合法：每一列、每一欄、每個 3×3 九宮格裡，數字 1–9 都不能重複。\n\n只需要檢查已填的格子，不用管這個盤面最後解不解得出來。",
+  summaryEn:
+    "You get a 9×9 Sudoku board where some cells are filled with digits and the rest are empty (`.`). Decide whether **the digits filled in so far** are valid: no row, no column, and no 3×3 box may contain a digit 1-9 more than once.\n\nOnly check the filled cells; whether the board can actually be solved does not matter.",
   examples: [
-    { input: 'board = [["5","3",".",".","7",…], …]（標準範例盤面）', output: "true" },
-    { input: "把上面盤面左上角的 5 改成 8", output: "false", note: "左上角的九宮格裡出現兩個 8" },
+    { input: 'board = [["5","3",".",".","7",…], …]  (standard example board)', output: "true" },
+    { input: "same board, top-left 5 changed to 8", output: "false", note: "左上角的九宮格裡出現兩個 8", noteEn: "The top-left 3×3 box now contains two 8s" },
   ],
   constraints: ["board 固定是 9×9", "每格是 `1`–`9` 或 `.`"],
+  constraintsEn: ["board is always 9×9", "Each cell is `1`-`9` or `.`"],
   idea:
     "每個數字同時屬於**一列、一欄、一個九宮格**。替 9 列、9 欄、9 宮各準備一個集合，掃過盤面一次：放進去之前先問「這三個集合裡有沒有它？」有就是重複。九宮格的編號用 `r // 3 * 3 + c // 3` 算出來。",
   steps: [
@@ -88,7 +91,7 @@ export default defineProblem<{ board: string[] }>({
     const cols = labels.map(() => new Set<string>());
     const boxes = labels.map(() => new Set<string>());
     const grid = (marks: Record<string, Tone> = {}, pointers: Record<string, [number, number]> = {}) =>
-      V.grid("board", cells, { marks, pointers, rowLabels: labels, colLabels: labels });
+      V.grid("board", cells, { marks, pointers, rowLabels: labels, colLabels: labels, blocks: [3, 3] });
 
     t.push({
       line: [3, 4, 5],

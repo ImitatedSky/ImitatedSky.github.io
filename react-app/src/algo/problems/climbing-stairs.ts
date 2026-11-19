@@ -16,11 +16,14 @@ export default defineProblem<{ n: number }>({
   id: 70,
   summary:
     "樓梯總共有 `n` 階，每一步可以爬 **1 階**或 **2 階**。\n\n問爬到最頂端一共有幾種不同的走法。",
+  summaryEn:
+    "A staircase has `n` steps, and each move climbs either **1 step** or **2 steps**.\n\nHow many different ways are there to reach the top?",
   examples: [
-    { input: "n = 2", output: "2", note: "1+1、2" },
-    { input: "n = 3", output: "3", note: "1+1+1、1+2、2+1" },
+    { input: "n = 2", output: "2", note: "1+1、2", noteEn: "1+1, 2" },
+    { input: "n = 3", output: "3", note: "1+1+1、1+2、2+1", noteEn: "1+1+1, 1+2, 2+1" },
   ],
   constraints: ["1 ≤ n ≤ 45"],
+  constraintsEn: ["1 ≤ n ≤ 45"],
   idea:
     "定義 `dp[i]` = 爬到第 `i` 階的方法數。站上第 `i` 階的**最後一步**只有兩種可能：從 `i-1` 跨 1 階，或從 `i-2` 跨 2 階，所以 `dp[i] = dp[i-1] + dp[i-2]` —— 其實就是費氏數列。",
   steps: [

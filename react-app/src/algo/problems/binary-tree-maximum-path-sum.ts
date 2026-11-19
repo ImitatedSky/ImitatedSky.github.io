@@ -23,11 +23,14 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 124,
   summary:
     "在二元樹裡，「路徑」是一串沿著邊相連的節點，每個節點最多經過一次；路徑**不一定要經過根節點**，也不一定要走到葉節點，但至少要有一個節點。\n\n路徑和是路徑上所有節點值的總和。請回傳整棵樹裡**最大的路徑和**。節點值可能是負數。",
+  summaryEn:
+    "In a binary tree, a path is a chain of nodes connected by edges, visiting each node at most once. A path **does not have to pass through the root** or reach a leaf, but it must contain at least one node.\n\nA path's sum is the total of its node values. Return the **largest path sum** anywhere in the tree. Node values can be negative.",
   examples: [
-    { input: "root = [1,2,3]", output: "6", note: "2 → 1 → 3" },
-    { input: "root = [-10,9,20,null,null,15,7]", output: "42", note: "15 → 20 → 7，不經過根" },
+    { input: "root = [1,2,3]", output: "6", note: "2 → 1 → 3", noteEn: "2 → 1 → 3" },
+    { input: "root = [-10,9,20,null,null,15,7]", output: "42", note: "15 → 20 → 7，不經過根", noteEn: "15 → 20 → 7, skipping the root" },
   ],
   constraints: ["1 ≤ 節點數 ≤ 3 × 10⁴", "-1000 ≤ Node.val ≤ 1000"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 3 × 10⁴", "-1000 ≤ Node.val ≤ 1000"],
   idea:
     "任何一條路徑都有一個**最高點**：從它往左下延伸一段、往右下延伸一段。所以對每個節點算兩件事 —— (1) 把它當最高點時的路徑和 `val + left + right`，用來更新答案；(2) 它能往上「貢獻」多少，也就是 `val + max(left, right)`，因為接到父節點的路徑不能分岔，只能挑一邊。子樹的貢獻如果是負的，乾脆不要（當成 0）。",
   steps: [

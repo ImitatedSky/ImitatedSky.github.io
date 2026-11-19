@@ -1,5 +1,5 @@
 import { defineProblem } from "../types";
-import type { ListNodeSpec, Tone, View } from "../types";
+import type { Tone, View } from "../types";
 import { V, heapSpec, py, tracer } from "../trace";
 
 const code = `class Solution:
@@ -59,12 +59,15 @@ export default defineProblem<{ lists: number[][] }>({
   id: 23,
   summary:
     "給 `k` 條**各自已經由小到大排好**的鏈結串列（放在陣列 `lists` 裡），把它們全部合併成**一條**排好的鏈結串列並回傳。\n\n`lists` 可能是空的，裡面的串列也可能是空的。",
+  summaryEn:
+    "You are given `k` linked lists in the array `lists`, **each already sorted in ascending order**. Merge them all into **one** sorted linked list and return it.\n\n`lists` may be empty, and any list inside it may be empty too.",
   examples: [
     { input: "lists = [[1,4,5],[1,3,4],[2,6]]", output: "[1,1,2,3,4,4,5,6]" },
     { input: "lists = []", output: "[]" },
     { input: "lists = [[]]", output: "[]" },
   ],
   constraints: ["0 ≤ k ≤ 10⁴", "每條串列長度 0 ~ 500，且已遞增排序", "所有節點總數不超過 10⁴"],
+  constraintsEn: ["0 ≤ k ≤ 10⁴", "Each list has length 0 to 500 and is sorted ascending", "The total number of nodes is at most 10⁴"],
   idea:
     "每條串列都排好了，所以**下一個要接到答案的節點，一定是某一條串列的頭**。問題變成：「k 個頭裡面誰最小？」每次都掃一遍要 O(k)，改用**最小堆積**存 `(值, 第幾條)`，就能 O(log k) 拿到最小的；拿走之後，把同一條串列的下一個節點補進堆積。堆積裡永遠最多 k 個元素。",
   steps: [
@@ -106,13 +109,23 @@ export default defineProblem<{ lists: number[][] }>({
     const key = (e: Entry) => `${e[0]},${e[1]}`;
 
     const views = (o: { top?: boolean; pushed?: Entry; from?: number; fresh?: boolean } = {}): View[] => {
-      const out: View[] = input.map((vals, i) => {
-        const nodes: ListNodeSpec[] = vals.slice(pos[i]).map((v, j) => ({ id: `${i}-${pos[i] + j}`, val: v }));
-        const marks: Record<string, Tone> = {};
-        if (nodes.length && heap.some((e) => e[1] === i)) marks[nodes[0].id] = "compare";
-        if (nodes.length && o.from === i) marks[nodes[0].id] = "active";
-        return V.list(`lists[${i}]`, nodes, { marks });
+      // One compact grid instead of k stacked list views: row i = lists[i],
+      // nodes already moved to the answer leave a dashed placeholder behind.
+      const cols = Math.max(1, ...input.map((l) => l.length));
+      const gm: Record<string, Tone> = {};
+      const cells = input.map((vals, i) => {
+        if (pos[i] < vals.length) {
+          if (heap.some((e) => e[1] === i)) gm[`${i},${pos[i]}`] = "compare";
+          if (o.from === i) gm[`${i},${pos[i]}`] = "active";
+        }
+        return Array.from({ length: cols }, (_, j) => (j >= pos[i] && j < vals.length ? vals[j] : ""));
       });
+      const out: View[] = [
+        V.grid("lists（每列一條串列，由左到右；黃色 = 在堆積裡的頭）", cells, {
+          marks: gm,
+          rowLabels: input.map((_, i) => `[${i}]`),
+        }),
+      ];
       const hm: Record<string, Tone> = {};
       if (o.top && heap.length) hm.h0 = "active";
       if (o.pushed) {

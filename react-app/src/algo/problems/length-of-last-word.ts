@@ -17,11 +17,14 @@ export default defineProblem<{ s: string }>({
   id: 58,
   summary:
     "給一個由英文字母和空白組成的字串 `s`，回傳**最後一個單字的長度**。單字是指中間沒有空白的一段連續字母；字串的頭尾都可能有多餘的空白。",
+  summaryEn:
+    "Given a string `s` made of English letters and spaces, return **the length of the last word**. A word is a run of letters with no spaces inside; the string may have extra spaces at either end.",
   examples: [
     { input: 's = "Hello World"', output: "5" },
     { input: 's = "   fly me   to   the moon  "', output: "4" },
   ],
   constraints: ["1 ≤ s.length ≤ 10⁴", "s 至少包含一個單字"],
+  constraintsEn: ["1 ≤ s.length ≤ 10⁴", "s contains at least one word"],
   idea:
     "答案在字串的**尾巴**，所以從後面往前看最省事：先跳過結尾的空白，接著碰到的第一段字母就是最後一個單字，一路數到再次遇到空白（或走到開頭）為止。",
   steps: [

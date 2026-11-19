@@ -19,12 +19,15 @@ export default defineProblem<{ nums: number[]; target: number }>({
   id: 35,
   summary:
     "給一個**由小到大排序、沒有重複**的整數陣列 `nums` 和一個 `target`。如果 `target` 在陣列裡，回傳它的索引；如果不在，回傳把它**插進去後仍保持有序**的位置。\n\n時間複雜度必須是 O(log n)。",
+  summaryEn:
+    "You have an integer array `nums` **sorted ascending with no duplicates**, and a `target`. If `target` is in the array, return its index; if not, return the index where it would go so the array **stays sorted after inserting it**.\n\nThe solution must run in O(log n) time.",
   examples: [
     { input: "nums = [1,3,5,6], target = 5", output: "2" },
-    { input: "nums = [1,3,5,6], target = 2", output: "1", note: "2 應該插在 1 和 3 之間" },
-    { input: "nums = [1,3,5,6], target = 7", output: "4", note: "比所有數都大，插在最後面" },
+    { input: "nums = [1,3,5,6], target = 2", output: "1", note: "2 應該插在 1 和 3 之間", noteEn: "2 belongs between 1 and 3" },
+    { input: "nums = [1,3,5,6], target = 7", output: "4", note: "比所有數都大，插在最後面", noteEn: "Larger than everything, so it goes at the end" },
   ],
   constraints: ["1 ≤ nums.length ≤ 10⁴", "nums 嚴格遞增"],
+  constraintsEn: ["1 ≤ nums.length ≤ 10⁴", "nums is strictly increasing"],
   idea:
     "標準二分搜尋。重點在**找不到時 `lo` 剛好就是答案**：迴圈全程維持「`lo` 左邊都 < target、`hi` 右邊都 > target」，當 `lo > hi` 兩者交錯時，`lo` 正好指著第一個比 target 大的位置 —— 也就是插入點。",
   steps: [

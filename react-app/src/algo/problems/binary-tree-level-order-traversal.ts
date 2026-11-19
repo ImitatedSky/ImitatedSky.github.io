@@ -25,11 +25,14 @@ export default defineProblem<{ root: (number | null)[] }>({
   id: 102,
   summary:
     "給一棵二元樹的根節點，回傳它的**層序走訪**結果：由上到下、每一層由左到右，每一層的節點值各自放在一個陣列裡。",
+  summaryEn:
+    "Given the root of a binary tree, return its **level order traversal**: top to bottom, left to right within each level, with each level's values in their own array.",
   examples: [
     { input: "root = [3,9,20,null,null,15,7]", output: "[[3],[9,20],[15,7]]" },
     { input: "root = []", output: "[]" },
   ],
   constraints: ["0 ≤ 節點數 ≤ 2000"],
+  constraintsEn: ["0 ≤ number of nodes ≤ 2000"],
   idea:
     "BFS 用佇列。關鍵是**每一輪開始時先記下佇列長度**：那正好是「這一層」的節點數，照這個數量 pop，就能把一層一層切開。",
   steps: [

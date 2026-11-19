@@ -21,12 +21,15 @@ export default defineProblem<{ s: string; numRows: number }>({
   id: 6,
   summary:
     "把字串 `s` 的字元依序排成 `numRows` 列的**鋸齒形**：先由上往下寫滿一直行，再沿著斜線往右上爬回第一列，如此反覆。\n\n排完之後**一列一列由左到右讀**，把讀到的字元接成新字串回傳。",
+  summaryEn:
+    "Lay out the characters of `s` in order as a **zigzag** across `numRows` rows: write down one column from top to bottom, then climb diagonally up and to the right back to the first row, and repeat.\n\nThen **read the rows one at a time, left to right**, and return the characters joined into a new string.",
   examples: [
     { input: 's = "PAYPALISHIRING", numRows = 3', output: '"PAHNAPLSIIGYIR"' },
     { input: 's = "PAYPALISHIRING", numRows = 4', output: '"PINALSIGYAHRPI"' },
     { input: 's = "A", numRows = 1', output: '"A"' },
   ],
   constraints: ["1 ≤ s.length ≤ 1000", "1 ≤ numRows ≤ 1000"],
+  constraintsEn: ["1 ≤ s.length ≤ 1000", "1 ≤ numRows ≤ 1000"],
   idea:
     "不需要真的畫出二維圖形。最後是一列一列讀，所以每個字元**只要知道它落在第幾列**就夠了。列號的變化像乒乓球：0, 1, 2, …, numRows−1, …, 2, 1, 0, 1, …，用一個方向變數 `step` 在碰到頂端和底端時反轉即可。",
   steps: [
@@ -100,16 +103,20 @@ export default defineProblem<{ s: string; numRows: number }>({
     let step = 1;
     let col = 0;
 
+    // 「結果」從頭到尾都在，還沒讀到的格子留空，版面才不會在最後突然長高
+    const outView = (text: string, marks: Record<number, Tone> = {}) =>
+      V.array("結果（一列一列讀出來）", Array.from({ length: n }, (_, k) => text[k] ?? ""), { marks });
+
     t.push({
       line: 3,
       note: `\`numRows = ${numRows}\`，字串長度 ${n}，會產生轉折，所以要實際排一次。`,
-      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels })],
+      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels }), outView("")],
       vars: { numRows },
     });
     t.push({
       line: [5, 6],
       note: `準備 ${numRows} 個空的列。\`row = 0\` 代表下一個字元要放第幾列，\`step = 1\` 代表目前方向是往下。其實只需要知道每個字元屬於哪一列，圖形是畫給我們看的。`,
-      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels, pointers: { row: [0, 0] } })],
+      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels, pointers: { row: [0, 0] } }), outView("")],
       vars: { row, step: arrow(step) },
     });
 
@@ -124,6 +131,7 @@ export default defineProblem<{ s: string; numRows: number }>({
         views: [
           V.chars("s", s, { pointers: { ch: k }, marks: { ...sMarks, [k]: "active" } }),
           V.grid(GRID, cells, { rowLabels, marks: { ...placed, [here]: "active" }, pointers: { row: [row, col] } }),
+          outView(""),
         ],
         vars: { ch, row, step: arrow(step) },
       });
@@ -158,6 +166,7 @@ export default defineProblem<{ s: string; numRows: number }>({
             marks: { ...placed, [here]: "compare" },
             pointers: inGrid ? { row: [row, col] } : {},
           }),
+          outView(""),
         ],
         vars: { ch, row, step: arrow(step) },
       });
@@ -176,7 +185,7 @@ export default defineProblem<{ s: string; numRows: number }>({
         note:
           (r === 0 ? "字元都放完了，開始**一列一列由左到右讀**。" : "繼續讀下一列。") +
           `\`rows[${r}] = "${rows[r].join("")}"\` 接上去，目前是 \`"${out}"\`。`,
-        views: [V.chars("s", s, { marks: sMarks }), V.grid(GRID, cells, { rowLabels, marks }), V.chars("結果", out)],
+        views: [V.chars("s", s, { marks: sMarks }), V.grid(GRID, cells, { rowLabels, marks }), outView(out)],
         vars: { 結果: py(out) },
       });
     }
@@ -191,7 +200,7 @@ export default defineProblem<{ s: string; numRows: number }>({
       views: [
         V.chars("s", s, { marks: sMarks }),
         V.grid(GRID, cells, { rowLabels, marks: good }),
-        V.chars("結果", out, { marks: outMarks }),
+        outView(out, outMarks),
       ],
       vars: { 結果: py(out) },
       result: py(out),

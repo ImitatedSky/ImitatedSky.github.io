@@ -16,11 +16,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 45,
   summary:
     "你站在陣列 `nums` 的第 0 格，`nums[i]` 表示在第 `i` 格時最多可以往右跳幾格。題目保證一定到得了最後一格。\n\n回傳跳到最後一格所需的**最少跳躍次數**。",
+  summaryEn:
+    "You start at index 0 of the array `nums`, and `nums[i]` is the maximum number of steps you can jump to the right from index `i`. Reaching the last index is guaranteed to be possible.\n\nReturn the **minimum number of jumps** needed to get there.",
   examples: [
-    { input: "nums = [2,3,1,1,4]", output: "2", note: "0 → 1 → 4" },
+    { input: "nums = [2,3,1,1,4]", output: "2", note: "0 → 1 → 4", noteEn: "0 -> 1 -> 4" },
     { input: "nums = [2,3,0,1,4]", output: "2" },
   ],
   constraints: ["1 ≤ nums.length ≤ 10⁴", "0 ≤ nums[i] ≤ 1000", "保證到得了最後一格"],
+  constraintsEn: ["1 ≤ nums.length ≤ 10⁴", "0 ≤ nums[i] ≤ 1000", "The last index is always reachable"],
   idea:
     "把格子**分層**，像 BFS：第 0 層是起點，「跳 1 次能到的格子」是第 1 層，「跳 2 次才到得了的」是第 2 層……每一層都是一段連續區間。掃過目前這一層時順便記下從這層出發最遠能到哪（`farthest`），那就是下一層的右邊界。最後一格落在第幾層，答案就是幾。",
   steps: [

@@ -28,11 +28,14 @@ export default defineProblem<{ numCourses: number; prerequisites: number[][] }>(
   id: 207,
   summary:
     "一共有 `numCourses` 門課，編號 `0` 到 `numCourses - 1`。`prerequisites` 裡的每一組 `[a, b]` 表示：**想修 `a`，必須先修完 `b`**。\n\n判斷有沒有辦法把所有課都修完，可以就回傳 `True`，否則回傳 `False`。",
+  summaryEn:
+    "There are `numCourses` courses, numbered `0` to `numCourses - 1`. Each pair `[a, b]` in `prerequisites` means: **to take `a`, you must finish `b` first**.\n\nDecide whether it is possible to finish every course: return `True` if so, `False` otherwise.",
   examples: [
-    { input: "numCourses = 2, prerequisites = [[1,0]]", output: "true", note: "先修 0 再修 1" },
-    { input: "numCourses = 2, prerequisites = [[1,0],[0,1]]", output: "false", note: "兩門課互為先修，誰都沒辦法先開始" },
+    { input: "numCourses = 2, prerequisites = [[1,0]]", output: "true", note: "先修 0 再修 1", noteEn: "take 0 first, then 1" },
+    { input: "numCourses = 2, prerequisites = [[1,0],[0,1]]", output: "false", note: "兩門課互為先修，誰都沒辦法先開始", noteEn: "the two courses require each other, so neither can go first" },
   ],
   constraints: ["1 ≤ numCourses ≤ 2000", "0 ≤ prerequisites.length ≤ 5000", "每組先修關係都不重複"],
+  constraintsEn: ["1 ≤ numCourses ≤ 2000", "0 ≤ prerequisites.length ≤ 5000", "No prerequisite pair is repeated"],
   idea:
     "把「先修 `b` 才能修 `a`」畫成有向邊 `b → a`，修不完的唯一原因就是**圖裡有環**。用 DFS 配三種狀態找環：沒走過（0）、**正在目前這條遞迴路徑上**（1）、已確認安全（2）。走訪途中如果又踩到狀態 1 的點，代表繞回了自己的路徑，環就出現了。",
   steps: [
@@ -102,8 +105,8 @@ export default defineProblem<{ numCourses: number; prerequisites: number[][] }>(
           edgeMarks: em,
           pointers: o.u !== undefined ? { u: String(o.u) } : {},
         }),
-        V.array("state（0 沒走過／1 走訪中／2 安全）", state, { marks: sm, pointers: o.u !== undefined ? { u: o.u } : {} }),
         V.stack("目前的遞迴路徑", stack),
+        V.array("state（0 沒走過／1 走訪中／2 安全）", state, { marks: sm, pointers: o.u !== undefined ? { u: o.u } : {} }),
       ];
     };
 

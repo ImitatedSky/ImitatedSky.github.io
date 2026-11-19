@@ -21,12 +21,15 @@ export default defineProblem<{ pattern: string; s: string }>({
   id: 290,
   summary:
     "給一個由小寫字母組成的 `pattern`，和一個用空白分隔單字的字串 `s`。判斷 `s` 是否**遵循同樣的規律**。\n\n也就是 `pattern` 的每個字母和 `s` 的每個單字之間要是**一對一**的對應：同一個字母永遠配同一個單字，不同的字母不能配到同一個單字。",
+  summaryEn:
+    "Given a `pattern` of lowercase letters and a string `s` of words separated by spaces, decide whether `s` **follows the same pattern**.\n\nThat means letters of `pattern` and words of `s` must match **one-to-one**: the same letter always pairs with the same word, and different letters cannot pair with the same word.",
   examples: [
     { input: 'pattern = "abba", s = "dog cat cat dog"', output: "true" },
     { input: 'pattern = "abba", s = "dog cat cat fish"', output: "false" },
     { input: 'pattern = "aaaa", s = "dog cat cat dog"', output: "false" },
   ],
   constraints: ["1 ≤ pattern.length ≤ 300", "s 的單字之間恰好一個空白，沒有前後多餘的空白"],
+  constraintsEn: ["1 ≤ pattern.length ≤ 300", "Words in s are separated by exactly one space, with no leading or trailing spaces"],
   idea:
     "和「同構字串」是同一題，只是其中一邊從字元換成了單字。先把 `s` 切成單字、確認數量和 `pattern` 一樣長，再用**兩張雜湊表**（字母→單字、單字→字母）檢查雙向的一對一對應。",
   steps: [

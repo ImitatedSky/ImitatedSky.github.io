@@ -1,5 +1,5 @@
 import { defineProblem } from "../types";
-import type { Cell, Tone } from "../types";
+import type { Tone } from "../types";
 import { V, py, tracer } from "../trace";
 
 const code = `class Solution:
@@ -20,12 +20,15 @@ export default defineProblem<{ s: string }>({
   id: 151,
   summary:
     "給一個字串 `s`，把裡面的**單字順序反過來**（每個單字本身的字母順序不變）。\n\n`s` 的開頭、結尾或單字之間可能有多餘的空白；回傳的字串裡，單字之間只能有**一個**空白，頭尾不能有空白。",
+  summaryEn:
+    "Given a string `s`, **reverse the order of its words** (the letters inside each word stay as they are).\n\n`s` may have extra spaces at the start, at the end, or between words; the returned string must have exactly **one** space between words and no leading or trailing spaces.",
   examples: [
     { input: 's = "the sky is blue"', output: '"blue is sky the"' },
     { input: 's = "  hello world  "', output: '"world hello"' },
     { input: 's = "a good   example"', output: '"example good a"' },
   ],
   constraints: ["1 ≤ s.length ≤ 10⁴", "s 至少包含一個單字"],
+  constraintsEn: ["1 ≤ s.length ≤ 10⁴", "s contains at least one word"],
   idea:
     "要的是「最後一個單字排最前面」，所以**從字串尾巴往前掃**：遇到空白就跳過，遇到字母就用兩個指標框出一整個單字並收集起來。收集的順序自然就是反過來的，最後用單一空白接起來，多餘的空白也順便處理掉了。",
   steps: [
@@ -55,15 +58,15 @@ export default defineProblem<{ s: string }>({
     const marks: Record<number, Tone> = {};
     let i = s.length - 1;
 
-    const resView = (last?: Tone) => {
-      const entries: [Cell, Cell][] = res.map((w, k) => [k, w]);
-      return V.map("res", entries, { marks: last && res.length ? { [String(res.length - 1)]: last } : {} });
-    };
+    const resView = (last?: Tone) =>
+      V.array("res", res, { marks: last && res.length ? { [res.length - 1]: last } : {} });
+    // i 走到 -1 時不畫指標（畫在陣列外會讓整排格子位移），數值看右下角的變數
+    const ptr = (p: Record<string, number>) => Object.fromEntries(Object.entries(p).filter(([, v]) => v >= 0));
 
     t.push({
       line: [3, 4],
       note: "想讓最後一個單字排到最前面，所以 `i` 從字串**尾巴**開始往左掃，掃到的單字依序放進 `res`。",
-      views: [V.chars("s", s, { pointers: { i } }), resView()],
+      views: [V.chars("s", s, { pointers: ptr({ i }), ranges: [] }), resView()],
       vars: { i },
     });
 
@@ -74,7 +77,7 @@ export default defineProblem<{ s: string }>({
         t.push({
           line: [5, 6, 7, 8],
           note: `\`s[${i + 1}]\` 是空白，不屬於任何單字，直接跳過。不管連續幾個空白都是這樣一格一格略過。`,
-          views: [V.chars("s", s, { pointers: { i }, marks }), resView()],
+          views: [V.chars("s", s, { pointers: ptr({ i }), marks, ranges: [] }), resView()],
           vars: { i },
         });
         continue;
@@ -84,7 +87,7 @@ export default defineProblem<{ s: string }>({
       t.push({
         line: [5, 6, 9],
         note: `\`s[${i}] = "${s[i]}"\` 是字母 —— 碰到一個單字的**結尾**了。用 \`j = ${j}\` 把這個位置記下來。`,
-        views: [V.chars("s", s, { pointers: { i, j }, marks: { ...marks, [i]: "active" } }), resView()],
+        views: [V.chars("s", s, { pointers: ptr({ i, j }), marks: { ...marks, [i]: "active" }, ranges: [] }), resView()],
         vars: { i, j },
       });
 
@@ -99,7 +102,7 @@ export default defineProblem<{ s: string }>({
           `所以單字的範圍是 \`i + 1 = ${i + 1}\` 到 \`j = ${j}\`。`,
         views: [
           V.chars("s", s, {
-            pointers: { i, j },
+            pointers: ptr({ i, j }),
             marks: { ...marks, ...wordMarks },
             ranges: [{ from: i + 1, to: j, tone: "active", label: word }],
           }),
@@ -115,7 +118,7 @@ export default defineProblem<{ s: string }>({
         note: `切出 \`s[${i + 1}:${j + 1}] = "${word}"\` 放進 \`res\`。因為是從後面掃過來的，越後面的單字越早進 \`res\`，順序自然就反過來了。`,
         views: [
           V.chars("s", s, {
-            pointers: { i, j },
+            pointers: ptr({ i, j }),
             marks,
             ranges: [{ from: i + 1, to: j, tone: "good", label: word }],
           }),
@@ -126,14 +129,14 @@ export default defineProblem<{ s: string }>({
     }
 
     const answer = res.join(" ");
-    const all: Record<string, Tone> = {};
-    res.forEach((_, k) => (all[String(k)] = "good"));
+    const all: Record<number, Tone> = {};
+    res.forEach((_, k) => (all[k] = "good"));
     t.push({
       line: 13,
       note: `\`i\` 走到 -1，整個字串掃完。用**一個**空白把 \`res\` 接起來：\`"${answer}"\` —— 原本多餘的空白完全沒被收進來。`,
       views: [
-        V.chars("s", s, { pointers: { i }, marks }),
-        V.map("res", res.map((w, k) => [k, w] as [Cell, Cell]), { marks: all }),
+        V.chars("s", s, { pointers: ptr({ i }), marks, ranges: [] }),
+        V.array("res", res, { marks: all }),
       ],
       vars: { i },
       result: py(answer),

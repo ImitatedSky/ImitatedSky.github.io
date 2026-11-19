@@ -28,13 +28,16 @@ export default defineProblem<{ root: (number | null)[]; ops: Op[] }>({
   id: 173,
   summary:
     "設計一個二元搜尋樹（BST）的迭代器，依照**中序走訪**的順序（也就是由小到大）一次吐出一個節點值。\n\n`BSTIterator(root)` 用 BST 的根節點初始化；`next()` 回傳下一個最小的值；`hasNext()` 回傳後面還有沒有值。進階要求：`next()` 和 `hasNext()` 平均 O(1) 時間，且只用 O(h) 的空間（h 是樹高）。",
+  summaryEn:
+    "Design an iterator over a binary search tree (BST) that yields node values one at a time in **inorder** order (that is, ascending).\n\n`BSTIterator(root)` initializes it with the BST's root; `next()` returns the next smallest value; `hasNext()` tells whether any values remain. Follow-up: `next()` and `hasNext()` in O(1) average time, using only O(h) space (h is the tree height).",
   examples: [
     {
-      input: 'root = [7,3,15,null,null,9,20]，依序呼叫 next, next, hasNext, next, hasNext, next, hasNext, next, hasNext',
+      input: 'root = [7,3,15,null,null,9,20]; calls: next, next, hasNext, next, hasNext, next, hasNext, next, hasNext',
       output: "[3, 7, true, 9, true, 15, true, 20, false]",
     },
   ],
   constraints: ["1 ≤ 節點數 ≤ 10⁵", "最多呼叫 10⁵ 次 next / hasNext", "呼叫 next 時保證還有下一個值"],
+  constraintsEn: ["1 ≤ number of nodes ≤ 10⁵", "At most 10⁵ calls to next / hasNext", "next is only called when a next value exists"],
   idea:
     "把「用堆疊做中序走訪」的迴圈**拆開、暫停**在每次輸出之間。堆疊裡放的是「左邊已經處理完、自己還沒輸出」的節點 —— 也就是從目前位置一路往左的那條**左脊**，所以堆疊頂端永遠是下一個最小值。pop 出一個節點後，它的右子樹才輪到，於是把右小孩的左脊補進堆疊。",
   steps: [
@@ -96,11 +99,10 @@ export default defineProblem<{ root: (number | null)[]; ops: Op[] }>({
       const marks: Record<string, Tone> = {};
       emitted.forEach((id) => (marks[id] = "good"));
       stack.forEach((n) => (marks[n.id] = "compare"));
-      const opMarks: Record<number, Tone> = {};
-      ops.forEach((_, i) => {
-        if (i < opIdx) opMarks[i] = "visited";
-        else if (i === opIdx) opMarks[i] = "active";
-      });
+      // 操作與回傳值合成一張表：寬度不夠時會自動換行，不必橫向捲動
+      const calls = ops.map((op, i) => `${i + 1}. ${op}()`);
+      const opMarks: Record<string, Tone> = {};
+      if (opIdx >= 0 && opIdx < ops.length) opMarks[calls[opIdx]] = opIdx < out.length ? "good" : "active";
       return [
         V.tree("BST", spec, { marks: { ...marks, ...extra }, pointers }),
         V.stack(
@@ -108,11 +110,7 @@ export default defineProblem<{ root: (number | null)[]; ops: Op[] }>({
           stack.map((n) => n.val),
           { marks: topTone && stack.length ? { [stack.length - 1]: topTone } : {} },
         ),
-        V.array("操作", ops, {
-          marks: opMarks,
-          pointers: opIdx >= 0 && opIdx < ops.length ? { 現在: opIdx } : {},
-        }),
-        V.array("輸出", out, { marks: out.length ? { [out.length - 1]: "good" } : {} }),
+        V.map("操作 → 回傳值", calls.map<[Cell, Cell?]>((c, i) => (i < out.length ? [c, out[i]] : [c])), { marks: opMarks }),
       ];
     };
 

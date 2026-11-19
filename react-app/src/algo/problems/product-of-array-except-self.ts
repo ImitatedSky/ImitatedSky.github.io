@@ -20,11 +20,14 @@ export default defineProblem<{ nums: number[] }>({
   id: 238,
   summary:
     "給一個整數陣列 `nums`，回傳一個陣列 `res`，其中 `res[i]` 等於**除了 `nums[i]` 以外所有元素的乘積**。\n\n要求時間 O(n)，而且**不能使用除法**。",
+  summaryEn:
+    "Given an integer array `nums`, return an array `res` where `res[i]` is **the product of every element except `nums[i]`**.\n\nIt must run in O(n) time, and **division is not allowed**.",
   examples: [
     { input: "nums = [1,2,3,4]", output: "[24,12,8,6]" },
     { input: "nums = [-1,1,0,-3,3]", output: "[0,0,9,0,0]" },
   ],
   constraints: ["2 ≤ nums.length ≤ 10⁵", "任何前綴 / 後綴的乘積都落在 32 位元整數內", "不可使用除法"],
+  constraintsEn: ["2 ≤ nums.length ≤ 10⁵", "Every prefix / suffix product fits in a 32-bit integer", "Division is not allowed"],
   idea:
     "「除了自己以外的乘積」可以拆成兩半：**左邊所有數的乘積 × 右邊所有數的乘積**。先由左往右掃一遍，把左半邊的乘積寫進 `res`；再由右往左掃一遍，把右半邊的乘積乘上去。",
   steps: [

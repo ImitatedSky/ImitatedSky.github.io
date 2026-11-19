@@ -18,12 +18,15 @@ export default defineProblem<{ nums: number[] }>({
   id: 300,
   summary:
     "給一個整數陣列 `nums`，找出**最長嚴格遞增子序列**的長度。\n\n子序列不需要連續，但必須保持原本的先後順序。",
+  summaryEn:
+    "Given an integer array `nums`, find the length of its **longest strictly increasing subsequence**.\n\nA subsequence doesn't have to be contiguous, but it must keep the original order of the elements.",
   examples: [
-    { input: "nums = [10,9,2,5,3,7,101,18]", output: "4", note: "例如 [2,3,7,101]" },
+    { input: "nums = [10,9,2,5,3,7,101,18]", output: "4", note: "例如 [2,3,7,101]", noteEn: "For example [2,3,7,101]" },
     { input: "nums = [0,1,0,3,2,3]", output: "4" },
     { input: "nums = [7,7,7,7]", output: "1" },
   ],
   constraints: ["1 ≤ nums.length ≤ 2500", "-10⁴ ≤ nums[i] ≤ 10⁴"],
+  constraintsEn: ["1 ≤ nums.length ≤ 2500", "-10⁴ ≤ nums[i] ≤ 10⁴"],
   idea:
     "維護 `tails`：`tails[k]` 是「長度 `k+1` 的遞增子序列」**結尾最小可以是多少**。結尾越小，後面越容易接上新的數，所以每來一個 `x` 就用二分搜尋找到第一個 `≥ x` 的結尾把它換小；找不到就代表 `x` 能接在最長的那條後面，長度加一。`tails` 永遠是遞增的，所以才能二分。",
   steps: [
