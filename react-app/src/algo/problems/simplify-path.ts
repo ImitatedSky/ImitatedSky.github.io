@@ -57,6 +57,7 @@ export default defineProblem<{ path: string }>({
     const parts = path.split("/");
     const shown = parts.map((p) => (p === "" ? '""' : p)); // 空字串畫成 ""
     const stack: string[] = [];
+    const from: number[] = []; // stack[k] 來自 parts 的哪一格
     const done: Record<number, Tone> = {};
     const here = () => "/" + stack.join("/");
 
@@ -88,6 +89,7 @@ export default defineProblem<{ path: string }>({
             vars: { part, 目前位置: here() },
           });
           stack.pop();
+          done[from.pop()!] = "muted"; // 被退出的目錄不再是答案的一部分
           done[i] = "visited";
           t.push({
             line: 7,
@@ -117,6 +119,7 @@ export default defineProblem<{ path: string }>({
         });
       } else {
         stack.push(part);
+        from.push(i);
         done[i] = "good";
         t.push({
           line: [4, 5, 8, 9],

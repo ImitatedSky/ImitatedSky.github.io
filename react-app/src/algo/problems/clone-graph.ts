@@ -17,6 +17,8 @@ const code = `class Solution:
                 clones[cur].neighbors.append(clones[nei])
         return clones[node]`;
 
+const GRAPH_LABEL = "左：原圖　右：複製品（箭頭 = neighbors 裡的一筆）";
+
 export default defineProblem<{ adjList: number[][] }>({
   id: 133,
   summary:
@@ -60,24 +62,21 @@ export default defineProblem<{ adjList: number[][] }>({
     const t = tracer();
     const n = adjList.length;
 
-    // 兩張圖用同一組座標，方便上下對照
-    const at = (i: number) => {
+    // 原圖畫在左半、複製品畫在右半，同一個節點在兩邊的相對位置一樣
+    const at = (i: number, right: boolean) => {
       const a = -Math.PI / 2 + (2 * Math.PI * i) / Math.max(1, n);
-      return { x: 0.5 + 0.44 * Math.cos(a), y: 0.5 + 0.46 * Math.sin(a) };
+      const r = n === 1 ? 0 : 1;
+      return { x: (right ? 0.81 : 0.19) + r * 0.18 * Math.cos(a), y: 0.52 + r * 0.46 * Math.sin(a) };
     };
-    const origNodes = adjList.map((_, i) => ({ id: String(i + 1), label: i + 1, ...at(i) }));
-    const origEdges: { from: string; to: string }[] = [];
-    adjList.forEach((ns, i) =>
-      ns.forEach((j) => {
-        if (i + 1 < j || !adjList[j - 1]?.includes(i + 1)) origEdges.push({ from: String(i + 1), to: String(j) });
-      }),
-    );
+    const origNodes = adjList.map((_, i) => ({ id: String(i + 1), label: i + 1, ...at(i, false) }));
+    // neighbors 是有方向的清單，所以原圖每條無向邊畫成一來一回兩個箭頭
+    const origEdges = adjList.flatMap((ns, i) => ns.map((j) => ({ from: String(i + 1), to: String(j) })));
 
     if (n === 0) {
       t.push({
         line: [3, 4],
         note: "傳進來的是 `None`（空圖），沒有東西可以複製，直接回傳 `None`。",
-        views: [V.graph("原圖", { nodes: [], edges: [] })],
+        views: [V.graph(GRAPH_LABEL, { nodes: [], edges: [] })],
         result: py(null),
       });
       return t.frames;
@@ -108,22 +107,21 @@ export default defineProblem<{ adjList: number[][] }>({
       }
       if (o.fresh !== undefined) cm[`c${o.fresh}`] = "alt";
 
-      const cloneNodes = [...clones].map((v) => ({ id: `c${v}`, label: `${v}′`, ...at(v - 1) }));
+      const cloneNodes = [...clones].map((v) => ({ id: `c${v}`, label: `${v}′`, ...at(v - 1, true) }));
       const cloneEdges = [...clones].flatMap((v) => cloneAdj[v].map((w) => ({ from: `c${v}`, to: `c${w}` })));
+      const edgeMarks: Record<string, Tone> = {};
+      if (o.cur !== undefined && o.nei !== undefined) edgeMarks[`${o.cur}>${o.nei}`] = "compare";
+      if (o.edge) edgeMarks[`c${o.edge[0]}>c${o.edge[1]}`] = "active";
       const mapMarks: Record<string, Tone> = {};
       if (o.nei !== undefined && clones.has(o.nei)) mapMarks[String(o.nei)] = o.fresh === o.nei ? "alt" : "compare";
       else if (o.fresh !== undefined) mapMarks[String(o.fresh)] = "alt";
 
       return [
-        V.graph("原圖", { nodes: origNodes, edges: origEdges }, {
-          marks: om,
-          edgeMarks: o.cur !== undefined && o.nei !== undefined ? { [`${o.cur}>${o.nei}`]: "compare" } : {},
-          pointers: { ...(o.cur !== undefined ? { cur: String(o.cur) } : {}), ...(o.nei !== undefined ? { nei: String(o.nei) } : {}) },
-        }),
-        V.graph("複製出來的圖（箭頭 = neighbors 裡的一筆）", { nodes: cloneNodes, edges: cloneEdges }, {
+        V.graph(GRAPH_LABEL, { nodes: [...origNodes, ...cloneNodes], edges: [...origEdges, ...cloneEdges] }, {
           directed: true,
-          marks: cm,
-          edgeMarks: o.edge ? { [`c${o.edge[0]}>c${o.edge[1]}`]: "active" } : {},
+          marks: { ...om, ...cm },
+          edgeMarks,
+          pointers: { ...(o.cur !== undefined ? { cur: String(o.cur) } : {}), ...(o.nei !== undefined ? { nei: String(o.nei) } : {}) },
         }),
         V.map("clones（原節點 → 複製品）", [...clones].map((v) => [v, `${v}′`] as [number, string]), { marks: mapMarks }),
         V.queue("q", q),
@@ -135,7 +133,7 @@ export default defineProblem<{ adjList: number[][] }>({
     q.push(1);
     t.push({
       line: [5, 6],
-      note: "先複製起點：建立 `1′`，並在 `clones` 記下「`1` → `1′`」。這張表之後既用來**查複製品**，也用來判斷節點**有沒有處理過**。起點放進佇列。",
+      note: "先複製起點：建立 `1′`，記進 `clones`，並把起點放進佇列。這張表既用來**查複製品**，也用來判斷節點**有沒有處理過**。",
       views: views({ fresh: 1 }),
       vars: { 已複製節點數: clones.size },
     });

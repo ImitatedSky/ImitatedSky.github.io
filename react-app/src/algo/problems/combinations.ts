@@ -92,10 +92,9 @@ export default defineProblem<{ n: number; k: number }>({
       expected: "[[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]",
     },
     {
-      label: "n = 5, k = 3",
-      input: { n: 5, k: 3 },
-      expected:
-        "[[1, 2, 3], [1, 2, 4], [1, 2, 5], [1, 3, 4], [1, 3, 5], [1, 4, 5], [2, 3, 4], [2, 3, 5], [2, 4, 5], [3, 4, 5]]",
+      label: "n = 4, k = 3",
+      input: { n: 4, k: 3 },
+      expected: "[[1, 2, 3], [1, 2, 4], [1, 3, 4], [2, 3, 4]]",
     },
     { label: "n = 4, k = 4", input: { n: 4, k: 4 }, expected: "[[1, 2, 3, 4]]" },
   ],
@@ -116,10 +115,10 @@ export default defineProblem<{ n: number; k: number }>({
       });
       if (x !== undefined) marks[x - 1] = "active";
       return [
-        V.array("候選數字 1…n", all, { marks }),
-        V.array("path", path, { marks: path.length ? { [path.length - 1]: "active" } : {} }),
+        // no separate path array: green cells here + the highlighted tree node show it
+        V.array("候選數字 1…n（綠色 = 已在 path 裡）", all, { marks }),
         tree.view("決策樹（節點 = 目前的 path，邊 = 選的數）"),
-        V.set("res", res.map((p) => py(p)), { marks: newest ? { [py(newest)]: "good" } : {} }),
+        V.array("res", res.map((p) => py(p)), { marks: newest ? { [res.length - 1]: "good" } : {} }),
       ];
     };
 
@@ -178,7 +177,7 @@ export default defineProblem<{ n: number; k: number }>({
     t.push({
       line: 18,
       note: `全部走完，共 ${res.length} 組 —— 正好是 C(${n}, ${k})。每片綠色葉子就是一組答案，而且因為有剪枝，樹上沒有任何一條白走的路。`,
-      views: views(1, n - k + 1),
+      views: views(1, n),
       vars: { n, k, 已收集: res.length },
       result: py(res),
     });

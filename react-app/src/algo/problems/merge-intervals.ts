@@ -113,7 +113,7 @@ export default defineProblem<{ intervals: number[][] }>({
 
       const last = res[res.length - 1];
       const lastEnd = last[1];
-      const line: Points = [{ at: lastEnd, label: `res[-1][1] = ${lastEnd}`, tone: "compare" }];
+      const line: Points = [{ at: lastEnd, label: `終點 ${lastEnd}`, tone: "compare" }];
       const overlap = start <= lastEnd;
       t.push({
         line: [5, 6],

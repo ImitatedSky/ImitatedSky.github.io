@@ -121,19 +121,20 @@ export default defineProblem<{ root: (number | null)[] }>({
         tmarks[k] = "active";
       }
       if (pre) marks[pre.id] = "compare";
+      const smarks = Object.fromEntries(Object.entries(tmarks).map(([i, tone]) => [String(target[+i]), tone]));
       const pointers: Record<string, string | null> = {};
       if (cur) pointers.cur = cur.id;
       if (pre) pointers.pre = pre.id;
       return [
         V.tree("tree", treeSpec(root), { marks: { ...marks, ...extra }, pointers, edgeMarks }),
-        V.array("前序順序（攤平後的目標）", target, { marks: tmarks, pointers: cur ? { cur: k } : {} }),
+        V.set("前序順序（攤平後的目標）", target, { marks: smarks }),
       ];
     };
 
     let cur: BTNode | null = root;
     t.push({
       line: 3,
-      note: "`cur` 從 root 出發。目標是讓整棵樹變成一條只往右走的鏈，順序和下方的前序走訪一樣。",
+      note: "`cur` 從 root 出發。目標是讓整棵樹變成一條只往右走的鏈，順序和旁邊的前序走訪一樣。",
       views: views(cur, null),
     });
 

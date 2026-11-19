@@ -75,7 +75,7 @@ export default defineProblem<{ s: string; words: string[] }>({
     t.push({
       line: [3, 4, 5],
       note: `每個單字長度 \`k = ${k}\`，共 \`m = ${m}\` 個，所以合法的子字串長度一定是 ${k * m}。\`need\` 記下每個單字需要的數量。`,
-      views: [V.chars("s", s), V.map("need", need), V.set("res", res)],
+      views: [V.chars("s", s, { ranges: [] }), V.map("need", need), V.map("have", []), V.set("res", res)],
       vars: { n, k, m },
     });
 
@@ -111,16 +111,16 @@ export default defineProblem<{ s: string; words: string[] }>({
           for (let i = r; i < r + k; i++) sMarks[i] = o.word;
           cMarks[ci(r)] = o.word;
         }
-        const label = `視窗：${count} / ${m} 個單字`;
+        const label = `${count} / ${m} 個單字`;
         return [
           V.chars("s", s, {
             pointers: r >= 0 ? { l, r } : { l },
             marks: sMarks,
-            ...(hasWindow ? { ranges: [{ from: l, to: r + k - 1, tone: o.window ?? "active", label }] } : {}),
+            ranges: hasWindow ? [{ from: l, to: r + k - 1, tone: o.window ?? "active", label }] : [],
           }),
           V.array("切成單字", chunks, {
             marks: cMarks,
-            ...(hasWindow ? { ranges: [{ from: ci(l), to: ci(r), tone: o.window ?? "active", label }] } : {}),
+            ranges: hasWindow ? [{ from: ci(l), to: ci(r), tone: o.window ?? "active" }] : [],
           }),
           V.map("need", need),
           V.map("have", have, { marks: o.haveMarks ?? {} }),
@@ -202,8 +202,9 @@ export default defineProblem<{ s: string; words: string[] }>({
         ? `${k} 種切割起點都滑完了，共找到 ${res.length} 個起點：${res.map((p) => `\`${p}\``).join("、")}。`
         : `${k} 種切割起點都滑完了，沒有任何視窗能湊齊所有單字。`,
       views: [
-        V.chars("s", s, { marks, pointers: Object.fromEntries(res.map((p, i) => [`res[${i}]`, p])) }),
+        V.chars("s", s, { marks, pointers: Object.fromEntries(res.map((p, i) => [`res[${i}]`, p])), ranges: [] }),
         V.map("need", need),
+        V.map("have", []),
         V.set("res", res, { marks: Object.fromEntries(res.map((p) => [String(p), "good" as Tone])) }),
       ],
       result: py(res),

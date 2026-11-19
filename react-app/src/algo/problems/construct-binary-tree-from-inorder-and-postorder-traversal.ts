@@ -139,7 +139,6 @@ export default defineProblem<{ inorder: number[]; postorder: number[] }>({
       active?: N;
       treeMarks?: Record<string, Tone>;
       justPopped?: boolean;
-      idxKey?: number;
       pending?: string;
     }) => {
       const { lo, hi, mid } = o;
@@ -161,10 +160,7 @@ export default defineProblem<{ inorder: number[]; postorder: number[] }>({
       if (o.pending) items[items.length - 1] += o.pending;
       return [
         postView(o.justPopped),
-        V.array("inorder", inorder, { marks: inMarks, ranges, pointers: inside({ lo, hi }) }),
-        V.map("idx（值 → inorder 位置）", idx, {
-          marks: o.idxKey !== undefined ? { [String(o.idxKey)]: "active" } : {},
-        }),
+        V.array("inorder", inorder, { marks: inMarks, ranges, pointers: inside(lo === hi ? { "lo=hi": lo } : { lo, hi }) }),
         treeView(o.active, o.treeMarks),
         V.stack("呼叫堆疊", items, { marks: items.length ? { [items.length - 1]: "active" } : {} }),
       ];
@@ -176,7 +172,6 @@ export default defineProblem<{ inorder: number[]; postorder: number[] }>({
       views: [
         postView(),
         V.array("inorder", inorder),
-        V.map("idx（值 → inorder 位置）", idx),
         treeView(),
         V.stack("呼叫堆疊", []),
       ],
@@ -207,8 +202,8 @@ export default defineProblem<{ inorder: number[]; postorder: number[] }>({
       t.push({
         line: [5, 6, 8],
         note:
-          `\`build(${lo}, ${hi})\`：要用 \`inorder[${lo}..${hi}]\` 建一棵子樹。後序是「左 → 右 → 根」，根永遠排在最後，所以 \`postorder.pop()\` 拿到的 \`${val}\` 就是**這棵子樹的根**。建立節點 \`${val}\`。` +
-          (parent ? `（它會是 \`${parent.val}\` 的${zh}小孩，等這次呼叫回傳才真正接上。）` : ""),
+          `\`build(${lo}, ${hi})\`：後序是「左 → 右 → 根」，根永遠排在最後，所以 \`postorder.pop()\` 拿到的 \`${val}\` 就是 \`inorder[${lo}..${hi}]\` 這棵子樹的**根**。` +
+          (parent ? `黃線：回傳後才接成 \`${parent.val}\` 的${zh}小孩。` : ""),
         views: views({ lo, hi, active: node, justPopped: true }),
         vars: { lo, hi, "root.val": val, "len(postorder)": remaining },
       });
@@ -228,7 +223,7 @@ export default defineProblem<{ inorder: number[]; postorder: number[] }>({
             : leftN > 0
               ? "照樣先呼叫右邊（會拿到空區間、不會 pop），之後尾巴上的值才輪到左子樹。"
               : ""),
-        views: views({ lo, hi, mid, active: node, idxKey: val }),
+        views: views({ lo, hi, mid, active: node }),
         vars: { lo, hi, mid, "root.val": val, "len(postorder)": remaining },
       });
 
@@ -258,7 +253,6 @@ export default defineProblem<{ inorder: number[]; postorder: number[] }>({
       views: [
         postView(),
         V.array("inorder", inorder, { marks: all }),
-        V.map("idx（值 → inorder 位置）", idx),
         treeView(),
         V.stack("呼叫堆疊", []),
       ],

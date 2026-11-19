@@ -53,14 +53,21 @@ export default defineProblem<{ k: number; prices: number[] }>({
       day: number | null,
       buyMarks: Record<number, Tone> = {},
       sellMarks: Record<number, Tone> = {},
-      j?: number,
     ) => [
       V.bars("prices", prices, {
         marks: day === null ? {} : { [day]: "active" },
         pointers: day === null ? {} : { p: day },
       }),
-      V.array("buy", buy.map(fmt), { marks: { 0: "muted", ...buyMarks }, pointers: j === undefined ? {} : { j } }),
-      V.array("sell", sell as Cell[], { marks: sellMarks, pointers: j === undefined ? {} : { j } }),
+      // buy / sell 併成一張兩列的表（行 = j），比兩條陣列矮很多
+      V.grid("buy / sell（行 = 第 j 筆交易）", [buy.map(fmt), sell as Cell[]], {
+        rowLabels: ["buy", "sell"],
+        colLabels: buy.map((_, c) => `j=${c}`),
+        marks: {
+          "0,0": "muted",
+          ...Object.fromEntries(Object.entries(buyMarks).map(([c, tone]) => [`0,${c}`, tone])),
+          ...Object.fromEntries(Object.entries(sellMarks).map(([c, tone]) => [`1,${c}`, tone])),
+        },
+      }),
     ];
 
     t.push({
@@ -81,7 +88,7 @@ export default defineProblem<{ k: number; prices: number[] }>({
             `${j === 1 ? `第 ${d} 天，股價 \`p = ${p}\`。` : ""}第 ${j} 張：帶著前 ${j - 1} 筆的獲利 \`sell[${j - 1}] = ${sell[j - 1]}\` 今天買進，現金是 \`${sell[j - 1]} - ${p} = ${candBuy}\`。` +
             `\`buy[${j}] = max(${fmt(oldBuy)}, ${candBuy}) = ${buy[j]}\`，` +
             (candBuy > oldBuy ? "比原本划算，更新。" : candBuy === oldBuy ? "跟原本一樣。" : "之前有更划算的買點，維持不變。"),
-          views: views(d, { [j]: "active" }, { [j - 1]: "compare" }, j),
+          views: views(d, { [j]: "active" }, { [j - 1]: "compare" }),
           vars: { k, p, j, "buy[j]": buy[j], "sell[j]": sell[j] },
         });
 
@@ -98,7 +105,7 @@ export default defineProblem<{ k: number; prices: number[] }>({
               : candSell === oldSell
                 ? "跟原本一樣。"
                 : "沒有比原本的獲利高，維持不變。"),
-          views: views(d, { [j]: "compare" }, { [j]: "active" }, j),
+          views: views(d, { [j]: "compare" }, { [j]: "active" }),
           vars: { k, p, j, "buy[j]": buy[j], "sell[j]": sell[j] },
         });
       }

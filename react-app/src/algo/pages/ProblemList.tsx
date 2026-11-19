@@ -4,6 +4,7 @@ import { FiCheck, FiRotateCw, FiSearch } from "react-icons/fi";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import { CATEGORIES, CATEGORY_BY_ID, PROBLEMS } from "../catalog";
 import { useProgress } from "../progress";
+import { useLang } from "../lang";
 import type { Difficulty } from "../types";
 
 const DIFFS: Difficulty[] = ["Easy", "Medium", "Hard"];
@@ -16,6 +17,7 @@ const STATUSES = [
 export default function ProblemList() {
   usePageTitle("題庫 150 — Algo Lab");
   const { store, toggleDone } = useProgress();
+  const { lang } = useLang();
 
   // Filters live in the URL so a view is shareable and Back restores it
   const [params, setParams] = useSearchParams();
@@ -168,8 +170,8 @@ export default function ProblemList() {
                       </button>
                       <span className="algo-row-no">#{p.id}</span>
                       <Link to={`/algo/p/${p.slug}`} className="algo-row-title">
-                        <b>{p.titleZh}</b>
-                        <small>{p.title}</small>
+                        <b>{lang === "en" ? p.title : p.titleZh}</b>
+                        <small>{lang === "en" ? p.titleZh : p.title}</small>
                       </Link>
                       <span className={`algo-diff is-${p.difficulty}`}>{p.difficulty}</span>
                     </div>

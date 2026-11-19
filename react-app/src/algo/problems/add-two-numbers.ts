@@ -92,7 +92,7 @@ export default defineProblem<{ l1: number[]; l2: number[] }>({
       const hasA = i < a.length;
       const hasB = j < b.length;
       const total = carry + (hasA ? a[i] : 0) + (hasB ? b[j] : 0);
-      const terms = [hasA ? `${a[i]}` : null, hasB ? `${b[j]}` : null, `${carry}（進位）`].filter(Boolean).join(" + ");
+      const terms = [hasA ? `${a[i]}` : null, hasB ? `${b[j]}` : null, `${carry}`].filter(Boolean).join(" + ");
       let how: string;
       if (hasA && hasB) how = `這一位：\`l1\` 的 \`${a[i]}\`、\`l2\` 的 \`${b[j]}\`，再加上前一位的進位 \`${carry}\`。`;
       else if (hasA) how = `\`l2\` 已經走完，當作 0；這一位只有 \`l1\` 的 \`${a[i]}\` 加上進位 \`${carry}\`。`;

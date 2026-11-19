@@ -106,10 +106,9 @@ export default defineProblem<{ digits: string }>({
       expected: '["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]',
     },
     {
-      label: '"79"',
-      input: { digits: "79" },
-      expected:
-        '["pw", "px", "py", "pz", "qw", "qx", "qy", "qz", "rw", "rx", "ry", "rz", "sw", "sx", "sy", "sz"]',
+      label: '"29"',
+      input: { digits: "29" },
+      expected: '["aw", "ax", "ay", "az", "bw", "bx", "by", "bz", "cw", "cx", "cy", "cz"]',
     },
     { label: '"2"', input: { digits: "2" }, expected: '["a", "b", "c"]' },
   ],
@@ -131,19 +130,20 @@ export default defineProblem<{ digits: string }>({
     const tree = decisionTree('""');
     const used = [...new Set(digits)];
 
+    // phone map first (its own row), no separate path array (tree node = path),
+    // and `res` as an array so it never jumps between beside / below the tree.
     const views = (i: number, newest?: string) => [
-      V.chars("digits", digits, {
-        pointers: { i },
-        marks: i < n ? { [i]: "active" } : {},
-      }),
       V.map(
         "phone（只列出用到的鍵）",
         used.map((d) => [d, PHONE[d]] as [Cell, Cell]),
         { marks: i < n ? { [digits[i]]: "active" } : {} },
       ),
-      V.array("path", path, { marks: path.length ? { [path.length - 1]: "active" } : {} }),
+      V.chars("digits", digits, {
+        pointers: { i },
+        marks: i < n ? { [i]: "active" } : {},
+      }),
       tree.view("決策樹（節點 = 目前的 path，邊 = 選的字母）"),
-      V.set("res", res, { marks: newest ? { [newest]: "good" } : {} }),
+      V.array("res", res, { marks: newest ? { [res.length - 1]: "good" } : {} }),
     ];
 
     t.push({

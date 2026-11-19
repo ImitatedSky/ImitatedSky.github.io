@@ -48,10 +48,11 @@ const algo: SortAlgo = {
     const views = (extra: Record<number, Tone> = {}, pointers: Record<string, number> = {}) => {
       const marks: Record<number, Tone> = {};
       for (let k = size; k < n; k++) marks[k] = "good";
+      // 樹永遠畫出全部 n 個節點（已排好的標綠色），這樣堆積縮小時版面不會跟著縮
       const treeMarks: Record<string, Tone> = {};
-      for (const [k, tone] of Object.entries(extra)) if (+k < size) treeMarks[`h${k}`] = tone;
+      for (const [k, tone] of Object.entries({ ...marks, ...extra })) treeMarks[`h${k}`] = tone;
       const treePointers: Record<string, string> = {};
-      for (const [name, k] of Object.entries(pointers)) if (k < size) treePointers[name] = `h${k}`;
+      for (const [name, k] of Object.entries(pointers)) treePointers[name] = `h${k}`;
       return [
         V.bars("a", a, {
           ids,
@@ -59,7 +60,7 @@ const algo: SortAlgo = {
           pointers,
           ranges: size > 0 ? [{ from: 0, to: size - 1, tone: "alt", label: `堆積 a[0..${size - 1}]` }] : [],
         }),
-        V.tree("堆積（樹狀）", heapSpec(a.slice(0, size)), { marks: treeMarks, pointers: treePointers }),
+        V.tree("堆積（樹狀，綠色 = 已排好、不在堆積內）", heapSpec(a), { marks: treeMarks, pointers: treePointers }),
       ];
     };
     const swap = (x: number, y: number) => {

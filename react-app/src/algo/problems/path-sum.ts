@@ -92,12 +92,12 @@ export default defineProblem<{ root: (number | null)[]; targetSum: number }>({
           edgeMarks,
           pointers: nullCall ? { root: null } : top ? { root: top.id } : {},
         }),
+        V.stack("呼叫堆疊 hasPathSum(root, targetSum)", calls, { marks: calls.length ? { [calls.length - 1]: "active" } : {} }),
         V.array(
           "目前路徑",
           path.map((n) => n.val),
           { marks: path.length ? { [path.length - 1]: extra[top.id] ?? "active" } : {} },
         ),
-        V.stack("呼叫堆疊 hasPathSum(root, targetSum)", calls, { marks: calls.length ? { [calls.length - 1]: "active" } : {} }),
       ];
     };
     const sumOf = () => path.reduce((s, n) => s + n.val, 0);

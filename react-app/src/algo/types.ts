@@ -34,6 +34,8 @@ export interface ArrayView {
   ranges?: { from: number; to: number; tone?: Tone; label?: string }[];
   /** Draw non-negative numbers as a bar chart */
   bars?: boolean;
+  /** Set by the player: pointer rows to reserve so the view keeps one height for the whole trace */
+  pointerRows?: number;
   /** bars only: extra amount stacked on top of each bar (e.g. trapped water) */
   fill?: number[];
 }
@@ -47,6 +49,8 @@ export interface GridView {
   /** pointer name → [row, col] */
   pointers?: Record<string, [number, number]>;
   rowLabels?: Cell[];
+  /** Draw a thicker gap every `rows` rows and `cols` columns (sudoku boxes: [3, 3]) */
+  blocks?: [number, number];
   colLabels?: Cell[];
 }
 
@@ -172,8 +176,13 @@ export interface Problem<I = unknown> {
   id: number;
   /** Own-words 繁中 summary. Paragraphs separated by a blank line; `code` and **bold** allowed. */
   summary: string;
-  examples: { input: string; output: string; note?: string }[];
+  /** English statement, own words (never LeetCode's text). Same paragraph / markup rules as `summary`. */
+  summaryEn?: string;
+  /** `note` is 繁中, `noteEn` its English counterpart */
+  examples: { input: string; output: string; note?: string; noteEn?: string }[];
   constraints?: string[];
+  /** English counterpart of `constraints`, same order */
+  constraintsEn?: string[];
   /** The key insight, 1–3 sentences */
   idea: string;
   /** The approach as ordered steps */
@@ -211,4 +220,6 @@ export interface SortAlgo {
   trace: (input: number[]) => Frame[];
   /** Constraint on inputs, e.g. counting/radix need small non-negative ints */
   maxValue?: number;
+  /** Input shown when this algorithm is opened (default: a small mixed array) */
+  sample?: number[];
 }

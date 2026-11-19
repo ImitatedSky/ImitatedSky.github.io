@@ -88,7 +88,7 @@ export default defineProblem<{ board: string[] }>({
     const cols = labels.map(() => new Set<string>());
     const boxes = labels.map(() => new Set<string>());
     const grid = (marks: Record<string, Tone> = {}, pointers: Record<string, [number, number]> = {}) =>
-      V.grid("board", cells, { marks, pointers, rowLabels: labels, colLabels: labels });
+      V.grid("board", cells, { marks, pointers, rowLabels: labels, colLabels: labels, blocks: [3, 3] });
 
     t.push({
       line: [3, 4, 5],

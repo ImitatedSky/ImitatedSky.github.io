@@ -30,7 +30,7 @@ export function ListView({ view }: { view: ListViewT }) {
   const maxStack = Math.max(0, ...[...groups.values()].map((g) => g.length));
   const nullNames = groups.get(null);
 
-  const top = maxStack * 17 + 12;
+  const top = maxStack * 17 + 18;
   const xOf = (i: number) => 8 + i * (LW + LGAP);
   const cy = top + LH / 2;
 
@@ -80,7 +80,7 @@ export function ListView({ view }: { view: ListViewT }) {
   const pointerLabels = (names: string[] | undefined, cx: number) =>
     names?.map((name, k) => (
       <g key={name} className={`algo-svg-pointer ${pointerClass(name)}`}>
-        <text x={cx} y={top - 8 - (names.length - 1 - k) * 17} textAnchor="middle">
+        <text x={cx} y={top - 15 - (names.length - 1 - k) * 17} textAnchor="middle">
           {name}
         </text>
       </g>
@@ -90,7 +90,10 @@ export function ListView({ view }: { view: ListViewT }) {
     <ViewFrame label={view.label}>
       <div className="algo-scroll-x">
         {nodes.length === 0 && !showNull ? (
-          <span className="algo-empty">空串列</span>
+          // Same height as a one-node list, so the stage doesn't jump when a list empties
+          <div className="algo-empty" style={{ height: top + LH + 10, display: "grid", placeItems: "center" }}>
+            空串列
+          </div>
         ) : (
           <svg className="algo-svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             {straight.map((s, k) => (
@@ -211,18 +214,23 @@ export function TreeView({ view }: { view: TreeViewT }) {
   const longest = Math.max(0, ...view.nodes.map((n) => fmt(n.val).length));
   const halfW = longest > 4 ? Math.min(60, longest * 3.9 + 8) : TR;
   const TX = Math.max(TX0, halfW * 2 + 10);
+  const ptrStack = Math.max(0, ...[...groupPointers<string>(view.pointers).values()].map((g) => g.length));
+  const sideLabels = !!view.edgeLabels && Object.keys(view.edgeLabels).length > 0;
   const pad = halfW + 26;
+  const extraTop = sideLabels ? 0 : Math.max(0, ptrStack - 1) * 14;
   const X = (id: string) => pad + pos.get(id)!.x * TX;
-  const Y = (id: string) => pad - 6 + pos.get(id)!.y * TY;
+  const Y = (id: string) => pad - 6 + extraTop + pos.get(id)!.y * TY;
   const width = pad * 2 + (slots - 1) * TX;
-  const height = pad * 2 - 12 + depth * TY;
+  const height = pad * 2 - 12 + extraTop + depth * TY;
   const groups = groupPointers<string>(view.pointers);
   const nullNames = groups.get(null);
 
   if (view.nodes.length === 0) {
     return (
       <ViewFrame label={view.label}>
-        <span className="algo-empty">空樹</span>
+        <div className="algo-empty" style={{ minHeight: 90, display: "grid", placeItems: "center" }}>
+          空樹
+        </div>
       </ViewFrame>
     );
   }
@@ -299,7 +307,11 @@ export function TreeView({ view }: { view: TreeViewT }) {
                 </text>
                 {names?.map((name, k) => (
                   <g key={name} className={`algo-svg-pointer ${pointerClass(name)}`}>
-                    <text x={X(n.id)} y={Y(n.id) - TR - 7 - k * 14} textAnchor="middle">
+                    <text
+                      x={sideLabels ? X(n.id) + halfW + 5 : X(n.id)}
+                      y={sideLabels ? Y(n.id) + (k - (names.length - 1) / 2) * 13 : Y(n.id) - TR - 7 - k * 14}
+                      style={sideLabels ? { textAnchor: "start" } : undefined}
+                    >
                       {name}
                     </text>
                   </g>
@@ -309,9 +321,10 @@ export function TreeView({ view }: { view: TreeViewT }) {
           })}
         </svg>
       </div>
-      {nullNames && (
+      {view.pointers && Object.keys(view.pointers).length > 0 && (
         <div className="algo-null-pointers">
-          {nullNames.map((n) => (
+          {!nullNames && <span className="algo-pointer-pill" style={{ visibility: "hidden" }}>·</span>}
+          {(nullNames ?? []).map((n) => (
             <span key={n} className={`algo-pointer-pill ${pointerClass(n)}`}>
               {n} = None
             </span>
@@ -394,8 +407,12 @@ export function GraphView({ view }: { view: GraphViewT }) {
             const names = groups.get(node.id);
             return (
               <g key={node.id} className={`algo-node ${toneClass(view.marks?.[node.id])}`}>
-                <circle cx={p.x} cy={p.y} r={GR} />
-                <text x={p.x} y={p.y} fontSize={fontFor(text, 14)}>
+                {text.length > 4 ? (
+                  <rect x={p.x - Math.min(56, text.length * 3.9 + 8)} y={p.y - GR} width={Math.min(112, text.length * 7.8 + 16)} height={GR * 2} rx={GR} />
+                ) : (
+                  <circle cx={p.x} cy={p.y} r={GR} />
+                )}
+                <text x={p.x} y={p.y} fontSize={text.length > 4 ? 11 : fontFor(text, 14)}>
                   {text}
                 </text>
                 {names?.map((name, k) => (

@@ -100,16 +100,20 @@ export default defineProblem<{ s: string; numRows: number }>({
     let step = 1;
     let col = 0;
 
+    // 「結果」從頭到尾都在，還沒讀到的格子留空，版面才不會在最後突然長高
+    const outView = (text: string, marks: Record<number, Tone> = {}) =>
+      V.array("結果（一列一列讀出來）", Array.from({ length: n }, (_, k) => text[k] ?? ""), { marks });
+
     t.push({
       line: 3,
       note: `\`numRows = ${numRows}\`，字串長度 ${n}，會產生轉折，所以要實際排一次。`,
-      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels })],
+      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels }), outView("")],
       vars: { numRows },
     });
     t.push({
       line: [5, 6],
       note: `準備 ${numRows} 個空的列。\`row = 0\` 代表下一個字元要放第幾列，\`step = 1\` 代表目前方向是往下。其實只需要知道每個字元屬於哪一列，圖形是畫給我們看的。`,
-      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels, pointers: { row: [0, 0] } })],
+      views: [V.chars("s", s), V.grid(GRID, cells, { rowLabels, pointers: { row: [0, 0] } }), outView("")],
       vars: { row, step: arrow(step) },
     });
 
@@ -124,6 +128,7 @@ export default defineProblem<{ s: string; numRows: number }>({
         views: [
           V.chars("s", s, { pointers: { ch: k }, marks: { ...sMarks, [k]: "active" } }),
           V.grid(GRID, cells, { rowLabels, marks: { ...placed, [here]: "active" }, pointers: { row: [row, col] } }),
+          outView(""),
         ],
         vars: { ch, row, step: arrow(step) },
       });
@@ -158,6 +163,7 @@ export default defineProblem<{ s: string; numRows: number }>({
             marks: { ...placed, [here]: "compare" },
             pointers: inGrid ? { row: [row, col] } : {},
           }),
+          outView(""),
         ],
         vars: { ch, row, step: arrow(step) },
       });
@@ -176,7 +182,7 @@ export default defineProblem<{ s: string; numRows: number }>({
         note:
           (r === 0 ? "字元都放完了，開始**一列一列由左到右讀**。" : "繼續讀下一列。") +
           `\`rows[${r}] = "${rows[r].join("")}"\` 接上去，目前是 \`"${out}"\`。`,
-        views: [V.chars("s", s, { marks: sMarks }), V.grid(GRID, cells, { rowLabels, marks }), V.chars("結果", out)],
+        views: [V.chars("s", s, { marks: sMarks }), V.grid(GRID, cells, { rowLabels, marks }), outView(out)],
         vars: { 結果: py(out) },
       });
     }
@@ -191,7 +197,7 @@ export default defineProblem<{ s: string; numRows: number }>({
       views: [
         V.chars("s", s, { marks: sMarks }),
         V.grid(GRID, cells, { rowLabels, marks: good }),
-        V.chars("結果", out, { marks: outMarks }),
+        outView(out, outMarks),
       ],
       vars: { 結果: py(out) },
       result: py(out),

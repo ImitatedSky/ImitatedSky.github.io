@@ -143,7 +143,6 @@ export default defineProblem<Input>({
       o: {
         gene?: string;
         i?: number;
-        nxt?: string;
         marks?: Record<string, Tone>;
         edgeMarks?: Record<string, Tone>;
       } = {},
@@ -161,10 +160,9 @@ export default defineProblem<Input>({
       const shown = o.gene ?? startGene;
       return [
         V.graph("基因圖（有連線 = 只差一個字元）", { nodes, edges }, { marks, edgeMarks: em, pointers }),
-        V.queue("q（基因, 突變次數）", q.map(([g, s]) => `(${g}, ${s})`)),
         V.map("代號對照", all.map((g) => [idOf.get(g)!, g] as [string, string]), { marks }),
-        V.chars("gene", shown, { marks: o.i !== undefined ? { [o.i]: "compare" } : {}, pointers: o.i !== undefined ? { i: o.i } : {} }),
-        ...(o.nxt && o.i !== undefined ? [V.chars("nxt", o.nxt, { marks: { [o.i]: "active" } })] : []),
+        V.queue("q（基因, 突變次數）", q.map(([g, s]) => `(${g}, ${s})`)),
+        V.chars("gene（i = 正在改的位置）", shown, { marks: o.i !== undefined ? { [o.i]: "compare" } : {}, pointers: o.i !== undefined ? { i: o.i } : {} }),
       ];
     };
 
@@ -238,7 +236,6 @@ export default defineProblem<Input>({
             views: views({
               gene,
               i,
-              nxt,
               marks: { [idOf.get(nxt)!]: LEVEL_TONES[(steps + 1) % LEVEL_TONES.length] },
               edgeMarks: { [`${idOf.get(gene)!}>${idOf.get(nxt)!}`]: "active" },
             }),

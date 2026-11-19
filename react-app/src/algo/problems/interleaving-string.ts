@@ -132,9 +132,7 @@ export default defineProblem<{ s1: string; s2: string; s3: string }>({
           const same = s1[i - 1] === ch;
           fromS1 = prev && same;
           parts.push(
-            `**取自 \`s1\`**（上方）：\`dp[${i - 1}][${j}]\` 是 ${py(prev)}` +
-              (prev ? `，\`s1[${i - 1}] = "${s1[i - 1]}"\` ${same ? "等於" : "不等於"} \`"${ch}"\`` : "，前面就組不出來") +
-              ` → ${fromS1 ? "可以" : "不行"}`,
+            `取 \`s1[${i - 1}] = "${s1[i - 1]}"\`（上方）：` + (!prev ? "上方是 False，不行" : same ? "**可以**" : "字元不同，不行"),
           );
         }
         if (j > 0) {
@@ -143,9 +141,7 @@ export default defineProblem<{ s1: string; s2: string; s3: string }>({
           const same = s2[j - 1] === ch;
           fromS2 = prev && same;
           parts.push(
-            `**取自 \`s2\`**（左方）：\`dp[${i}][${j - 1}]\` 是 ${py(prev)}` +
-              (prev ? `，\`s2[${j - 1}] = "${s2[j - 1]}"\` ${same ? "等於" : "不等於"} \`"${ch}"\`` : "，前面就組不出來") +
-              ` → ${fromS2 ? "可以" : "不行"}`,
+            `取 \`s2[${j - 1}] = "${s2[j - 1]}"\`（左方）：` + (!prev ? "左方是 False，不行" : same ? "**可以**" : "字元不同，不行"),
           );
         }
         dp[i][j] = fromS1 || fromS2;
@@ -154,7 +150,7 @@ export default defineProblem<{ s1: string; s2: string; s3: string }>({
         t.push({
           line,
           note:
-            `要組出 \`s3\` 的前 ${i + j} 個字元 \`"${s3.slice(0, i + j)}"\`，最後一個字元是 \`s3[${k}] = "${ch}"\`。` +
+            `\`s3[${k}] = "${ch}"\` 要由誰提供？` +
             `${parts.join("；")}。\`dp[${i}][${j}] = ${py(dp[i][j])}\`。`,
           views: views({ ...deps, [key]: "active" }, [i, j], { [k]: dp[i][j] ? "good" : "bad" }, k),
           vars: { i, j, "s3[i+j-1]": ch, "dp[i][j]": dp[i][j] },

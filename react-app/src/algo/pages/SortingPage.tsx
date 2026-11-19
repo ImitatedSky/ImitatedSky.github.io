@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FiShuffle } from "react-icons/fi";
 import { usePageTitle } from "../../hooks/usePageTitle";
@@ -32,6 +32,14 @@ export default function SortingPage() {
   const [values, setValues] = useState([5, 2, 8, 3, 9, 1, 6, 4]);
   const [size, setSize] = useState(8);
   const [run, setRun] = useState(0);
+
+  // Some algorithms only show their point on a particular input (radix needs several digits)
+  useEffect(() => {
+    if (!algo?.sample) return;
+    setValues(algo.sample);
+    setText(algo.sample.join(", "));
+    setSize(algo.sample.length);
+  }, [algo]);
   const max = algo?.maxValue ?? DEFAULT_MAX;
   // Keep random bars readable, but let wide-range algorithms (radix) show every digit
   const randomMax = max > DEFAULT_MAX ? max : Math.min(max, 60);

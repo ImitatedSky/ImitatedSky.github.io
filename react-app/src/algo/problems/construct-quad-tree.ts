@@ -75,20 +75,17 @@ export default defineProblem<{ grid: number[][] }>({
       expected: "[[0, 1], [1, 1], [1, 0], [0, 1], [1, 1], None, None, None, None, None, None, None, None, [1, 1], [1, 0], [1, 0], [1, 1]]",
     },
     {
-      label: "8 × 8",
+      // (was LeetCode's 8 × 8 example: same tree shape as preset 1 but a 370px-tall grid)
+      label: "4 × 4（全是 1）",
       input: {
         grid: [
-          [1, 1, 1, 1, 0, 0, 0, 0],
-          [1, 1, 1, 1, 0, 0, 0, 0],
-          [1, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 0, 0, 0, 0],
-          [1, 1, 1, 1, 0, 0, 0, 0],
-          [1, 1, 1, 1, 0, 0, 0, 0],
-          [1, 1, 1, 1, 0, 0, 0, 0],
+          [1, 1, 1, 1],
+          [1, 1, 1, 1],
+          [1, 1, 1, 1],
+          [1, 1, 1, 1],
         ],
       },
-      expected: "[[0, 1], [1, 1], [0, 1], [1, 1], [1, 0], None, None, None, None, [1, 0], [1, 0], [1, 1], [1, 1]]",
+      expected: "[[1, 1]]",
     },
     {
       label: "2 × 2",

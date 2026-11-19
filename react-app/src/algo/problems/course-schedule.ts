@@ -102,8 +102,8 @@ export default defineProblem<{ numCourses: number; prerequisites: number[][] }>(
           edgeMarks: em,
           pointers: o.u !== undefined ? { u: String(o.u) } : {},
         }),
-        V.array("state（0 沒走過／1 走訪中／2 安全）", state, { marks: sm, pointers: o.u !== undefined ? { u: o.u } : {} }),
         V.stack("目前的遞迴路徑", stack),
+        V.array("state（0 沒走過／1 走訪中／2 安全）", state, { marks: sm, pointers: o.u !== undefined ? { u: o.u } : {} }),
       ];
     };
 

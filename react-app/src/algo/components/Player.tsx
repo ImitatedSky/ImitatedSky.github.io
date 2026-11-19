@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import {
   FiChevronLeft,
@@ -8,7 +8,34 @@ import {
   FiRotateCcw,
   FiSkipForward,
 } from "react-icons/fi";
-import type { Frame } from "../types";
+import type { ArrayView, Frame } from "../types";
+import { groupPointers } from "../views/shared";
+
+/**
+ * Give every array view the same pointer-row and bracket-row height in every
+ * frame (the tallest it ever needs), so the stage doesn't jump as pointers
+ * and windows come and go.
+ */
+function stabilize(frames: Frame[]): Frame[] {
+  const rows = new Map<string, number>();
+  const ranged = new Set<string>();
+  const key = (v: ArrayView) => v.label ?? "";
+  for (const f of frames)
+    for (const v of f.views) {
+      if (v.type !== "array") continue;
+      const stack = Math.max(0, ...[...groupPointers<number>(v.pointers).values()].map((g) => g.length));
+      rows.set(key(v), Math.max(rows.get(key(v)) ?? 0, stack));
+      if (v.ranges !== undefined) ranged.add(key(v));
+    }
+  return frames.map((f) => ({
+    ...f,
+    views: f.views.map((v) =>
+      v.type === "array"
+        ? { ...v, pointerRows: rows.get(key(v)) || undefined, ranges: v.ranges ?? (ranged.has(key(v)) ? [] : undefined) }
+        : v,
+    ),
+  }));
+}
 import { ViewRenderer } from "../views";
 import { fmt, rich } from "../views/shared";
 import CodePanel from "./CodePanel";
@@ -22,7 +49,7 @@ const BASE_MS = 1200;
  * with the input so playback restarts.
  */
 export default function Player({
-  frames,
+  frames: rawFrames,
   code,
   toolbar,
   autoPlay = false,
@@ -32,6 +59,7 @@ export default function Player({
   toolbar?: ReactNode;
   autoPlay?: boolean;
 }) {
+  const frames = useMemo(() => stabilize(rawFrames), [rawFrames]);
   const [idx, setIdx] = useState(0);
   const [playing, setPlaying] = useState(autoPlay);
   const [speed, setSpeed] = useState(1);

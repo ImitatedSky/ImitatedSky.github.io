@@ -151,18 +151,13 @@ export default defineProblem<{ board: string[][]; words: string[] }>({
       const edgeMarks: Record<string, Tone> = {};
       for (let j = 1; j < chain.length; j++)
         if (have.has(chain[j].id)) edgeMarks[`${chain[j - 1].id}>${chain[j].id}`] = "active";
-      const pointers: Record<string, string> = {};
+      // 指標標籤會蓋住邊上的字母，所以改用顏色表示：紫色 = node，藍色 = parent
       const cur = chain[chain.length - 1];
       if (s.insertPath) {
         marks[cur.id] = "good";
-        pointers.node = cur.id;
       } else if (chain.length > 1) {
-        const parent = chain[chain.length - 2];
-        if (have.has(cur.id)) {
-          marks[cur.id] = s.nodeTone ?? "active";
-          pointers.node = cur.id;
-        }
-        pointers.parent = parent.id;
+        marks[chain[chain.length - 2].id] = "alt";
+        if (have.has(cur.id)) marks[cur.id] = s.nodeTone ?? "active";
       }
 
       const gm: Record<string, Tone> = {};
@@ -180,7 +175,8 @@ export default defineProblem<{ board: string[][]; words: string[] }>({
       if (s.wordIdx !== undefined) wm[s.wordIdx] = "active";
 
       return [
-        V.tree("trie（邊 = 字母，綠色節點 = 存著單字的 \"$\"）", { nodes: specs, root: trie.id }, { marks, edgeLabels, edgeMarks, pointers }),
+        V.tree("trie（邊 = 字母，綠 = 存著單字，紫 = node，藍 = parent）", { nodes: specs, root: trie.id }, { marks, edgeLabels, edgeMarks }),
+        V.stack("遞迴堆疊", path.map(([r, c]) => `dfs(${r}, ${c})`)),
         V.grid("board（# = 目前路徑用過的格子）", board, {
           marks: gm,
           pointers: s.at ? { "r,c": s.at } : {},
@@ -190,7 +186,6 @@ export default defineProblem<{ board: string[][]; words: string[] }>({
         V.map("words（綠色 = 已找到）", words.map((w, i) => [`${i}`, w] as [string, string]), {
           marks: wm,
         }),
-        V.stack("遞迴堆疊", path.map(([r, c]) => `dfs(${r}, ${c})`)),
       ];
     };
     const vars = (extra: Record<string, string | number> = {}) => ({ ...extra, res: py(res) });

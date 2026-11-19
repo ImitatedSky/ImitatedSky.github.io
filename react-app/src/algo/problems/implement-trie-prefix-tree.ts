@@ -84,20 +84,20 @@ export default defineProblem<{ ops: Op[]; args: string[] }>({
         pass`,
   presets: [
     {
-      label: "apple / app",
-      input: {
-        ops: ["Trie", "insert", "search", "search", "startsWith", "insert", "search"],
-        args: ["", "apple", "apple", "app", "app", "app", "app"],
-      },
-      expected: "[None, None, True, False, True, None, True]",
-    },
-    {
       label: "分岔：car / cat / dog",
       input: {
         ops: ["Trie", "insert", "insert", "insert", "search", "startsWith", "search", "search"],
         args: ["", "car", "cat", "dog", "ca", "ca", "cow", "dog"],
       },
       expected: "[None, None, None, None, False, True, False, True]",
+    },
+    {
+      label: "apple / app",
+      input: {
+        ops: ["Trie", "insert", "search", "search", "startsWith", "insert", "search"],
+        args: ["", "apple", "apple", "app", "app", "app", "app"],
+      },
+      expected: "[None, None, True, False, True, None, True]",
     },
     {
       label: "空的 trie",
@@ -156,12 +156,7 @@ export default defineProblem<{ ops: Op[]; args: string[] }>({
 
       const entries = calls.map<[Cell, Cell?]>((c, j) => (j < out.length ? [c, py(out[j])] : [c]));
       return [
-        V.tree("trie（邊 = 字母，綠色 ✓ = 有單字在此結束）", { nodes, root: root.id }, {
-          marks,
-          edgeLabels,
-          edgeMarks,
-          pointers: node ? { node: node.id } : {},
-        }),
+        V.tree("trie（邊 = 字母，✓ = 有單字在此結束，紫色 = node）", { nodes, root: root.id }, { marks, edgeLabels, edgeMarks }),
         V.chars("目前的字串", word, { marks: cm, pointers: s.charTone && i < word.length ? { ch: i } : {} }),
         V.map("操作 → 回傳值", entries, { marks: { [calls[s.k]]: s.opTone ?? "active" } }),
       ];

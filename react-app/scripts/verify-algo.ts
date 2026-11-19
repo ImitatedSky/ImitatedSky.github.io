@@ -4,7 +4,8 @@
  *   npx tsx scripts/verify-algo.ts                 every problem + every sort
  *   npx tsx scripts/verify-algo.ts two-sum 3sum    just these problems
  *   npx tsx scripts/verify-algo.ts --sorting       just the sorting algorithms
- *   npx tsx scripts/verify-algo.ts --strict        also fail if any of the 150 is missing
+ *   npx tsx scripts/verify-algo.ts --strict        also fail if any of the 150 is missing or lacks English
+ *   npx tsx scripts/verify-algo.ts --en <slug>     require the English statement for these problems
  *
  * For each problem it checks the trace (frame shape, line numbers, view
  * references, last frame's `result` === preset `expected`) and actually runs
@@ -31,6 +32,7 @@ const MIN_CHECKS = 5;
 
 const args = process.argv.slice(2);
 const strict = args.includes("--strict");
+const requireEn = strict || args.includes("--en");
 const sortingOnly = args.includes("--sorting");
 const wanted = args.filter((a) => !a.startsWith("--"));
 
@@ -202,6 +204,17 @@ async function verifyProblem(slug: string): Promise<string[]> {
   if (p.code?.includes("\t")) errs.push("code contains tabs — use 4 spaces");
   if (p.starter?.trim() === p.code?.trim()) errs.push("starter must be a stub, not the solution");
   if (/[一-鿿]/.test(p.summary ?? "") === false) errs.push("summary should be written in 繁體中文");
+  if (!p.summaryEn?.trim()) {
+    if (requireEn) errs.push("summaryEn missing");
+  } else {
+    if (/[一-鿿]/.test(p.summaryEn)) errs.push("summaryEn contains CJK characters");
+    if ((p.constraints?.length ?? 0) !== (p.constraintsEn?.length ?? 0))
+      errs.push(`constraintsEn has ${p.constraintsEn?.length ?? 0} items, constraints has ${p.constraints?.length ?? 0}`);
+    for (const [i, ex] of (p.examples ?? []).entries())
+      if (ex.note && !ex.noteEn?.trim()) errs.push(`example ${i + 1} has a note but no noteEn`);
+    for (const t of [...(p.constraintsEn ?? []), ...(p.examples ?? []).map((e) => e.noteEn ?? "")])
+      if (/[一-鿿]/.test(t)) errs.push(`English text contains CJK: ${t.slice(0, 40)}`);
+  }
 
   const codeLines = (p.code ?? "").split("\n").length;
   if (!p.presets?.length) errs.push("no presets");

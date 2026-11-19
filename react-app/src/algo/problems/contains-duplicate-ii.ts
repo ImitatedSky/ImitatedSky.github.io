@@ -59,7 +59,7 @@ export default defineProblem<{ nums: number[]; k: number }>({
     t.push({
       line: 3,
       note: `建立空的雜湊表 \`last\`，記錄每個數值**最近一次**出現在哪個索引。目標：找到兩個相同的數，索引差不超過 \`k = ${k}\`。`,
-      views: [V.array("nums", nums), V.map(LAST, last)],
+      views: [V.array("nums", nums, { ranges: [] }), V.map(LAST, last)],
       vars: { k },
     });
 
@@ -119,7 +119,7 @@ export default defineProblem<{ nums: number[]; k: number }>({
           ? `把 \`last[${x}]\` **更新**成 ${i}。對後面的元素來說，索引 ${i} 的 \`${x}\` 比舊的更近，舊位置可以丟掉了。`
           : `記下 \`last[${x}] = ${i}\`，之後若再遇到 \`${x}\` 就拿這個位置來算距離。`,
         views: [
-          V.array("nums", nums, { pointers: { i }, marks: { [i]: "visited" } }),
+          V.array("nums", nums, { pointers: { i }, marks: { [i]: "visited" }, ranges: [] }),
           V.map(LAST, last, { marks: { [String(x)]: "active" } }),
         ],
         vars: { k, i, x },
@@ -129,7 +129,7 @@ export default defineProblem<{ nums: number[]; k: number }>({
     t.push({
       line: 8,
       note: `走完整個陣列，每個數和它左邊最近的相同數字都相隔超過 ${k}（或根本沒有重複），回傳 \`False\`。`,
-      views: [V.array("nums", nums), V.map(LAST, last)],
+      views: [V.array("nums", nums, { ranges: [] }), V.map(LAST, last)],
       vars: { k },
       result: py(false),
     });

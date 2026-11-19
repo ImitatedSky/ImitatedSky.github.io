@@ -1,5 +1,5 @@
 import { defineProblem } from "../types";
-import type { ListNodeSpec, Tone, View } from "../types";
+import type { Tone, View } from "../types";
 import { V, heapSpec, py, tracer } from "../trace";
 
 const code = `class Solution:
@@ -106,13 +106,23 @@ export default defineProblem<{ lists: number[][] }>({
     const key = (e: Entry) => `${e[0]},${e[1]}`;
 
     const views = (o: { top?: boolean; pushed?: Entry; from?: number; fresh?: boolean } = {}): View[] => {
-      const out: View[] = input.map((vals, i) => {
-        const nodes: ListNodeSpec[] = vals.slice(pos[i]).map((v, j) => ({ id: `${i}-${pos[i] + j}`, val: v }));
-        const marks: Record<string, Tone> = {};
-        if (nodes.length && heap.some((e) => e[1] === i)) marks[nodes[0].id] = "compare";
-        if (nodes.length && o.from === i) marks[nodes[0].id] = "active";
-        return V.list(`lists[${i}]`, nodes, { marks });
+      // One compact grid instead of k stacked list views: row i = lists[i],
+      // nodes already moved to the answer leave a dashed placeholder behind.
+      const cols = Math.max(1, ...input.map((l) => l.length));
+      const gm: Record<string, Tone> = {};
+      const cells = input.map((vals, i) => {
+        if (pos[i] < vals.length) {
+          if (heap.some((e) => e[1] === i)) gm[`${i},${pos[i]}`] = "compare";
+          if (o.from === i) gm[`${i},${pos[i]}`] = "active";
+        }
+        return Array.from({ length: cols }, (_, j) => (j >= pos[i] && j < vals.length ? vals[j] : ""));
       });
+      const out: View[] = [
+        V.grid("lists（每列一條串列，由左到右；黃色 = 在堆積裡的頭）", cells, {
+          marks: gm,
+          rowLabels: input.map((_, i) => `[${i}]`),
+        }),
+      ];
       const hm: Record<string, Tone> = {};
       if (o.top && heap.length) hm.h0 = "active";
       if (o.pushed) {

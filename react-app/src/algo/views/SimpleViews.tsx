@@ -65,6 +65,8 @@ export function GridView({ view }: { view: GridViewT }) {
                       width: size,
                       height: size,
                       fontSize: text.length > 3 ? size * 0.26 : size * 0.36,
+                      marginRight: view.blocks && (c + 1) % view.blocks[1] === 0 && c < cols - 1 ? 5 : undefined,
+                      marginBottom: view.blocks && (r + 1) % view.blocks[0] === 0 && r < rows - 1 ? 5 : undefined,
                     }}
                   >
                     {text}
@@ -166,7 +168,7 @@ export function IntervalsView({ view }: { view: IntervalsViewT }) {
   return (
     <ViewFrame label={view.label}>
       <div className="algo-intervals">
-        <div className="algo-intervals-lanes" style={{ height: laneCount * 30 }}>
+        <div className="algo-intervals-lanes" style={{ height: laneCount * 30, marginTop: view.points?.some((p) => p.label) ? 18 : 0 }}>
           {view.items.map((it, i) => (
             <div
               key={i}

@@ -121,9 +121,9 @@ export default defineProblem<{ candidates: number[]; target: number }>({
       if (i !== undefined) pointers.i = i;
       return [
         V.array("candidates（已排序）", candidates, { marks, pointers }),
-        V.array("path", path, { marks: path.length ? { [path.length - 1]: "active" } : {} }),
-        tree.view("決策樹（節點 = 還差多少 remain，邊 = 選的數）"),
-        V.set("res", res.map((p) => py(p)), { marks: newest ? { [py(newest)]: "good" } : {} }),
+        // no separate path array: the lit edges from the root spell out `path`
+        tree.view("決策樹（節點 = 還差多少 remain，邊 = 選的數；亮起的邊 = path）"),
+        V.array("res", res.map((p) => py(p)), { marks: newest ? { [res.length - 1]: "good" } : {} }),
       ];
     };
 

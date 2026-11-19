@@ -36,7 +36,7 @@ The trace must **mirror the Python `code`**: same algorithm, same variable names
 
 ## Rules
 
-1. **Own words.** `summary` is a short 繁體中文 paraphrase of the task (2–5 sentences). Never copy LeetCode's statement text. Examples are just input/output values.
+1. **Own words, two languages.** `summary` is a short 繁體中文 paraphrase of the task (2–5 sentences) and `summaryEn` is the same in English; the page shows English by default with a 中文 switch. Also give `constraintsEn` (same order as `constraints`) and `noteEn` on every example that has a `note`. Never copy LeetCode's statement text in either language — write it fresh, plainly, as you would explain it to a colleague. Examples are just input/output values (language-neutral).
 2. **繁體中文（台灣用語）** for all prose: 陣列、字串、指標、佇列、堆疊、雜湊表、鏈結串列、遞迴、迴圈、節點、走訪. Keep identifiers and English terms of art as they are.
 3. **Notes explain why**, not just what. "`7 < 9`，左邊太小，只有移動 `l` 才可能變大" beats "移動 l".
 4. **Python**: LeetCode-style `class Solution` (or the class the problem asks you to design), Python 3, 4-space indent, no tabs, no `import` lines needed (see prelude). Pick the standard optimal interview solution — the one worth memorising — and keep it short and clean. A few short 繁中 comments are welcome.
@@ -52,7 +52,7 @@ The trace must **mirror the Python `code`**: same algorithm, same variable names
 
 | Situation | View |
 |---|---|
-| Array / string with indices and pointers | `V.array` / `V.chars`, `pointers`, `marks`, `ranges` for windows and subarrays |
+| Array / string with indices and pointers | `V.array` / `V.chars`, `pointers`, `marks`, `ranges` for windows and subarrays. Pass `pointers: {}` / `ranges: []` on frames without them so the rows stay reserved and the layout doesn't jump |
 | Heights, amounts, values worth comparing by size | `V.bars` (non-negative numbers), `fill` for stacked extras like trapped water |
 | Swapping / moving elements | pass `ids` so cells slide to their new position |
 | Hash map / set / counter | `V.map` / `V.set` |

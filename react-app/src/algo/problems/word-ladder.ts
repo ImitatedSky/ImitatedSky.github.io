@@ -145,7 +145,6 @@ export default defineProblem<Input>({
       o: {
         word?: string;
         i?: number;
-        nxt?: string;
         marks?: Record<string, Tone>;
         edgeMarks?: Record<string, Tone>;
       } = {},
@@ -162,12 +161,11 @@ export default defineProblem<Input>({
       if (words.has(endWord) || endWord === beginWord) pointers.end = endWord;
       return [
         V.graph("單字圖（有連線 = 只差一個字母；一欄 = BFS 的一層）", { nodes, edges }, { marks, edgeMarks: em, pointers }),
-        V.queue("q（單字, 序列長度）", q.map(([w, s]) => `(${w}, ${s})`)),
-        V.chars("word", o.word ?? beginWord, {
+        V.chars("word（i = 正在改的位置）", o.word ?? beginWord, {
           marks: o.i !== undefined ? { [o.i]: "compare" } : {},
           pointers: o.i !== undefined ? { i: o.i } : {},
         }),
-        ...(o.nxt && o.i !== undefined ? [V.chars("nxt", o.nxt, { marks: { [o.i]: "active" } })] : []),
+        V.queue("q（單字, 序列長度）", q.map(([w, s]) => `(${w}, ${s})`)),
       ];
     };
 
@@ -241,7 +239,6 @@ export default defineProblem<Input>({
             views: views({
               word,
               i,
-              nxt,
               marks: { [nxt]: toneOf(steps + 1) },
               edgeMarks: { [`${word}>${nxt}`]: "active" },
             }),

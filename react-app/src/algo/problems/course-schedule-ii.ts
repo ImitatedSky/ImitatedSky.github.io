@@ -110,11 +110,11 @@ export default defineProblem<{ numCourses: number; prerequisites: number[][] }>(
           edgeMarks: em,
           pointers,
         }),
+        V.queue("q（現在就能修的課）", q),
         V.array("indegree（還有幾門先修沒修）", indegree, {
           marks: { ...im, ...o.inMarks },
           pointers: o.nxt !== undefined ? { nxt: o.nxt } : {},
         }),
-        V.queue("q（現在就能修的課）", q),
         V.array("order", order),
       ];
     };

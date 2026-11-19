@@ -91,13 +91,13 @@ export default defineProblem<{ haystack: string; needle: string }>({
       t.push({
         line: 3,
         note: `\`n = ${n}\`、\`m = ${m}\`：\`needle\` 比 \`haystack\` 還長。`,
-        views: [V.chars("haystack", haystack), needleView(0, 0)],
+        views: [V.chars("haystack", haystack, { ranges: [] }), needleView(0, 0)],
         vars: { n, m },
       });
       t.push({
         line: [4, 10],
         note: `\`range(n - m + 1) = range(${n - m + 1})\` 是空的，一個起點都不用試，直接回傳 \`-1\`。`,
-        views: [V.chars("haystack", haystack), needleView(0, 0)],
+        views: [V.chars("haystack", haystack, { ranges: [] }), needleView(0, 0)],
         vars: { n, m },
         result: py(-1),
       });
@@ -107,7 +107,7 @@ export default defineProblem<{ haystack: string; needle: string }>({
     t.push({
       line: 3,
       note: `\`n = ${n}\`、\`m = ${m}\`。把 \`needle\` 貼在 \`haystack\` 下面，起點 \`i\` 只需要試 0 ~ ${n - m}（\`n − m\`），再往右就超出去了。`,
-      views: [V.chars("haystack", haystack), needleView(0, 0)],
+      views: [V.chars("haystack", haystack, { ranges: [] }), needleView(0, 0)],
       vars: { n, m },
     });
 
@@ -158,7 +158,7 @@ export default defineProblem<{ haystack: string; needle: string }>({
     t.push({
       line: 10,
       note: `0 ~ ${n - m} 每個起點都試過了，沒有一個能完整對上，\`needle\` 不在 \`haystack\` 裡，回傳 \`-1\`。`,
-      views: [V.chars("haystack", haystack), needleView(n - m, 0)],
+      views: [V.chars("haystack", haystack, { ranges: [] }), needleView(n - m, 0)],
       vars: { n, m },
       result: py(-1),
     });

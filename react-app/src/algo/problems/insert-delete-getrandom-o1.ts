@@ -117,7 +117,12 @@ export default defineProblem<{ ops: Op[] }>({
         }),
         V.array("nums", nums, { marks: o.numMarks ?? {}, pointers: o.numPointers ?? {} }),
         V.map("pos（數值 → 索引）", pos, { marks: o.posMarks ?? {} }),
-        V.array("回傳值", out),
+        // 固定長度、和上面的操作一格對一格，版面才不會跟著長大
+        V.array(
+          "回傳值（對應上面每個操作）",
+          ops.map((_, x) => (x < out.length ? out[x] : "")),
+          { marks: cur >= 0 && cur < out.length ? { [cur]: o.opTone === "bad" ? "bad" : "good" } : {} },
+        ),
       ];
     };
 

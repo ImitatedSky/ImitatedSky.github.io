@@ -1,5 +1,5 @@
 import { defineProblem } from "../types";
-import type { Cell, Tone } from "../types";
+import type { Tone } from "../types";
 import { V, py, tracer } from "../trace";
 
 const code = `class Solution:
@@ -55,15 +55,15 @@ export default defineProblem<{ s: string }>({
     const marks: Record<number, Tone> = {};
     let i = s.length - 1;
 
-    const resView = (last?: Tone) => {
-      const entries: [Cell, Cell][] = res.map((w, k) => [k, w]);
-      return V.map("res", entries, { marks: last && res.length ? { [String(res.length - 1)]: last } : {} });
-    };
+    const resView = (last?: Tone) =>
+      V.array("res", res, { marks: last && res.length ? { [res.length - 1]: last } : {} });
+    // i 走到 -1 時不畫指標（畫在陣列外會讓整排格子位移），數值看右下角的變數
+    const ptr = (p: Record<string, number>) => Object.fromEntries(Object.entries(p).filter(([, v]) => v >= 0));
 
     t.push({
       line: [3, 4],
       note: "想讓最後一個單字排到最前面，所以 `i` 從字串**尾巴**開始往左掃，掃到的單字依序放進 `res`。",
-      views: [V.chars("s", s, { pointers: { i } }), resView()],
+      views: [V.chars("s", s, { pointers: ptr({ i }), ranges: [] }), resView()],
       vars: { i },
     });
 
@@ -74,7 +74,7 @@ export default defineProblem<{ s: string }>({
         t.push({
           line: [5, 6, 7, 8],
           note: `\`s[${i + 1}]\` 是空白，不屬於任何單字，直接跳過。不管連續幾個空白都是這樣一格一格略過。`,
-          views: [V.chars("s", s, { pointers: { i }, marks }), resView()],
+          views: [V.chars("s", s, { pointers: ptr({ i }), marks, ranges: [] }), resView()],
           vars: { i },
         });
         continue;
@@ -84,7 +84,7 @@ export default defineProblem<{ s: string }>({
       t.push({
         line: [5, 6, 9],
         note: `\`s[${i}] = "${s[i]}"\` 是字母 —— 碰到一個單字的**結尾**了。用 \`j = ${j}\` 把這個位置記下來。`,
-        views: [V.chars("s", s, { pointers: { i, j }, marks: { ...marks, [i]: "active" } }), resView()],
+        views: [V.chars("s", s, { pointers: ptr({ i, j }), marks: { ...marks, [i]: "active" }, ranges: [] }), resView()],
         vars: { i, j },
       });
 
@@ -99,7 +99,7 @@ export default defineProblem<{ s: string }>({
           `所以單字的範圍是 \`i + 1 = ${i + 1}\` 到 \`j = ${j}\`。`,
         views: [
           V.chars("s", s, {
-            pointers: { i, j },
+            pointers: ptr({ i, j }),
             marks: { ...marks, ...wordMarks },
             ranges: [{ from: i + 1, to: j, tone: "active", label: word }],
           }),
@@ -115,7 +115,7 @@ export default defineProblem<{ s: string }>({
         note: `切出 \`s[${i + 1}:${j + 1}] = "${word}"\` 放進 \`res\`。因為是從後面掃過來的，越後面的單字越早進 \`res\`，順序自然就反過來了。`,
         views: [
           V.chars("s", s, {
-            pointers: { i, j },
+            pointers: ptr({ i, j }),
             marks,
             ranges: [{ from: i + 1, to: j, tone: "good", label: word }],
           }),
@@ -126,14 +126,14 @@ export default defineProblem<{ s: string }>({
     }
 
     const answer = res.join(" ");
-    const all: Record<string, Tone> = {};
-    res.forEach((_, k) => (all[String(k)] = "good"));
+    const all: Record<number, Tone> = {};
+    res.forEach((_, k) => (all[k] = "good"));
     t.push({
       line: 13,
       note: `\`i\` 走到 -1，整個字串掃完。用**一個**空白把 \`res\` 接起來：\`"${answer}"\` —— 原本多餘的空白完全沒被收進來。`,
       views: [
-        V.chars("s", s, { pointers: { i }, marks }),
-        V.map("res", res.map((w, k) => [k, w] as [Cell, Cell]), { marks: all }),
+        V.chars("s", s, { pointers: ptr({ i }), marks, ranges: [] }),
+        V.array("res", res, { marks: all }),
       ],
       vars: { i },
       result: py(answer),

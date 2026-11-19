@@ -115,9 +115,9 @@ export default defineProblem<{ nums: number[] }>({
       if (i !== undefined) marks[i] = "active";
       return [
         V.array("nums（灰色 = 已經用掉）", nums, { marks, pointers: i !== undefined ? { i } : {} }),
-        V.array("path", path, { marks: path.length ? { [path.length - 1]: "active" } : {} }),
+        // no separate path array: the highlighted tree node *is* the current path
         tree.view("決策樹（節點 = 目前的 path，邊 = 選的數）"),
-        V.set("res", res.map((p) => py(p)), { marks: newest ? { [py(newest)]: "good" } : {} }),
+        V.array("res", res.map((p) => py(p)), { marks: newest ? { [res.length - 1]: "good" } : {} }),
       ];
     };
 

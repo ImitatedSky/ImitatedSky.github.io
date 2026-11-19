@@ -94,10 +94,10 @@ export default defineProblem<{ root: (number | null)[] }>({
         : [{ start: LO, end: HI, label: "(-inf, inf)", tone: (bad ? "bad" : "good") as Tone }];
       return [
         V.tree("tree", spec, { marks: m, pointers: top ? { node: top.node.id } : {} }),
+        V.stack("遞迴堆疊", stack.map((c) => `valid(${c.node.val}, ${show(c.low)}, ${show(c.high)})`)),
         V.intervals("允許範圍（數線兩端代表 ±inf，越深的呼叫越窄）", items, {
           points: top ? [{ at: top.node.val, label: `node = ${top.node.val}`, tone: o.tone ?? "active" }] : [],
         }),
-        V.stack("遞迴堆疊", stack.map((c) => `valid(${c.node.val}, ${show(c.low)}, ${show(c.high)})`)),
       ];
     };
     const vars = () => {

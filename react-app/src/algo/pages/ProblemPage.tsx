@@ -10,6 +10,8 @@ import { setStatus, useProgress } from "../progress";
 import { loadProblem } from "../registry";
 import type { AnyProblem, Frame } from "../types";
 import { rich } from "../views/shared";
+import { useLang } from "../lang";
+import type { Lang } from "../lang";
 
 type Tab = "visual" | "idea" | "practice";
 type Loaded = { slug: string; problem: AnyProblem | null };
@@ -21,6 +23,7 @@ export default function ProblemPage() {
   const [tab, setTab] = useState<Tab>("visual");
   const [presetIdx, setPresetIdx] = useState(0);
   const { status, toggleDone, toggleReview } = useProgress();
+  const { lang, setLang } = useLang();
 
   usePageTitle(meta ? `${meta.id}. ${meta.titleZh} — Algo Lab` : "找不到題目");
 
@@ -79,11 +82,11 @@ export default function ProblemPage() {
         <div>
           <h1 className="algo-h1">
             <span>{meta.id}.</span>
-            {meta.titleZh}
+            {lang === "en" ? meta.title : meta.titleZh}
           </h1>
           <div className="algo-problem-sub">
             <span className={`algo-diff is-${meta.difficulty}`}>{meta.difficulty}</span>
-            <span>{meta.title}</span>
+            <span>{lang === "en" ? meta.titleZh : meta.title}</span>
             <a href={leetcodeUrl(slug)} target="_blank" rel="noreferrer" style={{ color: "var(--accent)" }}>
               LeetCode 原題 <FiExternalLink style={{ display: "inline", verticalAlign: "-2px" }} />
             </a>
@@ -112,38 +115,7 @@ export default function ProblemPage() {
 
       {problem && (
         <>
-          <section className="algo-card algo-prose" style={{ marginBottom: 18 }}>
-            <h3>題目</h3>
-            {problem.summary.split(/\n\s*\n/).map((para, i) => (
-              <p key={i}>{rich(para)}</p>
-            ))}
-            <details className="algo-details">
-              <summary>範例與限制</summary>
-                        {problem.examples.map((ex, i) => (
-              <div key={i} className="algo-example">
-                <p>
-                  <i>輸入</i>
-                  {ex.input}
-                </p>
-                <p>
-                  <i>輸出</i>
-                  {ex.output}
-                </p>
-                {ex.note && <p className="note">{rich(ex.note)}</p>}
-              </div>
-            ))}
-            {problem.constraints && problem.constraints.length > 0 && (
-              <>
-                <h4>限制</h4>
-                <ul>
-                  {problem.constraints.map((c, i) => (
-                    <li key={i}>{rich(c)}</li>
-                  ))}
-                </ul>
-              </>
-            )}
-            </details>
-          </section>
+          <Statement problem={problem} lang={lang} onLang={setLang} />
 
           <div className="algo-tabs" role="tablist">
             <button role="tab" aria-selected={tab === "visual"} className={tab === "visual" ? "is-on" : ""} onClick={() => setTab("visual")}>
@@ -250,5 +222,67 @@ export default function ProblemPage() {
         )}
       </nav>
     </>
+  );
+}
+
+const STATEMENT_TEXT = {
+  en: { heading: "Problem", more: "Examples & constraints", input: "Input", output: "Output", constraints: "Constraints" },
+  zh: { heading: "題目", more: "範例與限制", input: "輸入", output: "輸出", constraints: "限制" },
+};
+
+/** Problem statement with an EN / 中文 switch. Falls back to 中文 where no English text exists yet. */
+function Statement({ problem, lang, onLang }: { problem: AnyProblem; lang: Lang; onLang: (l: Lang) => void }) {
+  const en = lang === "en" && !!problem.summaryEn;
+  const t = STATEMENT_TEXT[en ? "en" : "zh"];
+  const summary = en ? problem.summaryEn! : problem.summary;
+  const constraints = en && problem.constraintsEn?.length ? problem.constraintsEn : problem.constraints;
+
+  return (
+    <section className="algo-card algo-prose" style={{ marginBottom: 18 }} lang={en ? "en" : "zh-Hant"}>
+      <div className="algo-statement-head">
+        <h3>{t.heading}</h3>
+        <div className="algo-lang" role="group" aria-label="Language / 語言">
+          <button className={lang === "en" ? "is-on" : ""} aria-pressed={lang === "en"} onClick={() => onLang("en")}>
+            EN
+          </button>
+          <button className={lang === "zh" ? "is-on" : ""} aria-pressed={lang === "zh"} onClick={() => onLang("zh")}>
+            中文
+          </button>
+        </div>
+      </div>
+      {lang === "en" && !problem.summaryEn && <p className="algo-lang-note">English version coming soon — showing 中文.</p>}
+      {summary.split(/\n\s*\n/).map((para, i) => (
+        <p key={i}>{rich(para)}</p>
+      ))}
+      <details className="algo-details">
+        <summary>{t.more}</summary>
+        {problem.examples.map((ex, i) => {
+          const note = en ? (ex.noteEn ?? ex.note) : ex.note;
+          return (
+            <div key={i} className="algo-example">
+              <p>
+                <i>{t.input}</i>
+                {ex.input}
+              </p>
+              <p>
+                <i>{t.output}</i>
+                {ex.output}
+              </p>
+              {note && <p className="note">{rich(note)}</p>}
+            </div>
+          );
+        })}
+        {constraints && constraints.length > 0 && (
+          <>
+            <h4>{t.constraints}</h4>
+            <ul>
+              {constraints.map((c, i) => (
+                <li key={i}>{rich(c)}</li>
+              ))}
+            </ul>
+          </>
+        )}
+      </details>
+    </section>
   );
 }

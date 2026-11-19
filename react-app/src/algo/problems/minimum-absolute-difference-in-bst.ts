@@ -76,8 +76,12 @@ export default defineProblem<{ root: (number | null)[] }>({
       if (o.comparing && prev) m[prev.id] = o.improved ? "good" : "compare";
       if (o.comparing && node) m[node.id] = o.improved ? "good" : "active";
       const pointers: Record<string, string> = {};
-      if (prev) pointers.prev = prev.id;
-      if (node) pointers.node = node.id;
+      // 兩個指標疊在同一個節點（尤其是根）會擠出畫面，合併成一個標籤
+      if (prev && node && prev.id === node.id) pointers["node = prev"] = node.id;
+      else {
+        if (prev) pointers.prev = prev.id;
+        if (node) pointers.node = node.id;
+      }
 
       // 中序序列：把正在比較的相鄰兩格標出來
       const seq = order.map((n) => n.val);
@@ -95,8 +99,8 @@ export default defineProblem<{ root: (number | null)[] }>({
       }
       return [
         V.tree("BST", spec, { marks: m, pointers }),
-        V.array("中序序列（由小到大）", shown, { marks: sm }),
         V.stack("遞迴堆疊", stack.map((n) => `inorder(${n.val})`)),
+        V.array("中序序列（由小到大）", shown, { marks: sm }),
       ];
     };
 

@@ -161,17 +161,12 @@ export default defineProblem<{ ops: Op[]; args: string[] }>({
       }
       const entries = calls.map<[Cell, Cell?]>((c, j) => (j < out.length ? [c, py(out[j])] : [c]));
       return [
-        V.tree("trie（邊 = 字母，綠色 ✓ = 單字結尾）", { nodes, root: root.id }, {
-          marks,
-          edgeLabels,
-          edgeMarks,
-          pointers: node ? { node: node.id } : {},
-        }),
-        V.chars("word", word, { marks: cm, pointers: s.stack && i <= word.length && word.length ? { i } : {} }),
+        V.tree("trie（邊 = 字母，✓ = 單字結尾，紫色 = node）", { nodes, root: root.id }, { marks, edgeLabels, edgeMarks }),
         V.stack(
-          "遞迴堆疊 dfs(節點代表的前綴, i)",
+          "遞迴堆疊 dfs(前綴, i)",
           s.stack ? path.map((n, j) => `dfs("${n.prefix}", ${j})`) : [],
         ),
+        V.chars("word", word, { marks: cm, pointers: s.stack && i <= word.length && word.length ? { i } : {} }),
         V.map("操作 → 回傳值", entries, { marks: { [calls[s.k]]: s.opTone ?? "active" } }),
       ];
     };

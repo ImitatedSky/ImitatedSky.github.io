@@ -160,25 +160,26 @@ export default defineProblem<{ points: number[][] }>({
         marks[id(j)] = group.length > 1 ? "good" : "compare";
         edgeMarks[`${id(i)}>${id(j)}`] = group.length > 1 ? "good" : "active";
 
-        const reduce =
-          g > 1
-            ? `\`gcd = ${g}\`，約分成 \`dx = ${rawDx / g}, dy = ${rawDy / g}\``
-            : "`gcd = 1`，已經是最簡";
-        const flip = flipped
-          ? `；${rawDx / g < 0 ? "`dx` 是負的" : "`dx = 0` 且 `dy` 是負的"}，整組變號成 \`dx = ${dx}, dy = ${dy}\`（同一條線，只是方向相反）`
-          : "";
+        const simp =
+          g > 1 && flipped
+            ? `除以 \`gcd = ${g}\` 再整組變號（統一方向）後，`
+            : g > 1
+              ? `除以 \`gcd = ${g}\` 後，`
+              : flipped
+                ? "整組變號（統一方向）後，"
+                : "已是最簡，";
         const outcome =
           group.length > 1
-            ? `key \`${key}\` 已經出現過 —— 斜率相同代表它和 ${group
+            ? `這個 key 出現過：它和 ${group
                 .slice(0, -1)
                 .map((k) => `\`${at(k)}\``)
-                .join("、")} 都跟錨點**共線**，這條線上現在有 ${group.length + 1} 個點。`
-            : `key \`${key}\` 第一次出現，這條線上目前是錨點加它共 2 個點。`;
+                .join("、")} 跟錨點**共線**，線上共 ${group.length + 1} 點。`
+            : "第一次出現，這條線上只有錨點和它 2 點。";
         t.push({
           line: flipped ? [7, 8, 9, 10, 11, 12, 13, 14, 15] : [7, 8, 9, 10, 11, 12, 14, 15],
           note:
-            `看 \`points[${j}] = ${at(j)}\`：相對錨點 \`dx = ${rawDx}, dy = ${rawDy}\`，${reduce}${flip}。${outcome}` +
-            (improved ? `\`res\` 更新為 **${res}**。` : `\`res\` 維持 ${res}。`),
+            `\`points[${j}] = ${at(j)}\`：相對錨點 \`dx = ${rawDx}, dy = ${rawDy}\`，${simp}key 是 \`${key}\`。${outcome}` +
+            (improved ? `\`res\` 更新為 **${res}**。` : ""),
           views: [
             graph(edges, marks, edgeMarks, { i: id(i), j: id(j) }),
             V.map("slopes", slopes, { marks: { [key]: group.length > 1 ? "good" : "active" } }),

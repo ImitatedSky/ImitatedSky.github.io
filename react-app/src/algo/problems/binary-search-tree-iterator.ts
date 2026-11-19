@@ -96,11 +96,10 @@ export default defineProblem<{ root: (number | null)[]; ops: Op[] }>({
       const marks: Record<string, Tone> = {};
       emitted.forEach((id) => (marks[id] = "good"));
       stack.forEach((n) => (marks[n.id] = "compare"));
-      const opMarks: Record<number, Tone> = {};
-      ops.forEach((_, i) => {
-        if (i < opIdx) opMarks[i] = "visited";
-        else if (i === opIdx) opMarks[i] = "active";
-      });
+      // 操作與回傳值合成一張表：寬度不夠時會自動換行，不必橫向捲動
+      const calls = ops.map((op, i) => `${i + 1}. ${op}()`);
+      const opMarks: Record<string, Tone> = {};
+      if (opIdx >= 0 && opIdx < ops.length) opMarks[calls[opIdx]] = opIdx < out.length ? "good" : "active";
       return [
         V.tree("BST", spec, { marks: { ...marks, ...extra }, pointers }),
         V.stack(
@@ -108,11 +107,7 @@ export default defineProblem<{ root: (number | null)[]; ops: Op[] }>({
           stack.map((n) => n.val),
           { marks: topTone && stack.length ? { [stack.length - 1]: topTone } : {} },
         ),
-        V.array("操作", ops, {
-          marks: opMarks,
-          pointers: opIdx >= 0 && opIdx < ops.length ? { 現在: opIdx } : {},
-        }),
-        V.array("輸出", out, { marks: out.length ? { [out.length - 1]: "good" } : {} }),
+        V.map("操作 → 回傳值", calls.map<[Cell, Cell?]>((c, i) => (i < out.length ? [c, out[i]] : [c])), { marks: opMarks }),
       ];
     };
 
