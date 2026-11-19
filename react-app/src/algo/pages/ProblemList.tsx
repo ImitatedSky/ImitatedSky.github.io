@@ -1,8 +1,10 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { FiCheck, FiRotateCw, FiSearch } from "react-icons/fi";
+import { FiCheck, FiChevronDown, FiRotateCw, FiSearch, FiX } from "react-icons/fi";
 import { usePageTitle } from "../../hooks/usePageTitle";
-import { CATEGORIES, CATEGORY_BY_ID, PROBLEMS } from "../catalog";
+import { CATEGORIES, CATEGORY_BY_ID, PROBLEMS, TAGS, TAG_BY_ID } from "../catalog";
+import TagChip from "../components/TagChip";
+import { tagLabel } from "../tags";
 import { useProgress } from "../progress";
 import { useLang } from "../lang";
 import LangToggle from "../components/LangToggle";
@@ -26,6 +28,9 @@ export default function ProblemList() {
   const diff = params.get("d");
   const status = params.get("s");
   const q = params.get("q") ?? "";
+  const tag = params.get("t");
+  const activeTag = tag ? TAG_BY_ID.get(tag) : undefined;
+  const [allTags, setAllTags] = useState(false);
 
   function update(key: string, value: string | null) {
     const p = new URLSearchParams(params);
@@ -39,16 +44,18 @@ export default function ProblemList() {
     return PROBLEMS.filter((p) => {
       if (cat && p.category !== cat) return false;
       if (diff && p.difficulty !== diff) return false;
+      if (tag && !p.tags.includes(tag)) return false;
       if (status === "done" && store[p.slug] !== "done") return false;
       if (status === "review" && store[p.slug] !== "review") return false;
       if (status === "todo" && store[p.slug] === "done") return false;
       if (needle) {
-        const hay = `${p.id} ${p.title} ${p.titleZh}`.toLowerCase();
+        const tagText = p.tags.map((t) => `${TAG_BY_ID.get(t)?.name} ${TAG_BY_ID.get(t)?.nameZh}`).join(" ");
+        const hay = `${p.id} ${p.title} ${p.titleZh} ${tagText}`.toLowerCase();
         if (!hay.includes(needle)) return false;
       }
       return true;
     });
-  }, [cat, diff, status, q, store]);
+  }, [cat, diff, status, q, tag, store]);
 
   const groups = CATEGORIES.map((c) => ({
     cat: c,
@@ -99,7 +106,7 @@ export default function ProblemList() {
               <input
                 value={q}
                 onChange={(e) => update("q", e.target.value)}
-                placeholder="搜尋題號或標題…"
+                placeholder="搜尋題號、標題或技巧…"
                 aria-label="搜尋題目"
               />
             </label>
@@ -136,6 +143,35 @@ export default function ProblemList() {
               </button>
             ))}
           </div>
+
+          <div className={`algo-tagbar ${allTags ? "" : "is-collapsed"}`} aria-label="技巧標籤">
+            <button className="algo-tagbar-toggle" onClick={() => setAllTags((v) => !v)} aria-expanded={allTags}>
+              技巧 <FiChevronDown style={{ transform: allTags ? "rotate(180deg)" : undefined }} />
+            </button>
+            {/* collapsed: the active tag comes first so it is always visible */}
+            {[...TAGS].sort((a, b) => (allTags ? 0 : Number(b.id === tag) - Number(a.id === tag))).map((t) => (
+              <TagChip
+                key={t.id}
+                id={t.id}
+                lang={lang}
+                active={tag === t.id}
+                count={PROBLEMS.filter((p) => p.tags.includes(t.id)).length}
+                onClick={() => update("t", tag === t.id ? null : t.id)}
+              />
+            ))}
+          </div>
+
+          {activeTag && (
+            <div className="algo-tag-banner">
+              <span>
+                使用「<b>{tagLabel(activeTag.id, lang)}</b>」的題目共 {PROBLEMS.filter((p) => p.tags.includes(activeTag.id)).length} 題，
+                分布在 {new Set(PROBLEMS.filter((p) => p.tags.includes(activeTag.id)).map((p) => p.category)).size} 個主題 —— 一起複習，找出共通的套路。
+              </span>
+              <button onClick={() => update("t", null)} aria-label="清除技巧篩選">
+                <FiX />
+              </button>
+            </div>
+          )}
 
           {groups.length === 0 && (
             <div className="algo-card algo-empty-state">
@@ -175,6 +211,18 @@ export default function ProblemList() {
                         <b>{lang === "en" ? p.title : p.titleZh}</b>
                         <small>{lang === "en" ? p.titleZh : p.title}</small>
                       </Link>
+                      <span className="algo-row-tags">
+                        {p.tags.map((t) => (
+                          <TagChip
+                            key={t}
+                            id={t}
+                            lang={lang}
+                            small
+                            active={tag === t}
+                            onClick={() => update("t", tag === t ? null : t)}
+                          />
+                        ))}
+                      </span>
                       <span className={`algo-diff is-${p.difficulty}`}>{p.difficulty}</span>
                     </div>
                   );

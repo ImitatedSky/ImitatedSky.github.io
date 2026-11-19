@@ -4,6 +4,10 @@
  * Order follows the official study plan.
  */
 import type { Difficulty } from "./types";
+import { TAGS_BY_SLUG } from "./tags";
+
+export { TAGS, TAG_BY_ID } from "./tags";
+export type { Tag } from "./tags";
 
 export interface Category {
   id: string;
@@ -21,6 +25,8 @@ export interface ProblemMeta {
   titleZh: string;
   difficulty: Difficulty;
   category: string;
+  /** Technique tag ids (see tags.ts), most characteristic first */
+  tags: string[];
 }
 
 export const CATEGORIES: Category[] = [
@@ -260,10 +266,33 @@ export const PROBLEMS: ProblemMeta[] = CATEGORIES.flatMap((c) =>
     titleZh,
     difficulty: D[d],
     category: c.id,
+    tags: TAGS_BY_SLUG[slug] ?? [],
   })),
 );
 
 export const BY_SLUG = new Map(PROBLEMS.map((p) => [p.slug, p]));
 export const CATEGORY_BY_ID = new Map(CATEGORIES.map((c) => [c.id, c]));
+
+/**
+ * Problems most similar to `slug`, ranked by how many technique tags they
+ * share. Matching the problem's first (most characteristic) tag counts extra,
+ * and a shared category only breaks ties — so similar problems surface across
+ * the study plan's categories.
+ */
+export function similarProblems(slug: string, limit = 6): { problem: ProblemMeta; shared: string[] }[] {
+  const me = BY_SLUG.get(slug);
+  if (!me) return [];
+  return PROBLEMS.filter((p) => p.slug !== slug)
+    .map((p) => {
+      const shared = me.tags.filter((t) => p.tags.includes(t));
+      const score =
+        shared.length * 2 + (shared.includes(me.tags[0]) ? 1 : 0) + (p.category === me.category ? 0.5 : 0);
+      return { problem: p, shared, score };
+    })
+    .filter((x) => x.shared.length > 0)
+    .sort((a, b) => b.score - a.score || a.problem.id - b.problem.id)
+    .slice(0, limit)
+    .map(({ problem, shared }) => ({ problem, shared }));
+}
 
 export const leetcodeUrl = (slug: string) => `https://leetcode.com/problems/${slug}/`;

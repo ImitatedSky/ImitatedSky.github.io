@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiBarChart2 } from "react-icons/fi";
 import { usePageTitle } from "../../hooks/usePageTitle";
-import { CATEGORIES, PROBLEMS } from "../catalog";
+import { CATEGORIES, PROBLEMS, TAGS } from "../catalog";
+import TagChip from "../components/TagChip";
+import { useLang } from "../lang";
 import { useProgress } from "../progress";
 import { SORTS, SORT_BY_ID } from "../sorting";
 import type { Difficulty } from "../types";
@@ -76,6 +78,7 @@ function Ring({ done, total }: { done: number; total: number }) {
 export default function AlgoHome() {
   usePageTitle("Algo Lab — LeetCode 150 動畫圖解");
   const { store } = useProgress();
+  const { lang } = useLang();
 
   const doneCount = PROBLEMS.filter((p) => store[p.slug] === "done").length;
   const next = PROBLEMS.find((p) => store[p.slug] !== "done") ?? PROBLEMS[0];
@@ -176,6 +179,21 @@ export default function AlgoHome() {
             </Link>
           );
         })}
+      </div>
+
+      <div className="algo-section-head">
+        <div>
+          <h2>依技巧複習</h2>
+          <p>同一個技巧會出現在不同主題裡，點標籤把它們一次找出來。</p>
+        </div>
+      </div>
+      <div className="algo-tagbar" style={{ margin: "0 0 52px" }}>
+        {[...TAGS]
+          .map((t) => ({ t, n: PROBLEMS.filter((p) => p.tags.includes(t.id)).length }))
+          .sort((a, b) => b.n - a.n)
+          .map(({ t, n }) => (
+            <TagChip key={t.id} id={t.id} lang={lang} count={n} />
+          ))}
       </div>
 
       <div className="algo-section-head">

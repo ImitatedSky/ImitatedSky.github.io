@@ -7,7 +7,7 @@ Each LeetCode problem is **two files**:
 | `src/algo/problems/<slug>.ts` | `export default defineProblem<Input>({...})` — text, Python solution, and `trace()` that produces the animation |
 | `src/algo/tests/<slug>.py` | `check(...)` calls run against the Python solution (by `verify-algo` and by the in-browser practice mode) |
 
-`<slug>` is the LeetCode slug and must already exist in `src/algo/catalog.ts` (do not edit the catalog).
+`<slug>` is the LeetCode slug and must already exist in `src/algo/catalog.ts` (do not edit the catalog). Its technique tags live in `src/algo/tags.ts` (`TAGS_BY_SLUG`, most characteristic tag first, drawn from the `TAGS` vocabulary) — they drive the tag filter and the "similar problems" list, so tag what the reference solution actually uses.
 
 **Read these first — they are the spec:**
 
