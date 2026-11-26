@@ -1439,6 +1439,12 @@
   left: 0;
   top: 0;
 }
+/* Chrome keeps the scrollable overflow of cells mid-slide after a resize; clip it (cells never sit outside the row) */
+.algo-array-cells,
+.algo-array-indices {
+  overflow-x: clip;
+  overflow-clip-margin: 8px;
+}
 .algo-array-cells > .algo-empty {
   position: static;
 }

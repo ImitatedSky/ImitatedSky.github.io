@@ -60,9 +60,14 @@ export function rich(text: string): ReactNode[] {
 }
 
 /** Width of an element, tracked with ResizeObserver, so a view can size itself to fit */
+/**
+ * Width of the element, plus whether it has been measured yet. Views key their content on
+ * `measured`: measuring forces a layout at the fallback width, and without a remount every
+ * cell would then slide in from those positions (and Chrome keeps that slide's overflow).
+ */
 export function useWidth<T extends HTMLElement>(fallback = 680) {
   const ref = useRef<T>(null);
-  const [width, setWidth] = useState(fallback);
+  const [width, setWidth] = useState<number | null>(null);
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -71,5 +76,5 @@ export function useWidth<T extends HTMLElement>(fallback = 680) {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
-  return [ref, width] as const;
+  return [ref, width ?? fallback, width !== null] as const;
 }

@@ -970,3 +970,16 @@ a.algo-card:hover {
 .algo-section-head h2 {
   display: inline-block;
 }
+.algo-range.is-start span {
+  left: 0;
+  transform: none;
+}
+.algo-range.is-end span {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+/* hero demo note: reserve two lines so the card doesn't grow when a step's note wraps */
+.algo-hero-demo-note {
+  min-height: 3.1em;
+}
