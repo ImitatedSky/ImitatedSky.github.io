@@ -47,18 +47,18 @@
 }
 
 .dark .algo {
-  --bg: #141a18;
-  --surface: #1c2421;
-  --surface-2: #212b27;
-  --surface-3: #2a3631;
-  --border: #303d38;
-  --border-strong: #4a5a53;
-  --text: #eef1ea;
-  --muted: #a7b2ab;
-  --faint: #6e7c75;
+  --bg: #161719;
+  --surface: #1e1f22;
+  --surface-2: #232428;
+  --surface-3: #2c2e33;
+  --border: #35373d;
+  --border-strong: #50535b;
+  --text: #eceef1;
+  --muted: #a8abb2;
+  --faint: #71747c;
   --accent: #7cb4ff;
   --accent-2: #8ce99a;
-  --accent-ink: #10201a;
+  --accent-ink: #111214;
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 30px -16px rgba(0, 0, 0, 0.7);
 
   /* chalk */
@@ -74,9 +74,9 @@
   --medium: #ffc078;
   --hard: #ff8787;
 
-  --ink: #eef1e8;
-  --ink-soft: #b9c2bc;
-  --paper: #23302b;
+  --ink: #eceef1;
+  --ink-soft: #b8bbc2;
+  --paper: #222327;
   --grid-line: rgba(255, 255, 255, 0.025);
   --grid-cell: rgba(255, 255, 255, 0.13);
   --margin-line: rgba(255, 135, 135, 0.4);
@@ -741,4 +741,232 @@
   .algo-note p {
     font-size: 1rem;
   }
+}
+
+/* ── pages: home / problem list / problem page chrome ─────────────────────── */
+/* cards are ink-outlined notebook cards with a soft offset shadow */
+.algo-card {
+  border: 1.8px solid color-mix(in srgb, var(--ink) 70%, transparent);
+  box-shadow: 4px 5px 0 -1px color-mix(in srgb, var(--ink) 12%, transparent);
+}
+a.algo-card {
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+a.algo-card:hover {
+  transform: translate(-1px, -2px) rotate(-0.4deg);
+  border-color: var(--ink);
+  box-shadow: 6px 8px 0 -1px color-mix(in srgb, var(--ink) 18%, transparent);
+}
+
+/* headings: marker swipe instead of gradient text */
+.algo-eyebrow {
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 700;
+}
+.algo-hero h1 em,
+.algo-section-head h2,
+.algo-group-head h2 {
+  color: var(--ink);
+  -webkit-text-fill-color: currentColor;
+  background: linear-gradient(transparent 60%, var(--hl) 60%, var(--hl) 92%, transparent 92%);
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  padding: 0 4px;
+}
+.algo-hero h1 em {
+  font-style: normal;
+  background-image: linear-gradient(
+    transparent 58%,
+    color-mix(in srgb, var(--accent) 28%, transparent) 58%,
+    color-mix(in srgb, var(--accent) 28%, transparent) 90%,
+    transparent 90%
+  );
+}
+.algo-section-head a {
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* buttons */
+.algo-btn {
+  border: 1.8px solid var(--ink);
+  background: var(--paper);
+}
+.algo-btn:hover {
+  transform: rotate(-1deg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.algo-btn.is-primary {
+  border: 2px solid var(--ink);
+  background: var(--accent);
+  box-shadow: 3px 4px 0 -1px var(--ink);
+}
+.algo-btn.is-primary:hover {
+  color: #fff;
+  box-shadow: 4px 6px 0 -1px var(--ink);
+}
+.dark .algo .algo-btn.is-primary,
+.dark .algo .algo-btn.is-primary:hover {
+  color: var(--accent-ink);
+}
+
+/* difficulty = pen circled word; chips/tags = sketched tabs */
+.algo-diff {
+  background: none;
+  border: 1.5px solid var(--d);
+  border-radius: 50% 42% 55% 45% / 55% 48% 45% 52%;
+  padding: 1px 9px;
+}
+.algo-chip,
+.algo-skill,
+.algo-tagbar-toggle,
+.algo-search,
+.algo-cat-select,
+.algo-tag-banner {
+  border-radius: var(--sketch-r-sm);
+}
+.algo-chip,
+.algo-search,
+.algo-cat-select {
+  border: 1.5px solid color-mix(in srgb, var(--ink) 45%, transparent);
+  background: var(--paper);
+}
+.algo-chip.is-on {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: linear-gradient(transparent 15%, var(--hl) 15%, var(--hl) 88%, transparent 88%), var(--paper);
+}
+.algo-skill {
+  border: 1.5px dashed color-mix(in srgb, var(--accent-2) 60%, transparent);
+  background: var(--paper);
+}
+.algo-skill.is-on {
+  border-style: solid;
+}
+.algo-search:focus-within {
+  border-color: var(--accent);
+}
+
+/* progress: ink-outlined tube filled with a marker */
+.algo-progressbar {
+  height: 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px 3px 7px 3px / 3px 7px 3px 6px;
+  background: var(--paper);
+}
+.algo-progressbar > i {
+  border-radius: 0;
+  background: var(--c1, var(--accent));
+  opacity: 0.75;
+}
+
+/* hero demo */
+.algo-hero-demo {
+  border: 2px solid var(--ink);
+  border-radius: 18px 8px 20px 9px / 9px 20px 8px 18px;
+  box-shadow: 5px 6px 0 -1px color-mix(in srgb, var(--ink) 14%, transparent);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.algo-hero-demo-head {
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.algo-hero-demo-head span:first-child::before {
+  box-shadow: none;
+}
+
+/* stats ring: pencil track + marker arc */
+.algo-ring .track {
+  stroke: color-mix(in srgb, var(--ink) 22%, transparent);
+  stroke-width: 2;
+  stroke-dasharray: 5 6;
+}
+.algo-ring .value {
+  stroke: var(--accent);
+  stroke-width: 10;
+  opacity: 0.8;
+}
+.algo-ring-label b {
+  font-family: var(--font-hand);
+  font-size: 2.4rem;
+}
+.algo-stats-bars h4 span,
+.algo-cat-foot {
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* topic cards: big handwritten number, coloured marker progress */
+.algo-cat::before {
+  display: none;
+}
+.algo-cat:hover {
+  border-color: var(--c);
+  box-shadow: 6px 8px 0 -1px color-mix(in srgb, var(--c) 35%, transparent);
+}
+.algo-cat-no {
+  font-family: var(--font-hand);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.algo-cat h3 small,
+.algo-sort-tile small {
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* sorting tiles: sketched bars */
+.algo-mini-bars i {
+  border: 1.5px solid var(--ink);
+  border-bottom: 0;
+  border-radius: 2px 3px 0 0;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  opacity: 1;
+}
+.algo-sort-tile .algo-mini-bars {
+  border-bottom: 2px solid var(--ink);
+}
+
+/* problem list: notebook page with dashed rules */
+.algo-list-side button.is-on {
+  color: var(--ink);
+  background: linear-gradient(transparent 18%, var(--hl) 18%, var(--hl) 86%, transparent 86%);
+}
+.algo-row {
+  border-bottom: 1.5px dashed color-mix(in srgb, var(--ink) 18%, transparent);
+}
+.algo-row:hover {
+  background: color-mix(in srgb, var(--hl) 35%, transparent);
+}
+.algo-row-no,
+.algo-list-side button span:last-child,
+.algo-group-head span {
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.algo-status {
+  border: 1.8px solid color-mix(in srgb, var(--ink) 45%, transparent);
+  border-radius: 50% 45% 55% 48% / 52% 55% 45% 50%;
+}
+.algo-status.is-done {
+  border-color: var(--ink);
+}
+.algo-section-head h2 {
+  display: inline-block;
 }
