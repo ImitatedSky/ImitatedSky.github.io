@@ -1,7 +1,10 @@
 import type { ArrayView as ArrayViewT } from "../types";
 import { ViewFrame, fmt, groupPointers, pointerClass, toneClass, useWidth } from "./shared";
+import { Brace, CurlyArrow, SketchBox, seedOf } from "./sketch";
 
-const BAR_MAX = 132;
+const BAR_MAX = 168;
+const PTR_ROW = 21;
+const PTR_H = 42;
 
 export default function ArrayView({ view }: { view: ArrayViewT }) {
   const n = view.values.length;
@@ -14,7 +17,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
   const longest = view.bars ? 0 : Math.max(0, ...view.values.map((v) => fmt(v).length));
   const wide = longest > 4;
   // Otherwise shrink the cells until the whole array fits the stage (down to a readable minimum)
-  const preferred = n <= 12 ? 46 : n <= 18 ? 38 : n <= 26 ? 30 : 24;
+  const preferred = n <= 8 ? 58 : n <= 12 ? 50 : n <= 18 ? 40 : n <= 26 ? 32 : 26;
   const fit = Math.floor((boxWidth - 8) / Math.max(1, n + pad * 2));
   const size = wide ? preferred : Math.max(16, Math.min(preferred, fit - (fit < 30 ? 3 : 6)));
   const gap = size < 24 ? 3 : n <= 18 ? 6 : 4;
@@ -30,6 +33,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
   const maxStack = Math.max(0, ...[...groups.values()].map((g) => g.length));
   const slot = new Map<string, number>();
   for (const names of groups.values()) names.forEach((name, k) => slot.set(name, k));
+  const ptrRows = Math.max(1, maxStack, view.pointerRows ?? 0);
 
   const nums = view.bars ? view.values.map((v) => (typeof v === "number" ? v : 0)) : [];
   const fill = view.fill ?? [];
@@ -42,21 +46,25 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
     <ViewFrame label={view.label}>
       <div className="algo-scroll-x" ref={boxRef}>
         <div className="algo-array" style={{ width, margin: `0 ${pad * step}px`, boxSizing: "content-box" }}>
-          {hasRanges && (
-            <div className="algo-array-ranges">
-              {view.ranges!.map((r, k) => (
-                <div
-                  key={k}
-                  className={`algo-range ${toneClass(r.tone ?? "active")}`}
-                  style={{
-                    transform: `translateX(${x(r.from) - 3}px)`,
-                    width: Math.max(0, (r.to - r.from + 1) * step - gap + 6),
-                    opacity: r.to < r.from ? 0 : 1,
-                  }}
-                >
-                  {r.label && <span>{r.label}</span>}
-                </div>
-              ))}
+          {/* `pointers: {}` keeps the row reserved, like `ranges: []` */}
+          {(maxStack > 0 || view.pointers !== undefined || !!view.pointerRows) && (
+            <div className="algo-array-pointers" style={{ height: (ptrRows - 1) * PTR_ROW + PTR_H }}>
+              {pointerEntries.map(([name, i]) => {
+                const k = slot.get(name) ?? 0;
+                return (
+                  <div
+                    key={name}
+                    className={`algo-pointer ${pointerClass(name)} ${k > 0 ? "is-stacked" : ""}`}
+                    style={{
+                      width: cellW,
+                      transform: `translate(${x(i)}px, ${(ptrRows - 1 - k) * PTR_ROW}px)`,
+                    }}
+                  >
+                    <span>{name}</span>
+                    <CurlyArrow flip={seedOf(name) % 2 === 1} />
+                  </div>
+                );
+              })}
             </div>
           )}
 
@@ -77,8 +85,14 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
                     <span className="algo-bar-value" style={{ fontSize: size < 30 ? 10 : 12 }}>
                       {fmt(v)}
                     </span>
-                    {fh > 0 && <div className="algo-bar-fill" style={{ height: fh }} />}
-                    <div className="algo-bar" style={{ height: Math.max(2, h) }} />
+                    {fh > 0 && (
+                      <div className="algo-bar-fill" style={{ height: fh }}>
+                        <SketchBox w={size} h={60} seed={seedOf(key) + 5} />
+                      </div>
+                    )}
+                    <div className="algo-bar" style={{ height: Math.max(2, h) }}>
+                      <SketchBox w={size} h={BAR_MAX} seed={seedOf(key)} />
+                    </div>
                   </div>
                 );
               }
@@ -94,7 +108,8 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
                     fontSize: wide ? 13 : Math.max(9, text.length > 3 ? size * 0.26 : size * 0.36),
                   }}
                 >
-                  {text}
+                  <SketchBox w={cellW} h={size} seed={seedOf(key)} />
+                  <b>{text}</b>
                 </div>
               );
             })}
@@ -108,21 +123,27 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
             ))}
           </div>
 
-          {/* `pointers: {}` keeps the row reserved, like `ranges: []` */}
-          {(maxStack > 0 || view.pointers !== undefined || !!view.pointerRows) && (
-            <div className="algo-array-pointers" style={{ height: Math.max(1, maxStack, view.pointerRows ?? 0) * 22 + 8 }}>
-              {pointerEntries.map(([name, i]) => (
-                <div
-                  key={name}
-                  className={`algo-pointer ${pointerClass(name)}`}
-                  style={{
-                    width: cellW,
-                    transform: `translate(${x(i)}px, ${(slot.get(name) ?? 0) * 22}px)`,
-                  }}
-                >
-                  <span>{name}</span>
-                </div>
-              ))}
+          {hasRanges && (
+            <div className="algo-array-ranges">
+              {view.ranges!.map((r, k) => {
+                const w = Math.max(0, (r.to - r.from + 1) * step - gap + 6);
+                return (
+                  <div
+                    key={k}
+                    className={`algo-range ${toneClass(r.tone ?? "active")}`}
+                    style={{
+                      transform: `translateX(${x(r.from) - 3}px)`,
+                      width: w,
+                      opacity: r.to < r.from ? 0 : 1,
+                    }}
+                  >
+                    {/* highlighter swipe behind the cells */}
+                    <i className="algo-range-swipe" style={{ top: -(cellH + 20), height: cellH }} />
+                    {w > 4 && <Brace w={Math.round(w)} seed={k + 3} />}
+                    {r.label && <span>{r.label}</span>}
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

@@ -1,0 +1,744 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Style C — "hand-drawn board". Layered on top of algo.css: a warm grid-paper
+   notebook in light mode, a chalkboard in dark mode, marker-pen tones and
+   roughjs strokes (see views/sketch.tsx).
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.algo {
+  --bg: #f4efe4;
+  --surface: #fffcf5;
+  --surface-2: #f8f3e7;
+  --surface-3: #ece4d2;
+  --border: #e2d8c3;
+  --border-strong: #c6b99d;
+  --text: #2a2722;
+  --muted: #6e6656;
+  --faint: #a2977f;
+  --accent: #1c5fd4;
+  --accent-2: #2b8a3e;
+  --accent-ink: #ffffff;
+  --shadow: 0 1px 0 rgba(60, 45, 20, 0.04), 0 10px 26px -16px rgba(60, 45, 20, 0.25);
+
+  --t-active: #1c64f2; /* blue marker */
+  --t-compare: #f08c00; /* orange highlighter */
+  --t-good: #2b8a3e; /* green pen */
+  --t-bad: #e03131; /* red pen */
+  --t-alt: #ae3ec9; /* purple marker */
+  --t-visited: #8a8f98; /* pencil */
+  --water: #339af0;
+
+  --easy: #2b8a3e;
+  --medium: #e8590c;
+  --hard: #e03131;
+
+  --ink: #2b2a33;
+  --ink-soft: #57545f;
+  --paper: #fffdf7;
+  --grid-line: rgba(70, 110, 170, 0.05);
+  --grid-cell: rgba(70, 110, 170, 0.24);
+  --margin-line: rgba(224, 49, 49, 0.45);
+  --hl: rgba(255, 212, 59, 0.5);
+  --hatch-opacity: 0.2;
+
+  --font-hand: "Caveat", "Noto Sans TC", "Microsoft JhengHei", cursive;
+  --font-note: var(--font-body);
+  --sketch-r: 14px 5px 16px 6px / 6px 16px 5px 14px;
+  --sketch-r-sm: 10px 4px 11px 5px / 5px 11px 4px 10px;
+}
+
+.dark .algo {
+  --bg: #141a18;
+  --surface: #1c2421;
+  --surface-2: #212b27;
+  --surface-3: #2a3631;
+  --border: #303d38;
+  --border-strong: #4a5a53;
+  --text: #eef1ea;
+  --muted: #a7b2ab;
+  --faint: #6e7c75;
+  --accent: #7cb4ff;
+  --accent-2: #8ce99a;
+  --accent-ink: #10201a;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 30px -16px rgba(0, 0, 0, 0.7);
+
+  /* chalk */
+  --t-active: #7cb4ff;
+  --t-compare: #ffc078;
+  --t-good: #8ce99a;
+  --t-bad: #ff8787;
+  --t-alt: #e599f7;
+  --t-visited: #9aa5a0;
+  --water: #74c0fc;
+
+  --easy: #8ce99a;
+  --medium: #ffc078;
+  --hard: #ff8787;
+
+  --ink: #eef1e8;
+  --ink-soft: #b9c2bc;
+  --paper: #23302b;
+  --grid-line: rgba(255, 255, 255, 0.025);
+  --grid-cell: rgba(255, 255, 255, 0.13);
+  --margin-line: rgba(255, 135, 135, 0.4);
+  --hl: rgba(124, 180, 255, 0.2);
+  --hatch-opacity: 0.24;
+}
+
+/* page: plain paper, faint grid near the top instead of glows + dots */
+.algo::before {
+  background: none;
+}
+.algo::after {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 1;
+}
+.algo-card,
+.algo-btn {
+  border-radius: var(--sketch-r);
+}
+
+/* ── player shell ─────────────────────────────────────────────────────────── */
+@media (min-width: 1021px) {
+  .algo-player {
+    grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr);
+  }
+}
+.algo-player {
+  border: 2px solid var(--ink);
+  border-radius: 18px 8px 20px 9px / 9px 20px 8px 18px;
+  box-shadow: 5px 6px 0 -1px color-mix(in srgb, var(--ink) 14%, transparent);
+  background: var(--surface);
+}
+.algo-player-stage {
+  padding: 18px 20px;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+}
+.algo-player-views {
+  min-height: 300px;
+  gap: 18px 22px;
+  align-content: center;
+  padding: 6px 0 10px;
+}
+.algo-player-side {
+  border-left: 2px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+  background: var(--surface-2);
+}
+@media (max-width: 1020px) {
+  .algo-player-side {
+    border-left: 0;
+    border-top: 2px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+  }
+}
+.algo-side-title {
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--muted);
+}
+
+/* step note = a margin note on ruled paper */
+.algo-player-dock {
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  border: 2px solid var(--ink);
+  border-radius: var(--sketch-r);
+  box-shadow: 3px 4px 0 -1px color-mix(in srgb, var(--ink) 18%, transparent);
+  backdrop-filter: blur(6px);
+}
+.algo-note {
+  border: 0;
+  border-radius: 0;
+  padding: 6px 8px 6px 0;
+  background: transparent;
+  gap: 0;
+  min-height: 64px;
+}
+.algo-note.is-result {
+  background: transparent;
+}
+.algo-note-step {
+  flex: none;
+  width: 58px;
+  margin-right: 14px;
+  align-self: stretch;
+  border-right: 1.5px solid var(--margin-line);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--accent);
+  padding-top: 0;
+}
+.algo-note-step i {
+  font-size: 0.95rem;
+  color: var(--faint);
+}
+.algo-note p {
+  font-family: var(--font-note);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.algo-note p .algo-code-inline {
+  font-size: 0.8em;
+}
+.algo-note p strong {
+  background: linear-gradient(transparent 55%, var(--hl) 55%, var(--hl) 92%, transparent 92%);
+}
+.algo-result {
+  margin-left: 10px;
+  padding: 0 10px;
+  border: 2px solid var(--t-good);
+  border-radius: 50% 40% 55% 45% / 55% 50% 45% 50%;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* transport: ink-outlined buttons */
+.algo-controls button {
+  border: 1.8px solid var(--ink);
+  border-radius: var(--sketch-r-sm);
+  background: var(--paper);
+}
+.algo-controls button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: rotate(-2deg);
+}
+.algo-controls button.is-primary {
+  border: 2px solid var(--ink);
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 2px 3px 0 -1px var(--ink);
+}
+.dark .algo-controls button.is-primary {
+  color: var(--accent-ink);
+}
+.algo-controls button.is-primary:hover {
+  color: #fff;
+}
+.algo-controls .algo-speed {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.algo-scrub::-webkit-slider-runnable-track {
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) var(--p), color-mix(in srgb, var(--ink) 18%, transparent) var(--p));
+}
+.algo-scrub::-moz-range-track {
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) var(--p), color-mix(in srgb, var(--ink) 18%, transparent) var(--p));
+}
+.algo-scrub::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border: 2px solid var(--ink);
+  background: var(--accent);
+  border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+}
+.algo-scrub::-moz-range-thumb {
+  border: 2px solid var(--ink);
+  background: var(--accent);
+}
+
+/* code: the executing line gets a highlighter swipe */
+.algo-code-line.is-active {
+  background: linear-gradient(transparent 8%, var(--hl) 8%, var(--hl) 92%, transparent 92%);
+  border-left-color: var(--accent);
+}
+.algo-var {
+  background: var(--paper);
+  border: 1.5px solid color-mix(in srgb, var(--ink) 35%, transparent);
+  border-radius: var(--sketch-r-sm);
+}
+.algo-var span {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+/* ── sketch primitives ────────────────────────────────────────────────────── */
+.sk-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.sk-line,
+.sk-head {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sk-box path {
+  vector-effect: non-scaling-stroke;
+}
+.sk-line {
+  stroke: var(--tone, var(--ink));
+  stroke-width: 2;
+  transition: stroke 0.3s;
+}
+.sk-hatch {
+  fill: var(--tone, var(--faint));
+  stroke: none;
+  opacity: 0;
+  transition: opacity 0.3s, fill 0.3s;
+}
+[class*="tone-"] .sk-hatch {
+  opacity: var(--hatch-opacity);
+}
+.tone-muted .sk-hatch,
+.tone-visited .sk-hatch {
+  opacity: 0.1;
+}
+.sk-head {
+  stroke: var(--tone, var(--ink-soft));
+  stroke-width: 1.8;
+}
+.sk-under {
+  fill: var(--paper);
+  stroke: none;
+}
+/* new marks are drawn in with a quick pen stroke */
+.algo-cell .sk-line,
+.algo-node .sk-line,
+.algo-map-entry .sk-line,
+.algo-stack-item .sk-line,
+.algo-queue-item .sk-line,
+.algo-grid-ring .sk-line,
+.algo-edge .sk-line {
+  stroke-dasharray: 1 0;
+  animation: sk-draw 0.55s ease-out;
+}
+@keyframes sk-draw {
+  from {
+    stroke-dasharray: 0 1;
+  }
+  to {
+    stroke-dasharray: 1 0;
+  }
+}
+.tone-muted {
+  opacity: 0.32;
+}
+
+/* ── view frames ──────────────────────────────────────────────────────────── */
+.algo-view {
+  padding: 4px 4px 6px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.algo-view-label {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 6px;
+  padding: 0 4px 2px;
+  background: linear-gradient(transparent 62%, var(--hl) 62%, var(--hl) 94%, transparent 94%);
+}
+.algo-empty {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  color: var(--faint);
+}
+
+/* ── array ────────────────────────────────────────────────────────────────── */
+/* (no position here: array cells are absolutely placed by algo.css) */
+.algo-cell {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none !important;
+  overflow: visible;
+  color: var(--ink);
+}
+.algo-cell > b {
+  position: relative;
+  font-weight: 600;
+}
+.algo-array-cells {
+  z-index: 1;
+}
+.algo-array-indices span {
+  font-family: var(--font-hand);
+  font-size: 1.08rem;
+  line-height: 16px;
+  color: var(--faint);
+}
+.algo-array-pointers {
+  margin-bottom: 2px;
+}
+.algo-pointer {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  gap: 0;
+}
+.algo-pointer::before {
+  display: none;
+}
+.algo-pointer span {
+  padding: 0;
+  background: none;
+  line-height: 22px;
+}
+.sk-curly {
+  display: block;
+  overflow: visible;
+}
+.sk-curly path {
+  fill: none;
+  stroke: var(--pc);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.algo-pointer.is-stacked .sk-curly {
+  visibility: hidden;
+}
+
+/* ranges: highlighter swipe behind the cells + a brace underneath */
+.algo-array-ranges {
+  z-index: 0;
+  height: 34px;
+}
+.algo-range {
+  top: 2px !important;
+  height: 32px;
+}
+.algo-range::before {
+  display: none;
+}
+.algo-range-swipe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: color-mix(in srgb, var(--tone) 10%, transparent);
+  border-radius: 6px 14px 5px 12px / 12px 5px 14px 6px;
+  transform: rotate(-0.5deg);
+}
+.sk-brace {
+  display: block;
+  overflow: visible;
+}
+.sk-brace .sk-line {
+  stroke: var(--tone);
+  stroke-width: 1.8;
+}
+.algo-range span {
+  top: 12px;
+  transform: translateX(-50%);
+  padding: 0;
+  background: none;
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* bars: hatched sketch columns */
+.algo-bar,
+.algo-bar-fill {
+  position: relative;
+  border-radius: 0;
+  background: none;
+}
+.algo-bar .sk-hatch {
+  opacity: var(--hatch-opacity);
+}
+.algo-bar-slot:not([class*="tone-"]) .algo-bar .sk-hatch {
+  opacity: 0.08;
+  fill: var(--ink-soft);
+}
+.algo-bar-fill {
+  --tone: var(--water);
+}
+.algo-bar-fill .sk-hatch {
+  opacity: 0.35;
+}
+.algo-bar-fill .sk-line {
+  stroke-dasharray: 3 3;
+}
+.algo-bar-value {
+  color: var(--tone, var(--ink-soft));
+}
+
+/* ── grid: notebook squares ───────────────────────────────────────────────── */
+.algo-grid {
+  gap: 0;
+}
+.algo-grid-cell {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: inset 0 0 0 0.5px var(--grid-cell) !important;
+}
+.algo-grid-cell.is-blank:not([class*="tone-"]) {
+  border: 0;
+  background: transparent;
+}
+.algo-grid-cell.has-pointer {
+  outline: 0;
+}
+.algo-grid-cell > .sk-box {
+  left: 3px;
+  top: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+}
+.algo-grid-cell > .sk-box.algo-grid-ring {
+  left: -3px;
+  top: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  z-index: 2;
+}
+.algo-grid-ring .sk-line {
+  stroke: var(--pc);
+  stroke-width: 2.2;
+}
+.algo-grid-pointer {
+  z-index: 3;
+  top: -9px;
+  right: -6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 0 2px;
+  background: var(--paper);
+  border-radius: 4px;
+}
+.algo-grid-label {
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* ── map / set: little hand-drawn table cells ─────────────────────────────── */
+.algo-map {
+  gap: 8px 10px;
+}
+.algo-map-entry {
+  position: relative;
+  border: 0;
+  background: transparent;
+  font-size: 0.98rem;
+  padding: 7px 13px;
+  gap: 9px;
+}
+.algo-map-entry > span {
+  position: relative;
+}
+.algo-map-entry.is-set {
+  padding: 6px 14px;
+}
+.algo-map-arrow {
+  align-self: stretch;
+  width: 0;
+  margin: -4px 0;
+  border-left: 1.5px solid var(--tone, var(--ink));
+  opacity: 0.55;
+  transform: rotate(4deg);
+}
+.algo-map-val {
+  color: var(--tone, var(--accent));
+}
+
+/* ── stack / queue: sketched containers ───────────────────────────────────── */
+.algo-stack {
+  position: relative;
+  border: 0;
+  padding: 10px 14px 12px;
+  gap: 6px;
+}
+.algo-stack-walls .sk-line,
+.algo-queue-walls .sk-line,
+.algo-axis-line .sk-line {
+  stroke: var(--ink);
+  stroke-width: 2.2;
+}
+.algo-stack-item,
+.algo-queue-item {
+  border: 0;
+  background: transparent;
+  font-size: 0.98rem;
+  padding: 8px 14px;
+}
+.algo-stack-item > b,
+.algo-queue-item > b {
+  position: relative;
+  font-weight: 600;
+}
+.algo-tag {
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.algo-queue {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 12px 10px 30px;
+}
+.algo-queue-walls {
+  height: calc(100% - 22px) !important;
+}
+.algo-queue .algo-tag {
+  top: calc(100% + 13px);
+}
+.algo-queue-end {
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+/* ── intervals: sketched segments on a number line ────────────────────────── */
+.algo-interval {
+  border: 0;
+  background: transparent;
+  font-size: 0.72rem;
+}
+.algo-interval > span {
+  position: relative;
+}
+.algo-interval .sk-hatch {
+  opacity: 0.45;
+}
+.algo-interval:not([class*="tone-"]) .sk-hatch {
+  opacity: 0.18;
+  stroke: var(--ink-soft);
+}
+.algo-interval-point {
+  width: 0;
+  background: none;
+  border-left: 2px dashed var(--tone);
+}
+.algo-interval-point.tone-muted {
+  border-left-color: transparent;
+}
+.algo-interval-point span {
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  font-weight: 700;
+  top: -18px;
+}
+.algo-intervals-axis {
+  border-top: 0;
+}
+.algo-axis-line {
+  top: -3px !important;
+  height: 6px !important;
+}
+.algo-intervals-axis span {
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.algo-intervals-axis span::before {
+  border-left: 1.8px solid var(--ink-soft);
+}
+
+/* ── svg views: list / tree / graph ───────────────────────────────────────── */
+.algo-node .sk-line {
+  stroke-width: 1.7;
+}
+.algo-node[class*="tone-"]:not(.tone-muted) .sk-line {
+  stroke-width: 2.3;
+}
+.algo-node rect.sk-under,
+.algo-node circle.sk-under {
+  fill: var(--paper);
+  stroke: none;
+  filter: none !important;
+}
+.algo-node {
+  transition: transform 0.45s cubic-bezier(0.3, 0.9, 0.3, 1), opacity 0.3s;
+}
+.algo-svg text {
+  fill: var(--ink);
+}
+.algo-edge .sk-line {
+  stroke: var(--tone, var(--ink-soft));
+  stroke-width: 1.5;
+}
+.algo-edge[class*="tone-"] .sk-line {
+  stroke-width: 2.6;
+}
+.algo-edge rect {
+  fill: var(--paper);
+  stroke: none;
+}
+.algo-edge text {
+  font-family: var(--font-hand);
+  font-size: 19px;
+  font-weight: 700;
+  fill: var(--tone, var(--ink-soft));
+}
+.algo-link .sk-line {
+  stroke: var(--tone, var(--ink-soft));
+}
+.algo-link-alt .sk-line,
+.algo-link-alt .sk-head {
+  stroke: var(--t-alt);
+}
+.algo-link-alt .sk-line {
+  stroke-dasharray: 4 4;
+  animation: none;
+}
+.algo-link-dashed path {
+  stroke: var(--tone, var(--t-alt));
+  stroke-width: 1.6;
+}
+.algo-svg-pointer text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--pc);
+}
+.algo-svg-pointer-tip {
+  fill: none;
+  stroke: var(--pc);
+}
+.algo-pointer-pill {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: none;
+  text-decoration: underline wavy color-mix(in srgb, var(--pc) 50%, transparent);
+}
+
+@media (max-width: 640px) {
+  .algo-player-stage {
+    padding: 12px 10px;
+  }
+  .algo-note-step {
+    width: 40px;
+    margin-right: 10px;
+    font-size: 1.25rem;
+  }
+  .algo-note p {
+    font-size: 1rem;
+  }
+}

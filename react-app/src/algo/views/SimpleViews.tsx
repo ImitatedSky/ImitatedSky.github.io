@@ -5,9 +5,11 @@ import type {
   QueueView as QueueViewT,
   StackView as StackViewT,
 } from "../types";
-import { ViewFrame, fmt, pointerClass, toneClass } from "./shared";
+import { ViewFrame, fmt, pointerClass, toneClass, useWidth } from "./shared";
+import { SketchBox, seedOf } from "./sketch";
 
 export function GridView({ view }: { view: GridViewT }) {
+  const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
   const rows = view.cells.length;
   const cols = Math.max(0, ...view.cells.map((r) => r.length));
   if (rows === 0 || cols === 0) {
@@ -17,7 +19,10 @@ export function GridView({ view }: { view: GridViewT }) {
       </ViewFrame>
     );
   }
-  const size = cols <= 6 ? 44 : cols <= 10 ? 36 : cols <= 14 ? 30 : 24;
+  const preferred = cols <= 6 ? 46 : cols <= 10 ? 38 : cols <= 14 ? 32 : 26;
+  // Shrink to fit narrow stages (phones) rather than scroll, down to a legible minimum
+  const fit = Math.floor((boxWidth - 8 - (view.rowLabels ? 22 : 0) - (view.blocks ? 10 : 0)) / cols);
+  const size = Math.max(19, Math.min(preferred, fit));
 
   const pointersAt = new Map<string, string[]>();
   for (const [name, [r, c]] of Object.entries(view.pointers ?? {})) {
@@ -28,7 +33,7 @@ export function GridView({ view }: { view: GridViewT }) {
 
   return (
     <ViewFrame label={view.label}>
-      <div className="algo-scroll-x">
+      <div className="algo-scroll-x" ref={boxRef}>
         <div
           className="algo-grid"
           style={{
@@ -69,7 +74,11 @@ export function GridView({ view }: { view: GridViewT }) {
                       marginBottom: view.blocks && (r + 1) % view.blocks[0] === 0 && r < rows - 1 ? 5 : undefined,
                     }}
                   >
-                    {text}
+                    {view.marks?.[k] && <SketchBox w={size} h={size} seed={r * 7 + c} />}
+                    {names && (
+                      <SketchBox w={size} h={size} seed={r * 3 + c + 1} shape="ellipse" fill={false} className={`algo-grid-ring ${pointerClass(names[0])}`} />
+                    )}
+                    <b>{text}</b>
                     {names && (
                       <span className={`algo-grid-pointer ${pointerClass(names[0])}`}>
                         {names.join(",")}
@@ -92,11 +101,17 @@ export function MapView({ view }: { view: MapViewT }) {
       <div className="algo-map">
         {view.entries.length === 0 && <span className="algo-empty">空</span>}
         {view.entries.map(([k, v]) => (
-          <div key={String(k)} className={`algo-map-entry ${toneClass(view.marks?.[String(k)])}`}>
+          <div key={String(k)} className={`algo-map-entry ${toneClass(view.marks?.[String(k)])} ${v === undefined ? "is-set" : ""}`}>
+            <SketchBox
+              w={v === undefined ? 44 : 84}
+              h={32}
+              seed={seedOf(String(k))}
+              shape={v === undefined && fmt(k).length <= 4 ? "ellipse" : "rect"}
+            />
             <span className="algo-map-key">{fmt(k)}</span>
             {v !== undefined && (
               <>
-                <span className="algo-map-arrow">→</span>
+                <span className="algo-map-arrow" />
                 <span className="algo-map-val">{fmt(v)}</span>
               </>
             )}
@@ -112,10 +127,12 @@ export function StackView({ view }: { view: StackViewT }) {
   return (
     <ViewFrame label={view.label}>
       <div className="algo-stack">
+        <SketchBox w={110} h={160} seed={11} shape="u" fill={false} className="algo-stack-walls" />
         {view.items.length === 0 && <span className="algo-empty">空</span>}
         {view.items.map((v, i) => (
           <div key={i} className={`algo-stack-item ${toneClass(view.marks?.[i])}`}>
-            {fmt(v)}
+            <SketchBox w={76} h={32} seed={i} />
+            <b>{fmt(v)}</b>
             {i === top && <span className="algo-tag">top</span>}
           </div>
         ))}
@@ -129,11 +146,13 @@ export function QueueView({ view }: { view: QueueViewT }) {
   return (
     <ViewFrame label={view.label}>
       <div className="algo-queue">
+        <SketchBox w={300} h={56} seed={13} shape="tube" fill={false} className="algo-queue-walls" />
         <span className="algo-queue-end">出 ←</span>
         {view.items.length === 0 && <span className="algo-empty">空</span>}
         {view.items.map((v, i) => (
           <div key={i} className={`algo-queue-item ${toneClass(view.marks?.[i])}`}>
-            {fmt(v)}
+            <SketchBox w={44} h={32} seed={i} />
+            <b>{fmt(v)}</b>
             {i === 0 && <span className="algo-tag">front</span>}
             {i === last && i !== 0 && <span className="algo-tag">back</span>}
           </div>
@@ -179,6 +198,7 @@ export function IntervalsView({ view }: { view: IntervalsViewT }) {
                 top: lanes[i] * 30,
               }}
             >
+              <SketchBox w={90} h={24} seed={i} />
               <span>{it.label ?? `[${it.start}, ${it.end}]`}</span>
             </div>
           ))}
@@ -193,6 +213,7 @@ export function IntervalsView({ view }: { view: IntervalsViewT }) {
           ))}
         </div>
         <div className="algo-intervals-axis">
+          <SketchBox w={400} h={6} seed={17} shape="hline" fill={false} className="algo-axis-line" />
           {ticks.map((t) => (
             <span key={t} style={{ left: `${pct(t)}%` }}>
               {t}

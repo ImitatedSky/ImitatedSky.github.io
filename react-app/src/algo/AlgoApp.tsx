@@ -4,13 +4,14 @@ import { FiMoon, FiSun } from "react-icons/fi";
 import { useTheme } from "../hooks/useTheme";
 import { usePageTitle } from "../hooks/usePageTitle";
 import "./algo.css";
+import "./board.css";
 import AlgoHome from "./pages/AlgoHome";
 import ProblemList from "./pages/ProblemList";
 import ProblemPage from "./pages/ProblemPage";
 import SortingPage from "./pages/SortingPage";
 
 const FONTS =
-  "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Caveat:wght@500;700&display=swap";
 
 function Layout() {
   const { dark, toggle } = useTheme();
