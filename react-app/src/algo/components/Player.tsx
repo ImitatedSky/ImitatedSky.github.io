@@ -63,6 +63,13 @@ export default function Player({
   const [idx, setIdx] = useState(0);
   const [playing, setPlaying] = useState(autoPlay);
   const [speed, setSpeed] = useState(1);
+  // New input → restart, without remounting (a remount would kill a drag in the toolbar)
+  const [shown, setShown] = useState(rawFrames);
+  if (shown !== rawFrames) {
+    setShown(rawFrames);
+    setIdx(0);
+    setPlaying(false);
+  }
   const last = frames.length - 1;
   const frame = frames[Math.min(idx, last)];
 
