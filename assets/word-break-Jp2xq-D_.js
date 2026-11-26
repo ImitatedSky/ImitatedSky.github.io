@@ -1,0 +1,11 @@
+var e=`s = Solution()
+check(s.wordBreak("leetcode", ["leet", "code"]), True, "範例 1")
+check(s.wordBreak("applepenapple", ["apple", "pen"]), True, "單字重複使用")
+check(s.wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"]), False, "範例 3")
+check(s.wordBreak("aaab", ["a", "aa"]), False, "最後一個字元湊不出來")
+check(s.wordBreak("a", ["a"]), True, "單一字元")
+check(s.wordBreak("a", ["b"]), False, "單一字元不在字典")
+check(s.wordBreak("aaaaaaa", ["aaaa", "aaa"]), True, "需要混用長短單字")
+check(s.wordBreak("cars", ["car", "ca", "rs"]), True, "貪心取最長會失敗")
+check(s.wordBreak("a" * 150 + "b", ["a", "aa", "aaa", "aaaa", "aaaaa"]), False, "不能指數爆炸")
+`;export{e as default};

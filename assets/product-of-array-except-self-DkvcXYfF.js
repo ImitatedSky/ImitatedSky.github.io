@@ -1,0 +1,10 @@
+var e=`s = Solution()
+check(s.productExceptSelf([1, 2, 3, 4]), [24, 12, 8, 6], "範例 1")
+check(s.productExceptSelf([-1, 1, 0, -3, 3]), [0, 0, 9, 0, 0], "含一個 0")
+check(s.productExceptSelf([2, 5]), [5, 2], "只有兩個數")
+check(s.productExceptSelf([0, 0]), [0, 0], "兩個 0")
+check(s.productExceptSelf([0, 4, 0, 2]), [0, 0, 0, 0], "多個 0")
+check(s.productExceptSelf([-2, -3, 4]), [-12, -8, 6], "負數")
+check(s.productExceptSelf([1, 1, 1, 1, 1]), [1, 1, 1, 1, 1], "全部是 1")
+check(s.productExceptSelf([3] * 12), [3 ** 11] * 12, "較長的輸入")
+`;export{e as default};

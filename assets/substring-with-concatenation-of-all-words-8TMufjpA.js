@@ -1,0 +1,15 @@
+var e=`s = Solution()
+# 回傳順序不限，排序後再比較
+check(sorted(s.findSubstring("barfoothefoobarman", ["foo", "bar"])), [0, 9], "範例 1")
+check(sorted(s.findSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "word"])), [], "範例 2：沒有答案")
+check(sorted(s.findSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])), [6, 9, 12], "範例 3")
+check(sorted(s.findSubstring("ababcdabab", ["ab", "ab", "cd"])), [0, 2, 4], "重複的單字")
+check(sorted(s.findSubstring("afoobarbbarfoo", ["foo", "bar"])), [1, 8], "不同的切割起點")
+check(sorted(s.findSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])), [8], "需要兩個 good")
+check(sorted(s.findSubstring("aaaaaa", ["a", "a"])), [0, 1, 2, 3, 4], "單字長度 1")
+check(sorted(s.findSubstring("ab", ["ab", "cd"])), [], "s 比串聯字串短")
+check(sorted(s.findSubstring("abc", ["abc"])), [0], "只有一個單字")
+check(sorted(s.findSubstring("lingmindraboofooowingdingbarrwingmonkeypoundcake", ["fooo", "barr", "wing", "ding", "wing"])), [13], "LeetCode 經典陷阱")
+check(sorted(s.findSubstring("ababaab", ["ab", "ba", "ba"])), [1], "單字彼此重疊")
+check(sorted(s.findSubstring("a" * 10000, ["a"] * 5000)), list(range(5001)), "大輸入")
+`;export{e as default};

@@ -1,0 +1,13 @@
+var e=`s = Solution()
+check(s.minDistance("horse", "ros"), 3, "範例 1")
+check(s.minDistance("intention", "execution"), 5, "範例 2")
+check(s.minDistance("sea", "eat"), 2, "刪一個、插一個")
+check(s.minDistance("", "abc"), 3, "word1 為空：全部插入")
+check(s.minDistance("abc", ""), 3, "word2 為空：全部刪除")
+check(s.minDistance("", ""), 0, "兩個都是空字串")
+check(s.minDistance("abc", "abc"), 0, "完全相同")
+check(s.minDistance("a", "b"), 1, "取代一次")
+check(s.minDistance("kitten", "sitting"), 3, "經典例子")
+check(s.minDistance("ros", "horse"), 3, "距離是對稱的")
+check(s.minDistance("a" * 300, "b" * 300), 300, "較長輸入：全部取代")
+`;export{e as default};

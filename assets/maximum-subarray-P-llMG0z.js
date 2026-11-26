@@ -1,0 +1,13 @@
+var e=`s = Solution()
+check(s.maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6, "範例 1")
+check(s.maxSubArray([1]), 1, "範例 2：只有一個數")
+check(s.maxSubArray([5, 4, -1, 7, 8]), 23, "範例 3：整個陣列")
+check(s.maxSubArray([-3, -1, -4]), -1, "全部是負數")
+check(s.maxSubArray([-5]), -5, "單一負數")
+check(s.maxSubArray([0, 0, 0]), 0, "全部是 0")
+check(s.maxSubArray([-1, 0, -2]), 0, "負數中夾一個 0")
+check(s.maxSubArray([2, -1, 2, -1, 2]), 4, "小負數值得帶著走")
+check(s.maxSubArray([3, -4, 5]), 5, "負數太大，重新開始比較好")
+check(s.maxSubArray([8, -19, 5, -4, 20]), 21, "答案在尾段")
+check(s.maxSubArray([1] * 50000 + [-1] * 50000), 50000, "大輸入")
+`;export{e as default};

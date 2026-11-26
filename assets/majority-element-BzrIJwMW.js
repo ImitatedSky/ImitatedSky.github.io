@@ -1,0 +1,11 @@
+var e=`s = Solution()
+check(s.majorityElement([3, 2, 3]), 3, "範例 1")
+check(s.majorityElement([2, 2, 1, 1, 1, 2, 2]), 2, "範例 2")
+check(s.majorityElement([7]), 7, "單一元素")
+check(s.majorityElement([1, 1]), 1, "兩個相同")
+check(s.majorityElement([3, 5, 3, 4, 3, 3, 5, 3]), 3, "候選人中途換過")
+check(s.majorityElement([-1, -1, 2, -1, 2]), -1, "含負數")
+check(s.majorityElement([6, 5, 5]), 5, "多數元素不在開頭")
+check(s.majorityElement([1, 2, 3, 4, 9, 9, 9, 9, 9]), 9, "多數元素集中在尾端")
+check(s.majorityElement([8] * 501 + list(range(500))), 8, "較長的輸入")
+`;export{e as default};

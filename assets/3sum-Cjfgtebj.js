@@ -1,0 +1,25 @@
+import{a as e,n as t,o as n}from"./AlgoApp-DIbAQPAC.js";import{t as r}from"./types-Dfvzj6n2.js";var i=`class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = []
+        for i in range(len(nums) - 2):
+            if nums[i] > 0:
+                break  # 最小的數已經是正的，三個數加起來不可能是 0
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue  # 同樣的值當過第一個數了，跳過
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                total = nums[i] + nums[l] + nums[r]
+                if total < 0:
+                    l += 1
+                elif total > 0:
+                    r -= 1
+                else:
+                    res.append([nums[i], nums[l], nums[r]])
+                    l += 1
+                    r -= 1
+                    while l < r and nums[l] == nums[l - 1]:
+                        l += 1  # 跳過重複的第二個數
+        return res`,a=(e,t,n)=>`[${e}, ${t}, ${n}]`,o=r({id:15,summary:"給一個整數陣列 `nums`，找出所有**相加等於 0 的三個數**（三個位置必須不同）。\n\n答案裡不能有重複的組合：`[-1, 0, 1]` 和 `[0, 1, -1]` 算同一組，只能出現一次。組合之間的順序不限。",summaryEn:"Given an integer array `nums`, find every **triple of numbers that sums to 0** (the three positions must be different).\n\nThe answer must not repeat a combination: `[-1, 0, 1]` and `[0, 1, -1]` count as the same triple and may appear only once. The triples can be in any order.",examples:[{input:`nums = [-1,0,1,2,-1,-4]`,output:`[[-1,-1,2],[-1,0,1]]`},{input:`nums = [0,1,1]`,output:`[]`},{input:`nums = [0,0,0]`,output:`[[0,0,0]]`}],constraints:[`3 ≤ nums.length ≤ 3000`,`-10⁵ ≤ nums[i] ≤ 10⁵`],constraintsEn:[`3 ≤ nums.length ≤ 3000`,`-10⁵ ≤ nums[i] ≤ 10⁵`],idea:"**先排序**，然後固定第一個數 `nums[i]`，剩下的問題就變成「在右邊的有序區間裡找兩個數，和為 `-nums[i]`」—— 這正是頭尾雙指標的拿手好戲。排序還順便讓相同的值排在一起，**跳過相鄰的重複值**就能去重，不需要用集合。",steps:["把 `nums` 由小到大排序。","用 `i` 走訪第一個數：若 `nums[i] > 0` 可以直接結束；若和前一個值相同就跳過。","`l = i + 1`、`r` 在最右邊，計算三數之和 `total`。","`total < 0` → `l` 右移讓和變大；`total > 0` → `r` 左移讓和變小。","`total == 0` → 記錄答案，兩個指標都往內縮，並讓 `l` 跳過和剛才相同的值。"],pitfalls:["去重要比的是**前一個**（`nums[i - 1]`、`nums[l - 1]`），而且 `i > 0` 的檢查不能少。","找到答案後 `l` 和 `r` 都要移動；只移一邊的話，另一邊不變、和一定不會再是 0，白做一輪。","第二個數去重就夠了：`l` 換成不同的值之後，`r` 就算停在一樣的值上，和也不會是 0。"],complexity:{time:`O(n²)`,space:`O(1)（不計排序與輸出）`},code:i,starter:`class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        `,presets:[{label:`[-1,0,1,2,-1,-4]`,input:{nums:[-1,0,1,2,-1,-4]},expected:`[[-1, -1, 2], [-1, 0, 1]]`},{label:`[2,-2,0,0,2,-2,0]`,input:{nums:[2,-2,0,0,2,-2,0]},expected:`[[-2, 0, 2], [0, 0, 0]]`},{label:`[3,1,2,-1,4]`,input:{nums:[3,1,2,-1,4]},expected:`[]`}],trace({nums:r}){let i=n(),o=r.length,s=r.map((e,t)=>t).sort((e,t)=>r[e]-r[t]||e-t),c=s.map(e=>r[e]),l=[],u=(e=!1)=>t.set(`res`,l.map(e=>a(e[0],e[1],e[2])),e&&l.length?{marks:{[a(...l[l.length-1])]:`good`}}:{}),d=e=>{let t={};for(let n=0;n<e;n++)t[n]=`muted`;return t};i.push({line:3,note:`原始陣列是亂的，沒辦法判斷指標該往哪邊移。第一步先排序。`,views:[t.array(`nums`,r,{ids:r.map((e,t)=>t)}),u()]}),i.push({line:[3,4],note:`排序完成。現在「往右走變大、往左走變小」，而且相同的值會排在一起，方便去重。`,views:[t.array(`nums`,c,{ids:s}),u()]});let f=!1;for(let e=0;e<o-2;e++){if(c[e]>0){i.push({line:[5,6,7],note:`\`nums[${e}] = ${c[e]}\` 已經大於 0，它右邊的數只會更大，三個正數加起來不可能是 0 —— 直接結束。`,views:[t.array(`nums`,c,{ids:s,pointers:{i:e},marks:{...d(e),[e]:`bad`}}),u()],vars:{i:e}}),f=!0;break}if(e>0&&c[e]===c[e-1]){i.push({line:[5,8,9],note:`\`nums[${e}] = ${c[e]}\` 和前一個 \`nums[${e-1}]\` 相同。以 \`${c[e]}\` 當第一個數的組合剛才都找過了，再找一次只會得到重複的答案 —— 跳過。`,views:[t.array(`nums`,c,{ids:s,pointers:{i:e},marks:{...d(e),[e-1]:`visited`,[e]:`bad`}}),u()],vars:{i:e}});continue}let n=e+1,r=o-1,p=(i={})=>t.array(`nums`,c,{ids:s,pointers:{i:e,l:n,r},marks:{...d(e),[e]:`active`,...i},...n<=r?{ranges:[{from:n,to:r,tone:`alt`,label:`找兩數和 = ${-c[e]}`}]}:{}});for(i.push({line:[5,10],note:`固定第一個數 \`nums[${e}] = ${c[e]}\`。接下來在它右邊的有序區間裡，用 \`l\`、\`r\` 找兩個數湊出 \`${-c[e]}\`。`,views:[p(),u()],vars:{i:e,l:n,r}});n<r;){let t=c[e]+c[n]+c[r],o=`\`${c[e]} + ${c[n]} + ${c[r]} = ${t}\``;if(t<0)i.push({line:[12,13,14],note:`${o}，小於 0。想讓和變大，只能把 \`l\` 右移換一個更大的數。`,views:[p({[n]:`bad`,[r]:`compare`}),u()],vars:{i:e,l:n,r,total:t}}),n++;else if(t>0)i.push({line:[12,15,16],note:`${o}，大於 0。想讓和變小，只能把 \`r\` 左移換一個更小的數。`,views:[p({[n]:`compare`,[r]:`bad`}),u()],vars:{i:e,l:n,r,total:t}}),r--;else for(l.push([c[e],c[n],c[r]]),i.push({line:[12,17,18],note:`${o}，剛好是 0！把 \`${a(c[e],c[n],c[r])}\` 加進答案。`,views:[p({[e]:`good`,[n]:`good`,[r]:`good`}),u(!0)],vars:{i:e,l:n,r,total:t}}),n++,r--,i.push({line:[19,20],note:n<r?`兩個指標都往內縮：只動一邊的話另一個數沒變，和不可能再是 0。`:"兩個指標都往內縮，`l` 和 `r` 已經碰頭，這個 `i` 找完了。",views:[p(n<r?{[n]:`compare`,[r]:`compare`}:{}),u()],vars:{i:e,l:n,r}});n<r&&c[n]===c[n-1];)i.push({line:[21,22],note:`\`nums[${n}] = ${c[n]}\` 和剛才用過的 \`nums[${n-1}]\` 一樣，拿它當第二個數只會得到重複的組合 —— \`l\` 再往右跳。`,views:[p({[n-1]:`visited`,[n]:`bad`,[r]:`compare`}),u()],vars:{i:e,l:n,r}}),n++}}let p={};for(let e=0;e<o;e++)p[e]=`muted`;return i.push({line:23,note:(f?``:`每個可以當第一個數的位置都試過了。`)+(l.length?`總共找到 ${l.length} 組不重複的三元組。`:`沒有任何三個數的和為 0，回傳空陣列。`),views:[t.array(`nums`,c,{ids:s,marks:p}),u()],result:e(l)}),i.frames}});export{o as default};

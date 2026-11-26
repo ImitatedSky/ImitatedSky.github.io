@@ -1,0 +1,8 @@
+var e=`s = Solution()
+check(s.climbStairs(1), 1, "n = 1")
+check(s.climbStairs(2), 2, "n = 2")
+check(s.climbStairs(3), 3, "n = 3")
+check(s.climbStairs(6), 13, "n = 6")
+check(s.climbStairs(10), 89, "n = 10")
+check(s.climbStairs(45), 1836311903, "n = 45（上限）")
+`;export{e as default};

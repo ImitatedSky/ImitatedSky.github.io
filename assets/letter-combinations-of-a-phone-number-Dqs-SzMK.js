@@ -1,0 +1,22 @@
+import{a as e,n as t,o as n}from"./AlgoApp-DIbAQPAC.js";import{t as r}from"./types-Dfvzj6n2.js";var i=`class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        phone = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl",
+                 "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+        res = []
+        path = []
+
+        def backtrack(i: int) -> None:
+            if i == len(digits):          # 每個數字都選好字母了
+                res.append("".join(path))
+                return
+            for ch in phone[digits[i]]:
+                path.append(ch)           # 選
+                backtrack(i + 1)          # 往下一個數字
+                path.pop()                # 撤銷
+
+        backtrack(0)
+        return res`,a={2:`abc`,3:`def`,4:`ghi`,5:`jkl`,6:`mno`,7:`pqrs`,8:`tuv`,9:`wxyz`};function o(e){let n=[{id:`r`,val:e,children:[]}],r={},i={},a=[`r`];return{down(e,t){let r=a[a.length-1],o=`d${n.length}`;n.push({id:o,val:e,children:[]}),n.find(e=>e.id===r).children.push(o),i[`${r}>${o}`]=t,a.push(o)},settle(e){r[a[a.length-1]]=e},up(){let e=a.pop();r[e]??=`visited`},view(e){let o={...r},s={};return a.forEach((e,t)=>{o[e]=t===a.length-1?r[e]??`active`:`compare`,t>0&&(s[`${a[t-1]}>${e}`]=`active`)}),t.tree(e,{nodes:n,root:`r`},{marks:o,edgeLabels:i,edgeMarks:s})}}}var s=r({id:17,summary:"給一個只包含 `2`–`9` 的數字字串 `digits`。照著傳統手機九宮格鍵盤的對應（`2 → abc`、`3 → def`、…、`9 → wxyz`），列出這串數字**可能代表的所有字母組合**。\n\n答案的順序不限；如果 `digits` 是空字串，就回傳空陣列。",summaryEn:"You get a string `digits` made only of the characters `2`–`9`. Using the letters printed on an old phone keypad (`2 → abc`, `3 → def`, …, `9 → wxyz`), list **every letter combination the digits could spell**.\n\nAny order is fine; if `digits` is empty, return an empty list.",examples:[{input:`digits = "23"`,output:`["ad","ae","af","bd","be","bf","cd","ce","cf"]`},{input:`digits = "2"`,output:`["a","b","c"]`},{input:`digits = ""`,output:`[]`}],constraints:[`0 ≤ digits.length ≤ 4`,`digits[i] 是 '2' 到 '9' 的數字`],constraintsEn:[`0 ≤ digits.length ≤ 4`,`digits[i] is a digit from '2' to '9'`],idea:"每個數字是一層「選擇」：第 `i` 層要從 `digits[i]` 對應的幾個字母裡挑一個。把所有選擇畫出來就是一棵樹，**每一條從根走到葉子的路徑就是一個答案**。回溯就是用一個共用的 `path` 走遍這棵樹：選一個字母 → 往下一層 → 回來時把它拿掉，再換下一個。",steps:["空字串直接回傳 `[]`（否則會得到一個空字串組合）。","`backtrack(i)` 代表「現在要替第 `i` 個數字挑字母」，`path` 是前面已經挑好的字母。","`i == len(digits)`：每個數字都挑完了，把 `path` 接成字串收進 `res`。","否則依序嘗試 `phone[digits[i]]` 的每個字母：`append` → 遞迴 `i + 1` → `pop`。"],pitfalls:['忘了處理空字串：沒有特判的話會回傳 `[""]` 而不是 `[]`。',"`path.pop()` 不能省 —— `path` 是所有分支共用的，不撤銷的話上一個選擇會殘留到下一個分支。","`7` 和 `9` 對應 **4** 個字母，不是 3 個。"],complexity:{time:`O(4ⁿ · n)`,space:`O(n)（遞迴深度，不含輸出）`},code:i,starter:`class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        `,presets:[{label:`"23"`,input:{digits:`23`},expected:`["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]`},{label:`"29"`,input:{digits:`29`},expected:`["aw", "ax", "ay", "az", "bw", "bx", "by", "bz", "cw", "cx", "cy", "cz"]`},{label:`"2"`,input:{digits:`2`},expected:`["a", "b", "c"]`}],trace({digits:r}){let i=n();if(!r)return i.push({line:[3,4],note:"`digits` 是空字串，沒有任何數字可以對應，直接回傳空陣列。",views:[t.chars(`digits`,r)],result:`[]`}),i.frames;let s=r.length,c=[],l=[],u=o(`""`),d=[...new Set(r)],f=(e,n)=>[t.map(`phone（只列出用到的鍵）`,d.map(e=>[e,a[e]]),{marks:e<s?{[r[e]]:`active`}:{}}),t.chars(`digits`,r,{pointers:{i:e},marks:e<s?{[e]:`active`}:{}}),u.view(`決策樹（節點 = 目前的 path，邊 = 選的字母）`),t.array(`res`,c,{marks:n?{[c.length-1]:`good`}:{}})];i.push({line:[5,6,7,8,19],note:`共有 ${s} 個數字，所以決策樹有 ${s} 層：第 \`i\` 層要替 \`digits[i]\` 挑一個字母。從空的 \`path\` 開始 \`backtrack(0)\`。`,views:f(0),vars:{i:0,path:`""`}});let p=e=>{if(e===s){let t=l.join(``);c.push(t),u.settle(`good`),i.push({line:[11,12,13],note:`\`i == ${s}\`，每個數字都挑好字母了 —— 這條路徑就是一個答案，把 \`"${t}"\` 收進 \`res\`。`,views:f(e,t),vars:{i:e,path:`"${t}"`,已收集:c.length}});return}let t=a[r[e]];for(let n=0;n<t.length;n++){let a=t[n];l.push(a),u.down(l.join(``),a),i.push({line:[14,15,16],note:`第 ${e} 個數字是 \`${r[e]}\`，可以選 \`${t}\`。**選** \`${a}\` 放進 \`path\`，`+(e+1===s?`所有數字都處理完了，往下檢查。`:`再往下替第 ${e+1} 個數字挑字母。`),views:f(e),vars:{i:e,ch:a,path:`"${l.join(``)}"`}}),p(e+1),l.pop(),u.up(),i.push({line:17,note:`回到第 ${e} 層，**撤銷** \`${a}\`（\`path.pop()\`），\`path\` 變回 \`"${l.join(``)}"\`。`+(n+1<t.length?`接著換試 \`${t[n+1]}\`。`:`\`${t}\` 都試過了，這一層結束，返回上一層。`),views:f(e),vars:{i:e,ch:a,path:`"${l.join(``)}"`}})}};return p(0),i.push({line:20,note:`整棵決策樹走完了：每一片葉子對應一個組合，共 ${c.length} 個。`,views:f(0),vars:{已收集:c.length},result:e(c)}),i.frames}});export{s as default};

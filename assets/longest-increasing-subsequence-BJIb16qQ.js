@@ -1,0 +1,11 @@
+var e=`s = Solution()
+check(s.lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]), 4, "範例 1")
+check(s.lengthOfLIS([0, 1, 0, 3, 2, 3]), 4, "範例 2")
+check(s.lengthOfLIS([7, 7, 7, 7]), 1, "全部相同（嚴格遞增）")
+check(s.lengthOfLIS([5]), 1, "單一元素")
+check(s.lengthOfLIS([1, 2, 3, 4, 5]), 5, "已經遞增")
+check(s.lengthOfLIS([5, 4, 3, 2, 1]), 1, "完全遞減")
+check(s.lengthOfLIS([4, 10, 4, 3, 8, 9]), 3, "中間有重複值")
+check(s.lengthOfLIS([-5, -2, -8, 0, -1, 3]), 4, "負數")
+check(s.lengthOfLIS(list(range(2500))), 2500, "長度上限")
+`;export{e as default};

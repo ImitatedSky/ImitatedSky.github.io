@@ -1,0 +1,10 @@
+var e=`s = Solution()
+check(s.minPathSum([[1, 3, 1], [1, 5, 1], [4, 2, 1]]), 7, "範例 1")
+check(s.minPathSum([[1, 2, 3], [4, 5, 6]]), 12, "範例 2")
+check(s.minPathSum([[5]]), 5, "1 x 1")
+check(s.minPathSum([[1, 2, 5]]), 8, "只有一列")
+check(s.minPathSum([[1], [2], [5]]), 8, "只有一行")
+check(s.minPathSum([[0, 0], [0, 0]]), 0, "全部是 0")
+check(s.minPathSum([[1, 9, 1, 1], [1, 9, 1, 9], [1, 1, 1, 9], [9, 9, 1, 1]]), 7,"要先往下繞再往右")
+check(s.minPathSum([[1, 2], [1, 1]]), 3, "2 x 2")
+`;export{e as default};

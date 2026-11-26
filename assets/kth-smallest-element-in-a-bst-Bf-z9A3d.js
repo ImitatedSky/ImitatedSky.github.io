@@ -1,0 +1,11 @@
+var e=`s = Solution()
+check(s.kthSmallest(build_tree([3, 1, 4, None, 2]), 1), 1, "範例 1")
+check(s.kthSmallest(build_tree([5, 3, 6, 2, 4, None, None, 1]), 3), 3, "範例 2")
+check(s.kthSmallest(build_tree([5, 3, 8, 2, 4, 7, 9]), 6), 8, "答案在右子樹")
+check(s.kthSmallest(build_tree([7]), 1), 7, "單一節點")
+check(s.kthSmallest(build_tree([5, 3, 8, 2, 4, 7, 9]), 7), 9, "k = 節點數（最大值）")
+check(s.kthSmallest(build_tree([5, 3, 8, 2, 4, 7, 9]), 4), 5, "答案是根節點")
+check(s.kthSmallest(build_tree([1, None, 2, None, 3, None, 4]), 3), 3, "右斜樹")
+check(s.kthSmallest(build_tree([4, 3, None, 2, None, 1]), 2), 2, "左斜樹")
+check([s.kthSmallest(build_tree([3, 1, 4, None, 2]), k) for k in range(1, 5)], [1, 2, 3, 4], "每個 k 都正確")
+`;export{e as default};

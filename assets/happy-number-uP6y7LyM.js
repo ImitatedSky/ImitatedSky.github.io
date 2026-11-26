@@ -1,0 +1,12 @@
+var e=`s = Solution()
+check(s.isHappy(19), True, "範例 1：19 → 82 → 68 → 100 → 1")
+check(s.isHappy(2), False, "範例 2：進入循環")
+check(s.isHappy(1), True, "一開始就是 1")
+check(s.isHappy(7), True, "7 是快樂數")
+check(s.isHappy(4), False, "4 在循環上")
+check(s.isHappy(10), True, "含 0 的位數")
+check(s.isHappy(100), True, "10 的次方")
+check(s.isHappy(116), False, "三位數、不快樂")
+check(s.isHappy(2147483647), False, "最大的 32 位元整數")
+check([x for x in range(1, 51) if s.isHappy(x)], [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49], "1 ~ 50 的所有快樂數")
+`;export{e as default};
