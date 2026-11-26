@@ -979,3 +979,7 @@ a.algo-card:hover {
   right: 0;
   transform: none;
 }
+/* hero demo note: reserve two lines so the card doesn't grow when a step's note wraps */
+.algo-hero-demo-note {
+  min-height: 3.1em;
+}

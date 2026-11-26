@@ -4,6 +4,7 @@ import { FiArrowRight, FiBarChart2 } from "react-icons/fi";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import { CATEGORIES, PROBLEMS, TAGS } from "../catalog";
 import TagChip from "../components/TagChip";
+import { stabilize } from "../components/Player";
 import { useLang } from "../lang";
 import { useProgress } from "../progress";
 import { SORTS, SORT_BY_ID } from "../sorting";
@@ -17,7 +18,8 @@ const DIFFS: Difficulty[] = ["Easy", "Medium", "Hard"];
 /** A small self-playing sort in the hero — the product, shown rather than described */
 function HeroDemo() {
   const algo = SORT_BY_ID.get("quick") ?? SORTS[0];
-  const frames = useMemo(() => (algo ? algo.trace(DEMO_INPUT) : []), [algo]);
+  // stabilize: reserve pointer rows so the card doesn't grow when pointers stack
+  const frames = useMemo(() => (algo ? stabilize(algo.trace(DEMO_INPUT)) : []), [algo]);
   const [i, setI] = useState(0);
 
   useEffect(() => {

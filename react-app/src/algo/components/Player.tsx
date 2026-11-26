@@ -16,7 +16,7 @@ import { groupPointers } from "../views/shared";
  * frame (the tallest it ever needs), so the stage doesn't jump as pointers
  * and windows come and go.
  */
-function stabilize(frames: Frame[]): Frame[] {
+export function stabilize(frames: Frame[]): Frame[] {
   const rows = new Map<string, number>();
   const ranged = new Set<string>();
   const key = (v: ArrayView) => v.label ?? "";
