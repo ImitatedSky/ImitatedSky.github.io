@@ -6,12 +6,13 @@ import type {
   TreeView as TreeViewT,
 } from "../types";
 import { ViewFrame, fmt, groupPointers, pointerClass, toneClass } from "./shared";
+import { SketchPaths, seedOf } from "./sketch";
 
-/** Triangle arrowhead with its tip at (x, y), pointing along `angle` */
-function head(x: number, y: number, angle: number, size = 7): string {
-  const a1 = angle + Math.PI - 0.42;
-  const a2 = angle + Math.PI + 0.42;
-  return `${x},${y} ${x + size * Math.cos(a1)},${y + size * Math.sin(a1)} ${x + size * Math.cos(a2)},${y + size * Math.sin(a2)}`;
+/** Open "V" arrowhead with its tip at (x, y), drawn like a pen stroke */
+function vhead(x: number, y: number, angle: number, size = 8): string {
+  const a1 = angle + Math.PI - 0.5;
+  const a2 = angle + Math.PI + 0.45;
+  return `M${x + size * Math.cos(a1)} ${y + size * Math.sin(a1)} L${x} ${y} L${x + size * Math.cos(a2)} ${y + size * Math.sin(a2)}`;
 }
 
 const fontFor = (text: string, base: number) =>
@@ -19,9 +20,9 @@ const fontFor = (text: string, base: number) =>
 
 // ── linked list ──────────────────────────────────────────────────────────────
 
-const LW = 46;
-const LH = 38;
-const LGAP = 34;
+const LW = 52;
+const LH = 42;
+const LGAP = 36;
 
 export function ListView({ view }: { view: ListViewT }) {
   const { nodes } = view;
@@ -30,7 +31,7 @@ export function ListView({ view }: { view: ListViewT }) {
   const maxStack = Math.max(0, ...[...groups.values()].map((g) => g.length));
   const nullNames = groups.get(null);
 
-  const top = maxStack * 17 + 18;
+  const top = maxStack * 19 + 28;
   const xOf = (i: number) => 8 + i * (LW + LGAP);
   const cy = top + LH / 2;
 
@@ -80,7 +81,7 @@ export function ListView({ view }: { view: ListViewT }) {
   const pointerLabels = (names: string[] | undefined, cx: number) =>
     names?.map((name, k) => (
       <g key={name} className={`algo-svg-pointer ${pointerClass(name)}`}>
-        <text x={cx} y={top - 15 - (names.length - 1 - k) * 17} textAnchor="middle">
+        <text x={cx} y={top - 23 - (names.length - 1 - k) * 19} textAnchor="middle">
           {name}
         </text>
       </g>
@@ -98,29 +99,30 @@ export function ListView({ view }: { view: ListViewT }) {
           <svg className="algo-svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             {straight.map((s, k) => (
               <g key={`s${k}`} className="algo-link">
-                <line x1={s.x1} y1={cy} x2={s.x2 - 3} y2={cy} />
-                <polygon points={head(s.x2 - 1, cy, 0)} />
+                <SketchPaths shape={{ k: "line", x1: s.x1 + 2, y1: cy, x2: s.x2 - 3, y2: cy }} seed={k} opts={{ roughness: 0.8 }} />
+                <path className="sk-head" d={vhead(s.x2 - 2, cy, 0)} />
               </g>
             ))}
             {arcs.map((a, k) => (
               <g key={`a${k}`} className={a.cls}>
-                <path d={a.d} fill="none" />
-                <polygon points={head(...a.tip)} />
+                <SketchPaths shape={{ k: "path", d: a.d }} seed={k} opts={{ roughness: 0.7 }} />
+                <path className="sk-head" d={vhead(...a.tip)} />
               </g>
             ))}
             {nodes.map((n, i) => {
               const text = fmt(n.val);
               return (
-                <g key={n.id} className={`algo-node ${toneClass(view.marks?.[n.id])}`}>
-                  <rect x={xOf(i)} y={top} width={LW} height={LH} rx={9} />
-                  <text x={xOf(i) + LW / 2} y={cy} fontSize={fontFor(text, 15)}>
+                <g key={n.id} className={`algo-node ${toneClass(view.marks?.[n.id])}`} style={{ transform: `translateX(${xOf(i)}px)` }}>
+                  <rect className="sk-under" x={2} y={top + 2} width={LW - 4} height={LH - 4} />
+                  <SketchPaths shape={{ k: "rect", x: 1, y: top + 1, w: LW - 2, h: LH - 2 }} seed={seedOf(n.id)} fill />
+                  <text x={LW / 2} y={cy} fontSize={fontFor(text, 15)}>
                     {text}
                   </text>
-                  {pointerLabels(groups.get(n.id), xOf(i) + LW / 2)}
+                  {pointerLabels(groups.get(n.id), LW / 2)}
                   {groups.has(n.id) && (
-                    <polygon
-                      className={`algo-svg-pointer-tip ${pointerClass(groups.get(n.id)![groups.get(n.id)!.length - 1])}`}
-                      points={head(xOf(i) + LW / 2, top - 1, Math.PI / 2, 5)}
+                    <path
+                      className={`sk-head algo-svg-pointer-tip ${pointerClass(groups.get(n.id)![groups.get(n.id)!.length - 1])}`}
+                      d={`M${LW / 2 + 5} ${top - 16} C${LW / 2 - 7} ${top - 13} ${LW / 2 + 4} ${top - 8} ${LW / 2} ${top - 2} ` + vhead(LW / 2, top - 2, Math.PI / 2, 6)}
                     />
                   )}
                 </g>
@@ -143,9 +145,9 @@ export function ListView({ view }: { view: ListViewT }) {
 
 // ── tree ─────────────────────────────────────────────────────────────────────
 
-const TR = 18;
-const TX0 = 46;
-const TY = 62;
+const TR = 20;
+const TX0 = 50;
+const TY = 68;
 
 function layoutTree(nodes: TreeNodeSpec[], root: string | null) {
   const byId = new Map(nodes.map((n) => [n.id, n]));
@@ -217,7 +219,7 @@ export function TreeView({ view }: { view: TreeViewT }) {
   const ptrStack = Math.max(0, ...[...groupPointers<string>(view.pointers).values()].map((g) => g.length));
   const sideLabels = !!view.edgeLabels && Object.keys(view.edgeLabels).length > 0;
   const pad = halfW + 26;
-  const extraTop = sideLabels ? 0 : Math.max(0, ptrStack - 1) * 14;
+  const extraTop = sideLabels ? 0 : Math.max(0, ptrStack - 1) * 17;
   const X = (id: string) => pad + pos.get(id)!.x * TX;
   const Y = (id: string) => pad - 6 + extraTop + pos.get(id)!.y * TY;
   const width = pad * 2 + (slots - 1) * TX;
@@ -249,7 +251,7 @@ export function TreeView({ view }: { view: TreeViewT }) {
               const my = (Y(n.id) + Y(c)) / 2;
               return (
                 <g key={key} className={`algo-edge ${toneClass(view.edgeMarks?.[key])}`}>
-                  <line x1={X(n.id)} y1={Y(n.id)} x2={X(c)} y2={Y(c)} />
+                  <SketchPaths shape={{ k: "line", x1: X(n.id), y1: Y(n.id), x2: X(c), y2: Y(c) }} seed={seedOf(key)} opts={{ roughness: 0.8 }} />
                   {label !== undefined && (
                     <>
                       <rect
@@ -287,7 +289,7 @@ export function TreeView({ view }: { view: TreeViewT }) {
             return (
               <g key={`l${k}`} className={`algo-link algo-link-dashed ${toneClass(l.tone ?? "alt")}`}>
                 <path d={`M ${x1 + ux * TR} ${y1 + uy * TR} Q ${cx} ${cyy} ${ex} ${ey}`} fill="none" />
-                <polygon points={head(ex, ey, Math.atan2(ey - cyy, ex - cx))} />
+                <path className="sk-head" d={vhead(ex, ey, Math.atan2(ey - cyy, ex - cx))} />
               </g>
             );
           })}
@@ -296,20 +298,26 @@ export function TreeView({ view }: { view: TreeViewT }) {
             const text = fmt(n.val);
             const names = groups.get(n.id);
             return (
-              <g key={n.id} className={`algo-node ${toneClass(view.marks?.[n.id])}`}>
+              <g key={n.id} className={`algo-node ${toneClass(view.marks?.[n.id])}`} style={{ transform: `translate(${X(n.id)}px, ${Y(n.id)}px)` }}>
                 {halfW > TR ? (
-                  <rect x={X(n.id) - halfW} y={Y(n.id) - TR} width={halfW * 2} height={TR * 2} rx={TR} />
+                  <>
+                    <rect className="sk-under" x={-halfW} y={-TR} width={halfW * 2} height={TR * 2} rx={TR} />
+                    <SketchPaths shape={{ k: "rect", x: -halfW, y: -TR, w: halfW * 2, h: TR * 2 }} seed={seedOf(n.id)} fill />
+                  </>
                 ) : (
-                  <circle cx={X(n.id)} cy={Y(n.id)} r={TR} />
+                  <>
+                    <circle className="sk-under" r={TR} />
+                    <SketchPaths shape={{ k: "ellipse", w: TR * 2 + 1, h: TR * 2 - 1 }} seed={seedOf(n.id)} fill />
+                  </>
                 )}
-                <text x={X(n.id)} y={Y(n.id)} fontSize={halfW > TR ? 11.5 : fontFor(text, 14)}>
+                <text fontSize={halfW > TR ? 11.5 : fontFor(text, 15)}>
                   {text}
                 </text>
                 {names?.map((name, k) => (
                   <g key={name} className={`algo-svg-pointer ${pointerClass(name)}`}>
                     <text
-                      x={sideLabels ? X(n.id) + halfW + 5 : X(n.id)}
-                      y={sideLabels ? Y(n.id) + (k - (names.length - 1) / 2) * 13 : Y(n.id) - TR - 7 - k * 14}
+                      x={sideLabels ? halfW + 5 : 0}
+                      y={sideLabels ? (k - (names.length - 1) / 2) * 15 : -TR - 12 - k * 17}
                       style={sideLabels ? { textAnchor: "start" } : undefined}
                     >
                       {name}
@@ -337,9 +345,9 @@ export function TreeView({ view }: { view: TreeViewT }) {
 
 // ── graph ────────────────────────────────────────────────────────────────────
 
-const GW = 440;
-const GH = 290;
-const GR = 19;
+const GW = 520;
+const GH = 340;
+const GR = 21;
 
 export function GraphView({ view }: { view: GraphViewT }) {
   const n = view.nodes.length;
@@ -388,8 +396,8 @@ export function GraphView({ view }: { view: GraphViewT }) {
             const text = e.label === undefined ? undefined : fmt(e.label);
             return (
               <g key={k} className={`algo-edge ${toneClass(tone)}`}>
-                <path d={`M ${sx} ${sy} Q ${mx} ${my} ${ex} ${ey}`} fill="none" />
-                {view.directed && <polygon points={head(ex, ey, Math.atan2(ey - my, ex - mx))} />}
+                <SketchPaths shape={{ k: "path", d: `M ${sx} ${sy} Q ${mx} ${my} ${ex} ${ey}` }} seed={seedOf(key)} opts={{ roughness: 0.8 }} />
+                {view.directed && <path className="sk-head" d={vhead(ex, ey, Math.atan2(ey - my, ex - mx))} />}
                 {text !== undefined && (
                   <>
                     <rect x={mx - 4 - text.length * 3.6} y={my - 9} width={8 + text.length * 7.2} height={18} rx={5} />
@@ -405,19 +413,26 @@ export function GraphView({ view }: { view: GraphViewT }) {
             const p = pos.get(node.id)!;
             const text = fmt(node.label ?? node.id);
             const names = groups.get(node.id);
+            const pw = Math.min(56, text.length * 3.9 + 8);
             return (
-              <g key={node.id} className={`algo-node ${toneClass(view.marks?.[node.id])}`}>
+              <g key={node.id} className={`algo-node ${toneClass(view.marks?.[node.id])}`} style={{ transform: `translate(${p.x}px, ${p.y}px)` }}>
                 {text.length > 4 ? (
-                  <rect x={p.x - Math.min(56, text.length * 3.9 + 8)} y={p.y - GR} width={Math.min(112, text.length * 7.8 + 16)} height={GR * 2} rx={GR} />
+                  <>
+                    <rect className="sk-under" x={-pw} y={-GR} width={pw * 2} height={GR * 2} rx={GR} />
+                    <SketchPaths shape={{ k: "rect", x: -pw, y: -GR, w: pw * 2, h: GR * 2 }} seed={seedOf(node.id)} fill />
+                  </>
                 ) : (
-                  <circle cx={p.x} cy={p.y} r={GR} />
+                  <>
+                    <circle className="sk-under" r={GR} />
+                    <SketchPaths shape={{ k: "ellipse", w: GR * 2 + 1, h: GR * 2 - 1 }} seed={seedOf(node.id)} fill />
+                  </>
                 )}
-                <text x={p.x} y={p.y} fontSize={text.length > 4 ? 11 : fontFor(text, 14)}>
+                <text fontSize={text.length > 4 ? 11 : fontFor(text, 15)}>
                   {text}
                 </text>
                 {names?.map((name, k) => (
                   <g key={name} className={`algo-svg-pointer ${pointerClass(name)}`}>
-                    <text x={p.x} y={p.y - GR - 7 - k * 14} textAnchor="middle">
+                    <text y={-GR - 13 - k * 17} textAnchor="middle">
                       {name}
                     </text>
                   </g>
