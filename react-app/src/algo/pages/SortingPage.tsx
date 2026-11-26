@@ -31,7 +31,6 @@ export default function SortingPage() {
   const [text, setText] = useState("5, 2, 8, 3, 9, 1, 6, 4");
   const [values, setValues] = useState([5, 2, 8, 3, 9, 1, 6, 4]);
   const [size, setSize] = useState(8);
-  const [run, setRun] = useState(0);
 
   // Some algorithms only show their point on a particular input (radix needs several digits)
   useEffect(() => {
@@ -54,7 +53,6 @@ export default function SortingPage() {
   function apply(next: number[]) {
     setValues(next);
     setText(next.join(", "));
-    setRun((r) => r + 1);
   }
 
   return (
@@ -78,7 +76,7 @@ export default function SortingPage() {
       </div>
 
       <Player
-        key={`${algo.id}-${run}-${safe.join(",")}`}
+        key={algo.id}
         frames={frames}
         code={algo.code}
         toolbar={
