@@ -970,3 +970,12 @@ a.algo-card:hover {
 .algo-section-head h2 {
   display: inline-block;
 }
+.algo-range.is-start span {
+  left: 0;
+  transform: none;
+}
+.algo-range.is-end span {
+  left: auto;
+  right: 0;
+  transform: none;
+}

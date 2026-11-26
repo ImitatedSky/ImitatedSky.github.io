@@ -8,7 +8,7 @@ const PTR_H = 42;
 
 export default function ArrayView({ view }: { view: ArrayViewT }) {
   const n = view.values.length;
-  const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
+  const [boxRef, boxWidth, measured] = useWidth<HTMLDivElement>();
   const pointerEntries = Object.entries(view.pointers ?? {});
   const outside = pointerEntries.some(([, i]) => i < 0 || i >= n);
   const pad = outside ? 1 : 0;
@@ -19,8 +19,9 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
   // Otherwise shrink the cells until the whole array fits the stage (down to a readable minimum)
   const preferred = n <= 8 ? 58 : n <= 12 ? 50 : n <= 18 ? 40 : n <= 26 ? 32 : 26;
   const fit = Math.floor((boxWidth - 8) / Math.max(1, n + pad * 2));
-  const size = wide ? preferred : Math.max(16, Math.min(preferred, fit - (fit < 30 ? 3 : 6)));
-  const gap = size < 24 ? 3 : n <= 18 ? 6 : 4;
+  const size = wide ? preferred : Math.max(14, Math.min(preferred, fit - (fit < 30 ? 3 : 6)));
+  // must match the 3px reserved above when the cells were shrunk to fit, or the row overflows
+  const gap = size < 24 || fit < 30 ? 3 : n <= 18 ? 6 : 4;
   const cellW = wide ? Math.max(34, Math.min(150, Math.round(longest * 8.2 + 16), fit - gap)) : size;
   const step = cellW + gap;
 
@@ -45,7 +46,7 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
   return (
     <ViewFrame label={view.label}>
       <div className="algo-scroll-x" ref={boxRef}>
-        <div className="algo-array" style={{ width, margin: `0 ${pad * step}px`, boxSizing: "content-box" }}>
+        <div key={String(measured)} className="algo-array" style={{ width, margin: `0 ${pad * step}px`, boxSizing: "content-box" }}>
           {/* `pointers: {}` keeps the row reserved, like `ranges: []` */}
           {(maxStack > 0 || view.pointers !== undefined || !!view.pointerRows) && (
             <div className="algo-array-pointers" style={{ height: (ptrRows - 1) * PTR_ROW + PTR_H }}>
@@ -127,10 +128,14 @@ export default function ArrayView({ view }: { view: ArrayViewT }) {
             <div className="algo-array-ranges">
               {view.ranges!.map((r, k) => {
                 const w = Math.max(0, (r.to - r.from + 1) * step - gap + 6);
+                // a label centred on the range may stick out of the row: anchor it to the near edge instead
+                const labelW = [...(r.label ?? "")].reduce((s, ch) => s + (ch.charCodeAt(0) > 0x2e80 ? 18 : 9), 12);
+                const mid = x(r.from) - 3 + w / 2;
+                const anchor = mid - labelW / 2 < 0 ? "is-start" : mid + labelW / 2 > width ? "is-end" : "";
                 return (
                   <div
                     key={k}
-                    className={`algo-range ${toneClass(r.tone ?? "active")}`}
+                    className={`algo-range ${toneClass(r.tone ?? "active")} ${anchor}`}
                     style={{
                       transform: `translateX(${x(r.from) - 3}px)`,
                       width: w,

@@ -9,7 +9,7 @@ import { ViewFrame, fmt, pointerClass, toneClass, useWidth } from "./shared";
 import { SketchBox, seedOf } from "./sketch";
 
 export function GridView({ view }: { view: GridViewT }) {
-  const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
+  const [boxRef, boxWidth, measured] = useWidth<HTMLDivElement>();
   const rows = view.cells.length;
   const cols = Math.max(0, ...view.cells.map((r) => r.length));
   if (rows === 0 || cols === 0) {
@@ -21,8 +21,10 @@ export function GridView({ view }: { view: GridViewT }) {
   }
   const preferred = cols <= 6 ? 46 : cols <= 10 ? 38 : cols <= 14 ? 32 : 26;
   // Shrink to fit narrow stages (phones) rather than scroll, down to a legible minimum
-  const fit = Math.floor((boxWidth - 8 - (view.rowLabels ? 22 : 0) - (view.blocks ? 10 : 0)) / cols);
-  const size = Math.max(19, Math.min(preferred, fit));
+  // row labels sit in an auto-width column; estimate it from the longest label (hand font ≈ 10px/char + padding)
+  const labelW = view.rowLabels ? Math.max(22, Math.max(0, ...view.rowLabels.map((l) => fmt(l).length)) * 10 + 8) : 0;
+  const fit = Math.floor((boxWidth - 8 - labelW - (view.blocks ? 10 : 0)) / cols);
+  const size = Math.max(16, Math.min(preferred, fit));
 
   const pointersAt = new Map<string, string[]>();
   for (const [name, [r, c]] of Object.entries(view.pointers ?? {})) {
@@ -35,6 +37,7 @@ export function GridView({ view }: { view: GridViewT }) {
     <ViewFrame label={view.label}>
       <div className="algo-scroll-x" ref={boxRef}>
         <div
+          key={String(measured)}
           className="algo-grid"
           style={{
             gridTemplateColumns: `${hasRowLabels ? "auto " : ""}repeat(${cols}, ${size}px)`,
