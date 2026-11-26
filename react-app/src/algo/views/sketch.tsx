@@ -15,18 +15,17 @@ const cache = new Map<string, Sketch>();
 export interface Sketch {
   /** outline strokes */
   line: string;
-  /** hachure fill strokes ("" if the shape has no fill) */
+  /** fill area — a soft marker wash, not hachure lines ("" if the shape has no fill) */
   hatch: string;
 }
 
 const BASE: Options = {
-  roughness: 1.1,
-  bowing: 0.8,
+  roughness: 0.9,
+  bowing: 0.6,
   strokeWidth: 1,
-  hachureAngle: -41,
-  hachureGap: 4.5,
-  fillWeight: 1.2,
-  fillStyle: "hachure",
+  // Solid wash instead of hachure: dense diagonal hatching on every marked
+  // element was the main source of visual noise
+  fillStyle: "solid",
 };
 
 type Shape =
@@ -54,7 +53,7 @@ export function sketch(shape: Shape, seed: number, opts: Options & { fill?: stri
   const out: Sketch = { line: "", hatch: "" };
   for (const set of d.sets) {
     if (set.type === "path") out.line += gen.opsToPath(set, 1);
-    else if (set.type === "fillSketch") out.hatch += gen.opsToPath(set, 1);
+    else if (set.type === "fillPath" || set.type === "fillSketch") out.hatch += gen.opsToPath(set, 1);
   }
   cache.set(key, out);
   return out;
@@ -131,7 +130,8 @@ export function SketchBox({
 export function CurlyArrow({ flip = false }: { flip?: boolean }) {
   return (
     <svg className="sk-curly" viewBox="0 0 16 18" width={16} height={18} aria-hidden="true" style={flip ? { transform: "scaleX(-1)" } : undefined}>
-      <path d="M10 1.5 C 3 4, 4 9, 8 10.5 C 11.5 12, 9 14.5, 8 16.5 M4.6 12.8 L8 16.6 L11.2 13.4" />
+      {/* a gently bowed stroke: a full curl read like a letter next to one-letter names */}
+      <path d="M8.6 1.5 C 7.4 6, 9.2 10.5, 8 16.3 M4.4 12.4 L8 16.6 L11.6 12.9" />
     </svg>
   );
 }

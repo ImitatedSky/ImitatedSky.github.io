@@ -34,11 +34,11 @@
   --ink: #2b2a33;
   --ink-soft: #57545f;
   --paper: #fffdf7;
-  --grid-line: rgba(70, 110, 170, 0.1);
+  --grid-line: rgba(70, 110, 170, 0.05);
   --grid-cell: rgba(70, 110, 170, 0.24);
   --margin-line: rgba(224, 49, 49, 0.45);
   --hl: rgba(255, 212, 59, 0.5);
-  --hatch-opacity: 0.6;
+  --hatch-opacity: 0.2;
 
   --font-hand: "Caveat", "Noto Sans TC", "Microsoft JhengHei", cursive;
   --font-note: var(--font-body);
@@ -77,11 +77,11 @@
   --ink: #eef1e8;
   --ink-soft: #b9c2bc;
   --paper: #23302b;
-  --grid-line: rgba(255, 255, 255, 0.045);
+  --grid-line: rgba(255, 255, 255, 0.025);
   --grid-cell: rgba(255, 255, 255, 0.13);
   --margin-line: rgba(255, 135, 135, 0.4);
   --hl: rgba(124, 180, 255, 0.2);
-  --hatch-opacity: 0.55;
+  --hatch-opacity: 0.24;
 }
 
 /* page: plain paper, faint grid near the top instead of glows + dots */
@@ -172,8 +172,8 @@
   align-self: stretch;
   border-right: 1.5px solid var(--margin-line);
   text-align: center;
-  font-family: var(--font-hand);
-  font-size: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
   line-height: 1;
   font-weight: 700;
   color: var(--accent);
@@ -201,8 +201,8 @@
   border: 2px solid var(--t-good);
   border-radius: 50% 40% 55% 45% / 55% 50% 45% 50%;
   background: transparent;
-  font-family: var(--font-hand);
-  font-size: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
   font-weight: 700;
 }
 
@@ -230,8 +230,8 @@
   color: #fff;
 }
 .algo-controls .algo-speed {
-  font-family: var(--font-hand);
-  font-size: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 700;
 }
 .algo-scrub::-webkit-slider-runnable-track {
@@ -266,8 +266,8 @@
   border-radius: var(--sketch-r-sm);
 }
 .algo-var span {
-  font-family: var(--font-hand);
-  font-size: 1.05rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
   font-weight: 700;
 }
 
@@ -282,7 +282,6 @@
   pointer-events: none;
 }
 .sk-line,
-.sk-hatch,
 .sk-head {
   fill: none;
   stroke-linecap: round;
@@ -293,21 +292,21 @@
 }
 .sk-line {
   stroke: var(--tone, var(--ink));
-  stroke-width: 1.6;
+  stroke-width: 2;
   transition: stroke 0.3s;
 }
 .sk-hatch {
-  stroke: var(--tone, var(--faint));
-  stroke-width: 1.5;
+  fill: var(--tone, var(--faint));
+  stroke: none;
   opacity: 0;
-  transition: opacity 0.3s, stroke 0.3s;
+  transition: opacity 0.3s, fill 0.3s;
 }
 [class*="tone-"] .sk-hatch {
   opacity: var(--hatch-opacity);
 }
 .tone-muted .sk-hatch,
 .tone-visited .sk-hatch {
-  opacity: 0.28;
+  opacity: 0.1;
 }
 .sk-head {
   stroke: var(--tone, var(--ink-soft));
@@ -391,8 +390,8 @@
   margin-bottom: 2px;
 }
 .algo-pointer {
-  font-family: var(--font-hand);
-  font-size: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
   font-weight: 700;
   gap: 0;
 }
@@ -469,14 +468,14 @@
   opacity: var(--hatch-opacity);
 }
 .algo-bar-slot:not([class*="tone-"]) .algo-bar .sk-hatch {
-  opacity: 0.22;
-  stroke: var(--ink-soft);
+  opacity: 0.08;
+  fill: var(--ink-soft);
 }
 .algo-bar-fill {
   --tone: var(--water);
 }
 .algo-bar-fill .sk-hatch {
-  opacity: 0.75;
+  opacity: 0.35;
 }
 .algo-bar-fill .sk-line {
   stroke-dasharray: 3 3;
@@ -523,8 +522,8 @@
   z-index: 3;
   top: -9px;
   right: -6px;
-  font-family: var(--font-hand);
-  font-size: 17px;
+  font-family: var(--font-mono);
+  font-size: 10px;
   padding: 0 2px;
   background: var(--paper);
   border-radius: 4px;
@@ -713,8 +712,8 @@
   stroke-width: 1.6;
 }
 .algo-svg-pointer text {
-  font-family: var(--font-hand);
-  font-size: 19px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 700;
   fill: var(--pc);
 }
@@ -723,8 +722,8 @@
   stroke: var(--pc);
 }
 .algo-pointer-pill {
-  font-family: var(--font-hand);
-  font-size: 1.05rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
   font-weight: 700;
   background: none;
   text-decoration: underline wavy color-mix(in srgb, var(--pc) 50%, transparent);
